@@ -9,6 +9,7 @@ import ThemeConfig from './theme';
 import GlobalStyles from './theme/globalStyles';
 import TeachersList from './components/pages/Teachers/View/TeachersList';
 import AddTeacher from './components/pages/Teachers/Add/AddTeacher';
+import AddStudent from './components/pages/Student/Add/AddStudents'
 function App() {
     return (
       <ThemeConfig>
@@ -19,6 +20,7 @@ function App() {
             <Route path="home" element={<Home/>}/>
             <Route path="teacher" element={<TeachersList/>}/>
             <Route path="teacher/add" element={<AddTeacher/>}/>
+            <Route path="student/add" element={<AddStudent/>}/>
           </Route>
         </Routes>
         </ThemeConfig>
