@@ -15,11 +15,10 @@ function App() {
       <GlobalStyles/>
         <Routes>
           <Route path="/" element={<DashboardLayout/>}>
-            {/* <Route path="teacher" element={<Teacher/>}/> */}
             <Route path="/" element={<Navigate to="/home"/>}/>
             <Route path="home" element={<Home/>}/>
-            <Route path="teachers" element={<TeachersList/>}/>
-            <Route path="teachers/add" element={<AddTeacher/>}/>
+            <Route path="teacher" element={<TeachersList/>}/>
+            <Route path="teacher/add" element={<AddTeacher/>}/>
           </Route>
         </Routes>
         </ThemeConfig>

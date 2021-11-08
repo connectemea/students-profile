@@ -10,7 +10,7 @@ const NavConfig = [
   },
   {
     title: "teacher",
-    path: "/teachers",
+    path: "/teacher",
     icon: FaceIcon,
   },
 ];

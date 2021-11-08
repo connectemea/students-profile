@@ -1,5 +1,4 @@
 import { useState } from "react";
-import PropTypes from 'prop-types';
 // To create special styled components
 import { styled } from "@mui/material/styles";
 import DashboardNavbar from "./DashboardNavbar";
@@ -31,10 +30,6 @@ const MainStyle = styled("div")(({ theme }) => ({
   },
 }));
 
-//dashboard layout props structure
-DashboardLayout.propTypes ={
-  wrapperComponent:PropTypes.func
-}
 // index render this components
 export default function DashboardLayout() {
   //state for controlling sidebar open and close

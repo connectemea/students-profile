@@ -14,6 +14,7 @@ import {
 
 // material icons
 import PublishIcon from "@mui/icons-material/Publish";
+
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
 import DataTable from "../../../utils/DataTable";
