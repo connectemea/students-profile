@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Home from './components/pages/Home'
+import {
+  Routes,
+  Route,
+  Navigate
+} from 'react-router-dom';
+import DashboardLayout from './components/utils/DashboardLayout';
+import ThemeConfig from './theme';
+import GlobalStyles from './theme/globalStyles';
+import TeachersList from './components/pages/Teachers/View/TeachersList';
+import AddTeacher from './components/pages/Teachers/Add/AddTeacher';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+      <ThemeConfig>
+      <GlobalStyles/>
+        <Routes>
+          <Route path="/" element={<DashboardLayout/>}>
+            {/* <Route path="teacher" element={<Teacher/>}/> */}
+            <Route path="/" element={<Navigate to="/home"/>}/>
+            <Route path="home" element={<Home/>}/>
+            <Route path="teachers" element={<TeachersList/>}/>
+            <Route path="teachers/add" element={<AddTeacher/>}/>
+          </Route>
+        </Routes>
+        </ThemeConfig>
+    );
 }
 
 export default App;
