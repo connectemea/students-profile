@@ -10,7 +10,7 @@ import GlobalStyles from './theme/globalStyles';
 import TeachersList from './components/pages/Teachers/View/TeachersList';
 import AddTeacher from './components/pages/Teachers/Add/AddTeacher';
 import StudentsList from './components/pages/Students/view/StudentsList';
-import AddStudent from './components/pages/Student/Add/AddStudents'
+import AddStudent from './components/pages/Students/Add/AddStudents'
 function App() {
     return (
       <ThemeConfig>
