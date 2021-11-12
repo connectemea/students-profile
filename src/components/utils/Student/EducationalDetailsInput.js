@@ -2,7 +2,6 @@ import { useState } from "react";
 
 // material components
 import {
-    Stack,
     Typography,
     Grid,
     Card,
@@ -11,24 +10,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-//Date Picker
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
 
-
-// material icons
-import IconButton from '@mui/material/IconButton';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import { typographyVariant } from "@mui/system";
-
-
-const AddImage = styled(IconButton)(({ theme }) => ({
-    height: theme.spacing(20),
-    width: theme.spacing(20),
-    outline: "1.5px dotted grey",
-    outlineOffset: "10px",
-}));
 const ProfileCard = styled(Card)(({ theme }) => ({
     paddingRight: `${theme.spacing(4)} !important`,
     paddingBottom: `${theme.spacing(4)} !important`
@@ -222,70 +204,3 @@ export default function EducationalDetailsInput() {
         </>
     )
 }
-
-{/* <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DatePicker
-                            label="Date Of Birth"
-                            value={dateOfBirth}
-                            onChange={(newDateOfBirth) => {
-                                setDateOfBirth(newDateOfBirth);
-                            }}
-                            renderInput={(params) => <TextField fullWidth color="info" {...params} />}
-                        />
-                    </LocalizationProvider>
-                </Grid>
-                <Grid item xs={12} sm={12} md={6} lg={6} >
-                    <TextField select fullWidth label="Gender" id="gender" color='info'>
-                        <MenuItem>Male</MenuItem>
-                        <MenuItem>Female</MenuItem>
-                        <MenuItem>Other</MenuItem>
-                    </TextField></Grid>
-                <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextField fullWidth label="Admission Number" id="admissionNumber" color='info' />
-                </Grid>
-                <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker
-                        views={['year']}
-                        label="Joining Year"
-                        value={joiningYear}
-                        onChange={(newJoiningYear) => {
-                            setJoiningYear(newJoiningYear);
-                        }}
-                        renderInput={(params) => <TextField fullWidth color="info" {...params} helperText={null} />}
-                    />
-                    </LocalizationProvider>
-                </Grid>
-            </Grid>
-            <Grid item xs={12} sm={12} md={4} lg={4}>
-                <TextField select fullWidth label="Blood Group" id="bloodGroup" color='info'>
-                    <MenuItem>A+ve</MenuItem>
-                    <MenuItem>A+ve</MenuItem>
-                    <MenuItem>A+ve</MenuItem>
-                    <MenuItem>A+ve</MenuItem>
-                    <MenuItem>A+ve</MenuItem>
-                </TextField></Grid>
-            <Grid item xs={12} sm={12} md={4} lg={4} >
-                <TextField select fullWidth label="Marital Status" id="maritalStatus" color='info'>
-                    <MenuItem>Married</MenuItem>
-                    <MenuItem>Unmarried</MenuItem>
-                </TextField></Grid>
-            <Grid item xs={12} sm={12} md={4} lg={4}>
-                <TextField fullWidth label="Religion" id="religion" color='info' />
-            </Grid>
-            <Grid item xs={12} sm={12} md={4} lg={4}>
-                <TextField fullWidth label="Caste" id="caste" color='info' />
-            </Grid>
-            <Grid item xs={12} sm={12} md={4} lg={4} >
-                <TextField select fullWidth label="Category Of Admission" id="categoryOfAdmission" color='info'>
-                    <MenuItem>Merrit</MenuItem>
-                    <MenuItem>Community Quota</MenuItem>
-                    <MenuItem>Management Quota</MenuItem>
-                </TextField></Grid>
-            <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextField fullWidth label="Identification Mark 1" id="identificationMark1" color='info' />
-            </Grid>
-            <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextField fullWidth label="Identification Mark 2" id="identificationMark2" color='info' />
-            </Grid> */}
