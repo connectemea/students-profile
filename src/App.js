@@ -12,6 +12,7 @@ import AddTeacher from './components/pages/Teachers/Add/AddTeacher';
 import StudentsList from './components/pages/Students/view/StudentsList';
 import AddStudent from './components/pages/Students/Add/AddStudents'
 import PersonalDetails from './components/pages/Students/Add/PersonalDetails';
+import EducationalDetails from './components/pages/Students/Add/EducationalDetails';
 function App() {
     return (
       <ThemeConfig>
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/student/details" >
             <Route path="personal" element={<PersonalDetails/>}/>
+            <Route path="educational" element={<EducationalDetails/>}/>
           </Route>
           <Route path="/" element={<DashboardLayout/>}>
             <Route path="/" element={<Navigate to="/home"/>}/>

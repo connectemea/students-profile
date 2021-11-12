@@ -27,7 +27,7 @@ export default function PersonalDetails() {
                 <Typography variant={"h4"}>Personal Details</Typography>
                 <PersonalDetailsInput/>
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Button sx={{ mt: 2 }} size="large" color="info" variant="contained">Next</Button>
+                    <Button sx={{ mt: 2 }} href="/student/details/educational" size="large" color="info" variant="contained">Next</Button>
                 </Box>
             </RootStyle>
 
