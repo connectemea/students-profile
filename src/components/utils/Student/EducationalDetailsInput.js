@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 // material components
 import {
     Typography,
@@ -17,8 +15,6 @@ const ProfileCard = styled(Card)(({ theme }) => ({
 }));
 
 export default function EducationalDetailsInput() {
-    const [dateOfBirth, setDateOfBirth] = useState(null);
-    const [joiningYear, setJoiningYear] = useState(null);
 
     return (
         <>
