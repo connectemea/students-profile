@@ -11,11 +11,20 @@ import TeachersList from './components/pages/Teachers/View/TeachersList';
 import AddTeacher from './components/pages/Teachers/Add/AddTeacher';
 import StudentsList from './components/pages/Students/view/StudentsList';
 import AddStudent from './components/pages/Students/Add/AddStudents'
+import PersonalDetails from './components/pages/Students/Add/PersonalDetails';
+import EducationalDetails from './components/pages/Students/Add/EducationalDetails';
+import FamilyDetails from './components/pages/Students/Add/FamilyDetails';
+
 function App() {
     return (
       <ThemeConfig>
       <GlobalStyles/>
         <Routes>
+          <Route path="/student/details" >
+            <Route path="personal" element={<PersonalDetails/>}/>
+            <Route path="educational" element={<EducationalDetails/>}/>
+            <Route path="family" element={<FamilyDetails/>}/>
+          </Route>
           <Route path="/" element={<DashboardLayout/>}>
             <Route path="/" element={<Navigate to="/home"/>}/>
             <Route path="home" element={<Home/>}/>
@@ -24,6 +33,7 @@ function App() {
             <Route path="student" element={<StudentsList/>}/>
             <Route path="student/add" element={<AddStudent/>}/>
           </Route>
+          
         </Routes>
         </ThemeConfig>
     );
