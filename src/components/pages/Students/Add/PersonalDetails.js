@@ -1,35 +1,15 @@
-import { useState } from "react";
 import PersonalDetailsInput from "../../../utils/Student/PersonalDetailsInput";
 // material components
 import {
-    Stack,
     Button,
-    Container,
-    Typography,
-    Grid,
-    Card,
-    TextField,
-    Tooltip,
-    MenuItem,
+    Typography
 } from "@mui/material";
-import { alpha, styled } from "@mui/material/styles";
-
-//Date Picker
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
-
-
-// material icons
-import PublishIcon from "@mui/icons-material/Publish";
-import IconButton from '@mui/material/IconButton';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-
+import { styled } from "@mui/material/styles";
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
-import DataTable from "../../../utils/DataTable";
-import { Box, width } from "@mui/system";
+
+import { Box } from "@mui/system";
 
 
 const RootStyle = styled("div")(({ theme }) => ({
@@ -38,7 +18,7 @@ const RootStyle = styled("div")(({ theme }) => ({
 
 
 
-export default function AddPersonalDetails() {
+export default function PersonalDetails() {
 
 
     return (

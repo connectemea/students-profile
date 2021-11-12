@@ -3,16 +3,13 @@ import { useState } from "react";
 // material components
 import {
     Stack,
-    Button,
-    Container,
     Typography,
     Grid,
     Card,
     TextField,
-    Tooltip,
     MenuItem,
 } from "@mui/material";
-import { alpha, styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 
 //Date Picker
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -21,7 +18,6 @@ import DatePicker from '@mui/lab/DatePicker';
 
 
 // material icons
-import PublishIcon from "@mui/icons-material/Publish";
 import IconButton from '@mui/material/IconButton';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
@@ -113,9 +109,9 @@ export default function PersonalDetailsInput() {
                         label="Joining Year"
                         value={joiningYear}
                         onChange={(newJoiningYear) => {
-                            setDateOfBirth(newJoiningYear);
+                            setJoiningYear(newJoiningYear);
                         }}
-                    renderInput={(params) => <TextField fullWidth color="info" {...params} helperText={null} />}
+                        renderInput={(params) => <TextField fullWidth color="info" {...params} helperText={null} />}
                     />
                     </LocalizationProvider>
                 </Grid>
