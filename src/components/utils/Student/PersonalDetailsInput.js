@@ -8,6 +8,8 @@ import {
     Card,
     TextField,
     MenuItem,
+    Switch,
+    FormControlLabel,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -147,10 +149,11 @@ export default function PersonalDetailsInput() {
             <Grid item xs={12} sm={12} md={6} lg={6}>
                 <TextField fullWidth label="Identification Mark 2" id="identificationMark2" color='info' />
             </Grid>
-            <Grid item xs={12} sm={12} md={6} lg={6}>
+            <Grid item xs={12} sm={12} md={6} lg={6} sx={{display:"flex", alignItems:"flex-end"}}>
                 <TextField fullWidth multiline rows="3" label="Present Address" id="presentAddress" color='info' />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
+                <FormControlLabel control={<Switch/>} label="Same as Present Address" sx={{color:"#637381"}} />
                 <TextField fullWidth multiline rows="3" label="Permanent Address" id="permanentAddress" color='info' />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6} >
