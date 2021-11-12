@@ -11,14 +11,14 @@ import TeachersList from './components/pages/Teachers/View/TeachersList';
 import AddTeacher from './components/pages/Teachers/Add/AddTeacher';
 import StudentsList from './components/pages/Students/view/StudentsList';
 import AddStudent from './components/pages/Students/Add/AddStudents'
-import AddDetails from './components/pages/Students/Add/AddDetails';
+import AddPersonalDetails from './components/pages/Students/Add/AddPersonalDetails';
 function App() {
     return (
       <ThemeConfig>
       <GlobalStyles/>
         <Routes>
           <Route path="/student/details" >
-            <Route path="personal" element={<AddDetails/>}/>
+            <Route path="personal" element={<AddPersonalDetails/>}/>
           </Route>
           <Route path="/" element={<DashboardLayout/>}>
             <Route path="/" element={<Navigate to="/home"/>}/>
