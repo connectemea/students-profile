@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 // material components
 import {
   Stack,
@@ -9,7 +8,7 @@ import {
   Grid,
   Card,
   TextField,
-  Tooltip
+  Tooltip,
 } from "@mui/material";
 
 // material icons
@@ -105,19 +104,21 @@ export default function AddStudent() {
             justifyContent="flex-end"
             mt={2}
           >
-            <Tooltip title={(!username || !email)?"fill the fields":"sumbit fields"}>
-            <span>
-              <Button
-                variant="contained"
-                color="info"
-                //   component={RouterLink}
-                onClick={handleAddStudent}
-                disabled={!username || !email}
-                //   to="#"
-                startIcon={<PublishIcon />}
-              >
-                Add
-              </Button>
+            <Tooltip
+              title={!username || !email ? "fill the fields" : "sumbit fields"}
+            >
+              <span>
+                <Button
+                  variant="contained"
+                  color="info"
+                  //   component={RouterLink}
+                  onClick={handleAddStudent}
+                  disabled={!username || !email}
+                  //   to="#"
+                  startIcon={<PublishIcon />}
+                >
+                  Add
+                </Button>
               </span>
             </Tooltip>
           </Stack>
