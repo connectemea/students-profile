@@ -95,20 +95,10 @@ export default function AddDetails() {
                 <TextInput label="Short Form" name="shortForm" />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextField
-                  fullWidth
-                  label="Email"
-                  id="fullWidth"
-                  color="info"
-                />
+                <TextInput label="Email" name="email" />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextField
-                  fullWidth
-                  label="Phone Number"
-                  id="fullWidth"
-                  color="info"
-                />
+                <TextInput label="Phone Number" name="phoneNumber" />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <TextField
@@ -118,6 +108,7 @@ export default function AddDetails() {
                   id="fullWidth"
                   color="info"
                 >
+                  {/* <TextInput label="Department" name="department"> */}
                   <MenuItem>BSc CS</MenuItem>
                   <MenuItem>BSc MB</MenuItem>
                   <MenuItem>BSc BT</MenuItem>
@@ -130,6 +121,7 @@ export default function AddDetails() {
                   <MenuItem>cs</MenuItem>
                   <MenuItem>cs</MenuItem>
                   <MenuItem>cs</MenuItem>
+                  {/* </TextInput> */}
                 </TextField>
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -185,38 +177,32 @@ export default function AddDetails() {
               </Grid>
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-              <TextField
-                fullWidth
-                label="Relegion"
-                id="fullWidth"
-                color="info"
-              />
+              <TextInput label="Religion" name="religion" />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-              <TextField fullWidth label="Caste" id="fullWidth" color="info" />
+              <TextInput label="Caste" name="caste" />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-              <TextField
-                fullWidth
+              <TextInput
                 label="Educational Qualification"
-                id="fullWidth"
-                color="info"
+                name="educaionalQualification"
               />
             </Grid>
           </Grid>
+          
         </Grid>
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Button
+              sx={{ mt: 2 }}
+              href="/"
+              size="large"
+              color="info"
+              variant="contained"
+            >
+              Next
+            </Button>
+          </Box>
       </Container>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          sx={{ mt: 2 }}
-          href="/student/details/educational"
-          size="large"
-          color="info"
-          variant="contained"
-        >
-          Next
-        </Button>
-      </Box>
     </Page>
   );
 }
