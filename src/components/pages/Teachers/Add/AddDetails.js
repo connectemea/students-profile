@@ -11,6 +11,7 @@ import {
   TextField,
   Tooltip,
   MenuItem,
+  Box,
 } from "@mui/material";
 
 // material icons
@@ -25,9 +26,9 @@ import IconButton from "@mui/material/IconButton";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 
 //Date Picker
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DatePicker from "@mui/lab/DatePicker";
 
 const AddImage = styled(IconButton)(({ theme }) => ({
   height: theme.spacing(20),
@@ -40,6 +41,7 @@ const ProfileCard = styled(Card)(({ theme }) => ({
   paddingBottom: `${theme.spacing(4)} !important`,
 }));
 export default function AddDetails() {
+  const [joiningYear, setJoiningYear] = useState(null);
   return (
     <Page title="TeacherDetails">
       <Container sx={{ m: 0, p: "0 important" }}>
@@ -141,13 +143,19 @@ export default function AddDetails() {
                 /> */}
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
-                    label="Date Of Birth"
-                    value={dateOfBirth}
-                    onChange={(newDateOfBirth) => {
-                      setDateOfBirth(newDateOfBirth);
+                    views={["year"]}
+                    label="Joining Year"
+                    value={joiningYear}
+                    onChange={(newJoiningYear) => {
+                      setJoiningYear(newJoiningYear);
                     }}
                     renderInput={(params) => (
-                      <TextField fullWidth color="info" {...params} />
+                      <TextField
+                        fullWidth
+                        color="info"
+                        {...params}
+                        helperText={null}
+                      />
                     )}
                   />
                 </LocalizationProvider>
@@ -200,6 +208,17 @@ export default function AddDetails() {
           </Grid>
         </Grid>
       </Container>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button
+          sx={{ mt: 2 }}
+          href="/student/details/educational"
+          size="large"
+          color="info"
+          variant="contained"
+        >
+          Next
+        </Button>
+      </Box>
     </Page>
   );
 }
