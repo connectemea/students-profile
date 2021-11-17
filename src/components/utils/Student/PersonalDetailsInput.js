@@ -18,7 +18,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 
-
+import TextInput from '../Inputs/TextInput';
 // material icons
 import IconButton from '@mui/material/IconButton';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
@@ -38,6 +38,8 @@ const ProfileCard = styled(Card)(({ theme }) => ({
 export default function PersonalDetailsInput() {
     const [dateOfBirth, setDateOfBirth] = useState(null);
     const [joiningYear, setJoiningYear] = useState(null);
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
 
     return (
         <Grid component={ProfileCard} sx={{ mt: 2, p: 2 }} container spacing={2}>
@@ -59,10 +61,10 @@ export default function PersonalDetailsInput() {
             {/* Add Details Section */}
             <Grid item xs={12} sm={12} md={8} lg={8} container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextField fullWidth label="Name" id="name" color='info' />
+                    <TextInput label="Name" name="name" textValue={name} setTextValue={setName}/>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextField fullWidth label="Email Address" id="emailAddress" color='info' />
+                    <TextInput name="email" label="Email Address" textValue={email} setTextValue={setEmail}/>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextField select fullWidth label="Department" id="department" color='info'>
