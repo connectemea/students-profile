@@ -33,6 +33,7 @@ import DatePicker from "@mui/lab/DatePicker";
 //Custom component
 import TextInput from "../../../utils/Inputs/TextInput";
 import SelectInput from "../../../utils/Inputs/SelectInput";
+import DatePickerInput from "../../../utils/Inputs/DatePickerInput";
 
 const AddImage = styled(IconButton)(({ theme }) => ({
   height: theme.spacing(20),
@@ -51,15 +52,15 @@ const genders = ["Female", "Male", "Other"];
 const status = ["Unmarried", "Married"];
 
 export default function AddDetails() {
-  const [joiningYear, setJoiningYear] = useState(null);
   const [name, setName] = useState();
   const [shortForm, setShortForm] = useState();
   const [email, setEmail] = useState();
   const [department, setDepartment] = useState();
+  const [joiningYear, setJoiningYear] = useState();
   const [gender, setGender] = useState();
   const [maritalStatus, setMaritalStatus] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
-  const [relegion, setRelegion] = useState();
+  const [religion, setRelegion] = useState();
   const [caste, setCaste] = useState();
   const [educationalQualification, setEducationalQualification] = useState();
   return (
@@ -146,24 +147,12 @@ export default function AddDetails() {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    views={["year"]}
-                    label="Joining Year"
-                    value={joiningYear}
-                    onChange={(newJoiningYear) => {
-                      setJoiningYear(newJoiningYear);
-                    }}
-                    renderInput={(params) => (
-                      <TextField
-                        fullWidth
-                        color="info"
-                        {...params}
-                        helperText={null}
-                      />
-                    )}
-                  />
-                </LocalizationProvider>
+                <DatePickerInput
+                  views={["year"]}
+                  label="Joining Year"
+                  date={joiningYear}
+                  setDate={setJoiningYear}
+                />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <SelectInput
@@ -186,9 +175,9 @@ export default function AddDetails() {
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
               <TextInput
-                label="Relegion"
-                name="relegion"
-                textValue={relegion}
+                label="Religion"
+                name="religion"
+                textValue={religion}
                 setTextValue={setRelegion}
               />
             </Grid>
