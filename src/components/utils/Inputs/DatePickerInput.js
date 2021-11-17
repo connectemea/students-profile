@@ -1,11 +1,13 @@
-import { DatePicker, LocalizationProvider } from "@mui/lab";
 import { TextField } from "@mui/material";
+
+//Date Picker
+import { DatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 
 export default function DatePickerInput(props) {
     const { label, date, setDate, views } = props
-    console.log(date)
+    
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker

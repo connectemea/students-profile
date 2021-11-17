@@ -6,7 +6,6 @@ export default function SelectInput(props) {
     const { label, name, dropdownValue, setDropdownValue, menuItems } = props;
 
     const handleTextInputChange = (e) => {
-        console.log(e.target.value);
         setDropdownValue(e.target.value)
 
     };
