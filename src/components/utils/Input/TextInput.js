@@ -1,26 +1,23 @@
-import { useState } from "react";
-
 // Material components
 import { TextField } from "@mui/material";
 
 export default function TextInput(props) {
-  const [textValue, setTextValue] = useState();
+  //props destructuring
+  const { label, name, textValue, setTextValue } = props;
 
-  const { label,name } = props;
-
-  const handleChange = (e) => setTextValue(e.target.value);
-  console.log(textValue);
+  const handleTextInputChange = (e) => setTextValue(e.target.value);
 
   return (
     <TextField
       varient="contained"
+      value={textValue}
       name={name}
       label={label}
       error={textValue === "" ? true : false}
-      helperText={textValue === "" ? "This field is required" : null}
+      helperText={textValue === "" ? `${name} is required` : null}
       color="info"
       fullWidth
-      onChange={handleChange}
+      onChange={handleTextInputChange}
     />
   );
 }
