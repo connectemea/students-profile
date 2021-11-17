@@ -128,8 +128,8 @@ export default function PersonalDetailsInput() {
                 </TextField></Grid>
             <Grid item xs={12} sm={12} md={4} lg={4} >
                 <TextField select fullWidth label="Marital Status" id="maritalStatus" color='info'>
-                    <MenuItem>Married</MenuItem>
                     <MenuItem>Unmarried</MenuItem>
+                    <MenuItem>Married</MenuItem>
                 </TextField></Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
                 <TextField fullWidth label="Religion" id="religion" color='info' />

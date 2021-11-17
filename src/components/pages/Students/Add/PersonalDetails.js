@@ -2,7 +2,10 @@ import PersonalDetailsInput from "../../../utils/Student/PersonalDetailsInput";
 // material components
 import {
     Button,
-    Typography
+    Typography,
+    Stepper,
+    Step,
+    StepLabel
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -16,6 +19,11 @@ const RootStyle = styled("div")(({ theme }) => ({
     padding: theme.spacing(4),
 }));
 
+const steps = [
+    'Personal Details',
+    'Educational Details',
+    'Family Details',
+];
 
 
 export default function PersonalDetails() {
@@ -25,9 +33,21 @@ export default function PersonalDetails() {
         <Page title="Personal Details">
             <RootStyle>
                 <Typography variant={"h4"}>Personal Details</Typography>
-                <PersonalDetailsInput/>
+                <Box sx={{ width: '100%', p: '0.75%' }}>
+                    <Stepper activeStep={0}>
+                        {steps.map((label) => (
+                            <Step key={label}>
+                                <StepLabel>{label}</StepLabel>
+                            </Step>
+                        ))}
+                    </Stepper>
+                </Box>
+                <PersonalDetailsInput />
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Button sx={{ mt: 2 }} href="/student/details/educational" size="large" color="info" variant="contained">Next</Button>
+                    <Button sx={{ mt: 2 }} 
+                    href="/student/details/educational" 
+                    onClick
+                    size="large" color="info" variant="contained">Next</Button>
                 </Box>
             </RootStyle>
 
