@@ -20,8 +20,8 @@ import { alpha, styled } from "@mui/material/styles";
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
-import DataTable from "../../../utils/DataTable";
-import { grid } from "@mui/system";
+// import DataTable from "../../../utils/DataTable";
+// import { grid } from "@mui/system";
 import IconButton from "@mui/material/IconButton";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 
@@ -31,7 +31,8 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 
 //Custom component
-import TextInput from "../../../utils/Input/TextInput";
+import TextInput from "../../../utils/Inputs/TextInput";
+import SelectInput from "../../../utils/Inputs/SelectInput";
 
 const AddImage = styled(IconButton)(({ theme }) => ({
   height: theme.spacing(20),
@@ -43,11 +44,20 @@ const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
   paddingBottom: `${theme.spacing(4)} !important`,
 }));
+
+// menu items
+const departments = ["BA English", "BSC Computer science", "BSC Microbiology"];
+const genders = ["Female", "Male", "Other"];
+const status = ["Unmarried", "Married"];
+
 export default function AddDetails() {
   const [joiningYear, setJoiningYear] = useState(null);
   const [name, setName] = useState();
   const [shortForm, setShortForm] = useState();
   const [email, setEmail] = useState();
+  const [department, setDepartment] = useState();
+  const [gender, setGender] = useState();
+  const [maritalStatus, setMaritalStatus] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [relegion, setRelegion] = useState();
   const [caste, setCaste] = useState();
@@ -103,7 +113,7 @@ export default function AddDetails() {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
-              <TextInput
+                <TextInput
                   label="Short Form"
                   name="shortform"
                   textValue={shortForm}
@@ -111,7 +121,7 @@ export default function AddDetails() {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
-              <TextInput
+                <TextInput
                   label="Email"
                   name="email"
                   textValue={email}
@@ -119,7 +129,7 @@ export default function AddDetails() {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
-              <TextInput
+                <TextInput
                   label="Phone Number"
                   name="phoneNumber"
                   textValue={phoneNumber}
@@ -127,34 +137,15 @@ export default function AddDetails() {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextField
-                  select
-                  fullWidth
+                <SelectInput
                   label="Department"
-                  id="fullWidth"
-                  color="info"
-                >
-                  <MenuItem>BSc CS</MenuItem>
-                  <MenuItem>BSc MB</MenuItem>
-                  <MenuItem>BSc BT</MenuItem>
-                  <MenuItem>BSc</MenuItem>
-                  <MenuItem>cs</MenuItem>
-                  <MenuItem>cs</MenuItem>
-                  <MenuItem>cs</MenuItem>
-                  <MenuItem>cs</MenuItem>
-                  <MenuItem>cs</MenuItem>
-                  <MenuItem>cs</MenuItem>
-                  <MenuItem>cs</MenuItem>
-                  <MenuItem>cs</MenuItem>
-                </TextField>
+                  name="department"
+                  menuItems={departments}
+                  dropdownValue={department}
+                  setDropdownValue={setDepartment}
+                />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
-                {/* <TextField
-                  fullWidth
-                  label="Joining Year"
-                  id="fullWidth"
-                  color="info"
-                /> */}
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
                     views={["year"]}
@@ -175,54 +166,47 @@ export default function AddDetails() {
                 </LocalizationProvider>
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextField
-                  select
-                  fullWidth
+                <SelectInput
                   label="Gender"
-                  id="fullWidth"
-                  color="info"
-                >
-                  <MenuItem>Male</MenuItem>
-                  <MenuItem>Female</MenuItem>
-                  <MenuItem>Other</MenuItem>
-                </TextField>
+                  name="gender"
+                  menuItems={genders}
+                  dropdownValue={gender}
+                  setDropdownValue={setGender}
+                />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextField
-                  select
-                  fullWidth
+                <SelectInput
                   label="Marital Status"
-                  id="fullWidth"
-                  color="info"
-                >
-                  <MenuItem>Married</MenuItem>
-                  <MenuItem>Unmarried</MenuItem>
-                </TextField>
+                  name="maritalStatus"
+                  menuItems={status}
+                  dropdownValue={maritalStatus}
+                  setDropdownValue={setMaritalStatus}
+                />
               </Grid>
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-            <TextInput
-                  label="Relegion"
-                  name="relegion"
-                  textValue={relegion}
-                  setTextValue={setRelegion}
-                />
+              <TextInput
+                label="Relegion"
+                name="relegion"
+                textValue={relegion}
+                setTextValue={setRelegion}
+              />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-            <TextInput
-                  label="Caste"
-                  name="caste"
-                  textValue={caste}
-                  setTextValue={setCaste}
-                />
+              <TextInput
+                label="Caste"
+                name="caste"
+                textValue={caste}
+                setTextValue={setCaste}
+              />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-            <TextInput
-                  label="Educational Qualification"
-                  name="educationalQualification"
-                  textValue={educationalQualification}
-                  setTextValue={setEducationalQualification}
-                />
+              <TextInput
+                label="Educational Qualification"
+                name="educationalQualification"
+                textValue={educationalQualification}
+                setTextValue={setEducationalQualification}
+              />
             </Grid>
           </Grid>
         </Grid>
