@@ -16,12 +16,16 @@ import { styled } from "@mui/material/styles";
 //Date Picker
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
 
+import SelectInput from "../Inputs/SelectInput";
 import TextInput from '../Inputs/TextInput';
 // material icons
 import IconButton from '@mui/material/IconButton';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import DatePickerInput from "../Inputs/DatePickerInput";
+import { DatePicker } from "@mui/lab";
+
+
 
 
 const AddImage = styled(IconButton)(({ theme }) => ({
@@ -35,11 +39,16 @@ const ProfileCard = styled(Card)(({ theme }) => ({
     paddingBottom: `${theme.spacing(4)} !important`
 }));
 
+// menu items
+const departments = ["Bsc computer science", "Bsc Microbiology", "BA English"]
+
 export default function PersonalDetailsInput() {
     const [dateOfBirth, setDateOfBirth] = useState(null);
     const [joiningYear, setJoiningYear] = useState(null);
     const [name, setName] = useState();
     const [email, setEmail] = useState();
+    const [department, setDepartment] = useState();
+    const [presentAddress, setPresentAddress] = useState();
 
     return (
         <Grid component={ProfileCard} sx={{ mt: 2, p: 2 }} container spacing={2}>
@@ -67,26 +76,15 @@ export default function PersonalDetailsInput() {
                     <TextInput name="email" label="Email Address" textValue={email} setTextValue={setEmail} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
-                    <TextField select fullWidth label="Department" id="department" color='info'>
-                        <MenuItem>BSc CS</MenuItem>
-                        <MenuItem>BSc MB</MenuItem>
-                        <MenuItem>BSc BT</MenuItem>
-                        <MenuItem>BSc</MenuItem>
-                        <MenuItem>cs</MenuItem>
-                        <MenuItem>cs</MenuItem>
-                        <MenuItem>cs</MenuItem>
-                        <MenuItem>cs</MenuItem>
-                        <MenuItem>cs</MenuItem>
-                        <MenuItem>cs</MenuItem>
-                        <MenuItem>cs</MenuItem>
-                        <MenuItem>cs</MenuItem>
-                    </TextField>
+                {/* select input from custom made component */}
+                    <SelectInput label="Department" name="department" menuItems={departments} dropdownValue={department} setDropdownValue={setDepartment} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                     <TextField fullWidth label="Mobile Number" type="number" id="mobileNumber" color='info' />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePickerInput label="Date Of Birth" date={dateOfBirth} setDate={setDateOfBirth}/>
+                    {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
                             label="Date Of Birth"
                             value={dateOfBirth}
@@ -95,7 +93,7 @@ export default function PersonalDetailsInput() {
                             }}
                             renderInput={(params) => <TextField fullWidth color="info" {...params} />}
                         />
-                    </LocalizationProvider>
+                    </LocalizationProvider> */}
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextField select fullWidth label="Gender" id="gender" color='info'>
@@ -107,7 +105,8 @@ export default function PersonalDetailsInput() {
                     <TextField fullWidth label="Admission Number" id="admissionNumber" color='info' />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePickerInput views={['year']} label="Joining Year" date={joiningYear} setDate={setJoiningYear}/>
+                    {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
                             views={['year']}
                             label="Joining Year"
@@ -117,7 +116,7 @@ export default function PersonalDetailsInput() {
                             }}
                             renderInput={(params) => <TextField fullWidth color="info" {...params} helperText={null} />}
                         />
-                    </LocalizationProvider>
+                    </LocalizationProvider> */}
                 </Grid>
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
@@ -152,7 +151,8 @@ export default function PersonalDetailsInput() {
                 <TextField fullWidth label="Identification Mark 2" id="identificationMark2" color='info' />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6} sx={{ display: "flex", alignItems: "flex-end" }}>
-                <TextField fullWidth multiline rows="3" label="Present Address" id="presentAddress" color='info' />
+            <TextInput label="Present Address" name="presentAddress" multiline rows={3} textValue={presentAddress} setTextValue={setPresentAddress} />
+                {/* <TextField fullWidth multiline rows="3" label="Present Address" id="presentAddress" color='info' /> */}
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
                 <FormControlLabel control={<Switch />} label="Same as Present Address" sx={{ color: "#637381" }} />
