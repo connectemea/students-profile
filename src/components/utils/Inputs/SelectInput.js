@@ -8,7 +8,6 @@ export default function SelectInput(props) {
   const handleTextInputChange = (e) => {
     setDropdownValue(e.target.value);
   };
-  console.log(dropdownValue)
   return (
     <TextField
       select
