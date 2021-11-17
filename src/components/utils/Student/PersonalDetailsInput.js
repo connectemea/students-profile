@@ -61,10 +61,10 @@ export default function PersonalDetailsInput() {
             {/* Add Details Section */}
             <Grid item xs={12} sm={12} md={8} lg={8} container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextInput label="Name" name="name" textValue={name} setTextValue={setName}/>
+                    <TextInput label="Name" name="name" textValue={name} setTextValue={setName} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextInput name="email" label="Email Address" textValue={email} setTextValue={setEmail}/>
+                    <TextInput name="email" label="Email Address" textValue={email} setTextValue={setEmail} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextField select fullWidth label="Department" id="department" color='info'>
@@ -108,15 +108,15 @@ export default function PersonalDetailsInput() {
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker
-                        views={['year']}
-                        label="Joining Year"
-                        value={joiningYear}
-                        onChange={(newJoiningYear) => {
-                            setJoiningYear(newJoiningYear);
-                        }}
-                        renderInput={(params) => <TextField fullWidth color="info" {...params} helperText={null} />}
-                    />
+                        <DatePicker
+                            views={['year']}
+                            label="Joining Year"
+                            value={joiningYear}
+                            onChange={(newJoiningYear) => {
+                                setJoiningYear(newJoiningYear);
+                            }}
+                            renderInput={(params) => <TextField fullWidth color="info" {...params} helperText={null} />}
+                        />
                     </LocalizationProvider>
                 </Grid>
             </Grid>
@@ -151,11 +151,11 @@ export default function PersonalDetailsInput() {
             <Grid item xs={12} sm={12} md={6} lg={6}>
                 <TextField fullWidth label="Identification Mark 2" id="identificationMark2" color='info' />
             </Grid>
-            <Grid item xs={12} sm={12} md={6} lg={6} sx={{display:"flex", alignItems:"flex-end"}}>
+            <Grid item xs={12} sm={12} md={6} lg={6} sx={{ display: "flex", alignItems: "flex-end" }}>
                 <TextField fullWidth multiline rows="3" label="Present Address" id="presentAddress" color='info' />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
-                <FormControlLabel control={<Switch/>} label="Same as Present Address" sx={{color:"#637381"}} />
+                <FormControlLabel control={<Switch />} label="Same as Present Address" sx={{ color: "#637381" }} />
                 <TextField fullWidth multiline rows="3" label="Permanent Address" id="permanentAddress" color='info' />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6} >

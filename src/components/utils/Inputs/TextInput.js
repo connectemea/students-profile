@@ -10,6 +10,7 @@ export default function TextInput(props) {
   return (
     <TextField
       varient="contained"
+      value={textValue}
       name={name}
       label={label}
       error={textValue === "" ? true : false}
