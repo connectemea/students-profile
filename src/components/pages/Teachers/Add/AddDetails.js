@@ -8,9 +8,7 @@ import {
   Typography,
   Grid,
   Card,
-  TextField,
-  Tooltip,
-  MenuItem,
+  // Tooltip,
   Box,
 } from "@mui/material";
 
@@ -41,6 +39,7 @@ const AddImage = styled(IconButton)(({ theme }) => ({
   outline: "1.5px dotted grey",
   outlineOffset: "10px",
 }));
+
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
   paddingBottom: `${theme.spacing(4)} !important`,

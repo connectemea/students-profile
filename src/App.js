@@ -5,6 +5,7 @@ import ThemeConfig from "./theme";
 import GlobalStyles from "./theme/globalStyles";
 import TeachersList from "./components/pages/Teachers/View/TeachersList";
 import AddTeacher from "./components/pages/Teachers/Add/AddTeacher";
+import TeachersView from "./components/pages/Teachers/View/TeachersView";
 import StudentsList from "./components/pages/Students/view/StudentsList";
 import AddStudent from "./components/pages/Students/Add/AddStudents";
 import PersonalDetails from "./components/pages/Students/Add/PersonalDetails";
@@ -25,6 +26,7 @@ function App() {
         </Route>
         <Route path="/teacher/details">
           <Route path="personal" element={<AddDetails />} />
+          <Route path="view" element={<TeachersView />} />
         </Route>
         <Route path="/" element={<DashboardLayout />}>
           <Route path="/" element={<Navigate to="/home" />} />
