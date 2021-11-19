@@ -6,8 +6,6 @@ import {
     Typography,
     Grid,
     Card,
-    TextField,
-    MenuItem,
     Switch,
     FormControlLabel,
 } from "@mui/material";
