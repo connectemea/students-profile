@@ -1,26 +1,17 @@
-import { useState } from "react";
 
 // material components
 import {
-  Stack,
-  Button,
   Container,
-  Typography,
   Grid,
   Card,
-  // Tooltip,
-  Box,
 } from "@mui/material";
 
 // material icons
-import PublishIcon from "@mui/icons-material/Publish";
-import { alpha, styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
 
-import IconButton from "@mui/material/IconButton";
-import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 
 //  My Imports
 import Avatar from "@mui/material/Avatar";
@@ -28,12 +19,7 @@ import Avatar from "@mui/material/Avatar";
 // Custuom compoent
 import Field from "../utils/Field";
 
-const AddImage = styled(IconButton)(({ theme }) => ({
-  height: theme.spacing(20),
-  width: theme.spacing(20),
-  outline: "1.5px dotted grey",
-  outlineOffset: "10px",
-}));
+
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
