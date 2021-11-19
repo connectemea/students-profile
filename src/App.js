@@ -26,7 +26,6 @@ function App() {
         </Route>
         <Route path="/teacher/details">
           <Route path="personal" element={<AddDetails />} />
-          <Route path="view" element={<TeachersView />} />
         </Route>
         <Route path="/" element={<DashboardLayout />}>
           <Route path="/" element={<Navigate to="/home" />} />
@@ -35,6 +34,7 @@ function App() {
           <Route path="teacher/add" element={<AddTeacher />} />
           <Route path="student" element={<StudentsList />} />
           <Route path="student/add" element={<AddStudent />} />
+          <Route path="teacher/view" element={<TeachersView />} />
         </Route>
       </Routes>
     </ThemeConfig>
