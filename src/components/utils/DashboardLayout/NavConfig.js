@@ -18,6 +18,11 @@ const NavConfig = [
     title: "student",
     path: "/student",
     icon: PersonIcon,
+  },
+  {
+    title: "department",
+    path: "/department",
+    icon: PersonIcon,
   }
 ];
 

@@ -14,6 +14,8 @@ import AddStudent from './components/pages/Students/Add/AddStudents'
 import PersonalDetails from './components/pages/Students/Add/PersonalDetails';
 import EducationalDetails from './components/pages/Students/Add/EducationalDetails';
 import FamilyDetails from './components/pages/Students/Add/FamilyDetails';
+import DepartmentDetails from './components/pages/Department/Dpt-details/DptDetails';
+import Add from './components/pages/Department/Add/Add';
 
 function App() {
     return (
@@ -32,6 +34,8 @@ function App() {
             <Route path="teacher/add" element={<AddTeacher/>}/>
             <Route path="student" element={<StudentsList/>}/>
             <Route path="student/add" element={<AddStudent/>}/>
+            <Route path="department" element={<DepartmentDetails/>}/>
+            <Route path="department/add" element={<Add/>}/>
           </Route>
           
         </Routes>
