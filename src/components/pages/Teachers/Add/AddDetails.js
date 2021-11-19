@@ -25,6 +25,7 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import TextInput from "../../../utils/Inputs/TextInput";
 import SelectInput from "../../../utils/Inputs/SelectInput";
 import DatePickerInput from "../../../utils/Inputs/DatePickerInput";
+import ImageUpload from "../../../utils/Inputs/ImageUpload";
 
 const AddImage = styled(IconButton)(({ theme }) => ({
   height: theme.spacing(20),
@@ -48,6 +49,7 @@ const genders = ["Female", "Male", "Other"];
 const status = ["Unmarried", "Married"];
 
 export default function AddDetails() {
+  const [image, setImage] = useState();
   const [name, setName] = useState();
   const [shortForm, setShortForm] = useState();
   const [email, setEmail] = useState();
@@ -75,7 +77,7 @@ export default function AddDetails() {
             md={4}
             lg={4}
           >
-            <input type="file" id="imageUpload" hidden />
+            {/* <input type="file" id="imageUpload" hidden />
             <AddImage>
               <label for="imageUpload">
                 <Stack direction="column" spacing={1}>
@@ -87,7 +89,8 @@ export default function AddDetails() {
                   </item>
                 </Stack>
               </label>
-            </AddImage>
+            </AddImage> */}
+            <ImageUpload image={image} setImage={setImage} />
 
             <Typography sx={{ mt: 3, color: "gray" }} variant={"body2"}>
               Allowed *.jpeg, *.jpg, *.png, *.gif <br />
