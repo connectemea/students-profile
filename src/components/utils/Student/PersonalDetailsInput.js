@@ -37,6 +37,11 @@ const ProfileCard = styled(Card)(({ theme }) => ({
 
 // menu items
 const departments = ["Bsc computer science", "Bsc Microbiology", "BA English"]
+const genders = ["Male", "Female", "Other"]
+const bloodGroups = ["O+", "O-", "A+", "A-", "AB+", "AB-", "B+", "B-"]
+const maritalStatuses = ["Unmarrird", "Married"]
+const categoriesOfAdmission = ["Merit", "Community Quota", "Management Quota", "Sports Quota", "Special Sports Quota"]
+const residences = ["House", "Hostel", "Relative's Residence", "Guardian's Residence"]
 
 export default function PersonalDetailsInput() {
     const [dateOfBirth, setDateOfBirth] = useState(null);
@@ -44,7 +49,20 @@ export default function PersonalDetailsInput() {
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [department, setDepartment] = useState();
+    const [mobileNumber, setMobileNumber] = useState();
+    const [gender, setGender] = useState();
+    const [admissionNumber, setAdmissionNumber] = useState();
+    const [bloodGroup, setBloodGroup] = useState();
+    const [maritalStatus, setMaritalStatus] = useState();
+    const [religion, setReligion] = useState();
+    const [caste, setCaste] = useState();
+    const [categoryOfAdmission, setCategoryOfAdmission] = useState();
+    const [identificationMark1, setIdentificationMark1] = useState();
+    const [identificationMark2, setIdentificationMark2] = useState();
     const [presentAddress, setPresentAddress] = useState();
+    const [permanentAddress, setPermanentAdress] = useState();
+    const [residence, setResidence] = useState();
+    const [distanceFromCollege, setDistanceFromCollege] = useState();
 
     return (
         <Grid component={ProfileCard} sx={{ mt: 2, p: 2 }} container spacing={2}>
@@ -76,92 +94,54 @@ export default function PersonalDetailsInput() {
                     <SelectInput label="Department" name="department" menuItems={departments} dropdownValue={department} setDropdownValue={setDepartment} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextField fullWidth label="Mobile Number" type="number" id="mobileNumber" color='info' />
+                    <TextInput name="mobileNumber" label="Mobile Number" type="number" textValue={mobileNumber} setTextValue={setMobileNumber} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                     <DatePickerInput label="Date Of Birth" date={dateOfBirth} setDate={setDateOfBirth}/>
-                    {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DatePicker
-                            label="Date Of Birth"
-                            value={dateOfBirth}
-                            onChange={(newDateOfBirth) => {
-                                setDateOfBirth(newDateOfBirth);
-                            }}
-                            renderInput={(params) => <TextField fullWidth color="info" {...params} />}
-                        />
-                    </LocalizationProvider> */}
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
-                    <TextField select fullWidth label="Gender" id="gender" color='info'>
-                        <MenuItem>Male</MenuItem>
-                        <MenuItem>Female</MenuItem>
-                        <MenuItem>Other</MenuItem>
-                    </TextField></Grid>
+                    <SelectInput label="Gender" name="gender" menuItems={genders} dropdownValue={gender} setDropdownValue={setGender} />
+                </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextField fullWidth label="Admission Number" id="admissionNumber" color='info' />
+                    <TextInput label="Admission Number" name="admissionNumber" textValue={admissionNumber} setTextValue={setAdmissionNumber} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                     <DatePickerInput views={['year']} label="Joining Year" date={joiningYear} setDate={setJoiningYear}/>
-                    {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DatePicker
-                            views={['year']}
-                            label="Joining Year"
-                            value={joiningYear}
-                            onChange={(newJoiningYear) => {
-                                setJoiningYear(newJoiningYear);
-                            }}
-                            renderInput={(params) => <TextField fullWidth color="info" {...params} helperText={null} />}
-                        />
-                    </LocalizationProvider> */}
                 </Grid>
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-                <TextField select fullWidth label="Blood Group" id="bloodGroup" color='info'>
-                    <MenuItem>A+ve</MenuItem>
-                    <MenuItem>A+ve</MenuItem>
-                    <MenuItem>A+ve</MenuItem>
-                    <MenuItem>A+ve</MenuItem>
-                    <MenuItem>A+ve</MenuItem>
-                </TextField></Grid>
-            <Grid item xs={12} sm={12} md={4} lg={4} >
-                <TextField select fullWidth label="Marital Status" id="maritalStatus" color='info'>
-                    <MenuItem>Unmarried</MenuItem>
-                    <MenuItem>Married</MenuItem>
-                </TextField></Grid>
-            <Grid item xs={12} sm={12} md={4} lg={4}>
-                <TextField fullWidth label="Religion" id="religion" color='info' />
-            </Grid>
-            <Grid item xs={12} sm={12} md={4} lg={4}>
-                <TextField fullWidth label="Caste" id="caste" color='info' />
+                <SelectInput label="Blood Group" name="bloodGroup" menuItems={bloodGroups} dropdownValue={bloodGroup} setDropdownValue={setBloodGroup} />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4} >
-                <TextField select fullWidth label="Category Of Admission" id="categoryOfAdmission" color='info'>
-                    <MenuItem>Merrit</MenuItem>
-                    <MenuItem>Community Quota</MenuItem>
-                    <MenuItem>Management Quota</MenuItem>
-                </TextField></Grid>
-            <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextField fullWidth label="Identification Mark 1" id="identificationMark1" color='info' />
+                <SelectInput label="Marital Status" name="maritalStatus" menuItems={maritalStatuses} dropdownValue={maritalStatus} setDropdownValue={setMaritalStatus} />
+            </Grid>
+            <Grid item xs={12} sm={12} md={4} lg={4}>
+                <TextInput label="Religion" name="religion" textValue={religion} setTextValue={setReligion} />
+            </Grid>
+            <Grid item xs={12} sm={12} md={4} lg={4}>
+                <TextInput label="Caste" name="caste" textValue={caste} setTextValue={setCaste} />
+            </Grid>
+            <Grid item xs={12} sm={12} md={4} lg={4} >
+                <SelectInput label="Category Of Admission" name="categoryOfAdmission" menuItems={categoriesOfAdmission} dropdownValue={categoryOfAdmission} setDropdownValue={setCategoryOfAdmission} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextField fullWidth label="Identification Mark 2" id="identificationMark2" color='info' />
+                <TextInput label="Identification Mark 1" name="identificationMark1" textValue={identificationMark1} setTextValue={setIdentificationMark1} />
+            </Grid>
+            <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextInput label="Identification Mark 2" name="identificationMark2" textValue={identificationMark2} setTextValue={setIdentificationMark2} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6} sx={{ display: "flex", alignItems: "flex-end" }}>
-            <TextInput label="Present Address" name="presentAddress" multiline rows={3} textValue={presentAddress} setTextValue={setPresentAddress} />
-                {/* <TextField fullWidth multiline rows="3" label="Present Address" id="presentAddress" color='info' /> */}
+                <TextInput label="Present Address" name="presentAddress" multiline rows={3} textValue={presentAddress} setTextValue={setPresentAddress} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
                 <FormControlLabel control={<Switch />} label="Same as Present Address" sx={{ color: "#637381" }} />
-                <TextField fullWidth multiline rows="3" label="Permanent Address" id="permanentAddress" color='info' />
+                <TextInput label="Permanent Address" name="permanentAddress" multiline rows={3} textValue={permanentAddress} setTextValue={setPermanentAdress} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6} >
-                <TextField select fullWidth label="Residence" id="residence" color='info'>
-                    <MenuItem>Home</MenuItem>
-                    <MenuItem>Realative House</MenuItem>
-                    <MenuItem>Guardian Residence</MenuItem>
-                </TextField></Grid>
+                <SelectInput label="Residence" name="residence" menuItems={residences} dropdownValue={residence} setDropdownValue={setResidence} />
+            </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextField fullWidth label="Distance From College" id="distanceFromCollege" color='info' />
+                <TextInput label="Distance From College" name="distanceFromCollege" textValue={distanceFromCollege} setTextValue={setDistanceFromCollege} />
             </Grid>
         </Grid>
     )
