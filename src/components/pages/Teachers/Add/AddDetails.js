@@ -64,21 +64,7 @@ export default function AddDetails() {
             md={4}
             lg={4}
           >
-            {/* <input type="file" id="imageUpload" hidden />
-            <AddImage>
-              <label for="imageUpload">
-                <Stack direction="column" spacing={1}>
-                  <item>
-                    <AddAPhotoIcon />
-                  </item>
-                  <item>
-                    <Typography variant={"body1"}>Upload photo</Typography>
-                  </item>
-                </Stack>
-              </label>
-            </AddImage> */}
             <ImageUpload image={image} setImage={setImage} />
-
             <Typography sx={{ mt: 3, color: "gray" }} variant={"body2"}>
               Allowed *.jpeg, *.jpg, *.png, *.gif <br />
               max size: 1MB

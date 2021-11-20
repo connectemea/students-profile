@@ -1,10 +1,5 @@
-
 // material components
-import {
-  Container,
-  Grid,
-  Card,
-} from "@mui/material";
+import { Container, Grid, Card, Typography } from "@mui/material";
 
 // material icons
 import { styled } from "@mui/material/styles";
@@ -12,14 +7,12 @@ import { styled } from "@mui/material/styles";
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
 
-
 //  My Imports
 import Avatar from "@mui/material/Avatar";
+import profile from "../../../../images/avatar.jpg";
 
 // Custuom compoent
 import Field from "../utils/Field";
-
-
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
@@ -46,20 +39,33 @@ export default function TeachersView() {
     <Page title="details">
       <Container>
         <Grid
+          style={{
+            backgroundImage:
+              "linear-gradient(to bottom,#038dfd 0%,#038dfd 30%,transparent 30%,transparent 100%)",
+          }}
           component={ProfileCard}
-          sx={{ mt: 2, p: 2 }}
+          sx={{
+            mt: 2,
+            p: 2,
+            alignContent: "center",
+          }}
           container
           spacing={2}
-          justifyContent="space-between"
-          alignItems="flex-end"
+          alignItems="center"
         >
           <Grid>
-            {/* <Avatar alt="Remy Sharp" src="/static/images/avatar.jpg" /> */}
             <Avatar
               alt="Remy Sharp"
-              src="/static/images/avatar/1.jpg"
-              sx={{ width: 56, height: 56 }}
+              src={profile}
+              sx={{
+                width: 80,
+                height: 80,
+              }}
             />
+          </Grid>
+          <Grid sx={{ marginLeft: 5 }}>
+            <Typography>Name</Typography>
+            <Typography>Department</Typography>
           </Grid>
         </Grid>
 
@@ -67,46 +73,47 @@ export default function TeachersView() {
           component={ProfileCard}
           sx={{ mt: 2, p: 2 }}
           container
-          spacing={2}
-        //   justifyContent="space-between"
+          spacing={2.3}
           alignItems="flex-end"
         >
-          <Grid item sm={12} sx={12} md={3} lg={3}>
+          {/* <Container> */}
+          <Grid item sm={12} xs={12} md={3} lg={3}>
             <Field heading="Name" subHeading={values.name} />
           </Grid>
-          <Grid item sm={12} sx={12} md={3} lg={3}>
+          <Grid item sm={12} xs={12} md={3} lg={3}>
             <Field heading="Email" subHeading={values.email} />
           </Grid>
-          <Grid item sm={12} sx={12} md={3} lg={3}>
+          <Grid item sm={12} xs={12} md={3} lg={3}>
             <Field heading="Short Form" subHeading={values.shortForm} />
           </Grid>
-          <Grid item sm={12} sx={12} md={3} lg={3}>
+          <Grid item sm={12} xs={12} md={3} lg={3}>
             <Field heading="Phone Number" subHeading={values.phoneNumber} />
           </Grid>
-          <Grid item sm={12} sx={12} md={3} lg={3}>
+          <Grid item sm={12} xs={12} md={3} lg={3}>
             <Field heading="Department" subHeading={values.departments} />
           </Grid>
-          <Grid item sm={12} sx={12} md={3} lg={3}>
+          <Grid item sm={12} xs={12} md={3} lg={3}>
             <Field heading="Joning Year" subHeading={values.joningYear} />
           </Grid>
-          <Grid item sm={12} sx={12} md={3} lg={3}>
+          <Grid item sm={12} xs={12} md={3} lg={3}>
             <Field heading="Gender" subHeading={values.gender} />
           </Grid>
-          <Grid item sm={12} sx={12} md={3} lg={3}>
+          <Grid item sm={12} xs={12} md={3} lg={3}>
             <Field heading="Marital Status" subHeading={values.maritalStatus} />
           </Grid>
-          <Grid item sm={12} sx={12} md={3} lg={3}>
+          <Grid item sm={12} xs={12} md={3} lg={3}>
             <Field heading="Religion" subHeading={values.religion} />
           </Grid>
-          <Grid item sm={12} sx={12} md={3} lg={3}>
+          <Grid item sm={12} xs={12} md={3} lg={3}>
             <Field heading="Caste" subHeading={values.caste} />
           </Grid>
-          <Grid item sm={12} sx={12} md={3} lg={3}>
+          <Grid item sm={12} xs={12} md={3} lg={3}>
             <Field
               heading="Educational Qualification"
               subHeading={values.educationalQualification}
             />
           </Grid>
+          {/* </Container> */}
         </Grid>
       </Container>
     </Page>

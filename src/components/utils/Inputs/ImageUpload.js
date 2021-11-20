@@ -19,9 +19,10 @@ const AddImage = styled(IconButton)(({ theme }) => ({
 export default function ImageUpload(props) {
   // pops destructuring
   const { image, setImage } = props;
-  
-  const handleImageChange = (e) => e.target.files[0] && setImage(URL.createObjectURL(e.target.files[0]));
-  
+
+  const handleImageChange = (e) =>
+    e.target.files[0] && setImage(URL.createObjectURL(e.target.files[0]));
+
   return (
     <>
       <input type="file" id="imageUpload" hidden onChange={handleImageChange} />
@@ -31,7 +32,9 @@ export default function ImageUpload(props) {
             {image ? (
               <Avatar
                 alt="Upload image"
-                src={ (typeof(image)=="object") ? URL.createObjectURL(image): image}
+                src={
+                  typeof image == "object" ? URL.createObjectURL(image) : image
+                }
                 sx={{ width: 182, height: 182 }}
               />
             ) : (
