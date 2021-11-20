@@ -1,13 +1,7 @@
 import { useState } from "react";
 
 // material components
-import {
-  Button,
-  Typography,
-  Grid,
-  Card,
-  Box,
-} from "@mui/material";
+import { Button, Typography, Grid, Card, Box, Container } from "@mui/material";
 
 // material icons
 import { styled } from "@mui/material/styles";
@@ -15,16 +9,11 @@ import { styled } from "@mui/material/styles";
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
 
-
 //Custom component
 import TextInput from "../../../utils/Inputs/TextInput";
 import SelectInput from "../../../utils/Inputs/SelectInput";
 import DatePickerInput from "../../../utils/Inputs/DatePickerInput";
 import ImageUpload from "../../../utils/Inputs/ImageUpload";
-
-
-
-
 
 const RootStyle = styled("div")(({ theme }) => ({
   padding: theme.spacing(4),
@@ -50,9 +39,15 @@ export default function AddDetails() {
   const [educationalQualification, setEducationalQualification] = useState();
   return (
     <Page title="TeacherDetails">
-      <RootStyle>
+      <Container maxWidth="xl" sx={{ mt: 2, p: 2, pl: 0 }}>
+        {/* <RootStyle> */}
         <Typography variant={"h3"}>Personal Details</Typography>
-        <Grid component={Card} sx={{ mt: 2, p: 2 }} container spacing={2}>
+        <Grid
+          component={Card}
+          sx={{ mt: 2, p: 2, pl: 0 }}
+          container
+          spacing={2}
+        >
           <Grid
             item
             container
@@ -175,7 +170,8 @@ export default function AddDetails() {
             Next
           </Button>
         </Box>
-      </RootStyle>
+      </Container>
+      {/* </RootStyle> */}
     </Page>
   );
 }

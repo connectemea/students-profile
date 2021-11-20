@@ -37,11 +37,11 @@ const values = {
 export default function TeachersView() {
   return (
     <Page title="details">
-      <Container>
+      <Container maxWidth="xl" sx={{pl:4}}>
         <Grid
           style={{
             backgroundImage:
-              "linear-gradient(to bottom,#038dfd 0%,#038dfd 30%,transparent 30%,transparent 100%)",
+              "linear-gradient(to bottom,#038dfd 0%,#038dfd 20%,transparent 20%,transparent 100%)",
           }}
           component={ProfileCard}
           sx={{
