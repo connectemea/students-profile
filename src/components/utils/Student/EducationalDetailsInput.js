@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 // material components
 import {
     Typography,
@@ -8,13 +10,36 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
+//Custom Components
+import TextInput from "../Inputs/TextInput";
+import SelectInput from "../Inputs/SelectInput";
+
 
 const ProfileCard = styled(Card)(({ theme }) => ({
     paddingRight: `${theme.spacing(4)} !important`,
     paddingBottom: `${theme.spacing(4)} !important`
 }));
 
+//Dropdown Menu
+const meduimsOfInstruction = ["Malayalam", "English", "Hindi"]
+const syllabuses = ["Kerala State", "CBSE", "ICSE"]
+const hseCourses = ["Science", "Computer Science", "Commerce", "Humanities"]
+const english = ["English"]
+
 export default function EducationalDetailsInput() {
+    // sslc
+    const [sslcSchoolName, setSslcSchoolName] = useState();
+    const [sslcMediumOfInstruction, setSslcMediumOfInstruction] = useState();
+    const [sslcEnglishMark, setSslcEnglishMark] = useState();
+    const [sslcMathsMark, setSslcMathsMark] = useState();
+    const [sslcScienceMark, setSslcScienceMark] = useState();
+    const [sslcSocialScienceMark, setSslcSocialScienceMark] = useState();
+    //HSE
+    const [hseSchoolName, setHseSchoolName] = useState();
+    const [hseSyllabus, setHseSyllabus] = useState();
+    const [hseCourse, setHseCourse] = useState();
+    const [hseSub1, setHseSub1] = useState();
+
 
     return (
         <>
@@ -24,25 +49,22 @@ export default function EducationalDetailsInput() {
             <Grid item md={12}><Typography variant="subtitle1">SSLC/10th Std</Typography></Grid>
             <Grid item md={12} container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextField fullWidth label="School Name" id="schoolName" color='info' />
+                    <TextInput label="School Name" name="schoolName" textValue={sslcSchoolName} setTextValue={setSslcSchoolName} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
-                    <TextField select fullWidth label="Medium Of Instruction" id="mediumOfInstruction" color='info'>
-                        <MenuItem>English</MenuItem>
-                        <MenuItem>Malayalam</MenuItem>
-                        <MenuItem>Hindi</MenuItem>
-                    </TextField></Grid>
-                <Grid item xs={12} sm={6} md={3} lg={3}>
-                    <TextField fullWidth label="English (in%)" type="number" id="english"/>
+                    <SelectInput label="Medium Of Instruction" name="mediumOfInstruction" menuItems={meduimsOfInstruction} dropdownValue={sslcMediumOfInstruction} setDropdownValue={setSslcMediumOfInstruction} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={3}>
-                    <TextField fullWidth label="Maths (in%)" type="number" id="maths"/>
+                    <TextInput label="English (in%)" name="english" type="number" textValue={sslcEnglishMark} setTextValue={setSslcEnglishMark} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={3}>
-                    <TextField fullWidth label="Science (in%)" type="number" id="science"/>
+                    <TextInput label="Maths (in%)" name="maths" type="number" textValue={sslcMathsMark} setTextValue={setSslcMathsMark} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={3}>
-                    <TextField fullWidth label="Social Science (in%)" type="number" id="socialScience"/>
+                    <TextInput label="Scince (in%)" name="scienceMarks" type="number" textValue={sslcScienceMark} setTextValue={setSslcScienceMark} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={3} lg={3}>
+                    <TextInput label="Social Science (in%)" name="socialScienceMark" type="number" textValue={sslcSocialScienceMark} setTextValue={setSslcSocialScienceMark} />
                 </Grid>
             </Grid>    
         </Grid>
@@ -53,28 +75,19 @@ export default function EducationalDetailsInput() {
             <Grid item md={12}><Typography variant="subtitle1">Plus Two/VHSE</Typography></Grid>
             <Grid item md={12} container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextField fullWidth label="School Name" id="schoolName"/>
+                <TextInput label="School Name" name="schoolName" textValue={hseSchoolName} setTextValue={setHseSchoolName} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={3} >
-                    <TextField select fullWidth label="Syllabus" id="syllabus">
-                        <MenuItem>Kerala State</MenuItem>
-                        <MenuItem>CBSE</MenuItem>
-                        <MenuItem>ICSE</MenuItem>
-                    </TextField>
+                    <SelectInput label="Syllabus" name="syllabus" menuItems={syllabuses} dropdownValue={hseSyllabus} setDropdownValue={setHseSyllabus} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={3} >
-                    <TextField select fullWidth label="Course" id="course">
-                        <MenuItem>Science</MenuItem>
-                        <MenuItem>Computer Science</MenuItem>
-                        <MenuItem>Commerce</MenuItem>
-                        <MenuItem>Humanities</MenuItem>
-                    </TextField>
+                    <SelectInput label="Course" name="course" menuItems={hseCourses} dropdownValue={hseCourse} setDropdownValue={setHseCourse} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={4} >
-                    <TextField select fullWidth label="Subject" id="sub1">
-                        <MenuItem>English</MenuItem>
-                    </TextField>
+                    <SelectInput label="Subject" name="sub1" menuItems={english} dropdownValue={hseSub1} setDropdownValue={setHseSub1} />
                 </Grid>
+
+                {/* Completed till here */}
                 <Grid item xs={12} sm={6} md={2} lg={2} >
                     <TextField select fullWidth label="Subject" id="sub2">
                         <MenuItem>Biology</MenuItem>
