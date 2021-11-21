@@ -13,6 +13,7 @@ import FamilyDetails from "./components/pages/Students/Add/FamilyDetails";
 import Register from "./components/pages/Users/Register";
 import Login from "./components/pages/Users/Login";
 import AuthLayout from "./components/utils/UserLayout/AuthLayout";
+import ForgotPassword from "./components/pages/Users/ForgotPassword";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/user" element={<AuthLayout />}>
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
+          <Route path="forgot" element={<ForgotPassword />} />
         </Route>
       </Routes>
     </ThemeConfig>
