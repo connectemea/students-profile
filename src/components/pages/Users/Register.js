@@ -1,5 +1,14 @@
 import { styled } from "@mui/material/styles";
-import { Box, Link, Container, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Stack,
+  TextField,
+  Link,
+} from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { Link as RouterLink } from "react-router-dom";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 480,
@@ -15,32 +24,55 @@ export default function Register() {
   return (
     <Container>
       <ContentStyle>
-        <Box sx={{ mb: 5 }}>
-          <Typography variant="h4" gutterBottom>
-            Get started absolutely free.
-          </Typography>
-          <Typography sx={{ color: "text.secondary" }}>
-            Free forever. No credit card needed.
+        <Box sx={{ mb: 3 }}>
+          <Typography variant="h3" gutterBottom>
+            Register
           </Typography>
         </Box>
-
-        {/* <RegisterForm /> */}
-
-        <Typography
-          variant="body2"
-          align="center"
-          sx={{ color: "text.secondary", mt: 3 }}
-        >
-          By registering, I agree to Minimal&nbsp;
-          <Link underline="always" sx={{ color: "text.primary" }}>
-            Terms of Service
-          </Link>
-          &nbsp;and&nbsp;
-          <Link underline="always" sx={{ color: "text.primary" }}>
-            Privacy Policy
-          </Link>
-          .
-        </Typography>
+        <Stack spacing={2}>
+          <TextField
+            fullWidth
+            autoComplete="username"
+            type="text"
+            label="User name"
+          />
+          <TextField
+            fullWidth
+            autoComplete="username"
+            type="email"
+            label="Email address"
+          />
+          <TextField
+            fullWidth
+            autoComplete="username"
+            type="password"
+            label="Password"
+          />
+          <TextField
+            fullWidth
+            autoComplete="username"
+            type="password"
+            label="Confirm password"
+          />
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="flex-end"
+            sx={{ my: 2 }}
+          >
+            <Link component={RouterLink} variant="subtitle2" to="/user/login">
+              Already have an account? Login
+            </Link>
+          </Stack>
+          <LoadingButton
+            fullWidth
+            size="large"
+            type="submit"
+            variant="contained"
+          >
+            Register
+          </LoadingButton>
+        </Stack>
       </ContentStyle>
     </Container>
   );
