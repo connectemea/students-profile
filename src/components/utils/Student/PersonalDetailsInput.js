@@ -84,64 +84,64 @@ export default function PersonalDetailsInput() {
             {/* Add Details Section */}
             <Grid item xs={12} sm={12} md={8} lg={8} container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextInput label="Name" name="name" textValue={name} setTextValue={setName} />
+                    <TextInput label="Name" name="Name" textValue={name} setTextValue={setName} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextInput name="email" label="Email Address" textValue={email} setTextValue={setEmail} />
+                    <TextInput name="Email" label="Email Address" textValue={email} setTextValue={setEmail} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
                 {/* select input from custom made component */}
-                    <SelectInput label="Department" name="department" menuItems={departments} dropdownValue={department} setDropdownValue={setDepartment} />
+                    <SelectInput label="Department" name="Department" menuItems={departments} dropdownValue={department} setDropdownValue={setDepartment} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextInput name="mobileNumber" label="Mobile Number" type="number" textValue={mobileNumber} setTextValue={setMobileNumber} />
+                    <TextInput name="Mobile Number" label="Mobile Number" type="number" textValue={mobileNumber} setTextValue={setMobileNumber} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <DatePickerInput label="Date Of Birth" date={dateOfBirth} setDate={setDateOfBirth}/>
+                    <DatePickerInput label="Date Of Birth" name="Date of Birth" date={dateOfBirth} setDate={setDateOfBirth}/>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
-                    <SelectInput label="Gender" name="gender" menuItems={genders} dropdownValue={gender} setDropdownValue={setGender} />
+                    <SelectInput label="Gender" name="Gender" menuItems={genders} dropdownValue={gender} setDropdownValue={setGender} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextInput label="Admission Number" name="admissionNumber" textValue={admissionNumber} setTextValue={setAdmissionNumber} />
+                    <TextInput label="Admission Number" name="Sdmission Number" textValue={admissionNumber} setTextValue={setAdmissionNumber} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <DatePickerInput views={['year']} label="Joining Year" date={joiningYear} setDate={setJoiningYear}/>
+                    <DatePickerInput views={['year']} label="Joining Year" name="Joining Year" date={joiningYear} setDate={setJoiningYear}/>
                 </Grid>
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-                <SelectInput label="Blood Group" name="bloodGroup" menuItems={bloodGroups} dropdownValue={bloodGroup} setDropdownValue={setBloodGroup} />
+                <SelectInput label="Blood Group" name="Blood Group" menuItems={bloodGroups} dropdownValue={bloodGroup} setDropdownValue={setBloodGroup} />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4} >
-                <SelectInput label="Marital Status" name="maritalStatus" menuItems={maritalStatuses} dropdownValue={maritalStatus} setDropdownValue={setMaritalStatus} />
+                <SelectInput label="Marital Status" name="Marital Status" menuItems={maritalStatuses} dropdownValue={maritalStatus} setDropdownValue={setMaritalStatus} />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-                <TextInput label="Religion" name="religion" textValue={religion} setTextValue={setReligion} />
+                <TextInput label="Religion" name="Religion" textValue={religion} setTextValue={setReligion} />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-                <TextInput label="Caste" name="caste" textValue={caste} setTextValue={setCaste} />
+                <TextInput label="Caste" name="Caste" textValue={caste} setTextValue={setCaste} />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4} >
-                <SelectInput label="Category Of Admission" name="categoryOfAdmission" menuItems={categoriesOfAdmission} dropdownValue={categoryOfAdmission} setDropdownValue={setCategoryOfAdmission} />
+                <SelectInput label="Category Of Admission" name="Category Of Admission" menuItems={categoriesOfAdmission} dropdownValue={categoryOfAdmission} setDropdownValue={setCategoryOfAdmission} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextInput label="Identification Mark 1" name="identificationMark1" textValue={identificationMark1} setTextValue={setIdentificationMark1} />
+                <TextInput label="Identification Mark 1" name="Identification Mark" textValue={identificationMark1} setTextValue={setIdentificationMark1} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextInput label="Identification Mark 2" name="identificationMark2" textValue={identificationMark2} setTextValue={setIdentificationMark2} />
+                <TextInput label="Identification Mark 2" name="Identification Mark" textValue={identificationMark2} setTextValue={setIdentificationMark2} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6} sx={{ display: "flex", alignItems: "flex-end" }}>
-                <TextInput label="Present Address" name="presentAddress" multiline rows={3} textValue={presentAddress} setTextValue={setPresentAddress} />
+                <TextInput label="Present Address" name="Present Address" multiline rows={3} textValue={presentAddress} setTextValue={setPresentAddress} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
                 <FormControlLabel control={<Switch />} label="Same as Present Address" sx={{ color: "#637381" }} />
-                <TextInput label="Permanent Address" name="permanentAddress" multiline rows={3} textValue={permanentAddress} setTextValue={setPermanentAdress} />
+                <TextInput label="Permanent Address" name="Permanent Address" multiline rows={3} textValue={permanentAddress} setTextValue={setPermanentAdress} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6} >
-                <SelectInput label="Residence" name="residence" menuItems={residences} dropdownValue={residence} setDropdownValue={setResidence} />
+                <SelectInput label="Residence" name="Residence" menuItems={residences} dropdownValue={residence} setDropdownValue={setResidence} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextInput label="Distance From College" name="distanceFromCollege" textValue={distanceFromCollege} setTextValue={setDistanceFromCollege} />
+                <TextInput label="Distance From College" name="Distance From College" textValue={distanceFromCollege} setTextValue={setDistanceFromCollege} />
             </Grid>
         </Grid>
     )

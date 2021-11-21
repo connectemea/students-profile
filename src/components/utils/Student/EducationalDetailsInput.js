@@ -64,22 +64,22 @@ export default function EducationalDetailsInput() {
             <Grid item md={12}><Typography variant="subtitle1">SSLC/10th Std</Typography></Grid>
             <Grid item md={12} container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextInput label="School Name" name="schoolName" textValue={sslcSchoolName} setTextValue={setSslcSchoolName} />
+                    <TextInput label="School Name" name="School Name" textValue={sslcSchoolName} setTextValue={setSslcSchoolName} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
-                    <SelectInput label="Medium Of Instruction" name="mediumOfInstruction" menuItems={meduimsOfInstruction} dropdownValue={sslcMediumOfInstruction} setDropdownValue={setSslcMediumOfInstruction} />
+                    <SelectInput label="Medium Of Instruction" name="Medium Of Instruction" menuItems={meduimsOfInstruction} dropdownValue={sslcMediumOfInstruction} setDropdownValue={setSslcMediumOfInstruction} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={3}>
-                    <TextInput label="English (in%)" name="english" type="number" textValue={sslcEnglishMark} setTextValue={setSslcEnglishMark} />
+                    <TextInput label="English (in%)" name="Marks" type="number" textValue={sslcEnglishMark} setTextValue={setSslcEnglishMark} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={3}>
-                    <TextInput label="Maths (in%)" name="maths" type="number" textValue={sslcMathsMark} setTextValue={setSslcMathsMark} />
+                    <TextInput label="Maths (in%)" name="Marks" type="number" textValue={sslcMathsMark} setTextValue={setSslcMathsMark} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={3}>
-                    <TextInput label="Scince (in%)" name="scienceMarks" type="number" textValue={sslcScienceMark} setTextValue={setSslcScienceMark} />
+                    <TextInput label="Scince (in%)" name="Marks" type="number" textValue={sslcScienceMark} setTextValue={setSslcScienceMark} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={3}>
-                    <TextInput label="Social Science (in%)" name="socialScienceMark" type="number" textValue={sslcSocialScienceMark} setTextValue={setSslcSocialScienceMark} />
+                    <TextInput label="Social Science (in%)" name="Marks" type="number" textValue={sslcSocialScienceMark} setTextValue={setSslcSocialScienceMark} />
                 </Grid>
             </Grid>    
         </Grid>
@@ -90,30 +90,28 @@ export default function EducationalDetailsInput() {
             <Grid item md={12}><Typography variant="subtitle1">Plus Two/VHSE</Typography></Grid>
             <Grid item md={12} container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextInput label="School Name" name="schoolName" textValue={hseSchoolName} setTextValue={setHseSchoolName} />
+                <TextInput label="School Name" name="School Name" textValue={hseSchoolName} setTextValue={setHseSchoolName} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={3} >
-                    <SelectInput label="Syllabus" name="syllabus" menuItems={syllabuses} dropdownValue={hseSyllabus} setDropdownValue={setHseSyllabus} />
+                    <SelectInput label="Syllabus" name="Syllabus" menuItems={syllabuses} dropdownValue={hseSyllabus} setDropdownValue={setHseSyllabus} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={3} >
-                    <SelectInput label="Course" name="course" menuItems={hseCourses} dropdownValue={hseCourse} setDropdownValue={setHseCourse} />
+                    <SelectInput label="Course" name="Course" menuItems={hseCourses} dropdownValue={hseCourse} setDropdownValue={setHseCourse} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={4} >
-                    <SelectInput label="Subject" name="english" menuItems={english} dropdownValue={hseEnglish} setDropdownValue={setHseEnglish} />
-                </Grid>
-
-                {/* Completed till here */}
-                <Grid item xs={12} sm={6} md={2} lg={2} >
-                    <SelectInput label="Subject" name="sub1" menuItems={hseSubjects1} dropdownValue={hseSub1} setDropdownValue={setHseSub1} />
+                    <SelectInput label="Subject" name="Subject" menuItems={english} dropdownValue={hseEnglish} setDropdownValue={setHseEnglish} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={2} lg={2} >
-                    <SelectInput label="Subject" name="sub2" menuItems={hseSubjects2} dropdownValue={hseSub2} setDropdownValue={setHseSub2} />
+                    <SelectInput label="Subject" name="Subject" menuItems={hseSubjects1} dropdownValue={hseSub1} setDropdownValue={setHseSub1} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={2} lg={2} >
-                    <SelectInput label="Subject" name="sub3" menuItems={hseSubjects3} dropdownValue={hseSub3} setDropdownValue={setHseSub3} />
+                    <SelectInput label="Subject" name="Subject" menuItems={hseSubjects2} dropdownValue={hseSub2} setDropdownValue={setHseSub2} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={2} lg={2} >
-                    <SelectInput label="Subject" name="sub4" menuItems={hseSubjects4} dropdownValue={hseSub4} setDropdownValue={setHseSub4} />
+                    <SelectInput label="Subject" name="Subject" menuItems={hseSubjects3} dropdownValue={hseSub3} setDropdownValue={setHseSub3} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={2} lg={2} >
+                    <SelectInput label="Subject" name="Subject" menuItems={hseSubjects4} dropdownValue={hseSub4} setDropdownValue={setHseSub4} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={4}>
                     <TextInput label="Marks (in%)" name="Marks" type="number" textValue={hseEnglishMark} setTextValue={setHseEnglishMark} />
