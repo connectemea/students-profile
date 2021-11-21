@@ -66,6 +66,17 @@ export default function EducationalDetailsInput() {
     const [ugCommonEnglishMark, setUgCommonEnglishMark] = useState();
     const [ugCommonLanguageMark, setUgCommonLanguageMark] = useState();
     const [ugOpenMark, setUgOpenMark] = useState();
+    //Other Qualification
+    const [othCourseType, setOthCourseType] = useState();
+    const [othInstitutionName, setOthInstitutionName] = useState();
+    const [othGrade, setOthGrade] = useState();
+    const [othUniversity, setOthUniversity] = useState();
+    //Additional Coourse
+    const [addiCourse, setAddiCourse] = useState();
+    const [addiInstituionName, setAddiInstituionName] = useState();
+    const [addiUniversity, setAddiUniversity] = useState();
+    const [addiMarks, setAddiMarks] = useState();
+
 
 
     return (
@@ -181,16 +192,16 @@ export default function EducationalDetailsInput() {
             <Grid item md={12}><Typography variant="subtitle1">Other Qualification</Typography></Grid>
             <Grid item md={12} container spacing={2}>
                 <Grid item xs={12} sm={12} md={3} lg={3}>
-                    <TextField fullWidth label="Course Type" id="courseType"/>
+                    <TextInput label="Course Type" name="Course Type" textValue={othCourseType} setTextValue={setOthCourseType} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={3} lg={3}>
-                    <TextField fullWidth label="Institution Name" id="institutionName"/>
+                    <TextInput label="Institution Name" name="Institution Name" textValue={othInstitutionName} setTextValue={setOthInstitutionName} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={3} lg={3}>
-                    <TextField fullWidth label="Grade" id="grade"/>
+                    <TextInput label="Grade" name="Grade" textValue={othGrade} setTextValue={setOthGrade} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={3} lg={3}>
-                    <TextField fullWidth label="University (If Recognised)" id="institutionName"/>
+                    <TextInput label="University (If Recognised)" name="University" textValue={othUniversity} setTextValue={setOthUniversity} />
                 </Grid>
             </Grid>    
         </Grid>
