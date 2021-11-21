@@ -21,10 +21,16 @@ const ProfileCard = styled(Card)(({ theme }) => ({
 }));
 
 //Dropdown Menu
+//SSLC
 const meduimsOfInstruction = ["Malayalam", "English", "Hindi"]
+//HSE
 const syllabuses = ["Kerala State", "CBSE", "ICSE"]
 const hseCourses = ["Science", "Computer Science", "Commerce", "Humanities"]
 const english = ["English"]
+const hseSubjects1 = ["Biology", "Computer Science"]
+const hseSubjects2 = ["Physics", "Accounting", "Journalism"]
+const hseSubjects3 = ["Chemistry", "Geology", "Computer Application"]
+const hseSubjects4 = ["Mathematics", "Politics", "Sociology"]
 
 export default function EducationalDetailsInput() {
     // sslc
@@ -38,7 +44,16 @@ export default function EducationalDetailsInput() {
     const [hseSchoolName, setHseSchoolName] = useState();
     const [hseSyllabus, setHseSyllabus] = useState();
     const [hseCourse, setHseCourse] = useState();
+    const [hseEnglish, setHseEnglish] = useState();
     const [hseSub1, setHseSub1] = useState();
+    const [hseSub2, setHseSub2] = useState();
+    const [hseSub3, setHseSub3] = useState();
+    const [hseSub4, setHseSub4] = useState();
+    const [hseEnglishMark, setHseEnglishMark] = useState();
+    const [hseSub1Mark, setHseSub1Mark] = useState();
+    const [hseSub2Mark, setHseSub2Mark] = useState();
+    const [hseSub3Mark, setHseSub3Mark] = useState();
+    const [hseSub4Mark, setHseSub4Mark] = useState();
 
 
     return (
@@ -84,52 +99,36 @@ export default function EducationalDetailsInput() {
                     <SelectInput label="Course" name="course" menuItems={hseCourses} dropdownValue={hseCourse} setDropdownValue={setHseCourse} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={4} >
-                    <SelectInput label="Subject" name="sub1" menuItems={english} dropdownValue={hseSub1} setDropdownValue={setHseSub1} />
+                    <SelectInput label="Subject" name="english" menuItems={english} dropdownValue={hseEnglish} setDropdownValue={setHseEnglish} />
                 </Grid>
 
                 {/* Completed till here */}
                 <Grid item xs={12} sm={6} md={2} lg={2} >
-                    <TextField select fullWidth label="Subject" id="sub2">
-                        <MenuItem>Biology</MenuItem>
-                        <MenuItem>Computer Science</MenuItem>
-                        <MenuItem>Computer Application</MenuItem>
-                    </TextField>
+                    <SelectInput label="Subject" name="sub1" menuItems={hseSubjects1} dropdownValue={hseSub1} setDropdownValue={setHseSub1} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={2} lg={2} >
-                    <TextField select fullWidth label="Subject" id="sub3">
-                        <MenuItem>Physics</MenuItem>
-                        <MenuItem>Physics</MenuItem>
-                        <MenuItem>Physics</MenuItem>
-                    </TextField>
+                    <SelectInput label="Subject" name="sub2" menuItems={hseSubjects2} dropdownValue={hseSub2} setDropdownValue={setHseSub2} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={2} lg={2} >
-                    <TextField select fullWidth label="Subject" id="sub4">
-                        <MenuItem>Chemistry</MenuItem>
-                        <MenuItem>Chemistry</MenuItem>
-                        <MenuItem>Chemistry</MenuItem>
-                    </TextField>
+                    <SelectInput label="Subject" name="sub3" menuItems={hseSubjects3} dropdownValue={hseSub3} setDropdownValue={setHseSub3} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={2} lg={2} >
-                    <TextField select fullWidth label="Subject" id="sub5">
-                        <MenuItem>Maths</MenuItem>
-                        <MenuItem>Maths</MenuItem>
-                        <MenuItem>Maths</MenuItem>
-                    </TextField>
+                    <SelectInput label="Subject" name="sub4" menuItems={hseSubjects4} dropdownValue={hseSub4} setDropdownValue={setHseSub4} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={4}>
-                    <TextField fullWidth label="Marks (in%)" type="number" id="sub1Mark"/>
+                    <TextInput label="Marks (in%)" name="Marks" type="number" textValue={hseEnglishMark} setTextValue={setHseEnglishMark} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={2} lg={2}>
-                    <TextField fullWidth label="Marks (in%)" type="number" id="sub2Mark"/>
+                    <TextInput label="Marks (in%)" name="Marks" type="number" textValue={hseSub1Mark} setTextValue={setHseSub1Mark} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={2} lg={2}>
-                    <TextField fullWidth label="Marks (in%)" type="number" id="sub3Mark"/>
+                    <TextInput label="Marks (in%)" name="Marks" type="number" textValue={hseSub2Mark} setTextValue={setHseSub2Mark} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={2} lg={2}>
-                    <TextField fullWidth label="Marks (in%)" type="number" id="sub4Mark"/>
+                    <TextInput label="Marks (in%)" name="Marks" type="number" textValue={hseSub3Mark} setTextValue={setHseSub3Mark} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={2} lg={2}>
-                    <TextField fullWidth label="Marks (in%)" type="number" id="sub5Mark"/>
+                    <TextInput label="Marks (in%)" name="Marks" type="number" textValue={hseSub4Mark} setTextValue={setHseSub4Mark} />
                 </Grid>
             </Grid>    
         </Grid>
