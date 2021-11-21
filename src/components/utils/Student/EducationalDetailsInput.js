@@ -212,16 +212,16 @@ export default function EducationalDetailsInput() {
             <Grid item md={12}><Typography variant="subtitle1">Additional Course</Typography></Grid>
             <Grid item md={12} container spacing={2}>
                 <Grid item xs={12} sm={12} md={3} lg={3}>
-                    <TextField fullWidth label="Degree / Diploma / Certificate Course" id="courseType"/>
+                    <TextInput label="Degree / Diploma / Certificate Course" name="Course Name" textValue={addiCourse} setTextValue={setAddiCourse} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={3} lg={3}>
-                    <TextField fullWidth label="Institute Name" id="instituteName"/>
+                    <TextInput label="Institute Name" name="Institute Name" textValue={addiInstituionName} setTextValue={setAddiInstituionName} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={3} lg={3}>
-                    <TextField fullWidth label="University / Government" id="university"/>
+                    <TextInput label="University / Government" name="University" textValue={addiUniversity} setTextValue={setAddiUniversity} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={3} lg={3}>
-                    <TextField fullWidth label="Marks / CGP obtained" id="marks"/>
+                    <TextInput label="Marks / CGP Obtained" type="number" name="Marks" textValue={addiMarks} setTextValue={setAddiMarks} />
                 </Grid>
             </Grid>    
         </Grid>
