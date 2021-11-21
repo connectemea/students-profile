@@ -13,6 +13,7 @@ import { styled } from "@mui/material/styles";
 //Custom Components
 import TextInput from "../Inputs/TextInput";
 import SelectInput from "../Inputs/SelectInput";
+import { setQuarter } from "date-fns";
 
 
 const ProfileCard = styled(Card)(({ theme }) => ({
@@ -31,6 +32,8 @@ const hseSubjects1 = ["Biology", "Computer Science"]
 const hseSubjects2 = ["Physics", "Accounting", "Journalism"]
 const hseSubjects3 = ["Chemistry", "Geology", "Computer Application"]
 const hseSubjects4 = ["Mathematics", "Politics", "Sociology"]
+//Degree
+const ugCourses = ["Bsc. Computer Science", "B.com", "BBA"]
 
 export default function EducationalDetailsInput() {
     // sslc
@@ -54,6 +57,15 @@ export default function EducationalDetailsInput() {
     const [hseSub2Mark, setHseSub2Mark] = useState();
     const [hseSub3Mark, setHseSub3Mark] = useState();
     const [hseSub4Mark, setHseSub4Mark] = useState();
+    //Degree
+    const [collegeName, setCollegeName] = useState();
+    const [ugUniversity, setUgUniversity] = useState();
+    const [ugCourse, setUgCourse] = useState();
+    const [ugCoreMark, setUgCoreMark] = useState();
+    const [ugComplementaryMark, setUgComplementaryMark] = useState();
+    const [ugCommonEnglishMark, setUgCommonEnglishMark] = useState();
+    const [ugCommonLanguageMark, setUgCommonLanguageMark] = useState();
+    const [ugOpenMark, setUgOpenMark] = useState();
 
 
     return (
@@ -137,33 +149,28 @@ export default function EducationalDetailsInput() {
             <Grid item md={12}><Typography variant="subtitle1">Degree</Typography></Grid>
             <Grid item md={12} container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextField fullWidth label="College Name" id="collegeName"/>
+                    <TextInput label="College Name" name="College Name" textValue={collegeName} setTextValue={setCollegeName} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={3} lg={3}>
-                    <TextField fullWidth label="University" id="university"/>
+                    <TextInput label="University" name="University" textValue={ugUniversity} setTextValue={setUgUniversity} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={3} >
-                    <TextField select fullWidth label="Course" id="course">
-                        <MenuItem>Computer Science</MenuItem>
-                        <MenuItem>B.com</MenuItem>
-                        <MenuItem>BBA</MenuItem>
-                        <MenuItem>English</MenuItem>
-                    </TextField>
+                    <SelectInput label="Course" name="Course" menuItems={ugCourses} dropdownValue={ugCourse} setDropdownValue={setUgCourse} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={3}>
-                    <TextField fullWidth label="Core (Main) %" type="number" id="coreMark"/>
+                    <TextInput label="Core (Main) %" name="Marks" type="number" textValue={ugCoreMark} setTextValue={setUgCoreMark} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={3}>
-                    <TextField fullWidth label="Complementary (Sub) %" type="number" id="complementaryMark"/>
+                    <TextInput label="Complementary (Sub) %" name="Marks" type="number" textValue={ugComplementaryMark} setTextValue={setUgComplementaryMark} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={2} lg={2}>
-                    <TextField fullWidth label="Common (English) %" type="number" id="commonEnglishMark"/>
+                    <TextInput label="Common (English) %" name="Marks" type="number" textValue={ugCommonEnglishMark} setTextValue={setUgCommonEnglishMark} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={2} lg={2}>
-                    <TextField fullWidth label="Common (Language) %" type="number" id="commonLanguageMark"/>
+                    <TextInput label="Common (Language) %" name="Marks" type="number" textValue={ugCommonLanguageMark} setTextValue={setUgCommonLanguageMark} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={2} lg={2}>
-                    <TextField fullWidth label="Open %" type="number" id="openMark"/>
+                    <TextInput label="Open Course %" name="Marks" type="number" textValue={ugOpenMark} setTextValue={setUgOpenMark} />
                 </Grid>
             </Grid>    
         </Grid>
