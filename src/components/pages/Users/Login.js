@@ -70,7 +70,10 @@ export default function Login() {
               justifyContent="space-between"
               sx={{ my: 2 }}
             >
-              <Link variant="subtitle2" to="#">
+              <Link 
+              component={RouterLink}
+              variant="subtitle2" 
+              to="/user/forgot">
                 Forgot password
               </Link>
 
