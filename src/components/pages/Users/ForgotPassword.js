@@ -4,6 +4,7 @@ import {
   Container,
   Typography,
   Stack,
+  Card,
   TextField,
 //   Link,
 } from "@mui/material";
@@ -11,10 +12,10 @@ import { LoadingButton } from "@mui/lab";
 // import { Link as RouterLink } from "react-router-dom";
 
 const ContentStyle = styled("div")(({ theme }) => ({
-  maxWidth: 480,
+  maxWidth: 400,
   margin: "auto",
   display: "flex",
-  minHeight: "100vh",
+  minHeight: "80vh",
   flexDirection: "column",
   justifyContent: "center",
   padding: theme.spacing(12, 0),
@@ -25,6 +26,7 @@ export default function ForgotPassword() {
     <div>
       <Container>
         <ContentStyle>
+        <Card sx={{ p: 5 }}>
           <Box sx={{ mb: 3 }}>
             <Typography variant="h3" gutterBottom>
               Forgot Password
@@ -34,14 +36,14 @@ export default function ForgotPassword() {
             <TextField
               fullWidth
               autoComplete="username"
-              type="email"
-              label="Email address"
+              type="username"
+              label="Username"
             />
             <TextField
               fullWidth
               autoComplete="username"
-              type="password"
-              label="Password"
+              type="email"
+              label="Email address"
             />
 
             
@@ -54,6 +56,7 @@ export default function ForgotPassword() {
               Submit
             </LoadingButton>
           </Stack>
+          </Card>
         </ContentStyle>
       </Container>
     </div>
