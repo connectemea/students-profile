@@ -37,7 +37,7 @@ const values = {
 export default function TeachersView() {
   return (
     <Page title="details">
-      <Container maxWidth="xl" sx={{pl:4}}>
+      <Container maxWidth="xl" sx={{ pl: 4 }}>
         <Grid
           style={{
             backgroundImage:

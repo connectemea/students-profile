@@ -166,6 +166,20 @@ export default function AddDetails() {
             size="large"
             color="info"
             variant="contained"
+            disabled={
+              !image ||
+              !name ||
+              !shortForm ||
+              !email ||
+              !department ||
+              !joiningYear ||
+              !gender ||
+              !maritalStatus ||
+              !phoneNumber ||
+              !religion ||
+              !caste ||
+              !educationalQualification
+            }
           >
             Next
           </Button>
