@@ -7,9 +7,14 @@ import {
   TextField,
   Card,
   Link,
+  InputAdornment,
+  IconButton,
+  Icon,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { Link as RouterLink } from "react-router-dom";
+import { useState } from "react";
+
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -22,6 +27,8 @@ const ContentStyle = styled("div")(({ theme }) => ({
 }));
 
 export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <Container>
       <ContentStyle>
@@ -43,6 +50,18 @@ export default function Login() {
               autoComplete="username"
               type="password"
               label="Password"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      edge="end"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                    >
+                      <Icon icon={showPassword ? eyeFill : eyeOffFill} />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
 
             <Stack
