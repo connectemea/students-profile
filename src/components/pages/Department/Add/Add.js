@@ -19,14 +19,23 @@ import PublishIcon from "@mui/icons-material/Publish";
 import Page from "../../../utils/Page";
 
 export default function Add() {
-  const [username, setUsername] = useState();
+  const [dptname, setDptname] = useState();
+  const [shortname, setShortname] = useState();
+  const [hodname, setHodname] = useState();
+  const [contact, setContact] = useState();
   const [email, setEmail] = useState();
-  const handleUsernameChange = (event) => setUsername(event.target.value);
+  const handleDptnameChange = (event) => setDptname(event.target.value);
+  const handleShortnameChange = (event) => setShortname(event.target.value);
+  const handleHodnameChange = (event) => setHodname(event.target.value);
+  const handleContactChange = (event) => setContact(event.target.value);
   const handleEmailChange = (event) => setEmail(event.target.value);
 
   const handleAddDepartment = () => {
     const data = {
-      username,
+      dptname,
+      shortname,
+      hodname,
+      contact,
       email,
     };
     console.log(data);
@@ -49,44 +58,55 @@ export default function Add() {
             <Grid item xs={12} sm={6} md={6}>
               <TextField
                 varient="contained"
-                name="username"
+                name="dptname"
                 label="Department Name"
                 color="info"
                 fullWidth
-                value={username}
-                onChange={handleUsernameChange}
+                value={dptname}
+                onChange={handleDptnameChange}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
               <TextField
                 varient="contained"
-                name="dpt-name"
+                name="shortname"
                 label="Short Form"
                 color="info"
                 fullWidth
-                value=""
-                onChange={handleEmailChange}
+                value={shortname}
+                onChange={handleShortnameChange}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
               <TextField
                 varient="contained"
-                name="username"
+                name="hodname"
                 label="HOD name"
                 color="info"
                 fullWidth
-                value={username}
-                onChange={handleUsernameChange}
+                value={hodname}
+                onChange={handleHodnameChange}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
               <TextField
                 varient="contained"
-                name="dptname"
+                name="contact"
                 label="HOD Contact"
                 color="info"
                 fullWidth
-                value=""
+                value={contact}
+                onChange={handleContactChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={6}>
+              <TextField
+                varient="contained"
+                name="email"
+                label="E-mail"
+                color="info"
+                fullWidth
+                value={email}
                 onChange={handleEmailChange}
               />
             </Grid>
@@ -97,14 +117,14 @@ export default function Add() {
             justifyContent="flex-end"
             mt={2}
           >
-            <Tooltip title={(!username || !email)?"fill the fields":"sumbit fields"}>
+            <Tooltip title={(!dptname || !shortname || !hodname || !contact || !email?"fill the fields":"sumbit fields")}>
             <span>
               <Button
                 variant="contained"
                 color="info"
                 //   component={RouterLink}
                 onClick={handleAddDepartment}
-                disabled={!username || !email}
+                disabled={!dptname || !shortname || !hodname || !contact || !email}
                 //   to="#"
                 startIcon={<PublishIcon />}
               >

@@ -16,6 +16,7 @@ import EducationalDetails from './components/pages/Students/Add/EducationalDetai
 import FamilyDetails from './components/pages/Students/Add/FamilyDetails';
 import DepartmentDetails from './components/pages/Department/Dpt-details/DptDetails';
 import Add from './components/pages/Department/Add/Add';
+import DptStudentList from './components/pages/Department/List/DptStudentList';
 
 function App() {
     return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="student" element={<StudentsList/>}/>
             <Route path="student/add" element={<AddStudent/>}/>
             <Route path="department" element={<DepartmentDetails/>}/>
+            <Route path="department/details" element={<DptStudentList/>}/>
             <Route path="department/add" element={<Add/>}/>
           </Route>
           
