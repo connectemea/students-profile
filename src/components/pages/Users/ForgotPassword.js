@@ -43,7 +43,11 @@ export default function ForgotPassword() {
               setValue={setEmail}
             />
 
-            <SubmitButton name="Submit" onClick={handleClick} />
+            <SubmitButton
+              disabled={!userName || !email ? true : false}
+              name="Submit"
+              onClick={handleClick}
+            />
           </Stack>
         </Card>
       </ContentStyle>

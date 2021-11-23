@@ -66,7 +66,11 @@ export default function Login() {
                 Don’t have an account? Register
               </Link>
             </Stack>
-            <SubmitButton name="Login" onClick={handleClick} />
+            <SubmitButton
+              disabled={!email || !password ? true : false}
+              name="Login"
+              onClick={handleClick}
+            />
           </Stack>
         </Card>
       </ContentStyle>

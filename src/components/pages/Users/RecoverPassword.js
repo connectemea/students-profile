@@ -70,7 +70,11 @@ export default function Register() {
               errorMessage={confirmPasswordError}
             />
 
-            <SubmitButton name="Submit" onClick={handleClick} />
+            <SubmitButton
+              disabled={!password || !confirmPassword ? true : false}
+              name="Submit"
+              onClick={handleClick}
+            />
           </Stack>
         </Card>
       </ContentStyle>
