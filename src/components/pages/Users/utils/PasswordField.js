@@ -12,7 +12,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 export default function PasswordField(props) {
   const [showPassword, setShowPassword] = useState(false);
 
-  const { label, value, setValue } = props;
+  const { label, value, setValue, errorMessage } = props;
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -39,8 +39,11 @@ export default function PasswordField(props) {
         }
         label={label}
       />
-      <FormHelperText sx={{color:"red"}}>
-        Password must contain 5 characters
+      <FormHelperText sx={{ color: "red" }}>
+        {value === "" && `${label} is required.`}
+      </FormHelperText>
+      <FormHelperText sx={{ color: "red" }}>
+        {errorMessage !== "" ? errorMessage : ""}
       </FormHelperText>
     </FormControl>
   );

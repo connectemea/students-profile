@@ -13,6 +13,7 @@ export default function TextInput(props) {
       error={value === "" ? true : false}
       value={value}
       onChange={handleChange}
+      helperText={value === "" && `${label} is required`}
     />
   );
 }

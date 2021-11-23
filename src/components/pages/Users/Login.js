@@ -25,7 +25,7 @@ export default function Login() {
   return (
     <Container>
       <ContentStyle>
-        <Card sx={{ p: 4 }}>
+        <Card sx={{ p: 3 }}>
           <Box sx={{ mb: 3 }}>
             <Typography textAlign="center" variant="h3" gutterBottom>
               Login

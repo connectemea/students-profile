@@ -1,7 +1,7 @@
 import { LoadingButton } from "@mui/lab";
 
 export default function SubmitButton(props) {
-  const { name, onClick } = props;
+  const { name, onClick ,disabled} = props;
 
   return (
     <LoadingButton
@@ -10,6 +10,7 @@ export default function SubmitButton(props) {
       type="submit"
       variant="contained"
       onClick={onClick}
+      disabled={disabled}
     >
       {name}
     </LoadingButton>
