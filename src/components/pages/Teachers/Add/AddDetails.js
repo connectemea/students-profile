@@ -25,18 +25,18 @@ const genders = ["Female", "Male", "Other"];
 const status = ["Unmarried", "Married"];
 
 export default function AddDetails() {
-  const [image, setImage] = useState();
+  const [profileImage, imageProfileImage] = useState();
   const [name, setName] = useState();
-  const [shortForm, setShortForm] = useState();
+  const [shortName, setShortName] = useState();
   const [email, setEmail] = useState();
   const [department, setDepartment] = useState();
   const [joiningYear, setJoiningYear] = useState();
   const [gender, setGender] = useState();
   const [maritalStatus, setMaritalStatus] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [phoneNo, setPhoneNo] = useState();
   const [religion, setRelegion] = useState();
   const [caste, setCaste] = useState();
-  const [educationalQualification, setEducationalQualification] = useState();
+  const [educationQualification, setEducationQualification] = useState();
   return (
     <Page title="TeacherDetails">
       <Container maxWidth="xl" sx={{ mt: 2, p: 2, pl: 0 }}>
@@ -59,7 +59,10 @@ export default function AddDetails() {
             md={4}
             lg={4}
           >
-            <ImageUpload image={image} setImage={setImage} />
+            <ImageUpload
+              image={profileImage}
+              setImage={imageProfileImage}
+            />
             <Typography sx={{ mt: 3, color: "gray" }} variant={"body2"}>
               Allowed *.jpeg, *.jpg, *.png, *.gif <br />
               max size: 1MB
@@ -78,8 +81,8 @@ export default function AddDetails() {
               <TextInput
                 label="Short Form"
                 name="shortform"
-                textValue={shortForm}
-                setTextValue={setShortForm}
+                textValue={shortName}
+                setTextValue={setShortName}
               />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -93,9 +96,9 @@ export default function AddDetails() {
             <Grid item xs={12} sm={12} md={6} lg={6}>
               <TextInput
                 label="Phone Number"
-                name="phoneNumber"
-                textValue={phoneNumber}
-                setTextValue={setPhoneNumber}
+                name="phoneNo"
+                textValue={phoneNo}
+                setTextValue={setPhoneNo}
               />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -153,9 +156,9 @@ export default function AddDetails() {
           <Grid item xs={12} sm={12} md={4} lg={4}>
             <TextInput
               label="Educational Qualification"
-              name="educationalQualification"
-              textValue={educationalQualification}
-              setTextValue={setEducationalQualification}
+              name="educationQualification"
+              textValue={educationQualification}
+              setTextValue={setEducationQualification}
             />
           </Grid>
         </Grid>
@@ -167,18 +170,18 @@ export default function AddDetails() {
             color="info"
             variant="contained"
             disabled={
-              !image ||
+              !profileImage ||
               !name ||
-              !shortForm ||
+              !shortName ||
               !email ||
               !department ||
               !joiningYear ||
               !gender ||
               !maritalStatus ||
-              !phoneNumber ||
+              !phoneNo ||
               !religion ||
               !caste ||
-              !educationalQualification
+              !educationQualification
             }
           >
             Next

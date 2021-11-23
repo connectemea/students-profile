@@ -12,7 +12,7 @@ export default function TextInput(props) {
       varient="contained"
       value={textValue}
       name={name}
-      label={label}
+      label={label}   
       type={type}
       error={textValue === "" ? true : false}
       helperText={textValue === "" ? `${label} is required` : null}
