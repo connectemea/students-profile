@@ -10,6 +10,7 @@ export default function TextInput(props) {
       fullWidth
       type={type}
       label={label}
+      error={value === "" ? true : false}
       value={value}
       onChange={handleChange}
     />
