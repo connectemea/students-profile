@@ -5,6 +5,7 @@ import {
   OutlinedInput,
   InputLabel,
   FormControl,
+  FormHelperText,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
@@ -38,6 +39,9 @@ export default function PasswordField(props) {
         }
         label={label}
       />
+      <FormHelperText sx={{color:"red"}}>
+        Password must contain 5 characters
+      </FormHelperText>
     </FormControl>
   );
 }
