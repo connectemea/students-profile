@@ -20,7 +20,7 @@ export default function PasswordField(props) {
   const handleChange = (e) => setValue(e.target.value);
 
   return (
-    <FormControl fullWidth sx={{ m: 1 }} variant="outlined">
+    <FormControl fullWidth  variant="outlined">
       <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
       <OutlinedInput
         value={value}
