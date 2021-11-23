@@ -16,6 +16,8 @@ import EducationalDetails from './components/pages/Students/Add/EducationalDetai
 import FamilyDetails from './components/pages/Students/Add/FamilyDetails';
 import Details from './components/pages/Students/view/Details';
 import PersonalView from './components/utils/Student/View/PersonalView';
+import EducationalView from './components/utils/Student/View/EducationalView';
+import FamilyView from './components/utils/Student/View/FamilyView';
 
 function App() {
     return (
@@ -40,6 +42,8 @@ function App() {
             {/* view */}
             <Route path="details" element={<Details/>}/>
             <Route path="personalview" element={<PersonalView/>}/>
+            <Route path="educationalview" element={<EducationalView/>}/>
+            <Route path="familydetails" element={<FamilyView/>}/>
           </Route>
           
         </Routes>

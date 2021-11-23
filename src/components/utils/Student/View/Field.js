@@ -6,7 +6,7 @@ export default function Field(props) {
   return (
     <>
       <Typography sx={{ color: "text.secondary"}}>{heading}</Typography>
-      <Typography sx={{ color: "text.primary", mt:1.5 }}>{subHeading}</Typography>
+      <Typography sx={{ color: "text.primary", mt:1.5, mb:3}}>{subHeading}</Typography>
     </>
   );
 }
