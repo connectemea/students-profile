@@ -1,15 +1,10 @@
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
-import {
-  Box,
-  Container,
-  Typography,
-  Stack,
-  TextField,
-  Link,
-  Card,
-} from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+import { Box, Container, Typography, Stack, Link, Card } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import PasswordField from "./utils/PasswordField";
+import TextInput from "./utils/TextInput";
+import SubmitButton from "./utils/SubmitButton";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -22,39 +17,46 @@ const ContentStyle = styled("div")(({ theme }) => ({
 }));
 
 export default function Register() {
+  const [userName, setUserName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+
+  const handleClick = () => {
+    console.log(userName, email, password, confirmPassword);
+  };
+
   return (
     <Container>
       <ContentStyle>
-        <Card  sx={{ p: 4 }}>
+        <Card sx={{ p: 4 }}>
           <Box sx={{ mb: 3 }}>
             <Typography variant="h3" gutterBottom textAlign="center">
               Register
             </Typography>
           </Box>
           <Stack spacing={2}>
-            <TextField
-              fullWidth
-              autoComplete="username"
-              type="text"
+            <TextInput
               label="User name"
+              type="text"
+              value={userName}
+              setValue={setUserName}
             />
-            <TextField
-              fullWidth
-              autoComplete="username"
+            <TextInput
+              label="Email"
               type="email"
-              label="Email address"
+              value={email}
+              setValue={setEmail}
             />
-            <TextField
-              fullWidth
-              autoComplete="username"
-              type="password"
+            <PasswordField
               label="Password"
+              value={password}
+              setValue={setPassword}
             />
-            <TextField
-              fullWidth
-              autoComplete="username"
-              type="password"
-              label="Confirm password"
+            <PasswordField
+              label="Confirm Password"
+              value={confirmPassword}
+              setValue={setConfirmPassword}
             />
             <Stack
               direction="row"
@@ -66,14 +68,7 @@ export default function Register() {
                 Already have an account? Login
               </Link>
             </Stack>
-            <LoadingButton
-              fullWidth
-              size="large"
-              type="submit"
-              variant="contained"
-            >
-              Register
-            </LoadingButton>
+            <SubmitButton name="Register" onClick={handleClick} />
           </Stack>
         </Card>
       </ContentStyle>

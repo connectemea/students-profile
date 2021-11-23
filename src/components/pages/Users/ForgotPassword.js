@@ -1,15 +1,8 @@
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
-import {
-  Box,
-  Container,
-  Typography,
-  Stack,
-  Card,
-  TextField,
-//   Link,
-} from "@mui/material";
-import { LoadingButton } from "@mui/lab";
-// import { Link as RouterLink } from "react-router-dom";
+import { Box, Container, Typography, Stack, Card } from "@mui/material";
+import TextInput from "./utils/TextInput";
+import SubmitButton from "./utils/SubmitButton";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -22,43 +15,38 @@ const ContentStyle = styled("div")(({ theme }) => ({
 }));
 
 export default function ForgotPassword() {
+  const [userName, setUserName] = useState();
+  const [email, setEmail] = useState();
+
+  const handleClick = () => console.log(userName, email);
+
   return (
-    <div>
-      <Container>
-        <ContentStyle>
+    <Container>
+      <ContentStyle>
         <Card sx={{ p: 5 }}>
           <Box sx={{ mb: 3 }}>
-            <Typography variant="h3" gutterBottom>
+            <Typography textAlign="center" variant="h3" gutterBottom>
               Forgot Password
             </Typography>
           </Box>
           <Stack spacing={2}>
-            <TextField
-              fullWidth
-              autoComplete="username"
-              type="username"
-              label="Username"
+            <TextInput
+              label="User name"
+              type="text"
+              value={userName}
+              setValue={setUserName}
             />
-            <TextField
-              fullWidth
-              autoComplete="username"
+            <TextInput
+              label="Email"
               type="email"
-              label="Email address"
+              value={email}
+              setValue={setEmail}
             />
 
-            
-            <LoadingButton
-              fullWidth
-              size="large"
-              type="submit"
-              variant="contained"
-            >
-              Submit
-            </LoadingButton>
+            <SubmitButton name="Submit" onClick={handleClick} />
           </Stack>
-          </Card>
-        </ContentStyle>
-      </Container>
-    </div>
+        </Card>
+      </ContentStyle>
+    </Container>
   );
 }

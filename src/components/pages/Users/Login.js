@@ -1,20 +1,10 @@
-import { styled } from "@mui/material/styles";
-import {
-  Box,
-  Container,
-  Typography,
-  Stack,
-  TextField,
-  Card,
-  Link,
-  InputAdornment,
-  IconButton,
-  Icon,
-} from "@mui/material";
-import { LoadingButton } from "@mui/lab";
-import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
-
+import { styled } from "@mui/material/styles";
+import { Box, Container, Typography, Stack, Card, Link } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import PasswordField from "./utils/PasswordField";
+import TextInput from "./utils/TextInput";
+import SubmitButton from "./utils/SubmitButton";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -27,7 +17,10 @@ const ContentStyle = styled("div")(({ theme }) => ({
 }));
 
 export default function Login() {
-  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const handleClick = () => console.log(email, password);
 
   return (
     <Container>
@@ -39,29 +32,16 @@ export default function Login() {
             </Typography>
           </Box>
           <Stack spacing={2}>
-            <TextField
-              fullWidth
-              autoComplete="username"
+            <TextInput
+              label="Email"
               type="email"
-              label="Email address"
+              value={email}
+              setValue={setEmail}
             />
-            <TextField
-              fullWidth
-              autoComplete="username"
-              type="password"
+            <PasswordField
               label="Password"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      edge="end"
-                      onClick={() => setShowPassword((prev) => !prev)}
-                    >
-                      <Icon icon={showPassword ? eyeFill : eyeOffFill} />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
+              value={password}
+              setValue={setPassword}
             />
 
             <Stack
@@ -70,10 +50,11 @@ export default function Login() {
               justifyContent="space-between"
               sx={{ my: 2 }}
             >
-              <Link 
-              component={RouterLink}
-              variant="subtitle2" 
-              to="/user/forgot">
+              <Link
+                component={RouterLink}
+                variant="subtitle2"
+                to="/user/forgot"
+              >
                 Forgot password
               </Link>
 
@@ -85,14 +66,7 @@ export default function Login() {
                 Don’t have an account? Register
               </Link>
             </Stack>
-            <LoadingButton
-              fullWidth
-              size="large"
-              type="submit"
-              variant="contained"
-            >
-              Login
-            </LoadingButton>
+            <SubmitButton name="Login" onClick={handleClick} />
           </Stack>
         </Card>
       </ContentStyle>
