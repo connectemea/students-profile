@@ -11,9 +11,13 @@ import AddStudent from "./components/pages/Students/Add/AddStudents";
 import PersonalDetails from "./components/pages/Students/Add/PersonalDetails";
 import EducationalDetails from "./components/pages/Students/Add/EducationalDetails";
 import FamilyDetails from "./components/pages/Students/Add/FamilyDetails";
-
-// import AddStudent from './components/pages/Students/Add/AddStudents';
+import Register from "./components/pages/Users/Register";
+import Login from "./components/pages/Users/Login";
+import AuthLayout from "./components/utils/UserLayout/AuthLayout";
+import ForgotPassword from "./components/pages/Users/ForgotPassword";
+import RecoverPassword from "./components/pages/Users/RecoverPassword";
 import AddDetails from "./components/pages/Teachers/Add/AddDetails";
+
 function App() {
   return (
     <ThemeConfig>
@@ -35,6 +39,12 @@ function App() {
           <Route path="student" element={<StudentsList />} />
           <Route path="student/add" element={<AddStudent />} />
           <Route path="teacher/view" element={<TeachersView />} />
+        </Route>
+        <Route path="/user" element={<AuthLayout />}>
+          <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
+          <Route path="forgot" element={<ForgotPassword />} />
+          <Route path="recover" element={<RecoverPassword />} />
         </Route>
       </Routes>
     </ThemeConfig>
