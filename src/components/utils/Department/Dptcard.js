@@ -4,9 +4,8 @@
 import { alpha, styled } from "@mui/material/styles";
 import { Card, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-import { style } from "@mui/system";
-import Fab from "@mui/material/Fab";
-import EditIcon from '@mui/icons-material/Edit';
+import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
+import DeleteOutlineSharpIcon from "@mui/icons-material/DeleteOutlineSharp";
 
 // utils
 // import { fShortenNumber } from '../../../utils/formatNumber';
@@ -16,11 +15,14 @@ import EditIcon from '@mui/icons-material/Edit';
 // ----------------------------------------------------------------------
 
 export default function Dptcard({ data, type }) {
+  const deleteDepartment = () => {
+    console.log("onClinck")
+  }
   const { shortForm, colorType } = type;
   const RootStyle = styled(Card)(({ theme }) => ({
     boxShadow: "none",
     textAlign: "center",
-    padding: theme.spacing(0,0,5,0),
+    padding: theme.spacing(0, 0, 5, 0),
     color: theme.palette[colorType].darker,
     backgroundColor: theme.palette[colorType].lighter,
   }));
@@ -53,9 +55,11 @@ export default function Dptcard({ data, type }) {
           justifyContent="flex-end"
           alignItems="flex-start"
         >
-          <Fab sx={{margin:"8px"}} size="small" color="" aria-label="edit">
-            <EditIcon />
-          </Fab>
+        <DeleteOutlineSharpIcon sx={{ margin: "8px" }} onClick={deleteDepartment} />
+        
+          <Link to="/department/add" style={{ color: "none" }}>
+            <ModeEditOutlineOutlinedIcon sx={{ margin: "8px" }} />
+          </Link>
         </Grid>
         <IconWrapperStyle>
           {/* <Icon icon={appleFilled} width={24} height={24} /> */}

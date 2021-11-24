@@ -18,6 +18,7 @@ import DepartmentDetails from './components/pages/Department/Dpt-details/DptDeta
 import Add from './components/pages/Department/Add/Add';
 import DptStudentList from './components/pages/Department/List/DptStudentList';
 import AddDetails from "./components/pages/Teachers/Add/AddDetails";
+import TeachersView from  "./components/pages/Teachers/View/TeachersView"
 function App() {
     return (
       <ThemeConfig>
