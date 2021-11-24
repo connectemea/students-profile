@@ -9,7 +9,7 @@ import {
   Grid,
   Card,
   TextField,
-  Tooltip
+  Tooltip,
 } from "@mui/material";
 
 // material icons
@@ -18,6 +18,9 @@ import PublishIcon from "@mui/icons-material/Publish";
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
 import DataTable from "../../../utils/DataTable";
+
+//importing the user service
+import UserService from "../../../../service/UserService";
 
 // table header cell config
 const TABLE_HEAD = [
@@ -51,15 +54,31 @@ const TABLE_DATA = [
 export default function AddStudent() {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
+  const [errorMsg, setErrorMsg] = useState();
   const handleUsernameChange = (event) => setUsername(event.target.value);
   const handleEmailChange = (event) => setEmail(event.target.value);
+  const clearError = () => setErrorMsg("");
 
-  const handleAddStudent = () => {
-    const data = {
-      username,
-      email,
-    };
-    console.log(data);
+  const handleAddStudent = async () => {
+    try {
+      clearError();
+      const userData = {
+        username,
+        email,
+      };
+      // adding user to db
+      await UserService.createUser(userData);
+      // clearing the form
+      clearUserCredentials();
+    } catch (err) {
+      setErrorMsg(err.response.data.message);
+    }
+  };
+
+  // clearing the form
+  const clearUserCredentials = () => {
+    setUsername("");
+    setEmail("");
   };
   return (
     <Page title="AddStudent">
@@ -105,19 +124,21 @@ export default function AddStudent() {
             justifyContent="flex-end"
             mt={2}
           >
-            <Tooltip title={(!username || !email)?"fill the fields":"sumbit fields"}>
-            <span>
-              <Button
-                variant="contained"
-                color="info"
-                //   component={RouterLink}
-                onClick={handleAddStudent}
-                disabled={!username || !email}
-                //   to="#"
-                startIcon={<PublishIcon />}
-              >
-                Add
-              </Button>
+            <Tooltip
+              title={!username || !email ? "fill the fields" : "sumbit fields"}
+            >
+              <span>
+                <Button
+                  variant="contained"
+                  color="info"
+                  //   component={RouterLink}
+                  onClick={handleAddStudent}
+                  disabled={!username || !email}
+                  //   to="#"
+                  startIcon={<PublishIcon />}
+                >
+                  Add
+                </Button>
               </span>
             </Tooltip>
           </Stack>
