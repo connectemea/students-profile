@@ -17,7 +17,7 @@ import FamilyDetails from './components/pages/Students/Add/FamilyDetails';
 import DepartmentDetails from './components/pages/Department/Dpt-details/DptDetails';
 import Add from './components/pages/Department/Add/Add';
 import DptStudentList from './components/pages/Department/List/DptStudentList';
-
+import AddDetails from "./components/pages/Teachers/Add/AddDetails";
 function App() {
     return (
       <ThemeConfig>
@@ -28,6 +28,9 @@ function App() {
             <Route path="educational" element={<EducationalDetails/>}/>
             <Route path="family" element={<FamilyDetails/>}/>
           </Route>
+          <Route path="/teacher/details">
+          <Route path="personal" element={<AddDetails />} />
+        </Route>
           <Route path="/" element={<DashboardLayout/>}>
             <Route path="/" element={<Navigate to="/home"/>}/>
             <Route path="home" element={<Home/>}/>
@@ -38,6 +41,7 @@ function App() {
             <Route path="department" element={<DepartmentDetails/>}/>
             <Route path="department/details" element={<DptStudentList/>}/>
             <Route path="department/add" element={<Add/>}/>
+            <Route path="teacher/view" element={<TeachersView />} />
           </Route>
           
         </Routes>
