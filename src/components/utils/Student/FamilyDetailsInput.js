@@ -61,7 +61,7 @@ export default function FamilyDetailsInput() {
                         <TextInput label="Occupation" name="Father Occupation" textValue={fatherOccupation} setTextValue={setFatherOccupation} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6}>
-                        <TextInput label="Official Address" name="Father Official Address" textValue={fatherAddress} setTextValue={setFatherAddress} />
+                        <TextInput label="Official Address" multiline rows="3" name="Father Official Address" textValue={fatherAddress} setTextValue={setFatherAddress} />
                     </Grid>
                 </Grid>
             </Grid>
@@ -84,7 +84,7 @@ export default function FamilyDetailsInput() {
                         <TextInput label="Occupation" name="Mother Occupation" textValue={motherOccupation} setTextValue={setMotherOccupation} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6}>
-                        <TextInput label="Official Address" name="Mother Official Address" textValue={motherAddress} setTextValue={setMotherAddress} />
+                        <TextInput label="Official Address" name="Mother Official Address" multiline rows="3" textValue={motherAddress} setTextValue={setMotherAddress} />
                     </Grid>
                 </Grid>
             </Grid>
@@ -114,7 +114,7 @@ export default function FamilyDetailsInput() {
                         <TextInput label="Occupation" name="Guardian Occupation" textValue={guardianOccupation} setTextValue={setGuardianOccupation} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6}>
-                        <TextInput label="Official Address" name="Guardian Official Address" textValue={guardianAddress} setTextValue={setGuardianAddress} />
+                        <TextInput label="Official Address" name="Guardian Official Address" multiline rows="3" textValue={guardianAddress} setTextValue={setGuardianAddress} />
                     </Grid>
                 </Grid>
             </Grid>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // material components
 import {
@@ -15,6 +15,7 @@ import { styled } from "@mui/material/styles";
 import SelectInput from "../Inputs/SelectInput";
 import TextInput from '../Inputs/TextInput';
 import DatePickerInput from "../Inputs/DatePickerInput";
+import ImageUpload from "../Inputs/ImageUpload";
 
 // material icons
 import IconButton from '@mui/material/IconButton';
@@ -22,14 +23,6 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 
 
-
-
-const AddImage = styled(IconButton)(({ theme }) => ({
-    height: theme.spacing(20),
-    width: theme.spacing(20),
-    outline: "1.5px dotted grey",
-    outlineOffset: "10px",
-}));
 const ProfileCard = styled(Card)(({ theme }) => ({
     paddingRight: `${theme.spacing(4)} !important`,
     paddingBottom: `${theme.spacing(4)} !important`
@@ -44,6 +37,7 @@ const categoriesOfAdmission = ["Merit", "Community Quota", "Management Quota", "
 const residences = ["House", "Hostel", "Relative's Residence", "Guardian's Residence"]
 
 export default function PersonalDetailsInput() {
+    const [profilePhoto, setProfilePhoto] = useState();
     const [dateOfBirth, setDateOfBirth] = useState(null);
     const [joiningYear, setJoiningYear] = useState(null);
     const [name, setName] = useState();
@@ -63,18 +57,22 @@ export default function PersonalDetailsInput() {
     const [permanentAddress, setPermanentAdress] = useState();
     const [residence, setResidence] = useState();
     const [distanceFromCollege, setDistanceFromCollege] = useState();
+    const [isAddressSame, setIsAddressSame] = useState(false);
+    const handleIsAddressChecked = () => {
+        if (!isAddressSame) setPermanentAdress(presentAddress);
+        setIsAddressSame(!isAddressSame)
+    };
+    useEffect(() => {
+        const setPresentAsPermanent = () => setPermanentAdress(presentAddress);
+        if (isAddressSame) setPresentAsPermanent();
+    }, [presentAddress])
+
 
     return (
         <Grid component={ProfileCard} sx={{ mt: 2, p: 2 }} container spacing={2}>
             {/* Add Image Section */}
             <Grid container direction="column" justifyContent="flex-end" alignItems="center" xs={12} sm={12} md={4} lg={4}>
-                <input type="file" id="imageUpload" hidden />
-                <AddImage>
-                    <label for="imageUpload"><Stack direction="column" spacing={1}>
-                        <item><AddAPhotoIcon /></item>
-                        <item><Typography variant={"body1"}>Upload photo</Typography></item></Stack>
-                    </label>
-                </AddImage>
+                <ImageUpload image={profilePhoto} setImage={setProfilePhoto} />
 
                 <Typography sx={{ mt: 3, color: "gray" }} variant={"body2"}>
                     Allowed *.jpeg, *.jpg, *.png, *.gif <br />max size: 1MB
@@ -90,14 +88,14 @@ export default function PersonalDetailsInput() {
                     <TextInput name="Email" label="Email Address" textValue={email} setTextValue={setEmail} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
-                {/* select input from custom made component */}
+                    {/* select input from custom made component */}
                     <SelectInput label="Department" name="Department" menuItems={departments} dropdownValue={department} setDropdownValue={setDepartment} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                     <TextInput name="Mobile Number" label="Mobile Number" type="number" textValue={mobileNumber} setTextValue={setMobileNumber} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <DatePickerInput label="Date Of Birth" name="Date of Birth" date={dateOfBirth} setDate={setDateOfBirth}/>
+                    <DatePickerInput label="Date Of Birth" name="Date of Birth" date={dateOfBirth} setDate={setDateOfBirth} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
                     <SelectInput label="Gender" name="Gender" menuItems={genders} dropdownValue={gender} setDropdownValue={setGender} />
@@ -106,7 +104,7 @@ export default function PersonalDetailsInput() {
                     <TextInput label="Admission Number" name="Sdmission Number" textValue={admissionNumber} setTextValue={setAdmissionNumber} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <DatePickerInput views={['year']} label="Joining Year" name="Joining Year" date={joiningYear} setDate={setJoiningYear}/>
+                    <DatePickerInput views={['year']} label="Joining Year" name="Joining Year" date={joiningYear} setDate={setJoiningYear} />
                 </Grid>
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
@@ -134,8 +132,8 @@ export default function PersonalDetailsInput() {
                 <TextInput label="Present Address" name="Present Address" multiline rows={3} textValue={presentAddress} setTextValue={setPresentAddress} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
-                <FormControlLabel control={<Switch />} label="Same as Present Address" sx={{ color: "#637381" }} />
-                <TextInput label="Permanent Address" name="Permanent Address" multiline rows={3} textValue={permanentAddress} setTextValue={setPermanentAdress} />
+                <FormControlLabel control={<Switch onClick={handleIsAddressChecked} />} label="Same as Present Address" sx={{ color: "#637381" }} />
+                <TextInput  label="Permanent Address" name="Permanent Address" multiline rows={3} textValue={permanentAddress} setTextValue={setPermanentAdress} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6} >
                 <SelectInput label="Residence" name="Residence" menuItems={residences} dropdownValue={residence} setDropdownValue={setResidence} />
