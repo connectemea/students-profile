@@ -22,10 +22,15 @@ export default function PasswordField(props) {
 
   return (
     <FormControl fullWidth variant="outlined">
-      <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
+      <InputLabel
+        error={value === "" || errorMessage ? true : false}
+        htmlFor="outlined-adornment-password"
+      >
+        {label}
+      </InputLabel>
       <OutlinedInput
         value={value}
-        error={value === "" ? true : false}
+        error={value === "" || errorMessage ? true : false}
         onChange={handleChange}
         id="outlined-adornment-password"
         fullWidth
