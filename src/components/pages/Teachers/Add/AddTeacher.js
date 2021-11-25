@@ -9,7 +9,7 @@ import {
   Grid,
   Card,
   TextField,
-  Tooltip
+  Tooltip,
 } from "@mui/material";
 
 // material icons
@@ -105,19 +105,21 @@ export default function AddTeacher() {
             justifyContent="flex-end"
             mt={2}
           >
-            <Tooltip title={(!username || !email)?"fill the fields":"sumbit fields"}>
-            <span>
-              <Button
-                variant="contained"
-                color="info"
-                //   component={RouterLink}
-                onClick={handleAddTeacher}
-                disabled={!username || !email}
-                //   to="#"
-                startIcon={<PublishIcon />}
-              >
-                Add
-              </Button>
+            <Tooltip
+              title={!username || !email ? "fill the fields" : "sumbit fields"}
+            >
+              <span>
+                <Button
+                  variant="contained"
+                  color="info"
+                  //   component={RouterLink}
+                  onClick={handleAddTeacher}
+                  disabled={!username || !email}
+                  //   to="#"
+                  startIcon={<PublishIcon />}
+                >
+                  Add
+                </Button>
               </span>
             </Tooltip>
           </Stack>

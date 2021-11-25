@@ -18,6 +18,9 @@ import PublishIcon from "@mui/icons-material/Publish";
 import Page from "../../../utils/Page";
 import DataTable from "../../../utils/DataTable";
 
+//importing the user service
+import UserService from "../../../../service/UserService";
+
 // table header cell config
 const TABLE_HEAD = [
   { id: "username", label: "Name", alignRight: false, type: "text" },
@@ -50,15 +53,31 @@ const TABLE_DATA = [
 export default function AddStudent() {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
+  const [errorMsg, setErrorMsg] = useState();
   const handleUsernameChange = (event) => setUsername(event.target.value);
   const handleEmailChange = (event) => setEmail(event.target.value);
+  const clearError = () => setErrorMsg("");
 
-  const handleAddStudent = () => {
-    const data = {
-      username,
-      email,
-    };
-    console.log(data);
+  const handleAddStudent = async () => {
+    try {
+      clearError();
+      const userData = {
+        username,
+        email,
+      };
+      // adding user to db
+      await UserService.createUser(userData);
+      // clearing the form
+      clearUserCredentials();
+    } catch (err) {
+      setErrorMsg(err.response.data.message);
+    }
+  };
+
+  // clearing the form
+  const clearUserCredentials = () => {
+    setUsername("");
+    setEmail("");
   };
   return (
     <Page title="AddStudent">
