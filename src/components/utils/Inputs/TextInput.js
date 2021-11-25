@@ -3,7 +3,7 @@ import { TextField } from "@mui/material";
 
 export default function TextInput(props) {
     //props destructuring 
-    const { label, name, textValue, setTextValue, multiline, rows, type,disabled, isError } = props;
+    const { label, name, textValue, setTextValue, multiline, rows, type,disabled } = props;
 
     const handleTextInputChange = (e) => setTextValue(e.target.value);
 

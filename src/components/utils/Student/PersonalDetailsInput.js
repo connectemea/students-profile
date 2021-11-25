@@ -59,7 +59,7 @@ export default function PersonalDetailsInput() {
     useEffect(() => {
         const setPresentAsPermanent = () => setPermanentAdress(presentAddress);
         if (isAddressSame) setPresentAsPermanent();
-    }, [presentAddress])
+    }, [presentAddress, isAddressSame])
 
     return (
         <Grid component={ProfileCard} sx={{ mt: 2, p: 2 }} container spacing={2}>

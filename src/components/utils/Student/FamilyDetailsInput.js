@@ -50,7 +50,7 @@ export default function FamilyDetailsInput() {
     useEffect(() => {
         const setFatherAsGuardian = () => setGuardianName(fatherName);
         if (isFatherChecked) setFatherAsGuardian();
-    }, [fatherName])
+    }, [fatherName, isFatherChecked])
 
 
     return (
