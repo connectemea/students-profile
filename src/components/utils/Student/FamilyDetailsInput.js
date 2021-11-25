@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // material components
 import {
@@ -39,6 +39,18 @@ export default function FamilyDetailsInput() {
     const [guardianOccupation, setGuardianOccupation] = useState();
     const [guardianAddress, setGuardianAddress] = useState();
 
+    //Radio button management
+    //Father
+    //father name
+    const [isFatherChecked, setIsFatherChecked] = useState(false);
+    const handleIsFatherChecked = () => {
+        if (!isFatherChecked) setGuardianName(fatherName);
+        setIsFatherChecked(!isFatherChecked)
+    };
+    useEffect(() => {
+        const setFatherAsGuardian = () => setGuardianName(fatherName);
+        if (isFatherChecked) setFatherAsGuardian();
+    }, [fatherName])
 
 
     return (
@@ -95,7 +107,7 @@ export default function FamilyDetailsInput() {
                 <Grid item md={12}><Typography variant="subtitle1">Guardian</Typography></Grid>
                 <Grid item md={12}>
                     <RadioGroup row aria-label="guardian" name="guardian">
-                        <FormControlLabel value="father" control={<Radio />} label="Father" />
+                        <FormControlLabel value="father" control={<Radio onClick={handleIsFatherChecked}/>} label="Father" />
                         <FormControlLabel value="mother" control={<Radio />} label="Mother" />
                         <FormControlLabel value="other" control={<Radio />} label="Other" />
                     </RadioGroup>

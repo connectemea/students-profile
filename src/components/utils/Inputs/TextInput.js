@@ -3,12 +3,13 @@ import { TextField } from "@mui/material";
 
 export default function TextInput(props) {
     //props destructuring 
-    const { label, name, textValue, setTextValue, multiline, rows, type,disabled,key } = props;
+    const { label, name, textValue, setTextValue, multiline, rows, type,disabled, isError } = props;
 
     const handleTextInputChange = (e) => setTextValue(e.target.value);
 
     return (
         <TextField
+            
             multiline={multiline ? true : false}
             rows={rows ? rows : 1}
             disabled={disabled}
@@ -22,6 +23,7 @@ export default function TextInput(props) {
             color="info"
             fullWidth
             onChange={handleTextInputChange}
+            InputLabelProps={{shrink:textValue}}
         />
     );
 }

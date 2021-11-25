@@ -13,6 +13,7 @@ import { styled } from "@mui/material/styles";
 import Page from "../../../utils/Page";
 
 import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
 
 
 const RootStyle = styled("div")(({ theme }) => ({
@@ -20,9 +21,9 @@ const RootStyle = styled("div")(({ theme }) => ({
 }));
 
 const steps = [
-    'Personal Details',
-    'Educational Details',
-    'Family Details',
+    {name:'Personal Details', link:'/student/details/personal'},
+    {name:'Educational Details', link:'/student/details/educational'},
+    {name:'Family Details', link:'/student/details/family'},
 ];
 
 
@@ -35,9 +36,11 @@ export default function PersonalDetails() {
                 <Typography variant={"h4"}>Personal Details</Typography>
                 <Box sx={{ width: '100%', p: '0.75%' }}>
                     <Stepper activeStep={0}>
-                        {steps.map((label) => (
-                            <Step key={label}>
-                                <StepLabel>{label}</StepLabel>
+                        {steps.map((step) => (
+                            <Step key={step.name}>
+                            <Link to={step.link} style={{textDecoration:'none'}}>
+                                <StepLabel>{step.name}</StepLabel>
+                            </Link>
                             </Step>
                         ))}
                     </Stepper>

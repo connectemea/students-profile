@@ -26,8 +26,8 @@ const ProfileCard = styled(Card)(({ theme }) => ({
 const departments = ["Bsc computer science", "Bsc Microbiology", "BA English"]
 const genders = ["Male", "Female", "Other"]
 const bloodGroups = ["O+", "O-", "A+", "A-", "AB+", "AB-", "B+", "B-"]
-const maritalStatuses = ["Unmarrird", "Married"]
-const categoriesOfAdmission = ["Merit", "Community Quota", "Management Quota", "Sports Quota", "Special Sports Quota"]
+const maritalStatuses = ["Unmarried", "Married"]
+const categoriesOfAdmission = ["Merit", "Community Quota", "Management Quota", "Sports Quota", "Special Sports Quota", "PH Quota"]
 const residences = ["House", "Hostel", "Relative's Residence", "Guardian's Residence"]
 
 export default function PersonalDetailsInput() {
@@ -126,7 +126,7 @@ export default function PersonalDetailsInput() {
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
                 <FormControlLabel control={<Switch onClick={handleIsAddressChecked} />} label="Same as Present Address" sx={{ color: "#637381" }} />
-                <TextInput  label="Permanent Address" name="Permanent Address" multiline rows={3} textValue={permanentAddress} setTextValue={setPermanentAdress} />
+                <TextInput  label="Permanent Address" name="Permanent Address" multiline rows={3} textValue={permanentAddress} disabled={isAddressSame} setTextValue={setPermanentAdress}  />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6} >
                 <SelectInput label="Residence" name="Residence" menuItems={residences} dropdownValue={residence} setDropdownValue={setResidence} />
