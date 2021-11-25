@@ -17,6 +17,7 @@ import AuthLayout from "./components/utils/UserLayout/AuthLayout";
 import ForgotPassword from "./components/pages/Users/ForgotPassword";
 import RecoverPassword from "./components/pages/Users/RecoverPassword";
 import AddDetails from "./components/pages/Teachers/Add/AddDetails";
+import Details from "./components/pages/Students/view/Details";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
             />
             <Route path="list" element={<StudentsList />} />
             <Route path="add" element={<AddStudent />} />
+            <Route path="view" element={<Details />} />
           </Route>
         </Route>
 
@@ -70,7 +72,7 @@ function App() {
           <Route path="educational" element={<EducationalDetails />} />
           <Route path="family" element={<FamilyDetails />} />
         </Route>
-        
+
       </Routes>
     </ThemeConfig>
   );
