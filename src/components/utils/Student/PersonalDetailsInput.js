@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 // material components
 import {
-    Stack,
     Typography,
     Grid,
     Card,
@@ -16,11 +15,6 @@ import SelectInput from "../Inputs/SelectInput";
 import TextInput from '../Inputs/TextInput';
 import DatePickerInput from "../Inputs/DatePickerInput";
 import ImageUpload from "../Inputs/ImageUpload";
-
-// material icons
-import IconButton from '@mui/material/IconButton';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-
 
 
 const ProfileCard = styled(Card)(({ theme }) => ({
@@ -37,22 +31,22 @@ const categoriesOfAdmission = ["Merit", "Community Quota", "Management Quota", "
 const residences = ["House", "Hostel", "Relative's Residence", "Guardian's Residence"]
 
 export default function PersonalDetailsInput() {
-    const [profilePhoto, setProfilePhoto] = useState();
+    const [profileImage, setProfileImage] = useState();
     const [dateOfBirth, setDateOfBirth] = useState(null);
-    const [joiningYear, setJoiningYear] = useState(null);
+    const [yearOfJoin, setYearOfJoin] = useState(null);
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [department, setDepartment] = useState();
-    const [mobileNumber, setMobileNumber] = useState();
+    const [mobileNO, setMobileNO] = useState();
     const [gender, setGender] = useState();
-    const [admissionNumber, setAdmissionNumber] = useState();
+    const [admissionNO, setAdmissionNO] = useState();
     const [bloodGroup, setBloodGroup] = useState();
     const [maritalStatus, setMaritalStatus] = useState();
     const [religion, setReligion] = useState();
     const [caste, setCaste] = useState();
     const [categoryOfAdmission, setCategoryOfAdmission] = useState();
-    const [identificationMark1, setIdentificationMark1] = useState();
-    const [identificationMark2, setIdentificationMark2] = useState();
+    const [identificationMarkOne, setIdentificationMarkOne] = useState();
+    const [identificationMarkTwo, setIdentificationMarkTwo] = useState();
     const [presentAddress, setPresentAddress] = useState();
     const [permanentAddress, setPermanentAdress] = useState();
     const [residence, setResidence] = useState();
@@ -67,12 +61,11 @@ export default function PersonalDetailsInput() {
         if (isAddressSame) setPresentAsPermanent();
     }, [presentAddress])
 
-
     return (
         <Grid component={ProfileCard} sx={{ mt: 2, p: 2 }} container spacing={2}>
             {/* Add Image Section */}
             <Grid container direction="column" justifyContent="flex-end" alignItems="center" xs={12} sm={12} md={4} lg={4}>
-                <ImageUpload image={profilePhoto} setImage={setProfilePhoto} />
+                <ImageUpload image={profileImage} setImage={setProfileImage} />
 
                 <Typography sx={{ mt: 3, color: "gray" }} variant={"body2"}>
                     Allowed *.jpeg, *.jpg, *.png, *.gif <br />max size: 1MB
@@ -92,7 +85,7 @@ export default function PersonalDetailsInput() {
                     <SelectInput label="Department" name="Department" menuItems={departments} dropdownValue={department} setDropdownValue={setDepartment} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextInput name="Mobile Number" label="Mobile Number" type="number" textValue={mobileNumber} setTextValue={setMobileNumber} />
+                    <TextInput name="Mobile Number" label="Mobile Number" type="number" textValue={mobileNO} setTextValue={setMobileNO} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                     <DatePickerInput label="Date Of Birth" name="Date of Birth" date={dateOfBirth} setDate={setDateOfBirth} />
@@ -101,10 +94,10 @@ export default function PersonalDetailsInput() {
                     <SelectInput label="Gender" name="Gender" menuItems={genders} dropdownValue={gender} setDropdownValue={setGender} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextInput label="Admission Number" name="Sdmission Number" textValue={admissionNumber} setTextValue={setAdmissionNumber} />
+                    <TextInput label="Admission Number" name="Sdmission Number" textValue={admissionNO} setTextValue={setAdmissionNO} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <DatePickerInput views={['year']} label="Joining Year" name="Joining Year" date={joiningYear} setDate={setJoiningYear} />
+                    <DatePickerInput views={['year']} label="Joining Year" name="Joining Year" date={yearOfJoin} setDate={setYearOfJoin} />
                 </Grid>
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
@@ -123,10 +116,10 @@ export default function PersonalDetailsInput() {
                 <SelectInput label="Category Of Admission" name="Category Of Admission" menuItems={categoriesOfAdmission} dropdownValue={categoryOfAdmission} setDropdownValue={setCategoryOfAdmission} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextInput label="Identification Mark 1" name="Identification Mark" textValue={identificationMark1} setTextValue={setIdentificationMark1} />
+                <TextInput label="Identification Mark 1" name="Identification Mark" textValue={identificationMarkOne} setTextValue={setIdentificationMarkOne} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextInput label="Identification Mark 2" name="Identification Mark" textValue={identificationMark2} setTextValue={setIdentificationMark2} />
+                <TextInput label="Identification Mark 2" name="Identification Mark" textValue={identificationMarkTwo} setTextValue={setIdentificationMarkTwo} />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6} sx={{ display: "flex", alignItems: "flex-end" }}>
                 <TextInput label="Present Address" name="Present Address" multiline rows={3} textValue={presentAddress} setTextValue={setPresentAddress} />
