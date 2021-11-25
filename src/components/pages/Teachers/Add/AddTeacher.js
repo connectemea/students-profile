@@ -111,7 +111,7 @@ export default function AddTeacher() {
                   color="info"
                   //   component={RouterLink}
                   onClick={handleAddTeacher}
-                  // disabled={!username || !email}
+                  disabled={!name || !email}
                   //   to="#"
                   startIcon={<PublishIcon />}
                 >
