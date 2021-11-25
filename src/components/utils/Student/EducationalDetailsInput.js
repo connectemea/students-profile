@@ -77,7 +77,7 @@ export default function EducationalDetailsInput() {
     // extra caricular
     const [activity, setActivity] = useState();
     const [prize, setPrize] = useState();
-    const [yearOfParticipation, setYearOfParticipation] = useState();
+    const [yearOfParticipation, setYearOfParticipation] = useState(null);
     const [perfomance, setPerfomance] = useState();
 
 

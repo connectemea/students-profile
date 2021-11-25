@@ -53,9 +53,12 @@ export default function DependenciesInput() {
         {/* Dependencies  */}
         <Grid component={ProfileCard} sx={{ mt: 2, p: 2 }} container spacing={2}>
 
-            <Grid item md={12}><Typography variant="subtitle1">Learing Method</Typography></Grid>
+            <Grid item md={12}>
+                <Typography variant="subtitle1">Learing Method</Typography>
+                <Typography variant="body2">How much do you depend on each of the following for learning?</Typography> 
+            </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextInput label="Class room lecture (in %)" name="" type="number" textValue={classRoomPercent} setTextValue={setClassRoomPercent} />
+                    <TextInput label="Classroom Lecture (in%)" name="" type="number" textValue={classRoomPercent} setTextValue={setClassRoomPercent} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={classRoomRemark} setTextValue={setClassRoomRemark}  />
@@ -63,55 +66,55 @@ export default function DependenciesInput() {
             
 
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <TextInput label="Lecture Note(in %)" name="" type="number" textValue={lectureNotePercent} setTextValue={setLectureNotePercent} />
+                    <TextInput label="Lecture Note (in%)" name="" type="number" textValue={lectureNotePercent} setTextValue={setLectureNotePercent} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={lectureNoteRemark} setTextValue={setLectureNoteRemark}  />
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TextInput label="Note provided by Teacher(in %)" name="" type="number" textValue={noteByTeacherPercent} setTextValue={setNoteByTeacherPercent} />
+                    <TextInput label="Notes Provided by Teacher (in%)" name="" type="number" textValue={noteByTeacherPercent} setTextValue={setNoteByTeacherPercent} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={noteByTeacherRemark} setTextValue={setNoteByTeacherRemark}  />
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TextInput label="Case Study(in %)" name="" type="number" textValue={caseStudyPercent} setTextValue={setCaseStudyPercent} />
+                    <TextInput label="Case Study (in%)" name="" type="number" textValue={caseStudyPercent} setTextValue={setCaseStudyPercent} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={caseStudyRemark} setTextValue={setCaseStudyRemark}  />
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TextInput label="Observation(in %)" name="" type="number" textValue={observationPercent} setTextValue={setObservationPercent} />
+                    <TextInput label="Observation (in%)" name="" type="number" textValue={observationPercent} setTextValue={setObservationPercent} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={observationRemark} setTextValue={setObservationRemark}  />
                 </Grid>
             
                 <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TextInput label="Survey(in %)" name="" type="number" textValue={surveyPercent} setTextValue={setSurveyPercent} />
+                    <TextInput label="Survey (in%)" name="" type="number" textValue={surveyPercent} setTextValue={setSurveyPercent} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={surveyRemark} setTextValue={setSurveyRemark}  />
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TextInput label="Experiments(in %)" name="" type="number" textValue={experimentPercent} setTextValue={setExperimentPercent} />
+                    <TextInput label="Experiments (in%)" name="" type="number" textValue={experimentPercent} setTextValue={setExperimentPercent} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={experimentRemark} setTextValue={setExperimentRemark}  />
                 </Grid>
                 <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TextInput label="Extra Reading(in %)" name="" type="number" textValue={extraReadingPercent} setTextValue={setExtraReadingPercent} />
+                    <TextInput label="Extra Readings (in%)" name="" type="number" textValue={extraReadingPercent} setTextValue={setExtraReadingPercent} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={extraReadingRemark} setTextValue={setExtraReadingRemark}  />
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TextInput label="Internet/Learing App(in %)" name="" type="number" textValue={internetPercent} setTextValue={setInternetPercent} />
+                    <TextInput label="Internet/Learing App (in%)" name="" type="number" textValue={internetPercent} setTextValue={setInternetPercent} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={internetRemark} setTextValue={setInternetRemark}  />
