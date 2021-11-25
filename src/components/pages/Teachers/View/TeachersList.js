@@ -49,20 +49,20 @@ const TABLE_DATA = [
 
 export default function TeachersList() {
   const [teacherData, setTeacherData] = useState();
+  console.log(teacherData);
+
 
   useEffect(() => {
     async function getTeachers() {
-      try{
-        const teacher = await TeacherService.getTeacher();
-        console.log(teacher);
-
-      }catch(e){
-        console.log(e.response.data)
+      try {
+        const response = await TeacherService.getTeacher();
+        setTeacherData(response.data);
+      } catch (err) {
+          console.log(err?.response?.data?.message)
       }
-      
     }
     getTeachers();
-  });
+  },[]);
 
   return (
     <Page title="TeachersList">

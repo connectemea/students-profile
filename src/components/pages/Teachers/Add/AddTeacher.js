@@ -1,4 +1,6 @@
 import { useState } from "react";
+import TextInput from "../../../utils/Inputs/TextInput";
+import UserService from "../../../../service/UserService";
 
 // material components
 import {
@@ -18,6 +20,7 @@ import PublishIcon from "@mui/icons-material/Publish";
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
 import DataTable from "../../../utils/DataTable";
+import { clear } from "dom-helpers";
 
 // table header cell config
 const TABLE_HEAD = [
@@ -49,18 +52,37 @@ const TABLE_DATA = [
 ];
 
 export default function AddTeacher() {
-  const [username, setUsername] = useState();
+  const [name, setName] = useState();
   const [email, setEmail] = useState();
-  const handleUsernameChange = (event) => setUsername(event.target.value);
-  const handleEmailChange = (event) => setEmail(event.target.value);
+  const [errorMsg, setErrorMsg] = useState();
 
-  const handleAddTeacher = () => {
-    const data = {
-      username,
-      email,
-    };
-    console.log(data);
+  // const handleUsernameChange = (event) => setUsername(event.target.value);
+  // const handleEmailChange = (event) => setEmail(event.target.value);
+
+  const clearError = () => setErrorMsg("");
+
+  const handleAddTeacher = async () => {
+    try {
+      clearError();
+      const userData = {
+        name,
+        email,
+      };
+      // adding user to db
+      await UserService.createUser(userData);
+      // clearing the form
+      clearTeacherCredentials();
+    } catch (err) {
+      setErrorMsg(err.response.data.message);
+    }
   };
+
+  // clearing the form
+  const clearTeacherCredentials = () => {
+    setName("");
+    setEmail("");
+  };
+
   return (
     <Page title="AddTeacher">
       <Container>
@@ -77,25 +99,21 @@ export default function AddTeacher() {
         <Card sx={{ padding: 3, marginBottom: 2 }}>
           <Grid container spacing={1} rowSpacing={1}>
             <Grid item xs={12} sm={6} md={6}>
-              <TextField
-                varient="contained"
+              <TextInput
                 name="username"
                 label="Username"
-                color="info"
-                fullWidth
-                value={username}
-                onChange={handleUsernameChange}
+                value={name}
+                textValue={name}
+                setTextValue={setName}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
-              <TextField
-                varient="contained"
+              <TextInput
                 name="email"
                 label="Email"
-                color="info"
-                fullWidth
                 value={email}
-                onChange={handleEmailChange}
+                textValue={email}
+                setTextValue={setEmail}
               />
             </Grid>
           </Grid>
@@ -106,7 +124,7 @@ export default function AddTeacher() {
             mt={2}
           >
             <Tooltip
-              title={!username || !email ? "fill the fields" : "sumbit fields"}
+              title={!name || !email ? "fill the fields" : "sumbit fields"}
             >
               <span>
                 <Button
@@ -114,7 +132,7 @@ export default function AddTeacher() {
                   color="info"
                   //   component={RouterLink}
                   onClick={handleAddTeacher}
-                  disabled={!username || !email}
+                  disabled={!name || !email}
                   //   to="#"
                   startIcon={<PublishIcon />}
                 >
