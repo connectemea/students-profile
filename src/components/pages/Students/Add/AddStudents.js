@@ -71,7 +71,7 @@ export default function AddStudent() {
       // clearing the form
       clearUserCredentials();
     } catch (err) {
-      setErrorMsg(err.response.data.message);
+      setErrorMsg(err?.response?.data?.message);
     }
   };
 

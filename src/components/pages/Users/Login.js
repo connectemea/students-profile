@@ -6,6 +6,12 @@ import PasswordField from "./utils/PasswordField";
 import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
 
+//importing the user service
+import UserService from "../../../service/UserService";
+
+//importing LocalKey
+import LOCAL_KEYS from "../../../constants/LOCAL_KEY";
+
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
   margin: "auto",
@@ -19,8 +25,25 @@ const ContentStyle = styled("div")(({ theme }) => ({
 export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [authErrors, setAuthErrors] = useState();
 
-  const handleClick = () => console.log(email, password);
+  const clearError = () => setAuthErrors("");
+
+  const handleClick = async () => {
+    try {
+      clearError();
+      const loginCredentials = {
+        email,
+        password,
+      };
+      // logging in user
+      const response = await UserService.loginUser(loginCredentials);
+      //storing token in localStorage
+      localStorage.setItem(LOCAL_KEYS.AUTH_TOKEN, response.data.userToken);
+    } catch (err) {
+      setAuthErrors(err?.response?.data?.message);
+    }
+  };
 
   return (
     <Container>
@@ -37,11 +60,14 @@ export default function Login() {
               type="email"
               value={email}
               setValue={setEmail}
+              authErrors={authErrors}
             />
             <PasswordField
               label="Password"
               value={password}
               setValue={setPassword}
+              authErrors={authErrors}
+              showError
             />
 
             <Stack
