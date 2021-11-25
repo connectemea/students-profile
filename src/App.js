@@ -14,6 +14,7 @@ import AddStudent from './components/pages/Students/Add/AddStudents'
 import PersonalDetails from './components/pages/Students/Add/PersonalDetails';
 import EducationalDetails from './components/pages/Students/Add/EducationalDetails';
 import FamilyDetails from './components/pages/Students/Add/FamilyDetails';
+import Dependencies from './components/pages/Students/Add/Dependencies';
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="personal" element={<PersonalDetails/>}/>
             <Route path="educational" element={<EducationalDetails/>}/>
             <Route path="family" element={<FamilyDetails/>}/>
+            <Route path="dependencies" element={<Dependencies/>}/>
           </Route>
           <Route path="/" element={<DashboardLayout/>}>
             <Route path="/" element={<Navigate to="/home"/>}/>

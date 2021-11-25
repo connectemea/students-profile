@@ -41,16 +41,32 @@ export default function FamilyDetailsInput() {
 
     //Radio button management
     //Father
-    //father name
     const [isFatherChecked, setIsFatherChecked] = useState(false);
     const handleIsFatherChecked = () => {
-        if (!isFatherChecked) setGuardianName(fatherName);
+        if (!isFatherChecked) setFatherAsGuardian();
         setIsFatherChecked(!isFatherChecked)
-    };
-    useEffect(() => {
-        const setFatherAsGuardian = () => setGuardianName(fatherName);
-        if (isFatherChecked) setFatherAsGuardian();
-    }, [fatherName, isFatherChecked])
+    }
+    const setFatherAsGuardian = () => {
+        setGuardianName(fatherName);
+        setGuardianQualification(fatherQualification);
+        setGuardianAnnualIncome(fatherAnnualIncome);
+        setGuardianOccupation(fatherOccupation);
+        setGuardianAddress(fatherAddress);
+    }
+
+    //Mother
+    const [isMotherChecked, setIsMotherChecked] = useState(false);
+    const handleIsMotherChecked = () => {
+        if (!isMotherChecked) setMotherAsGuardian();
+        setIsMotherChecked(!isMotherChecked)
+    }
+    const setMotherAsGuardian = () => {
+        setGuardianName(motherName)
+        setGuardianQualification(motherQualification)
+        setGuardianAnnualIncome(motherAnnualIncome)
+        setGuardianOccupation(motherOccupation)
+        setGuardianAddress(motherAddress)
+    }
 
 
     return (
@@ -108,7 +124,7 @@ export default function FamilyDetailsInput() {
                 <Grid item md={12}>
                     <RadioGroup row aria-label="guardian" name="guardian">
                         <FormControlLabel value="father" control={<Radio onClick={handleIsFatherChecked}/>} label="Father" />
-                        <FormControlLabel value="mother" control={<Radio />} label="Mother" />
+                        <FormControlLabel value="mother" control={<Radio onClick={handleIsMotherChecked} />} label="Mother" />
                         <FormControlLabel value="other" control={<Radio />} label="Other" />
                     </RadioGroup>
                 </Grid>

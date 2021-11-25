@@ -25,6 +25,7 @@ const steps = [
     {name:'Personal Details', link:'/student/details/personal'},
     {name:'Educational Details', link:'/student/details/educational'},
     {name:'Family Details', link:'/student/details/family'},
+    {name:'Dependencies', link:'/student/details/dependencies'}
 ];
 
 
