@@ -60,7 +60,7 @@ export default function StudentsList() {
           <Button
             variant="contained"
             component={RouterLink}
-            to="/student/add"
+            to="/app/student/add"
             startIcon={<AddIcon/>}
           >
             New Student

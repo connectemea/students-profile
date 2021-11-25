@@ -60,7 +60,7 @@ export default function TeachersList() {
           <Button
             variant="contained"
             component={RouterLink}
-            to="/teacher/add"
+            to="/app/teacher/add"
             startIcon={<AddIcon/>}
           >
             New Teacher
