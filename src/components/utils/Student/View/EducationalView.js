@@ -24,9 +24,9 @@ const ProfileCard = styled(Card)(({ theme }) => ({
   paddingBottom: `${theme.spacing(4)} !important`,
 }));
 
-export default function Details() {
+export default function EducationalView() {
   return (
-    <Page title="StudentsList">
+    <Page title="EducationalView">
       {/* Tenth Details */}
 
       <Container>
@@ -198,7 +198,7 @@ export default function Details() {
           spacing={2}
         >
           <Grid sx={{}} item sm={12} xs={12} md={12} lg={12}>
-            <Typography variant="h5">Participation in NCC,NSS,Sports,Fine Arts,Hackathon</Typography>
+            <Typography variant="h5">Participation in NCC,NSS,Sports,Fine Arts</Typography>
           </Grid>
           <Grid item sm={12} xs={12} md={4} lg={4}>
             <Field heading="Activity" subHeading="Volleyball" />
@@ -208,6 +208,38 @@ export default function Details() {
           </Grid>
           <Grid item sm={12} xs={12} md={4} lg={4}>
             <Field heading="Details of Excellence in performance" subHeading="Best Player" />
+          </Grid>
+        </Grid>
+      </Container>
+
+    {/* Extra Caricaular Activities */}
+
+      <Container>
+        <Grid
+          component={ProfileCard}
+          sx={{ mt: 2, p: 2 }}
+          container
+          spacing={2}
+        >
+          <Grid sx={{}} item sm={12} xs={12} md={12} lg={12}>
+            <Typography variant="h5" sx={{}}>
+              Extra Caricaular Activities
+            </Typography>
+          </Grid>
+          <Grid item sm={12} xs={12} md={2} lg={2}>
+            <Field
+              heading="Activties"
+              subHeading="Hackathon"
+            />
+          </Grid>
+          <Grid item sm={12} xs={12} md={2} lg={2}>
+            <Field heading="Price" subHeading="Second" />
+          </Grid>
+          <Grid item sm={12} xs={12} md={3} lg={3}>
+            <Field heading="Year of Participation" subHeading="2021" />
+          </Grid>
+          <Grid item sm={12} xs={12} md={5} lg={5}>
+            <Field heading="Details of Execellence" subHeading="The program that to task to create the App for the Kerala Police" />
           </Grid>
         </Grid>
       </Container>

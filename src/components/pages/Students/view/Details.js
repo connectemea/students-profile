@@ -20,6 +20,7 @@ import Page from "../../../utils/Page";
 import PersonalView from "../../../utils/Student/View/PersonalView";
 import EducationalView from "../../../utils/Student/View/EducationalView";
 import FamilyView from "../../../utils/Student/View/FamilyView";
+import DependenciesView from "../../../utils/Student/View/Dependencies";
 import TabPanel from "@mui/lab/TabPanel";
 import { typography } from "@mui/system";
 import profile from "../../../../images/test.jpg";
@@ -125,6 +126,7 @@ export default function Details() {
               <Tab label="Personal" />
               <Tab label="Educational" />
               <Tab label="Family" />
+              <Tab label="Dependencies" />
             </Tabs>
           </Grid>
         </Grid>
@@ -138,6 +140,9 @@ export default function Details() {
         </Panel>
         <Panel value={index} index={2}>
           <FamilyView />
+        </Panel>
+        <Panel value={index} index={3}>
+          <DependenciesView/>
         </Panel>
       </Grid>
     </Page>
