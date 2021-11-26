@@ -2,18 +2,13 @@ import { useState } from "react";
 
 // material components
 import {
-  Stack,
   Typography,
   Grid,
   Card,
   Container,
   Tabs,
-  TextField,
   Avatar,
   Tab,
-  MenuItem,
-  Switch,
-  FormControlLabel,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Page from "../../../utils/Page";
@@ -21,8 +16,6 @@ import PersonalView from "../../../utils/Student/View/PersonalView";
 import EducationalView from "../../../utils/Student/View/EducationalView";
 import FamilyView from "../../../utils/Student/View/FamilyView";
 import DependenciesView from "../../../utils/Student/View/Dependencies";
-import TabPanel from "@mui/lab/TabPanel";
-import { typography } from "@mui/system";
 import profile from "../../../../images/test.jpg";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
@@ -64,7 +57,6 @@ export default function Details() {
             xs={12}
             md={6}
             sm={12}
-            container
             direction="row"
             justifyContent="flex-start"
             gitItems="center"
