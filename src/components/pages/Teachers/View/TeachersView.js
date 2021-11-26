@@ -104,16 +104,16 @@ export default function TeachersView() {
               <Field heading="Email" subHeading={teacherData.email} />
             </Grid>
             <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field heading="Short Form" subHeading={teacherData.shortForm} />
+              <Field heading="Short Form" subHeading={teacherData.shortName} />
             </Grid>
             <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field heading="Phone Number" subHeading={teacherData.phoneNumber} />
+              <Field heading="Phone Number" subHeading={teacherData.phoneNo} />
             </Grid>
             <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field heading="Department" subHeading={teacherData.departments} />
+              <Field heading="Department" subHeading={teacherData.department} />
             </Grid>
             <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field heading="Joning Year" subHeading={teacherData.joningYear} />
+              <Field heading="Joning Year" subHeading={teacherData.joinYear} />
             </Grid>
             <Grid item sm={12} xs={12} md={3} lg={3}>
               <Field heading="Gender" subHeading={teacherData.gender} />
@@ -128,12 +128,12 @@ export default function TeachersView() {
               <Field heading="Religion" subHeading={teacherData.religion} />
             </Grid>
             <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field heading="Caste" subHeading={teacherData.caste} />
+              <Field heading="Caste" subHeading={teacherData.cast} />
             </Grid>
             <Grid item sm={12} xs={12} md={3} lg={3}>
               <Field
                 heading="Educational Qualification"
-                subHeading={teacherData.educationalQualification}
+                subHeading={teacherData.educationQualification}
               />
             </Grid>
             {/* </Container> */}
