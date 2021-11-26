@@ -137,7 +137,7 @@ export default function FamilyDetailsInput() {
                 {/* Add Details Section */}
                 <Grid item md={12}><Typography variant="subtitle1">Guardian</Typography></Grid>
                 <Grid item md={12}>
-                    <RadioGroup row aria-label="guardian" name="guardian">
+                    <RadioGroup row aria-label="guardian" name="guardian" defaultValue="other">
                         <FormControlLabel value="father" control={<Radio onClick={handleIsFatherChecked}/>} label="Father" />
                         <FormControlLabel value="mother" control={<Radio onClick={handleIsMotherChecked} />} label="Mother" />
                         <FormControlLabel value="other" control={<Radio onClick={handleIsOtherChecked} />} label="Other" />
