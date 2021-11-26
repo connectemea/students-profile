@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+// importing the teacher service
+import TeacherService from "../../../../service/TeacherService";
+
 // material components
 import { Button, Typography, Grid, Card, Box, Container } from "@mui/material";
 
@@ -19,10 +22,12 @@ const RootStyle = styled("div")(({ theme }) => ({
   padding: theme.spacing(4),
 }));
 
+
 // menu items
 const departments = ["BA English", "BSC Computer science", "BSC Microbiology"];
 const genders = ["Female", "Male", "Other"];
 const status = ["Unmarried", "Married"];
+
 
 export default function AddDetails() {
   const [profileImage, imageProfileImage] = useState();
@@ -38,11 +43,11 @@ export default function AddDetails() {
   const [caste, setCaste] = useState();
   const [educationQualification, setEducationQualification] = useState();
 
-   const [errorMsg, setErrorMsg] = useState();
+  const [errorMsg, setErrorMsg] = useState();
   const clearError = () => setErrorMsg("");
 
   const handleAddTeacherDetails = async () => {
-    try {     
+    try {
       clearError();
       const userData = {
         profileImage,
@@ -59,7 +64,7 @@ export default function AddDetails() {
         educationQualification,
       };
       // adding user to db
-         await UserService.createUser(userData);
+      await TeacherService.createTeacher(userData);
       // clearing the form
       clearUserCredentials();
     } catch (err) {
@@ -67,7 +72,7 @@ export default function AddDetails() {
     }
   };
 
-   // clearing the form
+  // clearing the form
   const clearUserCredentials = () => {
     imageProfileImage("");
     setName("");
@@ -81,7 +86,7 @@ export default function AddDetails() {
     setCaste("");
     setEducationQualification("");
   };
-  
+
   return (
     <Page title="TeacherDetails">
       <Container maxWidth="xl" sx={{ mt: 2, p: 2, pl: 0 }}>
@@ -104,10 +109,7 @@ export default function AddDetails() {
             md={4}
             lg={4}
           >
-            <ImageUpload
-              image={profileImage}
-              setImage={imageProfileImage}
-            />
+            <ImageUpload image={profileImage} setImage={imageProfileImage} />
             <Typography sx={{ mt: 3, color: "gray" }} variant={"body2"}>
               Allowed *.jpeg, *.jpg, *.png, *.gif <br />
               max size: 1MB
@@ -214,6 +216,7 @@ export default function AddDetails() {
             size="large"
             color="info"
             variant="contained"
+            onClick={handleAddTeacherDetails}
             disabled={
               !profileImage ||
               !name ||
@@ -229,7 +232,7 @@ export default function AddDetails() {
               !educationQualification
             }
           >
-            Next
+            Submit
           </Button>
         </Box>
       </Container>
