@@ -32,7 +32,7 @@ const TABLE_DATA = [
     name: "Noof",
     company: "google",
     role: "Front-end",
-  },
+  },  
   {
     id: "343433ojnn",
     name: "Nahyan",

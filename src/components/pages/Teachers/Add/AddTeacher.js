@@ -52,7 +52,7 @@ const TABLE_DATA = [
 ];
 
 export default function AddTeacher() {
-  const [name, setName] = useState();
+  const [username, setuserName] = useState();
   const [email, setEmail] = useState();
   const [errorMsg, setErrorMsg] = useState();
 
@@ -65,7 +65,7 @@ export default function AddTeacher() {
     try {
       clearError();
       const userData = {
-        name,
+        username,
         email,
       };
       // adding user to db
@@ -79,7 +79,7 @@ export default function AddTeacher() {
 
   // clearing the form
   const clearTeacherCredentials = () => {
-    setName("");
+    setuserName("");
     setEmail("");
   };
 
@@ -102,9 +102,9 @@ export default function AddTeacher() {
               <TextInput
                 name="username"
                 label="Username"
-                value={name}
-                textValue={name}
-                setTextValue={setName}
+                value={username}
+                textValue={username}
+                setTextValue={setuserName}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
@@ -124,7 +124,7 @@ export default function AddTeacher() {
             mt={2}
           >
             <Tooltip
-              title={!name || !email ? "fill the fields" : "sumbit fields"}
+              title={!username || !email ? "fill the fields" : "sumbit fields"}
             >
               <span>
                 <Button
@@ -132,7 +132,7 @@ export default function AddTeacher() {
                   color="info"
                   //   component={RouterLink}
                   onClick={handleAddTeacher}
-                  disabled={!name || !email}
+                  disabled={!username || !email}
                   //   to="#"
                   startIcon={<PublishIcon />}
                 >

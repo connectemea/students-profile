@@ -37,6 +37,51 @@ export default function AddDetails() {
   const [religion, setRelegion] = useState();
   const [caste, setCaste] = useState();
   const [educationQualification, setEducationQualification] = useState();
+
+   const [errorMsg, setErrorMsg] = useState();
+  const clearError = () => setErrorMsg("");
+
+  const handleAddTeacherDetails = async () => {
+    try {     
+      clearError();
+      const userData = {
+        profileImage,
+        name,
+        shortName,
+        email,
+        department,
+        joiningYear,
+        gender,
+        maritalStatus,
+        phoneNo,
+        religion,
+        caste,
+        educationQualification,
+      };
+      // adding user to db
+         await UserService.createUser(userData);
+      // clearing the form
+      clearUserCredentials();
+    } catch (err) {
+      setErrorMsg(err.response.data.message);
+    }
+  };
+
+   // clearing the form
+  const clearUserCredentials = () => {
+    imageProfileImage("");
+    setName("");
+    setShortName("");
+    setEmail("");
+    setDepartment("");
+    setJoiningYear("");
+    setGender("");
+    setMaritalStatus("");
+    setPhoneNo("");
+    setCaste("");
+    setEducationQualification("");
+  };
+  
   return (
     <Page title="TeacherDetails">
       <Container maxWidth="xl" sx={{ mt: 2, p: 2, pl: 0 }}>
