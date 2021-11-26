@@ -14,7 +14,7 @@ import AddStudent from './components/pages/Students/Add/AddStudents'
 import PersonalDetails from './components/pages/Students/Add/PersonalDetails';
 import EducationalDetails from './components/pages/Students/Add/EducationalDetails';
 import FamilyDetails from './components/pages/Students/Add/FamilyDetails';
-import DependenciesInput from './components/utils/Student/ExtraCariculamAndDependencies';
+import DependenciesInput from './components/utils/Student/DependenciesInput';
 
 function App() {
     return (

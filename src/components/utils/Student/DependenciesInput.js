@@ -18,21 +18,8 @@ const ProfileCard = styled(Card)(({ theme }) => ({
     paddingBottom: `${theme.spacing(4)} !important`
 }));
 
-//Dropdown Menu
-//SSLC
-// const meduimsOfInstruction = ["Malayalam", "English", "Hindi"]
-// //HSE
-// const syllabuses = ["Kerala State", "CBSE", "ICSE"]
-// const hseCourses = ["Science", "Computer Science", "Commerce", "Humanities"]
-// const english = ["English"]
-// const hseSubjects1 = ["Biology", "Computer Science"]
-// const hseSubjects2 = ["Physics", "Accounting", "Journalism"]
-// const hseSubjects3 = ["Chemistry", "Geology", "Computer Application"]
-// const hseSubjects4 = ["Mathematics", "Politics", "Sociology"]
-// //Degree
-// const ugCourses = ["Bsc. Computer Science", "B.com", "BBA"]
 
-export default function DependenciesInpu() {
+export default function DependenciesInput() {
     // extra cariculam
     const [activity, setActivity] = useState();
     const [prize , setPrize] = useState();
@@ -68,8 +55,9 @@ export default function DependenciesInpu() {
         <>
         {/* extra curiculam */}
         <Grid component={ProfileCard} sx={{ mt: 2, p: 2 }} container spacing={2}>
+
             {/* Add Details Section */}
-            <Grid item md={12}><Typography variant="subtitle1">Extra Cariculam Activities</Typography></Grid>
+            <Grid item md={12}><Typography variant="subtitle1">Extra Curricular Activities</Typography></Grid>
             <Grid item md={12} container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                     <TextInput label="Activity" name="Activity" textValue={activity} setTextValue={setActivity} />
@@ -89,81 +77,67 @@ export default function DependenciesInpu() {
         {/* Dependencies  */}
         <Grid component={ProfileCard} sx={{ mt: 2, p: 2 }} container spacing={2}>
 
-            <Grid item md={12}><Typography variant="subtitle1">Learing Method and Dependance on each Method</Typography></Grid>
-            <Grid item md={4}><Typography variant="subtitle1">Learning method</Typography></Grid>
-            <Grid item md={4}><Typography variant="subtitle1">% of Dependance</Typography></Grid>
-            <Grid item md={4}><Typography variant="subtitle1">Remark</Typography></Grid>
-            <Grid item md={4}><Typography variant="subtitle1">Class room lecture</Typography></Grid>
-                <Grid item xs={12} sm={6} md={4} lg={4}>
-                    <TextInput label="in %" name="" type="number" textValue={classRoomPercent} setTextValue={setClassRoomPercent} />
+            <Grid item md={12}><Typography variant="subtitle1">Learing Method</Typography></Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                    <TextInput label="Class room lecture (in %)" name="" type="number" textValue={classRoomPercent} setTextValue={setClassRoomPercent} />
                 </Grid>
-                <Grid item xs={12} sm={12} md={4} lg={4} >
+                <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={classRoomRemark} setTextValue={setClassRoomRemark}  />
                 </Grid>
-            <Grid item md={4}><Typography variant="subtitle1">Lecture Note</Typography></Grid>
+            
 
-                <Grid item xs={12} sm={6} md={4} lg={4}>
-                    <TextInput label="in %" name="" type="number" textValue={lectureNotePercent} setTextValue={setLectureNotePercent} />
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                    <TextInput label="Lecture Note(in %)" name="" type="number" textValue={lectureNotePercent} setTextValue={setLectureNotePercent} />
                 </Grid>
-                <Grid item xs={12} sm={12} md={4} lg={4} >
+                <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={lectureNoteRemark} setTextValue={setLectureNoteRemark}  />
                 </Grid>
-            <Grid item md={4}><Typography variant="subtitle1">Note provided by Teacher</Typography></Grid>
 
-                <Grid item xs={12} sm={6} md={4} lg={4}>
-                    <TextInput label="in %" name="" type="number" textValue={noteByTeacherPercent} setTextValue={setNoteByTeacherPercent} />
+                <Grid item xs={12} sm={6} md={6} lg={6}>
+                    <TextInput label="Note provided by Teacher(in %)" name="" type="number" textValue={noteByTeacherPercent} setTextValue={setNoteByTeacherPercent} />
                 </Grid>
-                <Grid item xs={12} sm={12} md={4} lg={4} >
+                <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={noteByTeacherRemark} setTextValue={setNoteByTeacherRemark}  />
                 </Grid>
-            <Grid item md={4}><Typography variant="subtitle1">Case Study</Typography></Grid>
 
-                <Grid item xs={12} sm={6} md={4} lg={4}>
-                    <TextInput label="in %" name="" type="number" textValue={caseStudyPercent} setTextValue={setCaseStudyPercent} />
+                <Grid item xs={12} sm={6} md={6} lg={6}>
+                    <TextInput label="Case Study(in %)" name="" type="number" textValue={caseStudyPercent} setTextValue={setCaseStudyPercent} />
                 </Grid>
-                <Grid item xs={12} sm={12} md={4} lg={4} >
+                <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={caseStudyRemark} setTextValue={setCaseStudyRemark}  />
                 </Grid>
-            <Grid item md={4}><Typography variant="subtitle1">Observation</Typography></Grid>
 
-                <Grid item xs={12} sm={6} md={4} lg={4}>
-                    <TextInput label="in %" name="" type="number" textValue={observationPercent} setTextValue={setObservationPercent} />
+                <Grid item xs={12} sm={6} md={6} lg={6}>
+                    <TextInput label="Observation(in %)" name="" type="number" textValue={observationPercent} setTextValue={setObservationPercent} />
                 </Grid>
-                <Grid item xs={12} sm={12} md={4} lg={4} >
+                <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={observationRemark} setTextValue={setObservationRemark}  />
                 </Grid>
             
-            <Grid item md={4}><Typography variant="subtitle1">Survey</Typography></Grid>
-
-                <Grid item xs={12} sm={6} md={4} lg={4}>
-                    <TextInput label="in %" name="" type="number" textValue={surveyPercent} setTextValue={setSurveyPercent} />
+                <Grid item xs={12} sm={6} md={6} lg={6}>
+                    <TextInput label="Survey(in %)" name="" type="number" textValue={surveyPercent} setTextValue={setSurveyPercent} />
                 </Grid>
-                <Grid item xs={12} sm={12} md={4} lg={4} >
+                <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={surveyRemark} setTextValue={setSurveyRemark}  />
                 </Grid>
-            <Grid item md={4}><Typography variant="subtitle1">Experiments</Typography></Grid>
 
-                <Grid item xs={12} sm={6} md={4} lg={4}>
-                    <TextInput label="in %" name="" type="number" textValue={experimentPercent} setTextValue={setExperimentPercent} />
+                <Grid item xs={12} sm={6} md={6} lg={6}>
+                    <TextInput label="Experiments(in %)" name="" type="number" textValue={experimentPercent} setTextValue={setExperimentPercent} />
                 </Grid>
-                <Grid item xs={12} sm={12} md={4} lg={4} >
+                <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={experimentRemark} setTextValue={setExperimentRemark}  />
                 </Grid>
-            <Grid item md={4}><Typography variant="subtitle1">Extra Reading</Typography></Grid>
-
-                <Grid item xs={12} sm={6} md={4} lg={4}>
-                    <TextInput label="in %" name="" type="number" textValue={extraReadingPercent} setTextValue={setExtraReadingPercent} />
+                <Grid item xs={12} sm={6} md={6} lg={6}>
+                    <TextInput label="Extra Reading(in %)" name="" type="number" textValue={extraReadingPercent} setTextValue={setExtraReadingPercent} />
                 </Grid>
-                <Grid item xs={12} sm={12} md={4} lg={4} >
+                <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={extraReadingRemark} setTextValue={setExtraReadingRemark}  />
                 </Grid>
 
-            <Grid item md={4}><Typography variant="subtitle1">Internet/Learing App</Typography></Grid>
-
-                <Grid item xs={12} sm={6} md={4} lg={4}>
-                    <TextInput label="in %" name="" type="number" textValue={internetPercent} setTextValue={setInternetPercent} />
+                <Grid item xs={12} sm={6} md={6} lg={6}>
+                    <TextInput label="Internet/Learing App(in %)" name="" type="number" textValue={internetPercent} setTextValue={setInternetPercent} />
                 </Grid>
-                <Grid item xs={12} sm={12} md={4} lg={4} >
+                <Grid item xs={12} sm={12} md={6} lg={6} >
                     <TextInput label="Remark" name="" textValue={internetRemark} setTextValue={setInternetRemark}  />
                 </Grid>
 
