@@ -18,6 +18,7 @@ import ForgotPassword from "./components/pages/Users/ForgotPassword";
 import RecoverPassword from "./components/pages/Users/RecoverPassword";
 import AddDetails from "./components/pages/Teachers/Add/AddDetails";
 import Details from "./components/pages/Students/view/Details";
+import Dependencies from "./components/pages/Students/Add/Dependencies";
 
 function App() {
   return (
@@ -71,6 +72,7 @@ function App() {
           <Route path="personal" element={<PersonalDetails />} />
           <Route path="educational" element={<EducationalDetails />} />
           <Route path="family" element={<FamilyDetails />} />
+          <Route path="dependencies" element={<Dependencies/>} />
         </Route>
 
       </Routes>

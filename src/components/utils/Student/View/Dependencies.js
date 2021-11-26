@@ -1,32 +1,17 @@
 import {
-  Stack,
-  Typography,
-  Grid,
   Card,
-  Container,
-  Tabs,
-  TextField,
-  Avatar,
-  Tab,
-  MenuItem,
-  Switch,
-  FormControlLabel,
 } from "@mui/material";
 
 //  material table components
-
 import { styled } from "@mui/material/styles";
-import Page from "../../../utils/Page";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 
-//   custom component
-import Field from "./Field";
+
 // custom card
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
