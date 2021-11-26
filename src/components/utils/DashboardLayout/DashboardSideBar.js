@@ -10,7 +10,7 @@ import Scrollbar from "../Scrollbar";
 import NavSection from "./NavSection";
 import { MHidden } from "../../@material-extent";
 import NavConfig from "./NavConfig";
-import Logo from "../../../images/AvengersLogo.png";
+import Logo from "../../../images/Logo.png";
 import ProfileImg from '../../../images/avatar.jpg'
 // import account from '../../_mocks_/account';
 
