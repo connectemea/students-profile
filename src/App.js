@@ -20,6 +20,7 @@ import AddDetails from "./components/pages/Teachers/Add/AddDetails";
 import Details from "./components/pages/Students/view/Details";
 import ProfileProvider from "./context/profileContext";
 import StudentProvider from "./context/studentContext";
+import Dependencies from "./components/pages/Students/Add/Dependencies";
 
 function App() {
   return (
@@ -28,7 +29,6 @@ function App() {
 
       {/* Student data provider */}
       <StudentProvider>
-
         {/* User profile provider */}
         <ProfileProvider>
           <Routes>
@@ -72,12 +72,13 @@ function App() {
             <Route path="/teacher/details">
               <Route path="personal" element={<AddDetails />} />
             </Route>
-
+            
             {/* student details forms routes */}
             <Route path="/student/details">
               <Route path="personal" element={<PersonalDetails />} />
               <Route path="educational" element={<EducationalDetails />} />
               <Route path="family" element={<FamilyDetails />} />
+              <Route path="dependencies" element={<Dependencies />} />
             </Route>
           </Routes>
         </ProfileProvider>
