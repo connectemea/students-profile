@@ -1,17 +1,8 @@
 // material components
 import {
-  Stack,
-  Typography,
   Grid,
   Card,
   Container,
-  Tabs,
-  TextField,
-  Avatar,
-  Tab,
-  MenuItem,
-  Switch,
-  FormControlLabel,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Page from "../../../utils/Page";
