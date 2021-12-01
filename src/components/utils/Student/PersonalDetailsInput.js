@@ -70,7 +70,7 @@ export default function PersonalDetailsInput() {
     // To Check if the form is filled
     const navigate = useNavigate()
     const hadleNextBtn = () => {
-        if(!dateOfBirth || !yearOfJoin || !name || !email || !department || !mobileNO || !gender || !admissionNO || !bloodGroup || !maritalStatus || !religion || !caste || !categoryOfAdmission || !identificationMarkOne || !setIdentificationMarkTwo || !presentAddress || !permanentAddress || !residence || !distanceFromCollege ){
+        if (!dateOfBirth || !yearOfJoin || !name || !email || !department || !mobileNO || !gender || !admissionNO || !bloodGroup || !maritalStatus || !religion || !caste || !categoryOfAdmission || !identificationMarkOne || !setIdentificationMarkTwo || !presentAddress || !permanentAddress || !residence || !distanceFromCollege) {
             return errorSetter()
         }
         console.log("namall jayichu");
@@ -79,25 +79,26 @@ export default function PersonalDetailsInput() {
 
     //Set error for empty field
     const errorSetter = () => {
-        if(!dateOfBirth) setDateOfBirth("")
-        if(!yearOfJoin) setYearOfJoin("")
-        if(!name) setName("")
-        if(!email) setEmail("")
-        if(!department) setDepartment("")
-        if(!mobileNO) setMobileNO("")
-        if(!gender) setGender("")
-        if(!admissionNO) setAdmissionNO("")
-        if(!bloodGroup) setBloodGroup("")
-        if(!maritalStatus) setMaritalStatus("")
-        if(!religion) setReligion("")
-        if(!caste) setCaste("")
-        if(!categoryOfAdmission) setCategoryOfAdmission("")
-        if(!identificationMarkOne) setIdentificationMarkOne("")
-        if(!identificationMarkTwo) setIdentificationMarkTwo("")
-        if(!presentAddress) setPresentAddress("")
-        if(!permanentAddress) setPermanentAdress("")
-        if(!residence) setResidence("")
-        if(!distanceFromCollege) setDistanceFromCollege("")
+        if (!profileImage) setProfileImage("")
+        if (!dateOfBirth) setDateOfBirth("")
+        if (!yearOfJoin) setYearOfJoin("")
+        if (!name) setName("")
+        if (!email) setEmail("")
+        if (!department) setDepartment("")
+        if (!mobileNO) setMobileNO("")
+        if (!gender) setGender("")
+        if (!admissionNO) setAdmissionNO("")
+        if (!bloodGroup) setBloodGroup("")
+        if (!maritalStatus) setMaritalStatus("")
+        if (!religion) setReligion("")
+        if (!caste) setCaste("")
+        if (!categoryOfAdmission) setCategoryOfAdmission("")
+        if (!identificationMarkOne) setIdentificationMarkOne("")
+        if (!identificationMarkTwo) setIdentificationMarkTwo("")
+        if (!presentAddress) setPresentAddress("")
+        if (!permanentAddress) setPermanentAdress("")
+        if (!residence) setResidence("")
+        if (!distanceFromCollege) setDistanceFromCollege("")
     }
 
 
@@ -107,8 +108,9 @@ export default function PersonalDetailsInput() {
                 {/* Add Image Section */}
                 <Grid container direction="column" justifyContent="center" alignItems="center" xs={12} sm={12} md={4} lg={4}>
                     <ImageUpload image={profileImage} setImage={setProfileImage} />
-
-                    <Typography sx={{ mt: 3, color: "gray" }} variant={"body2"}>
+                    {profileImage===""&&<Typography sx={{ mt: 2 }} variant="body2" color="error">Profile image is required </Typography>
+                    }
+                    <Typography sx={{ mt: 2, color: "gray" }} variant={"body2"}>
                         Allowed *.jpeg, *.jpg, *.png, *.gif <br />max size: 1MB
                     </Typography>
                 </Grid>
