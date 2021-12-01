@@ -79,7 +79,25 @@ export default function PersonalDetailsInput() {
 
     //Set error for empty field
     const errorSetter = () => {
-        if(!dateOfBirth) setDateOfBirth("");
+        if(!dateOfBirth) setDateOfBirth("")
+        if(!yearOfJoin) setYearOfJoin("")
+        if(!name) setName("")
+        if(!email) setEmail("")
+        if(!department) setDepartment("")
+        if(!mobileNO) setMobileNO("")
+        if(!gender) setGender("")
+        if(!admissionNO) setAdmissionNO("")
+        if(!bloodGroup) setBloodGroup("")
+        if(!maritalStatus) setMaritalStatus("")
+        if(!religion) setReligion("")
+        if(!caste) setCaste("")
+        if(!categoryOfAdmission) setCategoryOfAdmission("")
+        if(!identificationMarkOne) setIdentificationMarkOne("")
+        if(!identificationMarkTwo) setIdentificationMarkTwo("")
+        if(!presentAddress) setPresentAddress("")
+        if(!permanentAddress) setPermanentAdress("")
+        if(!residence) setResidence("")
+        if(!distanceFromCollege) setDistanceFromCollege("")
     }
 
 
@@ -87,7 +105,7 @@ export default function PersonalDetailsInput() {
         <>
             <Grid component={ProfileCard} sx={{ mt: 2, p: 2 }} container spacing={2}>
                 {/* Add Image Section */}
-                <Grid container direction="column" justifyContent="flex-end" alignItems="center" xs={12} sm={12} md={4} lg={4}>
+                <Grid container direction="column" justifyContent="center" alignItems="center" xs={12} sm={12} md={4} lg={4}>
                     <ImageUpload image={profileImage} setImage={setProfileImage} />
 
                     <Typography sx={{ mt: 3, color: "gray" }} variant={"body2"}>
@@ -117,7 +135,7 @@ export default function PersonalDetailsInput() {
                         <SelectInput label="Gender" name="Gender" menuItems={genders} dropdownValue={gender} setDropdownValue={setGender} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6}>
-                        <TextInput label="Admission Number" name="Sdmission Number" textValue={admissionNO} setTextValue={setAdmissionNO} />
+                        <TextInput label="Admission Number" name="Admission Number" textValue={admissionNO} setTextValue={setAdmissionNO} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6}>
                         <DatePickerInput views={['year']} label="Joining Year" name="Joining Year" date={yearOfJoin} setDate={setYearOfJoin} />
