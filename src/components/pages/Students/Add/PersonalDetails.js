@@ -1,4 +1,5 @@
 import PersonalDetailsInput from "../../../utils/Student/PersonalDetailsInput";
+import { useState, useEffect } from "react";
 // material components
 import {
     Button,
@@ -11,7 +12,6 @@ import { styled } from "@mui/material/styles";
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
-import { useHistory } from "react-router-dom"
 
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
@@ -29,14 +29,6 @@ const steps = [
 
 
 export default function PersonalDetails() {
-    const history = useHistory();
-    const [isPersonalFilled, setIsPersonalFilled] = useState(false);
-    useEffect(() => {
-        const pushToNextPage = () => {
-            history.push("/student/details/educational")
-        }
-        if(isPersonalFilled)pushToNextPage();
-    }, [isPersonalFilled])
 
 
     return (
@@ -54,13 +46,8 @@ export default function PersonalDetails() {
                         ))}
                     </Stepper>
                 </Box>
-                <PersonalDetailsInput isFilled={isPersonalFilled} />
-                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Button sx={{ mt: 2 }} 
-                    href="/student/details/educational" 
-                    onClick
-                    size="large" color="info" variant="contained">Next</Button>
-                </Box>
+                <PersonalDetailsInput />
+                
             </RootStyle>
 
         </Page>
