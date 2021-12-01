@@ -11,6 +11,7 @@ import { styled } from "@mui/material/styles";
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
+import { useHistory } from "react-router-dom"
 
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
@@ -23,12 +24,19 @@ const RootStyle = styled("div")(({ theme }) => ({
 const steps = [
     {name:'Personal Details', link:'/student/details/personal'},
     {name:'Educational Details', link:'/student/details/educational'},
-    {name:'Family Details', link:'/student/details/family'},
-    {name:'Dependencies', link:'/student/details/dependencies'}
+    {name:'Family Details', link:'/student/details/family'}
 ];
 
 
 export default function PersonalDetails() {
+    const history = useHistory();
+    const [isPersonalFilled, setIsPersonalFilled] = useState(false);
+    useEffect(() => {
+        const pushToNextPage = () => {
+            history.push("/student/details/educational")
+        }
+        if(isPersonalFilled)pushToNextPage();
+    }, [isPersonalFilled])
 
 
     return (
@@ -46,7 +54,7 @@ export default function PersonalDetails() {
                         ))}
                     </Stepper>
                 </Box>
-                <PersonalDetailsInput />
+                <PersonalDetailsInput isFilled={isPersonalFilled} />
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <Button sx={{ mt: 2 }} 
                     href="/student/details/educational" 

@@ -24,8 +24,7 @@ const RootStyle = styled("div")(({ theme }) => ({
 const steps = [
     {name:'Personal Details', link:'/student/details/personal'},
     {name:'Educational Details', link:'/student/details/educational'},
-    {name:'Family Details', link:'/student/details/family'},
-    {name:'Dependencies', link:'/student/details/dependencies'}
+    {name:'Family Details', link:'/student/details/family'}
 ];
 
 
@@ -50,7 +49,7 @@ export default function EducationalDetails() {
                 <EducationalDetailsInput/>
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <Button sx={{ mt: 2, mr:2 }} href="/student/details/personal" size="large" color="info" variant="contained">Previous</Button>
-                    <Button sx={{ mt: 2 }} href="/student/details/family" size="large" color="info" variant="contained">Next</Button>
+                    <Button sx={{ mt: 2 }} href="/student/details/dependencies" size="large" color="info" variant="contained">Next</Button>
                 </Box>
             </RootStyle>
 
