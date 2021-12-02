@@ -47,10 +47,6 @@ export default function FamilyDetails() {
                     </Stepper>
                 </Box>
                 <FamilyDetailsInput/>
-                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Button sx={{ mt: 2, mr:2 }} href="/student/details/educational" size="large" color="info" variant="contained">Previous</Button>
-                    <Button sx={{ mt: 2 }} href="/home/app" size="large" color="info" variant="contained">Submit</Button>
-                </Box>
             </RootStyle>
 
         </Page>

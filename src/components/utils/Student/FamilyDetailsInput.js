@@ -7,12 +7,15 @@ import {
     Card,
     RadioGroup,
     FormControlLabel,
-    Radio
+    Radio,
+    Button,
+    Box
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 //Custom Components
 import TextInput from "../Inputs/TextInput";
+import { Navigate } from "react-router";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
     paddingRight: `${theme.spacing(4)} !important`,
@@ -61,7 +64,8 @@ export default function FamilyDetailsInput() {
     const [isMotherChecked, setIsMotherChecked] = useState(false);
     const handleIsMotherChecked = () => {
         if (!isMotherChecked) setMotherAsGuardian();
-        setIsOtherChecked(false)    }
+        setIsOtherChecked(false)
+    }
     const setMotherAsGuardian = () => {
         setGuardianName(motherName)
         setGuardianQualification(motherQualification)
@@ -75,7 +79,39 @@ export default function FamilyDetailsInput() {
     const handleIsOtherChecked = () => {
         setIsOtherChecked(true);
     }
-   
+
+    //To check if fields are filled
+    const navigate = Navigate()
+    const handleSubmitBtn = () => {
+        if(!fatherName || !fatherQualification || !fatherAnnualIncome || !fatherOccupation || !fatherNO || !fatherAddress || !motherName || !motherQualification || !motherAnnualIncome || !motherOccupation || !motherNO || !motherAddress || !guardianName || !guardianQualification || !guardianAnnualIncome || !guardianOccupation || !guardianNO || !guardianAddress){
+            return errorSetter()
+        }
+        return navigate("/app/home")
+    }
+    //To set error in field
+    const errorSetter = () => {
+        if(!fatherName) setFatherName("")
+        if(!fatherQualification) setFatherQualification("")
+        if(!fatherAnnualIncome) setFatherAnnualIncome("")
+        if(!fatherOccupation) setFatherOccupation("")
+        if(!fatherNO) setFatherNO("")
+        if(!fatherAddress) setFatherAddress("")
+
+        if(!motherName) setMotherName("")
+        if(!motherQualification) setMotherQualification("")
+        if(!motherAnnualIncome) setMotherAnnualIncome("")
+        if(!motherOccupation) setMotherOccupation("")
+        if(!motherNO) setMotherNO("")
+        if(!motherAddress) setMotherAddress("")
+        
+        if(!guardianName) setGuardianName("")
+        if(!guardianQualification) setGuardianQualification("")
+        if(!guardianAnnualIncome) setGuardianAnnualIncome("")
+        if(!guardianOccupation) setGuardianOccupation("")
+        if(!guardianNO) setGuardianNO("")
+        if(!guardianAddress) setGuardianAddress("")
+    }
+
 
 
     return (
@@ -138,7 +174,7 @@ export default function FamilyDetailsInput() {
                 <Grid item md={12}><Typography variant="subtitle1">Guardian</Typography></Grid>
                 <Grid item md={12}>
                     <RadioGroup row aria-label="guardian" name="guardian" defaultValue="other">
-                        <FormControlLabel value="father" control={<Radio onClick={handleIsFatherChecked}/>} label="Father" />
+                        <FormControlLabel value="father" control={<Radio onClick={handleIsFatherChecked} />} label="Father" />
                         <FormControlLabel value="mother" control={<Radio onClick={handleIsMotherChecked} />} label="Mother" />
                         <FormControlLabel value="other" control={<Radio onClick={handleIsOtherChecked} />} label="Other" />
                     </RadioGroup>
@@ -164,6 +200,11 @@ export default function FamilyDetailsInput() {
                     </Grid>
                 </Grid>
             </Grid>
+            {/* Buttons */}
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <Button sx={{ mt: 2, mr: 2 }} href="/student/details/educational" size="large" color="info" variant="contained">Previous</Button>
+                <Button sx={{ mt: 2 }} onClick={handleSubmitBtn} size="large" color="info" variant="contained">Submit</Button>
+            </Box>
 
         </>
     )
