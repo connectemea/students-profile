@@ -17,35 +17,64 @@ import AuthLayout from "./components/utils/UserLayout/AuthLayout";
 import ForgotPassword from "./components/pages/Users/ForgotPassword";
 import RecoverPassword from "./components/pages/Users/RecoverPassword";
 import AddDetails from "./components/pages/Teachers/Add/AddDetails";
+import Details from "./components/pages/Students/view/Details";
+import Dependencies from "./components/pages/Students/Add/Dependencies";
 
 function App() {
   return (
     <ThemeConfig>
       <GlobalStyles />
       <Routes>
-        <Route path="/student/details">
-          <Route path="personal" element={<PersonalDetails />} />
-          <Route path="educational" element={<EducationalDetails />} />
-          <Route path="family" element={<FamilyDetails />} />
-        </Route>
-        <Route path="/teacher/details">
-          <Route path="personal" element={<AddDetails />} />
-        </Route>
-        <Route path="/" element={<DashboardLayout />}>
-          <Route path="/" element={<Navigate to="/home" />} />
+
+        {/* Home routes (Dashboard) */}
+        <Route path="/app" element={<DashboardLayout />}>
+          <Route path="/app" element={<Navigate to="/home" />} />
           <Route path="home" element={<Home />} />
-          <Route path="teacher" element={<TeachersList />} />
-          <Route path="teacher/add" element={<AddTeacher />} />
-          <Route path="student" element={<StudentsList />} />
-          <Route path="student/add" element={<AddStudent />} />
-          <Route path="teacher/view" element={<TeachersView />} />
+
+          {/* Teachers routes (Dashboard)*/}
+          <Route path="teacher">
+            <Route
+              path="/app/teacher"
+              element={<Navigate to="/app/teacher/list" />}
+            />
+            <Route path="view" element={<TeachersView />} />
+            <Route path="list" element={<TeachersList />} />
+            <Route path="add" element={<AddTeacher />} />
+          </Route>
+
+          {/* students routes (Dashboard)*/}
+          <Route path="student">
+            <Route
+              path="/app/student"
+              element={<Navigate to="/app/student/list" />}
+            />
+            <Route path="list" element={<StudentsList />} />
+            <Route path="add" element={<AddStudent />} />
+            <Route path="view" element={<Details />} />
+          </Route>
         </Route>
+
+        {/* user routes */}
         <Route path="/user" element={<AuthLayout />}>
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
           <Route path="forgot" element={<ForgotPassword />} />
           <Route path="recover" element={<RecoverPassword />} />
         </Route>
+
+        {/* teacher details forms routes */}
+        <Route path="/teacher/details">
+          <Route path="personal" element={<AddDetails />} />
+        </Route>
+
+        {/* student details forms routes */}
+        <Route path="/student/details">
+          <Route path="personal" element={<PersonalDetails />} />
+          <Route path="educational" element={<EducationalDetails />} />
+          <Route path="family" element={<FamilyDetails />} />
+          <Route path="dependencies" element={<Dependencies/>} />
+        </Route>
+
       </Routes>
     </ThemeConfig>
   );

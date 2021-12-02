@@ -9,10 +9,10 @@ import { Avatar, Stack, Typography } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
 
-const AddImage = styled(IconButton)(({ theme }) => ({
+const AddImage = styled(IconButton)(({ theme, isError }) => ({
   height: theme.spacing(20),
   width: theme.spacing(20),
-  outline: "1.5px dotted grey",
+  outline: `1.5px dotted ${isError===""?"red":"grey"}`,
   outlineOffset: "10px",
 }));
 
@@ -26,7 +26,7 @@ export default function ImageUpload(props) {
   return (
     <>
       <input type="file" id="imageUpload" hidden onChange={handleImageChange} />
-      <AddImage>
+      <AddImage isError={image}>
         <label for="imageUpload">
           <Stack direction="column" spacing={1}>
             {image ? (

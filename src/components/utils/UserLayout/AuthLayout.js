@@ -1,7 +1,11 @@
 import { styled } from "@mui/material/styles";
 import { Outlet } from "react-router";
-import Logo from "../../../images/AvengersLogo.png";
+import Logo from "../../../images/Logo.png";
 
+const RootStyle = styled("div")(({ theme }) => ({
+  background: "rgba(3, 141, 254,.08)",
+  minHeight: "100vh",
+}));
 const HeaderStyle = styled("header")(({ theme }) => ({
   width: "100%",
   display: "flex",
@@ -17,11 +21,11 @@ const ImageContainer = styled("img")(({ theme }) => ({
 
 export default function AuthLayout() {
   return (
-    <>
+    <RootStyle>
       <HeaderStyle>
         <ImageContainer src={Logo} alt="" />
       </HeaderStyle>
       <Outlet />
-    </>
+    </RootStyle>
   );
 }
