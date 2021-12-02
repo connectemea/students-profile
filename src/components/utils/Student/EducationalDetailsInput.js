@@ -5,13 +5,17 @@ import {
     Typography,
     Grid,
     Card,
+    Button
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { Box } from "@mui/system";
 
 //Custom Components
 import TextInput from "../Inputs/TextInput";
 import SelectInput from "../Inputs/SelectInput";
 import DatePickerInput from "../Inputs/DatePickerInput";
+import { Navigate } from "react-router";
+import { set } from "date-fns";
 
 
 const ProfileCard = styled(Card)(({ theme }) => ({
@@ -79,6 +83,38 @@ export default function EducationalDetailsInput() {
     const [prize, setPrize] = useState();
     const [yearOfParticipation, setYearOfParticipation] = useState(null);
     const [perfomance, setPerfomance] = useState();
+
+    //To check if the form is filled
+    const handleNxtBtn = () => {
+        if(!sslcSchoolName || !sslcMediumOfInstruction || !sslcEnglishMark || !sslcMathsMark || !sslcScienceMark || !sslcSocialScienceMark || !hseSchoolName || !hseSyllabus || !hseCourse || !hseEnglish || !hseSub1 || !hseSub2 || !hseSub3 || !hseSub4 || !hseEnglishMark || !hseSub1Mark || !hseSub2Mark || !hseSub3Mark || !hseSub4Mark){
+            return errorSetter()
+        }
+        return Navigate("/student/details/dependencies")
+    }
+
+    //To set error for empty field
+    const errorSetter = () => {
+        if(!sslcSchoolName) setSslcSchoolName("")
+        if(!sslcMediumOfInstruction) setSslcMediumOfInstruction("")
+        if(!sslcEnglishMark) setSslcEnglishMark("")
+        if(!sslcMathsMark) setSslcMathsMark("")
+        if(!sslcScienceMark) setSslcScienceMark("")
+        if(!sslcSocialScienceMark) setSslcSocialScienceMark("")
+        if(!hseSchoolName) setHseSchoolName("")
+        if(!hseSyllabus) setHseSyllabus("")
+        if(!hseCourse) setHseCourse("")
+        if(!hseEnglish) setHseEnglish("")
+        if(!hseSub1) setHseSub1("")
+        if(!hseSub2) setHseSub2("")
+        if(!hseSub3) setHseSub3("")
+        if(!hseSub4) setHseSub4("")
+        if(!hseEnglishMark) setHseEnglishMark("")
+        if(!hseSub1Mark) setHseSub1Mark("")
+        if(!hseSub2Mark) setHseSub2Mark("")
+        if(!hseSub3Mark) setHseSub3Mark("")
+        if(!hseSub4Mark) setHseSub4Mark("")
+        
+    }
 
 
 
@@ -249,6 +285,11 @@ export default function EducationalDetailsInput() {
                     </Grid>
                 </Grid>
             </Grid>
+            {/* Button */}
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <Button sx={{ mt: 2, mr: 2 }} href="/student/details/personal" size="large" color="info" variant="contained">Previous</Button>
+                <Button sx={{ mt: 2 }} onClick={handleNxtBtn} size="large" color="info" variant="contained">Next</Button>
+            </Box>
         </>
     )
 }

@@ -47,10 +47,7 @@ export default function EducationalDetails() {
                     </Stepper>
                 </Box>
                 <EducationalDetailsInput/>
-                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Button sx={{ mt: 2, mr:2 }} href="/student/details/personal" size="large" color="info" variant="contained">Previous</Button>
-                    <Button sx={{ mt: 2 }} href="/student/details/dependencies" size="large" color="info" variant="contained">Next</Button>
-                </Box>
+                
             </RootStyle>
 
         </Page>
