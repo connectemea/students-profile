@@ -15,7 +15,7 @@ import { styled } from "@mui/material/styles";
 
 //Custom Components
 import TextInput from "../Inputs/TextInput";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
     paddingRight: `${theme.spacing(4)} !important`,
@@ -81,7 +81,7 @@ export default function FamilyDetailsInput() {
     }
 
     //To check if fields are filled
-    const navigate = Navigate()
+    const navigate = useNavigate()
     const handleSubmitBtn = () => {
         if(!fatherName || !fatherQualification || !fatherAnnualIncome || !fatherOccupation || !fatherNO || !fatherAddress || !motherName || !motherQualification || !motherAnnualIncome || !motherOccupation || !motherNO || !motherAddress || !guardianName || !guardianQualification || !guardianAnnualIncome || !guardianOccupation || !guardianNO || !guardianAddress){
             return errorSetter()
@@ -202,7 +202,7 @@ export default function FamilyDetailsInput() {
             </Grid>
             {/* Buttons */}
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                <Button sx={{ mt: 2, mr: 2 }} href="/student/details/educational" size="large" color="info" variant="contained">Previous</Button>
+                <Button sx={{ mt: 2, mr: 2 }} href="/student/details/dependencies" size="large" color="info" variant="contained">Previous</Button>
                 <Button sx={{ mt: 2 }} onClick={handleSubmitBtn} size="large" color="info" variant="contained">Submit</Button>
             </Box>
 

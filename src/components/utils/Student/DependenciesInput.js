@@ -12,7 +12,7 @@ import { Box } from "@mui/system";
 
 //Custom Components
 import TextInput from "../Inputs/TextInput";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 // import SelectInput from "../Inputs/SelectInput";
 
 
@@ -46,11 +46,12 @@ export default function DependenciesInput() {
     const [internetRemark, setInternetRemark] = useState();
 
     //To check if the field is filled
+    const navigate = useNavigate()
     const handleNextBtn = () => {
         if(!classRoomPercent || !lectureNotePercent || !noteByTeacherPercent || !caseStudyPercent || !observationPercent || !surveyPercent || !experimentPercent || !extraReadingPercent || !internetPercent){
             return errorSetter()
         }
-        return Navigate("/student/details/family")
+        return navigate("/student/details/family")
     }
     const errorSetter = () => {
         if(!classRoomPercent) setClassRoomPercent("")
