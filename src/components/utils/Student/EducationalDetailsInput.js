@@ -138,7 +138,7 @@ export default function EducationalDetailsInput() {
                         <TextInput label="Maths (in%)" name="Marks" type="number" textValue={sslcMathsMark} setTextValue={setSslcMathsMark} />
                     </Grid>
                     <Grid item xs={12} sm={6} md={3} lg={3}>
-                        <TextInput label="Scince (in%)" name="Marks" type="number" textValue={sslcScienceMark} setTextValue={setSslcScienceMark} />
+                        <TextInput label="Science (in%)" name="Marks" type="number" textValue={sslcScienceMark} setTextValue={setSslcScienceMark} />
                     </Grid>
                     <Grid item xs={12} sm={6} md={3} lg={3}>
                         <TextInput label="Social Science (in%)" name="Marks" type="number" textValue={sslcSocialScienceMark} setTextValue={setSslcSocialScienceMark} />
