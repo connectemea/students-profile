@@ -52,16 +52,12 @@ export default function Dptcard({ data, type }) {
         <Grid
           container
           direction="row"
-          padding="5px"
-          justifyContent="space-between"
-          alignItems="flex-start"
+          justifyContent="flex-end"
+          alignItems="center"
         >
-          <DeleteOutlineSharpIcon
-            sx={{ margin: "8px" }}
-            onClick={deleteDepartment}
-          />
+
           <Link to="/department/add" style={{ color: "none" }}>
-            <ModeEditOutlineOutlinedIcon sx={{ margin: "8px" }} />
+            <ModeEditOutlineOutlinedIcon sx={{ margin: "8px", opacity: "0.5" , height:"3vh" , width:"2vw"}} />
           </Link>
         </Grid>
         <IconWrapperStyle>
@@ -70,9 +66,9 @@ export default function Dptcard({ data, type }) {
         </IconWrapperStyle>
         <Typography variant="h5">{data.dptName}</Typography>
         <Typography sx={{ mt: 4 }} variant="subtitle2">
-          HOD : {data.hodName}
+          {data.hodName}
         </Typography>
-        <Typography variant="subtitle2">contact : {data.contact}</Typography>
+        <Typography variant="subtitle2">{data.contact}</Typography>
       </RootStyle>
     </Link>
   );

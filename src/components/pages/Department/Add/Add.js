@@ -14,6 +14,7 @@ import {
 
 // material icons
 import PublishIcon from "@mui/icons-material/Publish";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
@@ -118,21 +119,32 @@ export default function Add() {
             justifyContent="flex-end"
             mt={2}
           >
-            <Tooltip title={(!name || !shortName || !hod || !phoneNo || !email?"fill the fields":"sumbit fields")}>
-            <span>
-              <Button
-                variant="contained"
-                color="info"
-                //   component={RouterLink}
-                onClick={handleAddDepartment}
-                disabled={!name || !shortName || !hod || !phoneNo || !email}
-                //   to="#"
-                startIcon={<PublishIcon />}
-              >
-                Add
-              </Button>
-              </span>
-            </Tooltip>
+          <span>
+            <Tooltip title={(!name || !shortName || !hod || !phoneNo || !email ? "Add Department" : "Delete Department")}>             
+                <Button variant="outlined"
+                  color="info"
+                  style={{ margin:"2px"}}
+                  //   component={RouterLink}
+                  onClick={handleAddDepartment}
+                  disabled={!name || !shortName || !hod || !phoneNo || !email}
+                  startIcon={<DeleteIcon />}>
+                  Delete
+                </Button>
+                </Tooltip>
+                <Tooltip title={(!name || !shortName || !hod || !phoneNo || !email ? "fill the fields" : "sumbit fields")}>
+                <Button
+                  variant="contained"
+                  color="info"
+                  //   component={RouterLink}
+                  onClick={handleAddDepartment}
+                  disabled={!name || !shortName || !hod || !phoneNo || !email}
+                  //   to="#"
+                  startIcon={<PublishIcon />}
+                >
+                  Add
+                </Button>
+                </Tooltip>
+              </span>            
           </Stack>
         </Card>
       </Container>
