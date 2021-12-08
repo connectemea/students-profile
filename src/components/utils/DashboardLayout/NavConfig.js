@@ -6,22 +6,22 @@ import PersonIcon from '@mui/icons-material/Person';
 const NavConfig = [
   {
     title: "home",
-    path: "/home",
+    path: "/app/home",
     icon: PieChartIcon,
   },
   {
     title: "teacher",
-    path: "/teacher",
+    path: "/app/teacher",
     icon: FaceIcon,
   },
   {
     title: "student",
-    path: "/student",
+    path: "/app/student",
     icon: PersonIcon,
   },
   {
     title: "department",
-    path: "/department",
+    path: "/app/department",
     icon: PersonIcon,
   }
 ];

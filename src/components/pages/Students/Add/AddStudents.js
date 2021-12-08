@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 // material components
 import {
   Stack,
@@ -9,7 +8,7 @@ import {
   Grid,
   Card,
   TextField,
-  Tooltip
+  Tooltip,
 } from "@mui/material";
 
 // material icons
@@ -19,10 +18,14 @@ import PublishIcon from "@mui/icons-material/Publish";
 import Page from "../../../utils/Page";
 import DataTable from "../../../utils/DataTable";
 
+//importing the user service
+import userService from "../../../../services/userService";
+
 // table header cell config
 const TABLE_HEAD = [
-  { id: "username", label: "Name", alignRight: false, type: "text" },
-  { id: "email", label: "Company", alignRight: false, type: "text" },
+  { id: "username", label: "Name", type: "text" },
+  { id: "email", label: "Company", type: "text" },
+  { id: "status", label: "status", type: "userStatusChip" },
 ];
 
 const TABLE_DATA = [
@@ -30,36 +33,70 @@ const TABLE_DATA = [
     id: "134doojon",
     username: "Aseel",
     email: "aseelhacker@microsoft.com",
+    status: "registered",
   },
   {
     id: "ounr34343",
     username: "Noof",
     email: "noof@google.com",
+    status: "created",
   },
   {
     id: "343433ojnn",
     username: "Nahyan",
     email: "nahyan@facebook.com",
+    status: "filled",
   },
   {
     id: "eonkn2434",
     username: "Dilshad",
     email: "dilshad@amazon.com",
+    status: "created",
   },
 ];
 
 export default function AddStudent() {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
+  const [errorMsg, setErrorMsg] = useState("");
+  const [users, setUsers] = useState();
   const handleUsernameChange = (event) => setUsername(event.target.value);
   const handleEmailChange = (event) => setEmail(event.target.value);
-
-  const handleAddStudent = () => {
-    const data = {
-      username,
-      email,
+  const clearError = () => setErrorMsg("");
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const users = await userService.getUsers();
+        console.log(users);
+        setUsers(users);
+      } catch (err) {
+        console.error(err?.response?.data?.message);
+      }
     };
-    console.log(data);
+    getUsers();
+  }, []);
+
+  const handleAddStudent = async () => {
+    try {
+      clearError();
+      const userData = {
+        username,
+        email,
+        userType: "student",
+      };
+      // adding user to db
+      await userService.createUser(userData);
+      // clearing the form
+      clearUserCredentials();
+    } catch (err) {
+      setErrorMsg(err?.response?.data?.message);
+    }
+  };
+
+  // clearing the form
+  const clearUserCredentials = () => {
+    setUsername("");
+    setEmail("");
   };
   return (
     <Page title="AddStudent">
@@ -85,6 +122,7 @@ export default function AddStudent() {
                 fullWidth
                 value={username}
                 onChange={handleUsernameChange}
+                error={errorMsg}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
@@ -96,7 +134,13 @@ export default function AddStudent() {
                 fullWidth
                 value={email}
                 onChange={handleEmailChange}
+                error={errorMsg}
               />
+            </Grid>
+            <Grid item xs={12} sm={12} md={12}>
+              <Typography variant="body1" gutterBottom color="error">
+                {errorMsg}
+              </Typography>
             </Grid>
           </Grid>
           <Stack
@@ -105,24 +149,26 @@ export default function AddStudent() {
             justifyContent="flex-end"
             mt={2}
           >
-            <Tooltip title={(!username || !email)?"fill the fields":"sumbit fields"}>
-            <span>
-              <Button
-                variant="contained"
-                color="info"
-                //   component={RouterLink}
-                onClick={handleAddStudent}
-                disabled={!username || !email}
-                //   to="#"
-                startIcon={<PublishIcon />}
-              >
-                Add
-              </Button>
+            <Tooltip
+              title={!username || !email ? "fill the fields" : "sumbit fields"}
+            >
+              <span>
+                <Button
+                  variant="contained"
+                  color="info"
+                  //   component={RouterLink}
+                  onClick={handleAddStudent}
+                  disabled={!username || !email}
+                  //   to="#"
+                  startIcon={<PublishIcon />}
+                >
+                  Add
+                </Button>
               </span>
             </Tooltip>
           </Stack>
         </Card>
-        <DataTable TABLE_DATA={TABLE_DATA} TABLE_HEAD={TABLE_HEAD} />
+        {users && <DataTable TABLE_DATA={users} TABLE_HEAD={TABLE_HEAD} />}
       </Container>
     </Page>
   );

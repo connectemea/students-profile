@@ -64,8 +64,25 @@ export default function TeachersView() {
             />
           </Grid>
           <Grid sx={{ marginLeft: 5 }}>
-            <Typography>Name</Typography>
-            <Typography>Department</Typography>
+            <Typography
+              sx={{
+                fontStyle: "normal",
+                fontWeight: 600,
+                fontSize: 18,
+              }}
+            >
+              Minshad
+            </Typography>
+            <Typography
+              sx={{
+                color: "rgba(0,0,0,.75)",
+                fontStyle: "normal",
+                fontWeight: 300,
+                fontSize: 15,
+              }}
+            >
+              Computer Science
+            </Typography>
           </Grid>
         </Grid>
 

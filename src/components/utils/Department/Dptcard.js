@@ -47,7 +47,7 @@ export default function Dptcard({ data, type }) {
     textTransform: "uppercase",
   }));
   return (
-    <Link to="/department/details" style={{ textDecoration: "none" }}>
+    <Link to="/app/department/details" style={{ textDecoration: "none" }}>
       <RootStyle>
         <Grid
           container
@@ -56,7 +56,7 @@ export default function Dptcard({ data, type }) {
           alignItems="center"
         >
 
-          <Link to="/department/add" style={{ color: "none" }}>
+          <Link to="/app/department/add" style={{ color: "none" }}>
             <ModeEditOutlineOutlinedIcon sx={{ margin: "8px", opacity: "0.5" , height:"3vh" , width:"2vw"}} />
           </Link>
         </Grid>
