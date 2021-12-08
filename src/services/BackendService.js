@@ -5,12 +5,12 @@ import BACKEND_URL from "../constants/BACKEND_URL";
 //get request
 const get = async (path, headers = {}, params = {}) => {
   //generating url
-  const url = `${BACKEND_URL}${path}`;
+  const url = `${BACKEND_URL.BASE_URL}${path}`;
 
   //generating the request
   const response = await axios.get(url, _generateParams(headers, params));
 
-  return response.data;
+  return response.data.data;
 };
 
 //post request
