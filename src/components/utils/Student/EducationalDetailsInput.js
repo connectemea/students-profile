@@ -14,7 +14,7 @@ import { Box } from "@mui/system";
 import TextInput from "../Inputs/TextInput";
 import SelectInput from "../Inputs/SelectInput";
 import DatePickerInput from "../Inputs/DatePickerInput";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { set } from "date-fns";
 
 
@@ -85,11 +85,12 @@ export default function EducationalDetailsInput() {
     const [perfomance, setPerfomance] = useState();
 
     //To check if the form is filled
+    const navigate = useNavigate()
     const handleNxtBtn = () => {
         if(!sslcSchoolName || !sslcMediumOfInstruction || !sslcEnglishMark || !sslcMathsMark || !sslcScienceMark || !sslcSocialScienceMark || !hseSchoolName || !hseSyllabus || !hseCourse || !hseEnglish || !hseSub1 || !hseSub2 || !hseSub3 || !hseSub4 || !hseEnglishMark || !hseSub1Mark || !hseSub2Mark || !hseSub3Mark || !hseSub4Mark){
             return errorSetter()
         }
-        return Navigate("/student/details/dependencies")
+        return navigate("/student/details/dependencies")
     }
 
     //To set error for empty field

@@ -48,10 +48,7 @@ export default function Dependencies() {
                 </Box>
                 {/* Add Custom Component Here */}
                 <DependenciesInput/>
-                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Button sx={{ mt: 2, mr:2 }} href="/student/details/educational" size="large" color="info" variant="contained">Previous</Button>
-                    <Button sx={{ mt: 2 }} href="/student/details/family" size="large" color="info" variant="contained">Next</Button>
-                </Box>
+                
             </RootStyle>
 
         </Page>
