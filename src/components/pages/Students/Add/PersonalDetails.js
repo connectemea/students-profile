@@ -1,8 +1,6 @@
 import PersonalDetailsInput from "../../../utils/Student/PersonalDetailsInput";
-import { useState, useEffect } from "react";
 // material components
 import {
-    Button,
     Typography,
     Stepper,
     Step,

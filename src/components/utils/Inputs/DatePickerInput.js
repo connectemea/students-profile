@@ -13,7 +13,7 @@ export default function DatePickerInput(props) {
         views={views ? views : undefined}
         label={label}
         value={date}
-        maxDate={new Date}
+        maxDate={new Date()}
         onChange={(newDateValue) => {
           setDate(newDateValue);
         }}
