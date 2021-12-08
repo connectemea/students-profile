@@ -56,7 +56,7 @@ function App() {
                 />
                 <Route path="list" element={<StudentsList />} />
                 <Route path="add" element={<AddStudent />} />
-                <Route path="view" element={<Details />} />
+                <Route path="view/:id" element={<Details />} />
               </Route>
             </Route>
 
