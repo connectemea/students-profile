@@ -75,8 +75,6 @@ export default function FamilyDetailsInput() {
     const handleIsOtherChecked = () => {
         setIsOtherChecked(true);
     }
-   
-
 
     return (
         <>

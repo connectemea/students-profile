@@ -9,6 +9,8 @@ import { styled } from "@mui/material/styles";
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
 
+import { useNavigate } from "react-router-dom";
+
 //Custom component
 import TextInput from "../../../utils/Inputs/TextInput";
 import SelectInput from "../../../utils/Inputs/SelectInput";
@@ -30,13 +32,33 @@ export default function AddDetails() {
   const [shortName, setShortName] = useState();
   const [email, setEmail] = useState();
   const [department, setDepartment] = useState();
-  const [joiningYear, setJoiningYear] = useState();
+  const [joiningYear, setJoiningYear] = useState(null);
   const [gender, setGender] = useState();
   const [maritalStatus, setMaritalStatus] = useState();
   const [phoneNo, setPhoneNo] = useState();
   const [religion, setRelegion] = useState();
   const [caste, setCaste] = useState();
   const [educationQualification, setEducationQualification] = useState();
+
+  const navigate = useNavigate()
+    const hadleNextBtn = () => {
+        if (!name || !shortName || !email || !department || !joiningYear || !gender || !maritalStatus || !phoneNo || !religion || !caste || !educationQualification) {
+            return errorSetter()
+        }}
+
+        const errorSetter = () => {
+          if (!name) setName("")
+          if (!shortName) setShortName("")
+          if (!email) setEmail("")
+          if (!department) setDepartment("")
+          if (!joiningYear) setJoiningYear("")
+          if (!gender) setGender("")
+          if (!maritalStatus) setMaritalStatus("")
+          if (!phoneNo) setPhoneNo("")
+          if (!religion) setRelegion("")
+          if (!caste) setCaste("")
+          if (!educationQualification) setEducationQualification("")
+        }
   return (
     <Page title="TeacherDetails">
       <Container maxWidth="xl" sx={{ mt: 2, p: 2, pl: 0 }}>
@@ -116,6 +138,7 @@ export default function AddDetails() {
                 label="Joining Year"
                 date={joiningYear}
                 setDate={setJoiningYear}
+                
               />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -163,7 +186,7 @@ export default function AddDetails() {
           </Grid>
         </Grid>
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button
+          {/* <Button
             sx={{ mt: 2 }}
             href="/student/details/educational"
             size="large"
@@ -185,10 +208,15 @@ export default function AddDetails() {
             }
           >
             Next
-          </Button>
+          </Button> */}
+          <Button sx={{ mt: 2 }}
+                    onClick={hadleNextBtn}
+                    size="large" color="info" variant="contained">
+                    Next
+                    </Button>
         </Box>
       </Container>
       {/* </RootStyle> */}
     </Page>
   );
-}
+ }
