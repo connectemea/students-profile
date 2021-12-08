@@ -22,12 +22,10 @@ const RootStyle = styled("div")(({ theme }) => ({
   padding: theme.spacing(4),
 }));
 
-
 // menu items
 const departments = ["BA English", "BSC Computer science", "BSC Microbiology"];
 const genders = ["Female", "Male", "Other"];
 const status = ["Unmarried", "Married"];
-
 
 export default function AddDetails() {
   const [profileImage, imageProfileImage] = useState();
@@ -64,7 +62,8 @@ export default function AddDetails() {
         educationQualification,
       };
       // adding user to db
-      await TeacherService.createTeacher(userData);
+      // await TeacherService.createTeacher(userData);
+      console.log(userData);
       // clearing the form
       clearUserCredentials();
     } catch (err) {
@@ -212,7 +211,7 @@ export default function AddDetails() {
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <Button
             sx={{ mt: 2 }}
-            href="/student/details/educational"
+            // href="/student/details/educational"
             size="large"
             color="info"
             variant="contained"
