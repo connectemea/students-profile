@@ -79,8 +79,6 @@ export default function FamilyDetailsInput() {
     const handleIsOtherChecked = () => {
         setIsOtherChecked(true);
     }
-<<<<<<< HEAD
-=======
 
     //To check if fields are filled
     const navigate = useNavigate()
@@ -115,7 +113,6 @@ export default function FamilyDetailsInput() {
     }
 
 
->>>>>>> 0f779731ca58fcaaacaa57620f93ad6a4d6aebf4
 
     return (
         <>
