@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 // material components
 import {
@@ -24,6 +24,7 @@ import DependenciesView from "../../../utils/Student/View/Dependencies";
 import TabPanel from "@mui/lab/TabPanel";
 import { typography } from "@mui/system";
 import profile from "../../../../images/test.jpg";
+import StudentService from "../../../../service/StudentService";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
@@ -41,6 +42,20 @@ export default function Details() {
   const onTabClicked = (event, index) => {
     setIndex(index);
   };
+  const [studentDetails,setStudentDetails] = useState();
+
+  useEffect(() => {
+    async function getStudentDetails() {
+      try {
+        const response = await StudentService.getStudent();
+        setStudentDetails(response.data)
+        console.log("success",response.data.personalDetails.name);
+      } catch (error) {
+        console.log("error",error.response)
+      }
+    }
+    getStudentDetails()
+  },[]);
 
   return (
     <Page title="details">
@@ -96,7 +111,7 @@ export default function Details() {
                   fontSize: 18,
                 }}
               >
-                Salmanul Faris c c
+               {studentDetails && studentDetails.personalDetails.name}
               </Typography>
               <Typography
                 sx={{
@@ -132,13 +147,13 @@ export default function Details() {
       </Container>
       <Grid sx={{ mt: 5 }}>
         <Panel value={index} index={0}>
-          <PersonalView />
+          <PersonalView personalDetails = {studentDetails && studentDetails.personalDetails} />
         </Panel>
         <Panel value={index} index={1}>
-          <EducationalView />
+          <EducationalView educationDetails = {studentDetails && studentDetails.educationDetails}/>
         </Panel>
         <Panel value={index} index={2}>
-          <FamilyView />
+          <FamilyView familyDetails = {studentDetails && studentDetails.familyDetails} />
         </Panel>
         <Panel value={index} index={3}>
           <DependenciesView/>

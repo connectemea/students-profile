@@ -12,7 +12,8 @@ const ProfileCard = styled(Card)(({ theme }) => ({
   paddingBottom: `${theme.spacing(4)} !important`,
 }));
 
-export default function EducationalView() {
+export default function EducationalView(props) {
+  const {educationDetails} = props;
   return (
     <Page title="EducationalView">
       {/* Tenth Details */}
@@ -30,26 +31,26 @@ export default function EducationalView() {
           <Grid item sm={12} xs={12} md={6} lg={6}>
             <Field
               heading="School Name"
-              subHeading="V.P.K.M.H.S.S Puthur Pallikkal"
+              subHeading={educationDetails && educationDetails.tenthStd.schoolName}
             />
           </Grid>
           <Grid item sm={12} xs={12} md={6} lg={6}>
-            <Field heading="Medium" subHeading="English" />
+            <Field heading="Medium" subHeading={educationDetails && educationDetails.tenthStd.syllabus} />
           </Grid>
           <Grid sx={{}} item sm={12} xs={12} md={12} lg={12}>
             <Typography>Marks</Typography>
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="English" subHeading="95%" />
+            <Field heading="English" subHeading={educationDetails && educationDetails.tenthStd.english} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Maths" subHeading="78%" />
+            <Field heading="Maths" subHeading={educationDetails && educationDetails.tenthStd.maths} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Science" subHeading="85%" />
+            <Field heading="Science" subHeading={educationDetails && educationDetails.tenthStd.science} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Social Science" subHeading="90%" />
+            <Field heading="Social Science" subHeading={educationDetails && educationDetails.tenthStd.socialScience} />
           </Grid>
         </Grid>
       </Container>
@@ -67,22 +68,22 @@ export default function EducationalView() {
             <Typography variant="h5">12th Details</Typography>
           </Grid>
           <Grid item sm={12} xs={12} md={6} lg={6}>
-            <Field heading="School Name" subHeading="GHSS Peruvallur" />
+            <Field heading="School Name" subHeading={educationDetails && educationDetails.twelthStd.schoolName} />
           </Grid>
           <Grid item sm={12} xs={12} md={6} lg={6}>
-            <Field heading="Medium" subHeading="English" />
+            <Field heading="Medium" subHeading={educationDetails && educationDetails.twelthStd.schoolName} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="English" subHeading="95%" />
+            <Field heading={educationDetails && educationDetails.twelthStd.sub[0]} subHeading={educationDetails && educationDetails.twelthStd.subMark[0]} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Maths" subHeading="78%" />
+            <Field heading={educationDetails && educationDetails.twelthStd.sub[1]}  subHeading={educationDetails && educationDetails.twelthStd.subMark[1]} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Science" subHeading="85%" />
+            <Field heading={educationDetails && educationDetails.twelthStd.sub[2]}  subHeading={educationDetails && educationDetails.twelthStd.subMark[2]} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Social Science" subHeading="90%" />
+            <Field heading={educationDetails && educationDetails.twelthStd.sub[3]}  subHeading={educationDetails && educationDetails.twelthStd.subMark[3]} />
           </Grid>
         </Grid>
       </Container>
