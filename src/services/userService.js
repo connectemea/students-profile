@@ -1,8 +1,8 @@
 import BackendService from "./BackendService";
 
 // get all users
-const getUser = async () => {
-  return BackendService.get("user/");
+const getUsers = async (type = "student") => {
+  return BackendService.get(`user/?type=${type}`);
 };
 
 // create a new user
@@ -12,7 +12,7 @@ const createUser = async (data) => {
 
 //exporting the user service
 const UserService = {
-  getUser,
+  getUsers,
   createUser,
 };
 export default UserService;

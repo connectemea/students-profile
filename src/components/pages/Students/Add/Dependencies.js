@@ -14,7 +14,7 @@ import Page from "../../../utils/Page";
 import { Link } from "react-router-dom";
 
 import { Box } from "@mui/system";
-import FamilyDetailsInput from "../../../utils/Student/FamilyDetailsInput";
+import DependenciesInput from "../../../utils/Student/DependenciesInput";
 
 
 const RootStyle = styled("div")(({ theme }) => ({
@@ -29,15 +29,15 @@ const steps = [
 ];
 
 
-export default function FamilyDetails() {
+export default function Dependencies() {
 
 
     return (
-        <Page title="Family Details">
+        <Page title="Dependencies">
             <RootStyle>
-                <Typography variant={"h4"}>Family Details</Typography>
+                <Typography variant={"h4"}>Dependencies</Typography>
                 <Box sx={{ width: '100%', p: '0.75%' }}>
-                    <Stepper activeStep={2}>
+                    <Stepper activeStep={3}>
                     {steps.map((step) => (
                             <Step key={step.name}>
                             <Link to={step.link} style={{textDecoration:'none'}}>
@@ -47,10 +47,11 @@ export default function FamilyDetails() {
                         ))}
                     </Stepper>
                 </Box>
-                <FamilyDetailsInput/>
+                {/* Add Custom Component Here */}
+                <DependenciesInput/>
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Button sx={{ mt: 2, mr:2 }} href="/student/details/educational" size="large" color="info" variant="contained">Previous</Button>
-                    <Button sx={{ mt: 2 }} href="/student/details/dependencies" size="large" color="info" variant="contained">Next</Button>
+                    <Button sx={{ mt: 2, mr:2 }} href="/student/details/personal" size="large" color="info" variant="contained">Previous</Button>
+                    <Button sx={{ mt: 2 }} href="/home" size="large" color="info" variant="contained">Submit</Button>
                 </Box>
             </RootStyle>
 
