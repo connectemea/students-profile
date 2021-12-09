@@ -21,9 +21,9 @@ import Details from "./components/pages/Students/view/Details";
 import ProfileProvider from "./context/profileContext";
 import StudentProvider from "./context/studentContext";
 import Dependencies from "./components/pages/Students/Add/Dependencies";
-import DepartmentDetails from './components/pages/Department/Dpt-details/DptDetails';
+import DepartmentDetails from './components/pages/Department/View/DptDetails';
 import Add from './components/pages/Department/Add/Add';
-import DptStudentList from './components/pages/Department/List/DptStudentList';
+import DptStudentList from './components/pages/Department/View/DptStudentList';
 
 function App() {
   return (

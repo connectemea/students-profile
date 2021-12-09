@@ -123,7 +123,7 @@ export default function Add() {
             <Tooltip title={(!name || !shortName || !hod || !phoneNo || !email ? "Add Department" : "Delete Department")}>             
                 <Button variant="outlined"
                   color="info"
-                  style={{ margin:"2px"}}
+                  style={{ margin:"5px"}}
                   //   component={RouterLink}
                   onClick={handleAddDepartment}
                   disabled={!name || !shortName || !hod || !phoneNo || !email}

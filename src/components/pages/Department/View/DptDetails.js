@@ -1,4 +1,5 @@
 import { Link as RouterLink } from 'react-router-dom';
+import {useState,useEffect} from 'react'
 // material components
 import {
   Stack,
@@ -19,7 +20,7 @@ const departmentData = {
 }
 
 export default function DptDetails() {
-
+  
   return (
     <Page title="Departments">
       <Container>
@@ -30,7 +31,7 @@ export default function DptDetails() {
           <Button
             variant="contained"
             component={RouterLink}
-            to="/department/add"
+            to="/app/department/add"
             startIcon={<AddIcon />}
           >
             New department
