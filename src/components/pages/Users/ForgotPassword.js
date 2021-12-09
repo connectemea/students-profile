@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
-import { Box, Container, Typography, Stack, Card } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Stack,
+  Card,
+  TextField,
+} from "@mui/material";
 import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
 import { useNavigate } from "react-router-dom";
@@ -22,10 +29,13 @@ export default function ForgotPassword() {
 
   const [username, setUserName] = useState();
   const [email, setEmail] = useState();
+  const [authErrors, setAuthErrors] = useState();
+
+  const clearError = () => setAuthErrors("");
 
   const handleClick = async () => {
     try {
-      // clearError();
+      clearError();
       const data = {
         username,
         email,
@@ -36,6 +46,7 @@ export default function ForgotPassword() {
       navigate(`/user/recover/${response.data.userToken}`);
     } catch (err) {
       console.log(err.response);
+      setAuthErrors(err?.response?.data?.message);
     }
   };
 
@@ -54,13 +65,16 @@ export default function ForgotPassword() {
               type="text"
               value={username}
               setValue={setUserName}
+              authErrors={authErrors}
             />
             <TextInput
               label="Email"
               type="email"
               value={email}
               setValue={setEmail}
+              authErrors={authErrors}
             />
+            <Typography variant="body2">{authErrors && authErrors}</Typography>
 
             <SubmitButton
               disabled={!username || !email ? true : false}
