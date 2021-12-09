@@ -20,7 +20,7 @@ import Page from "../../../utils/Page";
 import DataTable from "../../../utils/DataTable";
 
 //importing the user service
-import UserService from "../../../../service/UserService";
+import userService from "../../../../services/userService";
 
 // table header cell config
 const TABLE_HEAD = [
@@ -67,7 +67,7 @@ export default function AddStudent() {
         email,
       };
       // adding user to db
-      await UserService.createUser(userData);
+      await userService.createUser(userData);
       // clearing the form
       clearUserCredentials();
     } catch (err) {

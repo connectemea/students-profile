@@ -16,7 +16,7 @@ import profile from "../../../../images/avatar.jpg";
 import Field from "../utils/Field";
 
 // importing getTech form TeacherService
-import TeacherService from "../../../../service/TeacherService";
+import TeacherService from "../../../../services/teacherService";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,

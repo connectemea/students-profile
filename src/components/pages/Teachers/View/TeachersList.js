@@ -11,7 +11,7 @@ import Page from "../../../utils/Page";
 import DataTable from "../../../utils/DataTable";
 
 // Backend Services
-import TeacherService from "../../../../service/TeacherService";
+import TeacherService from "../../../../services/teacherService";
 
 // table header cell config
 const TABLE_HEAD = [
