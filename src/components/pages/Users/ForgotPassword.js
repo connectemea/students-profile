@@ -3,6 +3,9 @@ import { styled } from "@mui/material/styles";
 import { Box, Container, Typography, Stack, Card } from "@mui/material";
 import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
+import { useNavigate } from "react-router-dom";
+
+import UserService from "../../../service/UserService";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -15,10 +18,26 @@ const ContentStyle = styled("div")(({ theme }) => ({
 }));
 
 export default function ForgotPassword() {
-  const [userName, setUserName] = useState();
+  const navigate = useNavigate();
+
+  const [username, setUserName] = useState();
   const [email, setEmail] = useState();
 
-  const handleClick = () => console.log(userName, email);
+  const handleClick = async () => {
+    try {
+      // clearError();
+      const data = {
+        username,
+        email,
+      };
+      // logging in user
+      const response = await UserService.forgotPassword(data);
+      console.log(response);
+      navigate(`/user/recover/${response.data.userToken}`);
+    } catch (err) {
+      console.log(err.response);
+    }
+  };
 
   return (
     <Container>
@@ -33,7 +52,7 @@ export default function ForgotPassword() {
             <TextInput
               label="User name"
               type="text"
-              value={userName}
+              value={username}
               setValue={setUserName}
             />
             <TextInput
@@ -44,7 +63,7 @@ export default function ForgotPassword() {
             />
 
             <SubmitButton
-              disabled={!userName || !email ? true : false}
+              disabled={!username || !email ? true : false}
               name="Submit"
               onClick={handleClick}
             />

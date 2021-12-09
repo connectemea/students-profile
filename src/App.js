@@ -44,7 +44,7 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
           <Route path="forgot" element={<ForgotPassword />} />
-          <Route path="recover" element={<RecoverPassword />} />
+          <Route path="recover/:token" element={<RecoverPassword />} />
         </Route>
       </Routes>
     </ThemeConfig>

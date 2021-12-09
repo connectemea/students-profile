@@ -61,10 +61,9 @@ const _generateParams = (headers = {}, params = {}) => {
 
   //set headers
   const localHeader = {
-    ...headers,
     token: authToken,
+    ...headers,
   };
-
   //return params and headers
   return {
     headers: localHeader,
