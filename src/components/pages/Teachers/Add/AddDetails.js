@@ -245,7 +245,7 @@ export default function AddDetails() {
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           {/* <Button
             sx={{ mt: 2 }}
-            href="/student/details/educational"
+            // href="/student/details/educational"
             size="large"
             color="info"
             variant="contained"
