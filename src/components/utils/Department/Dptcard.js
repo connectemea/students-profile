@@ -5,7 +5,6 @@ import { alpha, styled } from "@mui/material/styles";
 import { Card, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-
 // utils
 // import { fShortenNumber } from '../../../utils/formatNumber';
 
@@ -13,11 +12,11 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 
 // ----------------------------------------------------------------------
 
-export default function Dptcard({ data, type }) {
+export default function Dptcard({ data,type }) {
   const deleteDepartment = () => {
     console.log("onClinck");
   };
-  const { shortForm, colorType } = type;
+  const { colorType } = type;
   const RootStyle = styled(Card)(({ theme }) => ({
     boxShadow: "none",
     textAlign: "center",
@@ -61,13 +60,13 @@ export default function Dptcard({ data, type }) {
         </Grid>
         <IconWrapperStyle>
           {/* <Icon icon={appleFilled} width={24} height={24} /> */}
-          <ShortFormStyle>{shortForm}</ShortFormStyle>
+          {/* <ShortFormStyle>{shortForm}</ShortFormStyle> */}
         </IconWrapperStyle>
-        <Typography variant="h5">{data.dptName}</Typography>
+        <Typography variant="h5">{data && data.name}</Typography>
         <Typography sx={{ mt: 4 }} variant="subtitle2">
-          {data.hodName}
+          {data && data.hod}
         </Typography>
-        <Typography variant="subtitle2">{data.contact}</Typography>
+        <Typography variant="subtitle2">{data && data.phoneNo}</Typography>
       </RootStyle>
     </Link>
   );

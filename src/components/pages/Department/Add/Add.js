@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // material components
 import {
@@ -19,7 +20,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
 
+//api service
+import departmentService from "../../../../services/departmentService"
+
 export default function Add() {
+  const navigate = useNavigate()
   const [name, setDptname] = useState();
   const [shortName, setShortName] = useState();
   const [hod, setHodname] = useState();
@@ -31,15 +36,25 @@ export default function Add() {
   const handleContactChange = (event) => setPhoneNo(event.target.value);
   const handleEmailChange = (event) => setEmail(event.target.value);
 
-  const handleAddDepartment = () => {
-    const data = {
-      name,
-      shortName,
-      hod,
-      phoneNo,
-      email,
-    };
-    console.log(data);
+  const handleAddDepartment = async () => {
+    try {
+      const departmentData = {
+        departmentDetails: {
+          name,
+          shortName,
+          hod,
+          phoneNo,
+          email,
+        }
+      };
+      // adding department to db
+      const response = await departmentService.addDepartment(departmentData);
+      // clearing the form
+      navigate("/app/department/list");
+      console.log(response)
+    } catch (err) {
+      console.log(err.response);
+    }
   };
   return (
     <Page title="Add Department">
@@ -119,19 +134,19 @@ export default function Add() {
             justifyContent="flex-end"
             mt={2}
           >
-          <span>
-            <Tooltip title={(!name || !shortName || !hod || !phoneNo || !email ? "Add Department" : "Delete Department")}>             
+            <span>
+              <Tooltip title={(!name || !shortName || !hod || !phoneNo || !email ? "Add Department" : "Delete Department")}>
                 <Button variant="outlined"
                   color="info"
-                  style={{ margin:"5px"}}
+                  style={{ margin: "5px" }}
                   //   component={RouterLink}
                   onClick={handleAddDepartment}
                   disabled={!name || !shortName || !hod || !phoneNo || !email}
                   startIcon={<DeleteIcon />}>
                   Delete
                 </Button>
-                </Tooltip>
-                <Tooltip title={(!name || !shortName || !hod || !phoneNo || !email ? "fill the fields" : "sumbit fields")}>
+              </Tooltip>
+              <Tooltip title={(!name || !shortName || !hod || !phoneNo || !email ? "fill the fields" : "sumbit fields")}>
                 <Button
                   variant="contained"
                   color="info"
@@ -143,8 +158,8 @@ export default function Add() {
                 >
                   Add
                 </Button>
-                </Tooltip>
-              </span>            
+              </Tooltip>
+            </span>
           </Stack>
         </Card>
       </Container>
