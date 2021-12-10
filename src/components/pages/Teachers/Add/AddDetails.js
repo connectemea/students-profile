@@ -63,9 +63,11 @@ export default function AddDetails() {
         educationQualification,
       };
       // adding user to db
-      await teacherService.createTeacher(userData);
+      // const response = await teacherService.createTeacher(userData);
+      // console.log(response);
+       await teacherService.createTeacher(userData);
       // clearing the form
-      clearUserCredentials();
+      // clearUserCredentials();
     } catch (err) {
       console.log(err.response);
       setErrorMsg(err.response.message);
@@ -305,12 +307,10 @@ export default function AddDetails() {
 //   padding: theme.spacing(4),
 // }));
 
-
 // // menu items
 // const departments = ["BA English", "BSC Computer science", "BSC Microbiology"];
 // const genders = ["Female", "Male", "Other"];
 // const status = ["Unmarried", "Married"];
-
 
 // export default function AddDetails() {
 //   const [profileImage, imageProfileImage] = useState();

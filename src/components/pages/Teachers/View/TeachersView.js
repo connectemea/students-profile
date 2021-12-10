@@ -45,8 +45,9 @@ export default function TeachersView() {
   useEffect(() => {
     async function getTeacher() {
       try {
-        const response = await TeacherService.getTeach();
+        const response = await TeacherService.getTeacher();
         setTeacherData(response.data);
+        console.log(response.data)
       } catch (err) {
         console.log(err?.response?.data?.message);
       }
