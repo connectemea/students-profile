@@ -20,7 +20,7 @@ import TeacherService from "../../../../services/teacherService";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
-  paddingBottom: `${theme.spacing(4)} !important`,
+  paddingBottom: `${theme.spacing(4)} !important`
 }));
 
 // value Object
@@ -35,7 +35,7 @@ const teacherData = {
   maritalStatus: "unmaried",
   religion: "Jhon Doe",
   caste: "Jonn Doe",
-  educationalQualification: "Pg",
+  educationalQualification: "Pg"
 };
 
 export default function TeachersView() {
@@ -47,7 +47,7 @@ export default function TeachersView() {
       try {
         const response = await TeacherService.getTeacher();
         setTeacherData(response.data);
-        console.log(response.data)
+        console.log(response.data);
       } catch (err) {
         console.log(err?.response?.data?.message);
       }
@@ -59,7 +59,7 @@ export default function TeachersView() {
     <Page title="details">
       {teacherData && (
         <Container maxWidth="xl" sx={{ pl: 4 }}>
-          <Grid
+          {/* <Grid
             style={{
               backgroundImage:
                 "linear-gradient(to bottom,#038dfd 0%,#038dfd 20%,transparent 20%,transparent 100%)",
@@ -87,8 +87,92 @@ export default function TeachersView() {
             <Grid sx={{ marginLeft: 5 }}>
               <Typography>{teacherData.name}</Typography>
               <Typography>{teacherData.department}</Typography>
+            </Grid>  
+          </Grid> */}
+          <Container>
+            <Grid
+              style={{
+                backgroundImage:
+                  "linear-gradient(to bottom,#038dfd 0%,#038dfd 25%,transparent 25%,transparent 100%)"
+              }}
+              component={ProfileCard}
+              sx={{ mt: 2, p: 2 }}
+              container
+              spacing={2}
+              justifyContent="space-between"
+              alignItems="flex-end"
+            >
+              <Grid
+                item
+                container
+                sx={{ pl: 5 }}
+                xs={12}
+                md={6}
+                sm={12}
+                direction="row"
+                justifyContent="flex-start"
+                gitItems="center"
+              >
+                <Grid
+                  // xs={12}
+                  // md={3}
+                  // sm={3}
+                  item
+                  component={Avatar}
+                  alt="Remy Sharp"
+                  src={profile}
+                  sx={{
+                    width: 80,
+                    height: 80
+                  }}
+                />
+                <Grid
+                  xs={12}
+                  md={6}
+                  sm={6}
+                  sx={{ mt: 2.5, ml: 2 }}
+                  component={Typography}
+                >
+                  <Typography
+                    sx={{
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: 18
+                    }}
+                  >
+                    {teacherData.name}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "rgba(0,0,0,.75)",
+                      fontStyle: "normal",
+                      fontWeight: 300,
+                      fontSize: 15
+                    }}
+                  >
+                    {teacherData.department}
+                  </Typography>
+                </Grid>
+              </Grid>
+
+              <Grid
+                item
+                xs={12}
+                md={6}
+                sm={6}
+                container
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="center"
+              >
+                {/* <Tabs value={index} onChange={onTabClicked}>
+              <Tab label="Personal" />
+              <Tab label="Educational" />
+              <Tab label="Family" />
+              <Tab label="Dependencies" />
+            </Tabs> */}
+              </Grid>
             </Grid>
-          </Grid>
 
           <Grid
             component={ProfileCard}
@@ -139,6 +223,7 @@ export default function TeachersView() {
             </Grid>
             {/* </Container> */}
           </Grid>
+          </Container>
         </Container>
       )}
     </Page>
