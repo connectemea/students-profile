@@ -1,7 +1,6 @@
 import PersonalDetailsInput from "../../../utils/Student/PersonalDetailsInput";
 // material components
 import {
-    Button,
     Typography,
     Stepper,
     Step,
@@ -23,8 +22,7 @@ const RootStyle = styled("div")(({ theme }) => ({
 const steps = [
     {name:'Personal Details', link:'/student/details/personal'},
     {name:'Educational Details', link:'/student/details/educational'},
-    {name:'Family Details', link:'/student/details/family'},
-    {name:'Dependencies', link:'/student/details/dependencies'}
+    {name:'Family Details', link:'/student/details/family'}
 ];
 
 
@@ -47,12 +45,7 @@ export default function PersonalDetails() {
                     </Stepper>
                 </Box>
                 <PersonalDetailsInput />
-                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Button sx={{ mt: 2 }} 
-                    href="/student/details/educational" 
-                    onClick
-                    size="large" color="info" variant="contained">Next</Button>
-                </Box>
+                
             </RootStyle>
 
         </Page>

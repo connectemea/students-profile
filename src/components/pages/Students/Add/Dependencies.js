@@ -1,6 +1,5 @@
 // material components
 import {
-    Button,
     Typography,
     Stepper,
     Step,
@@ -24,8 +23,7 @@ const RootStyle = styled("div")(({ theme }) => ({
 const steps = [
     {name:'Personal Details', link:'/student/details/personal'},
     {name:'Educational Details', link:'/student/details/educational'},
-    {name:'Family Details', link:'/student/details/family'},
-    {name:'Dependencies', link:'/student/details/dependencies'}
+    {name:'Family Details', link:'/student/details/family'}
 ];
 
 
@@ -37,7 +35,7 @@ export default function Dependencies() {
             <RootStyle>
                 <Typography variant={"h4"}>Dependencies</Typography>
                 <Box sx={{ width: '100%', p: '0.75%' }}>
-                    <Stepper activeStep={3}>
+                    <Stepper activeStep={1}>
                     {steps.map((step) => (
                             <Step key={step.name}>
                             <Link to={step.link} style={{textDecoration:'none'}}>
@@ -49,10 +47,7 @@ export default function Dependencies() {
                 </Box>
                 {/* Add Custom Component Here */}
                 <DependenciesInput/>
-                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Button sx={{ mt: 2, mr:2 }} href="/student/details/personal" size="large" color="info" variant="contained">Previous</Button>
-                    <Button sx={{ mt: 2 }} href="/home" size="large" color="info" variant="contained">Submit</Button>
-                </Box>
+                
             </RootStyle>
 
         </Page>

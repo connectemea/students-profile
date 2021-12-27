@@ -1,3 +1,4 @@
+import TextInput from "../../../utils/Inputs/TextInput";
 import { useEffect, useState } from "react";
 
 // material components
@@ -8,7 +9,6 @@ import {
   Typography,
   Grid,
   Card,
-  TextField,
   Tooltip,
 } from "@mui/material";
 
@@ -118,34 +118,30 @@ export default function AddTeacher() {
         </Stack>
         <Card sx={{ padding: 3, marginBottom: 2 }}>
           <Grid container spacing={1} rowSpacing={1}>
-            <Grid item xs={12} sm={6} md={6}>
-              <TextField
-                varient="contained"
+            <Grid item xs={12} sm={6} md={6}>            
+                <TextInput
                 name="username"
                 label="Username"
-                color="info"
-                fullWidth
                 value={username}
-                onChange={handleUsernameChange}
-              />
+                textValue={username}
+                setTextValue={setUsername}
+                />
             </Grid>
-            <Grid item xs={12} sm={6} md={6}>
-              <TextField
-                varient="contained"
+            <Grid item xs={12} sm={6} md={6}>            
+                <TextInput
                 name="email"
                 label="Email"
-                color="info"
-                fullWidth
                 value={email}
-                onChange={handleEmailChange}
-              />
+                textValue={email}
+                setTextValue={setEmail}
+                />
+                </Grid>
             </Grid>
             <Grid item xs={12} sm={12} md={12}>
               <Typography variant="p" gutterBottom color="error">
                 {errorMsg}
               </Typography>
             </Grid>
-          </Grid>
           <Stack
             direction="row"
             alignItems="center"
