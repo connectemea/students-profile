@@ -11,7 +11,6 @@ const ContentStyle = styled("div")(({ theme }) => ({
   minHeight: "80vh",
   flexDirection: "column",
   justifyContent: "center",
-  padding: theme.spacing(12, 0),
 }));
 
 export default function ForgotPassword() {
@@ -21,7 +20,6 @@ export default function ForgotPassword() {
   const handleClick = () => console.log(userName, email);
 
   return (
-    <Container>
       <ContentStyle>
         <Card sx={{ p: 5 }}>
           <Box sx={{ mb: 3 }}>
@@ -51,6 +49,5 @@ export default function ForgotPassword() {
           </Stack>
         </Card>
       </ContentStyle>
-    </Container>
   );
 }

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import TextInput from "../../../utils/Inputs/TextInput";
+import { useEffect, useState } from "react";
 
 // material components
 import {
@@ -8,7 +9,6 @@ import {
   Typography,
   Grid,
   Card,
-  TextField,
   Tooltip,
 } from "@mui/material";
 
@@ -19,10 +19,14 @@ import PublishIcon from "@mui/icons-material/Publish";
 import Page from "../../../utils/Page";
 import DataTable from "../../../utils/DataTable";
 
+// userService
+import userService from "../../../../services/userService";
+
 // table header cell config
 const TABLE_HEAD = [
-  { id: "username", label: "Name", alignRight: false, type: "text" },
-  { id: "email", label: "Company", alignRight: false, type: "text" },
+  { id: "username", label: "username", type: "text" },
+  { id: "email", label: "email", type: "text" },
+  { id: "status", label: "status", type: "userStatusChip" },
 ];
 
 const TABLE_DATA = [
@@ -30,37 +34,75 @@ const TABLE_DATA = [
     id: "134doojon",
     username: "Aseel",
     email: "aseelhacker@microsoft.com",
+    status: "created",
   },
   {
     id: "ounr34343",
     username: "Noof",
     email: "noof@google.com",
+    status: "registered",
   },
   {
     id: "343433ojnn",
     username: "Nahyan",
     email: "nahyan@facebook.com",
+    status: "filled",
   },
   {
     id: "eonkn2434",
     username: "Dilshad",
     email: "dilshad@amazon.com",
+    status: "registered",
   },
 ];
 
 export default function AddTeacher() {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
+  const [errorMsg, setErrorMsg] = useState();
+  const [users, setUsers] = useState();
   const handleUsernameChange = (event) => setUsername(event.target.value);
   const handleEmailChange = (event) => setEmail(event.target.value);
-
-  const handleAddTeacher = () => {
-    const data = {
-      username,
-      email,
-    };
-    console.log(data);
+  //To clear the user input
+  const clearUserCredentials = () => {
+    setEmail("");
+    setUsername("");
   };
+  //To clear the error message
+  const clearError = () => setErrorMsg("");
+
+  // add new teacher
+  const handleAddTeacher = async () => {
+    try {
+      clearError();
+      const userData = {
+        username,
+        email,
+        userType: "teacher",
+      };
+      // adding user to db
+      await userService.createUser(userData);
+      // clearing the form
+      clearUserCredentials();
+    } catch (err) {
+      setErrorMsg(err?.response?.data?.message);
+    }
+  };
+
+  useEffect(() => {
+    //get all user (teachers)
+    const getUsers = async () => {
+      try {
+        console.log("getting users");
+        const users = await userService.getUsers("teacher");
+        console.log(users);
+        setUsers(users);
+      } catch (err) {
+        console.error(err?.response?.data?.message);
+      }
+    };
+    getUsers();
+  }, []);
   return (
     <Page title="AddTeacher">
       <Container>
@@ -76,29 +118,30 @@ export default function AddTeacher() {
         </Stack>
         <Card sx={{ padding: 3, marginBottom: 2 }}>
           <Grid container spacing={1} rowSpacing={1}>
-            <Grid item xs={12} sm={6} md={6}>
-              <TextField
-                varient="contained"
+            <Grid item xs={12} sm={6} md={6}>            
+                <TextInput
                 name="username"
                 label="Username"
-                color="info"
-                fullWidth
                 value={username}
-                onChange={handleUsernameChange}
-              />
+                textValue={username}
+                setTextValue={setUsername}
+                />
             </Grid>
-            <Grid item xs={12} sm={6} md={6}>
-              <TextField
-                varient="contained"
+            <Grid item xs={12} sm={6} md={6}>            
+                <TextInput
                 name="email"
                 label="Email"
-                color="info"
-                fullWidth
                 value={email}
-                onChange={handleEmailChange}
-              />
+                textValue={email}
+                setTextValue={setEmail}
+                />
+                </Grid>
             </Grid>
-          </Grid>
+            <Grid item xs={12} sm={12} md={12}>
+              <Typography variant="p" gutterBottom color="error">
+                {errorMsg}
+              </Typography>
+            </Grid>
           <Stack
             direction="row"
             alignItems="center"
@@ -124,7 +167,7 @@ export default function AddTeacher() {
             </Tooltip>
           </Stack>
         </Card>
-        <DataTable TABLE_DATA={TABLE_DATA} TABLE_HEAD={TABLE_HEAD} />
+        {users && <DataTable TABLE_DATA={users} TABLE_HEAD={TABLE_HEAD} />}
       </Container>
     </Page>
   );

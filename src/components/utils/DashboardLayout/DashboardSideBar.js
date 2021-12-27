@@ -75,10 +75,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             <Avatar src={ProfileImg} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-               aseel
+               Salman
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                Student
+                Admin
               </Typography>
             </Box>
           </AccountStyle>

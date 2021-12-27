@@ -2,6 +2,7 @@ import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Container, Typography, Stack, Card, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router";
 import PasswordField from "./utils/PasswordField";
 import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
@@ -13,14 +14,14 @@ const ContentStyle = styled("div")(({ theme }) => ({
   minHeight: "80vh",
   flexDirection: "column",
   justifyContent: "center",
-  padding: theme.spacing(12, 0),
 }));
 
 export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const navigate = useNavigate();
 
-  const handleClick = () => console.log(email, password);
+  const handleClick = () => navigate("/app/home");
 
   return (
     <Container>
