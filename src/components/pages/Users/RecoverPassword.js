@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Box, Container, Typography, Stack, Card } from "@mui/material";
 import PasswordField from "./utils/PasswordField";
 import SubmitButton from "./utils/SubmitButton";
+
+import UserService from "../../../service/UserService";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -15,6 +18,9 @@ const ContentStyle = styled("div")(({ theme }) => ({
 }));
 
 export default function Register() {
+  const navigate = useNavigate();
+  const { token } = useParams();
+
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [passwordError, setPasswordError] = useState();
@@ -40,11 +46,21 @@ export default function Register() {
     return false;
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const passwordLengthError = validatePasswordLength();
     const passwordMatchError = validatePasswordMatch();
     if (passwordLengthError || passwordMatchError) return;
-    console.log(password, confirmPassword);
+    try {
+      // clearError();
+      const data = {
+        password,
+      };
+      // logging in user
+      const response = await UserService.resetPassword(data, token);
+      navigate("/user/login");
+    } catch (err) {
+      console.log(err.response);
+    }
   };
 
   return (

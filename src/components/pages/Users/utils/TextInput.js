@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 
 export default function TextInput(props) {
-  const { type, label, value, setValue } = props;
+  const { type, label, value, setValue, authErrors } = props;
 
   const handleChange = (e) => setValue(e.target.value);
 
@@ -10,7 +10,7 @@ export default function TextInput(props) {
       fullWidth
       type={type}
       label={label}
-      error={value === "" ? true : false}
+      error={value === "" || authErrors ? true : false}
       value={value}
       onChange={handleChange}
       helperText={value === "" && `${label} is required`}

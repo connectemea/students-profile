@@ -1,8 +1,18 @@
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
-import { Box, Container, Typography, Stack, Card } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Stack,
+  Card,
+  TextField,
+} from "@mui/material";
 import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
+import { useNavigate } from "react-router-dom";
+
+import UserService from "../../../service/UserService";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -14,10 +24,30 @@ const ContentStyle = styled("div")(({ theme }) => ({
 }));
 
 export default function ForgotPassword() {
-  const [userName, setUserName] = useState();
-  const [email, setEmail] = useState();
+  const navigate = useNavigate();
 
-  const handleClick = () => console.log(userName, email);
+  const [username, setUserName] = useState();
+  const [email, setEmail] = useState();
+  const [authErrors, setAuthErrors] = useState();
+
+  const clearError = () => setAuthErrors("");
+
+  const handleClick = async () => {
+    try {
+      clearError();
+      const data = {
+        username,
+        email,
+      };
+      // logging in user
+      const response = await UserService.forgotPassword(data);
+      console.log(response);
+      navigate(`/user/recover/${response.data.userToken}`);
+    } catch (err) {
+      console.log(err.response);
+      setAuthErrors(err?.response?.data?.message);
+    }
+  };
 
   return (
       <ContentStyle>
@@ -31,18 +61,21 @@ export default function ForgotPassword() {
             <TextInput
               label="User name"
               type="text"
-              value={userName}
+              value={username}
               setValue={setUserName}
+              authErrors={authErrors}
             />
             <TextInput
               label="Email"
               type="email"
               value={email}
               setValue={setEmail}
+              authErrors={authErrors}
             />
+            <Typography variant="body2">{authErrors && authErrors}</Typography>
 
             <SubmitButton
-              disabled={!userName || !email ? true : false}
+              disabled={!username || !email ? true : false}
               name="Submit"
               onClick={handleClick}
             />
