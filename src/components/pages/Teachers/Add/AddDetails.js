@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-// importing the teacher service
-import teacherService from "../../../../services//teacherService";
 // material components
 import { Button, Typography, Grid, Card, Box, Container } from "@mui/material";
 
@@ -19,8 +17,12 @@ import SelectInput from "../../../utils/Inputs/SelectInput";
 import DatePickerInput from "../../../utils/Inputs/DatePickerInput";
 import ImageUpload from "../../../utils/Inputs/ImageUpload";
 
+// importing backend services
+import teacherService from "../../../../services//teacherService";
+import userService from "../../../../services//userService";
+
 const RootStyle = styled("div")(({ theme }) => ({
-  padding: theme.spacing(4),
+  padding: theme.spacing(4)
 }));
 
 // menu items || dropdown items
@@ -29,10 +31,9 @@ const genders = ["Female", "Male", "Other"];
 const status = ["Unmarried", "Married"];
 
 export default function AddDetails() {
-
   const navigate = useNavigate();
 
-  const [profileImage, imageProfileImage] = useState();
+  const [profileImage, setProfileImage] = useState();
   const [name, setName] = useState();
   const [shortName, setShortName] = useState();
   const [email, setEmail] = useState();
@@ -49,6 +50,8 @@ export default function AddDetails() {
   const clearError = () => setErrorMsg("");
 
   const handleAddTeacherDetails = async () => {
+
+    console.log("handleAddTeacher function started")
     try {
       clearError();
       const userData = {
@@ -63,25 +66,44 @@ export default function AddDetails() {
         phoneNo,
         religion,
         cast,
-        educationQualification,
+        educationQualification
+      };
+      // console.log(profileImage);
+
+      // Converting data into form data format
+      const formData = new FormData();
+      formData.append("profile", profileImage);
+
+      // console.log(`form data = ${formData}`);
+      // console.log(formData);
+      const image = {
+        formData
       };
       // adding user to db
       // const response = await teacherService.createTeacher(userData);
       // console.log(response);
-       await teacherService.createTeacher(userData);
+
+      await teacherService.createTeacher(userData);
+
+      const response = await userService.uploadImage(image);
+      console.log(`image response`)
+      console.log(response)
+
       // clearing the form
-      // clearUserCredentials();
-      // Next page
-      navigate("/teacher/view")
+      clearUserCredentials();
+
+      // Navigating to next page
+      // navigate("/teacher/view");
     } catch (err) {
-      console.log(err.response);
-      setErrorMsg(err.response.message);
+      console.log(err);
+      // console.log(err.response);
+      // setErrorMsg(err.response.message);
     }
   };
 
   // clearing the form
   const clearUserCredentials = () => {
-    imageProfileImage("");
+    setProfileImage("");
     setName("");
     setShortName("");
     setEmail("");
@@ -95,8 +117,9 @@ export default function AddDetails() {
   };
 
   // const navigate = useNavigate();
-  const hadleNextBtn = () => {
+  const handleNextBtn = () => {
     if (
+      !profileImage ||
       !name ||
       !shortName ||
       !email ||
@@ -115,6 +138,7 @@ export default function AddDetails() {
   };
 
   const errorSetter = () => {
+    if (!profileImage) setProfileImage("");
     if (!name) setName("");
     if (!shortName) setShortName("");
     if (!email) setEmail("");
@@ -127,6 +151,7 @@ export default function AddDetails() {
     if (!cast) setCast("");
     if (!educationQualification) setEducationQualification("");
   };
+
   return (
     <Page title="TeacherDetails">
       <Container maxWidth="xl" sx={{ mt: 2, p: 2, pl: 0 }}>
@@ -149,7 +174,7 @@ export default function AddDetails() {
             md={4}
             lg={4}
           >
-            <ImageUpload image={profileImage} setImage={imageProfileImage} />
+            <ImageUpload image={profileImage} setImage={setProfileImage} />
             <Typography sx={{ mt: 3, color: "gray" }} variant={"body2"}>
               Allowed *.jpeg, *.jpg, *.png, *.gif <br />
               max size: 1MB
@@ -275,7 +300,7 @@ export default function AddDetails() {
           </Button> */}
           <Button
             sx={{ mt: 2 }}
-            onClick={hadleNextBtn}
+            onClick={handleNextBtn}
             size="large"
             color="info"
             variant="contained"

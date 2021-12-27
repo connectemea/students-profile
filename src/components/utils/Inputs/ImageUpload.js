@@ -13,15 +13,22 @@ const AddImage = styled(IconButton)(({ theme }) => ({
   height: theme.spacing(20),
   width: theme.spacing(20),
   outline: "1.5px dotted grey",
-  outlineOffset: "10px",
+  outlineOffset: "10px"
 }));
 
 export default function ImageUpload(props) {
   // pops destructuring
   const { image, setImage } = props;
 
-  const handleImageChange = (e) =>
-    e.target.files[0] && setImage(URL.createObjectURL(e.target.files[0]));
+  const handleImageChange = (e) => {
+    e.target.files[0] && setImage(e.target.files[0]);
+
+    // const formData = new FormData();
+    // formData.append("profile", image);
+
+    // console.log(`form data = ${formData}`);
+    // console.log(formData);
+  };
 
   return (
     <>
