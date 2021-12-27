@@ -2,7 +2,7 @@ import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Container, Typography, Stack, Card, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import PasswordField from "./utils/PasswordField";
 import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
@@ -26,8 +26,14 @@ export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [authErrors, setAuthErrors] = useState();
+  const navigate = useNavigate();
 
   const clearError = () => setAuthErrors("");
+
+  const clearForm = () => {
+    setEmail("");
+    setPassword("");
+  };
 
   const handleClick = async () => {
     try {
@@ -38,6 +44,8 @@ export default function Login() {
       };
       // logging in user
       const response = await userService.loginUser(loginCredentials);
+      clearForm();
+      navigate("/app/home");
       //storing token in localStorage
       localStorage.setItem(LOCAL_KEYS.AUTH_TOKEN, response.data.userToken);
     } catch (err) {

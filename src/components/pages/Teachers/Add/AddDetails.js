@@ -20,7 +20,7 @@ import ImageUpload from "../../../utils/Inputs/ImageUpload";
 
 // importing backend services
 import teacherService from "../../../../services//teacherService";
-import userService from "../../../../services//userService";
+import userService from "../../../../services/userService";
 
 const RootStyle = styled("div")(({ theme }) => ({
   padding: theme.spacing(4)
@@ -75,20 +75,12 @@ export default function AddDetails() {
       const formData = new FormData();
       formData.append("profile", profileImage);
 
-      // console.log(`form data = ${formData}`);
-      // console.log(formData);
-      const image = {
-        formData
-      };
+
       // adding user to db
-      // const response = await teacherService.createTeacher(userData);
-      // console.log(response);
+      const response = await teacherService.createTeacher(userData);
 
-      await teacherService.createTeacher(userData);
 
-      const response = await userService.uploadImage(image);
-      console.log(`image response`)
-      console.log(response)
+      const imageRes = await userService.uploadImage(formData);
 
       // clearing the form
       clearUserCredentials();

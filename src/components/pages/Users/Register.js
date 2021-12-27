@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
-import { Box, Container, Typography, Stack, Link, Card } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Box, Typography, Stack, Link, Card } from "@mui/material";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import PasswordField from "./utils/PasswordField";
 import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
@@ -9,7 +9,7 @@ import SubmitButton from "./utils/SubmitButton";
 //importing the user service
 import userService from "../../../services/userService";
 
-const ContentStyle = styled("div")(({ theme }) => ({
+const ContentStyle = styled("div")(() => ({
   maxWidth: 400,
   margin: "auto",
   display: "flex",
@@ -27,6 +27,7 @@ export default function Register() {
   const [passwordError, setPasswordError] = useState();
   const [confirmPasswordError, setConfirmPasswordError] = useState();
   const [authErrors, setAuthErrors] = useState();
+  const navigate = useNavigate()
 
   const clearError = () => setAuthErrors("");
 
@@ -50,11 +51,17 @@ export default function Register() {
     return false;
   };
 
+  const clearForm = () => {
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+  }
+
   const handleClick = async () => {
     const passwordLengthError = validatePasswordLength();
     const passwordMatchError = validatePasswordMatch();
     if (passwordLengthError || passwordMatchError) return;
-
     try {
       clearError();
       const registerCredentials = {
@@ -64,6 +71,8 @@ export default function Register() {
       };
       // registering a user
       await userService.registerUser(registerCredentials);
+      clearForm();
+      navigate("/user/login");
     } catch (err) {
       setAuthErrors(err?.response?.data?.message);
     }

@@ -50,7 +50,6 @@ export default function TeachersList() {
   useEffect(() => {
     const getTeachers = async () => {
       try {
-        console.log("called getTeachers");
         // get teachers
         const newTeacher = await teacherService.getAllTeacher();
         setTeachers(newTeacher);
