@@ -12,7 +12,7 @@ import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
 import { useNavigate } from "react-router-dom";
 
-import UserService from "../../../service/UserService";
+import userService from "../../../services/userService";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -40,7 +40,7 @@ export default function ForgotPassword() {
         email,
       };
       // logging in user
-      const response = await UserService.forgotPassword(data);
+      const response = await userService.forgotPassword(data);
       console.log(response);
       navigate(`/user/recover/${response.data.userToken}`);
     } catch (err) {

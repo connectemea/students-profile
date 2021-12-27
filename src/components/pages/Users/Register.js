@@ -7,7 +7,7 @@ import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
 
 //importing the user service
-import UserService from "../../../service/UserService";
+import userService from "../../../services/userService";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -63,7 +63,7 @@ export default function Register() {
         password,
       };
       // registering a user
-      await UserService.registerUser(registerCredentials);
+      await userService.registerUser(registerCredentials);
     } catch (err) {
       setAuthErrors(err?.response?.data?.message);
     }
