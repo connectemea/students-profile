@@ -13,11 +13,10 @@ const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
   margin: "auto",
   display: "flex",
-  minHeight: "80vh",
+  height: "80vh",
   flexDirection: "column",
   justifyContent: "center",
   alignContent: "center",
-  padding: theme.spacing(12, 0),
 }));
 
 export default function Register() {
@@ -71,7 +70,6 @@ export default function Register() {
   };
 
   return (
-    <Container>
       <ContentStyle>
         <Card sx={{ p: 3 }}>
           <Box sx={{ mb: 3 }}>
@@ -131,6 +129,5 @@ export default function Register() {
           </Stack>
         </Card>
       </ContentStyle>
-    </Container>
   );
 }

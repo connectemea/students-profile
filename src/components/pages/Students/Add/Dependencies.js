@@ -1,4 +1,3 @@
-import PersonalDetailsInput from "../../../utils/Student/PersonalDetailsInput";
 // material components
 import {
     Typography,
@@ -11,8 +10,10 @@ import { styled } from "@mui/material/styles";
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
 
-import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
+
+import { Box } from "@mui/system";
+import DependenciesInput from "../../../utils/Student/DependenciesInput";
 
 
 const RootStyle = styled("div")(({ theme }) => ({
@@ -26,16 +27,16 @@ const steps = [
 ];
 
 
-export default function PersonalDetails() {
+export default function Dependencies() {
 
 
     return (
-        <Page title="Personal Details">
+        <Page title="Dependencies">
             <RootStyle>
-                <Typography variant={"h4"}>Personal Details</Typography>
+                <Typography variant={"h4"}>Dependencies</Typography>
                 <Box sx={{ width: '100%', p: '0.75%' }}>
-                    <Stepper activeStep={0}>
-                        {steps.map((step) => (
+                    <Stepper activeStep={1}>
+                    {steps.map((step) => (
                             <Step key={step.name}>
                             <Link to={step.link} style={{textDecoration:'none'}}>
                                 <StepLabel>{step.name}</StepLabel>
@@ -44,7 +45,8 @@ export default function PersonalDetails() {
                         ))}
                     </Stepper>
                 </Box>
-                <PersonalDetailsInput />
+                {/* Add Custom Component Here */}
+                <DependenciesInput/>
                 
             </RootStyle>
 

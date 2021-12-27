@@ -17,6 +17,13 @@ import AuthLayout from "./components/utils/UserLayout/AuthLayout";
 import ForgotPassword from "./components/pages/Users/ForgotPassword";
 import RecoverPassword from "./components/pages/Users/RecoverPassword";
 import AddDetails from "./components/pages/Teachers/Add/AddDetails";
+import Details from "./components/pages/Students/view/Details";
+import ProfileProvider from "./context/profileContext";
+import StudentProvider from "./context/studentContext";
+import Dependencies from "./components/pages/Students/Add/Dependencies";
+import DepartmentDetails from "./components/pages/Department/Dpt-details/DptDetails";
+import Add from "./components/pages/Department/Add/Add";
+import DptStudentList from "./components/pages/Department/List/DptStudentList";
 
 function App() {
   return (

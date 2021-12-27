@@ -10,7 +10,7 @@ const get = async (path, headers = {}, params = {}) => {
   //generating the request
   const response = await axios.get(url, _generateParams(headers, params));
 
-  return response.data;
+  return response.data.data;
 };
 
 //post request
