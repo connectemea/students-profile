@@ -110,31 +110,46 @@ export default function DataTable({ TABLE_HEAD, TABLE_DATA, SEARCH_ID }) {
 
   const isUserNotFound = filteredUsers.length === 0;
 
+  const getValueForCell = (data, key) => {
+    if (key.includes(".")) {
+      let value = data;
+      key.split(".").forEach((segment) => {
+        if (value) {
+          value = value[segment];
+        } else {
+          return undefined;
+        }
+      });
+      return value;
+    } else {
+      return data[key];
+    }
+  };
   const getRowCell = (col, value) => {
     const type = col.type;
     switch (type) {
       case "text":
-        return value[col.id];
+        return getValueForCell(value, col.id);
       case "stack":
         return (
           <Stack
             direction="row"
             alignItems="center"
-            sx={{textDecoration:"none",color:"black"}}
+            sx={{ textDecoration: "none", color: "black" }}
             spacing={2}
             component={Link}
             to={`${col.baseUrl}/${value._id}`}
           >
             <Avatar alt={value[col.id]} src={"#"} />
             <Typography variant="subtitle2" noWrap>
-              {value[col.id]}
+              {getValueForCell(value, col.id)}
             </Typography>
           </Stack>
         );
       case "userStatusChip":
         return (
           <Chip
-            label={value[col.id].toUpperCase()}
+            label={getValueForCell(value, col.id).toUpperCase()}
             variant="outlined"
             color={
               value[col.id] === "created"
@@ -157,7 +172,7 @@ export default function DataTable({ TABLE_HEAD, TABLE_DATA, SEARCH_ID }) {
         onFilterName={handleFilterByName}
       />
 
-      <Scrollbar>
+      {/* <Scrollbar> */}
         <TableContainer sx={{ minWidth: 800, padding: 2 }}>
           <Table>
             <DataTableHead
@@ -198,7 +213,7 @@ export default function DataTable({ TABLE_HEAD, TABLE_DATA, SEARCH_ID }) {
             )}
           </Table>
         </TableContainer>
-      </Scrollbar>
+      {/* </Scrollbar> */}
 
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
