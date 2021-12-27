@@ -15,7 +15,7 @@ const TABLE_HEAD = [
     label: "Name",
     alignRight: false,
     type: "stack",
-    baseUrl: "/app/student/view",
+    baseUrl: "/app/department/student",
   },
   { id: "company", label: "Company", alignRight: false, type: "text" },
   { id: "role", label: "Role", alignRight: false, type: "text" },
@@ -48,7 +48,7 @@ const TABLE_DATA = [
   },
 ];
 
-export default function StudentsList() {
+export default function DptStudentList() {
   return (
     <Page title="StudentsList">
       <Container>
@@ -64,7 +64,7 @@ export default function StudentsList() {
           <Button
             variant="contained"
             component={RouterLink}
-            to="/app/student/add"
+            to="/student/add"
             startIcon={<AddIcon />}
           >
             New Student

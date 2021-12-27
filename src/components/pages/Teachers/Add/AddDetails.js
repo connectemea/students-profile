@@ -3,13 +3,14 @@ import { useState } from "react";
 // material components
 import { Button, Typography, Grid, Card, Box, Container } from "@mui/material";
 
-import { useNavigate } from "react-router-dom";
 
 // material icons
 import { styled } from "@mui/material/styles";
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
+
+import { useNavigate } from "react-router-dom";
 
 //Custom component
 import TextInput from "../../../utils/Inputs/TextInput";
@@ -228,6 +229,7 @@ export default function AddDetails() {
                 label="Joining Year"
                 date={joinYear}
                 setDate={setJoiningYear}
+                
               />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -312,4 +314,4 @@ export default function AddDetails() {
       {/* </RootStyle> */}
     </Page>
   );
-}
+ }

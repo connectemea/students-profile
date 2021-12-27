@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // material UI components
 import {
   Card,
+  Chip,
   Table,
   Stack,
   Avatar,
@@ -39,7 +41,7 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-function applySortFilter(array, comparator, query) {
+function applySortFilter(array, cols, comparator, query) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
@@ -47,8 +49,10 @@ function applySortFilter(array, comparator, query) {
     return a[1] - b[1];
   });
   if (query) {
-    return array.filter(
-      (row) => row.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
+    return array.filter((row) =>
+      cols.find(
+        (col) => row[col.id].toLowerCase().indexOf(query.toLowerCase()) !== -1
+      )
     );
   }
   return stabilizedThis.map((el) => el[0]);
@@ -58,7 +62,7 @@ DataTable.propTypes = {
   TABLE_HEAD: PropTypes.array,
   TABLE_DATA: PropTypes.array,
 };
-export default function DataTable({ TABLE_HEAD, TABLE_DATA }) {
+export default function DataTable({ TABLE_HEAD, TABLE_DATA, SEARCH_ID }) {
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState("asc");
   const [selected, setSelected] = useState([]);
@@ -99,6 +103,7 @@ export default function DataTable({ TABLE_HEAD, TABLE_DATA }) {
 
   const filteredUsers = applySortFilter(
     TABLE_DATA,
+    TABLE_HEAD,
     getComparator(order, orderBy),
     filterName
   );
@@ -112,12 +117,33 @@ export default function DataTable({ TABLE_HEAD, TABLE_DATA }) {
         return value[col.id];
       case "stack":
         return (
-          <Stack direction="row" alignItems="center" spacing={2}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            sx={{textDecoration:"none",color:"black"}}
+            spacing={2}
+            component={Link}
+            to={`${col.baseUrl}/${value._id}`}
+          >
             <Avatar alt={value[col.id]} src={"#"} />
             <Typography variant="subtitle2" noWrap>
               {value[col.id]}
             </Typography>
           </Stack>
+        );
+      case "userStatusChip":
+        return (
+          <Chip
+            label={value[col.id].toUpperCase()}
+            variant="outlined"
+            color={
+              value[col.id] === "created"
+                ? "error"
+                : value[col.id] === "registred"
+                ? "primary"
+                : "success"
+            }
+          />
         );
       default:
         return null;
@@ -149,7 +175,9 @@ export default function DataTable({ TABLE_HEAD, TABLE_DATA }) {
                 .map((row) => (
                   <TableRow hover key={row.id} tabIndex={-1} role="checkbox">
                     {TABLE_HEAD.map((col) => (
-                      <TableCell align="left">{getRowCell(col,row)}</TableCell>
+                      <TableCell align={row.align ? row.align : "left"}>
+                        {getRowCell(col, row)}
+                      </TableCell>
                     ))}
                   </TableRow>
                 ))}

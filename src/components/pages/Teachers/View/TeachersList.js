@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
-
+import { useState } from "react";
+import teacherService from "../../../../services/teacherService";
 // material components
 import { Stack, Button, Container, Typography } from "@mui/material";
 
@@ -9,15 +9,13 @@ import AddIcon from "@mui/icons-material/Add";
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
 import DataTable from "../../../utils/DataTable";
-
-// Backend Services
-import TeacherService from "../../../../services/teacherService";
+import { useEffect } from "react";
 
 // table header cell config
 const TABLE_HEAD = [
-  { id: "name", label: "Name", alignRight: false, type: "stack" },
-  { id: "company", label: "Company", alignRight: false, type: "text" },
-  { id: "role", label: "Role", alignRight: false, type: "text" },
+  { id: "name", label: "Name", type: "stack" ,baseUrl:"/app/teacher/view"},
+  { id: "shortName", label: "short form", type: "text" },
+  { id: "department", label: "department", type: "text" },
 ];
 
 const TABLE_DATA = [
@@ -48,21 +46,20 @@ const TABLE_DATA = [
 ];
 
 export default function TeachersList() {
-  const [teacherData, setTeacherData] = useState();
-  console.log(teacherData);
-
-
+  const [teachers, setTeachers] = useState([]);
   useEffect(() => {
-    async function getTeachers() {
+    const getTeachers = async () => {
       try {
-        const response = await TeacherService.getTeacher();
-        setTeacherData(response.data);
+        console.log("called getTeachers");
+        // get teachers
+        const newTeacher = await teacherService.getAllTeacher();
+        setTeachers(newTeacher);
       } catch (err) {
-          console.log(err?.response?.data?.message)
+        console.error(err?.response?.data?.message);
       }
-    }
+    };
     getTeachers();
-  },[]);
+  }, []);
 
   return (
     <Page title="TeachersList">
@@ -79,13 +76,15 @@ export default function TeachersList() {
           <Button
             variant="contained"
             component={RouterLink}
-            to="/teacher/add"
+            to="/app/teacher/add"
             startIcon={<AddIcon />}
           >
             New Teacher
           </Button>
         </Stack>
-        <DataTable TABLE_DATA={TABLE_DATA} TABLE_HEAD={TABLE_HEAD} />
+        {teachers && (
+          <DataTable TABLE_DATA={teachers} TABLE_HEAD={TABLE_HEAD} />
+        )}
       </Container>
     </Page>
   );

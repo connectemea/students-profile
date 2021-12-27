@@ -10,7 +10,7 @@ import Scrollbar from "../Scrollbar";
 import NavSection from "./NavSection";
 import { MHidden } from "../../@material-extent";
 import NavConfig from "./NavConfig";
-import Logo from "../../../images/AvengersLogo.png";
+import Logo from "../../../images/Logo.png";
 import ProfileImg from '../../../images/avatar.jpg'
 // import account from '../../_mocks_/account';
 
@@ -75,10 +75,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             <Avatar src={ProfileImg} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-               aseel
+               Salman
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                Student
+                Admin
               </Typography>
             </Box>
           </AccountStyle>
