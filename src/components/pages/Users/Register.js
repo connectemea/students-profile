@@ -1,17 +1,13 @@
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
-import {
-  Box,
-  Container,
-  Typography,
-  Stack,
-  Link,
-  Card,
-} from "@mui/material";
+import { Box, Container, Typography, Stack, Link, Card } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import PasswordField from "./utils/PasswordField";
 import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
+
+//importing the user service
+import userService from "../../../services/userService";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -24,12 +20,15 @@ const ContentStyle = styled("div")(({ theme }) => ({
 }));
 
 export default function Register() {
-  const [userName, setUserName] = useState();
+  const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [passwordError, setPasswordError] = useState();
   const [confirmPasswordError, setConfirmPasswordError] = useState();
+  const [authErrors, setAuthErrors] = useState();
+
+  const clearError = () => setAuthErrors("");
 
   const validatePasswordLength = () => {
     //password validation for min length
@@ -51,11 +50,23 @@ export default function Register() {
     return false;
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const passwordLengthError = validatePasswordLength();
     const passwordMatchError = validatePasswordMatch();
     if (passwordLengthError || passwordMatchError) return;
-    console.log(userName, email, password, confirmPassword);
+
+    try {
+      clearError();
+      const registerCredentials = {
+        username,
+        email,
+        password,
+      };
+      // registering a user
+      await userService.registerUser(registerCredentials);
+    } catch (err) {
+      setAuthErrors(err?.response?.data?.message);
+    }
   };
 
   return (
@@ -70,26 +81,31 @@ export default function Register() {
             <TextInput
               label="User name"
               type="text"
-              value={userName}
-              setValue={setUserName}
+              value={username}
+              setValue={setUsername}
+              authErrors={authErrors}
             />
             <TextInput
               label="Email"
               type="email"
               value={email}
               setValue={setEmail}
+              authErrors={authErrors}
             />
             <PasswordField
               label="Password"
               value={password}
               setValue={setPassword}
               errorMessage={passwordError}
+              authErrors={authErrors}
             />
             <PasswordField
               label="Confirm Password"
               value={confirmPassword}
               setValue={setConfirmPassword}
               errorMessage={confirmPasswordError}
+              authErrors={authErrors}
+              showError
             />
             <Stack
               direction="row"
@@ -104,7 +120,7 @@ export default function Register() {
             <SubmitButton
               name="Register"
               disabled={
-                !userName || !email || !password || !confirmPassword
+                !username || !email || !password || !confirmPassword
                   ? true
                   : false
               }

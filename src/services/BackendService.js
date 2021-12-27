@@ -19,32 +19,40 @@ const post = async (path, data = {}, headers = {}, params = {}) => {
   const url = `${BACKEND_URL.BASE_URL}${path}`;
 
   //generating the request
-  const response = await axios.post(url, data, _generateParams(headers, params));
+  const response = await axios.post(
+    url,
+    data,
+    _generateParams(headers, params)
+  );
 
   return response.data;
 };
 
 //patch request
 const patch = async (path, data = {}, headers = {}, params = {}) => {
-    //generating url
-    const url = `${BACKEND_URL.BASE_URL}${path}`;
-    
-    //generating the request
-    const response = await axios.patch(url, data, _generateParams(headers, params));
-    
-    return response.data;
-}
+  //generating url
+  const url = `${BACKEND_URL.BASE_URL}${path}`;
+
+  //generating the request
+  const response = await axios.patch(
+    url,
+    data,
+    _generateParams(headers, params)
+  );
+
+  return response.data;
+};
 
 //delete request
 const destroy = async (path, headers = {}, params = {}) => {
-    //generating url
-    const url = `${BACKEND_URL.BASE_URL}${path}`;
-    
-    //generating the request
-    const response = await axios.delete(url, _generateParams(headers, params));
-    
-    return response.data;
-}
+  //generating url
+  const url = `${BACKEND_URL.BASE_URL}${path}`;
+
+  //generating the request
+  const response = await axios.delete(url, _generateParams(headers, params));
+
+  return response.data;
+};
 
 const imageUpload = async (path, data = {}, params = {}) => {
   axios({
@@ -72,10 +80,9 @@ const _generateParams = (headers = {}, params = {}) => {
 
   //set headers
   const localHeader = {
-    ...headers,
     token: authToken,
+    ...headers,
   };
-
   //return params and headers
   return {
     headers: localHeader,
