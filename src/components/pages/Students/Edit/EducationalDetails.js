@@ -23,7 +23,7 @@ export default function EducationDeatils() {
       <Grid>
         <Grid>Education Details</Grid>
         <Grid>
-         {details&& <EducationalDetailsInput currentdetails={details.EducationDeatils}/>}
+         {details&& <EducationalDetailsInput currentData={details.EducationDeatils}/>}
          </Grid>
         <Grid
           container

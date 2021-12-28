@@ -24,7 +24,7 @@ export default function FamilyDetails() {
       <Grid>
         <Grid>FamilyDetails</Grid>
         <Grid>
-          {details && <FamilyDetailsInput currentdetails={details.FamilyDetails} />}
+          {details && <FamilyDetailsInput currentData={details.FamilyDetails} />}
         </Grid>
         <Grid
           container
