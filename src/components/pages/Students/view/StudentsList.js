@@ -1,4 +1,5 @@
 import { Link as RouterLink } from "react-router-dom";
+import { useEffect, useState } from "react";
 // material components
 import { Stack, Button, Container, Typography } from "@mui/material";
 
@@ -7,18 +8,23 @@ import AddIcon from "@mui/icons-material/Add";
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
 import DataTable from "../../../utils/DataTable";
+import studentService from "../../../../services/studentService";
 
 // table header cell config
 const TABLE_HEAD = [
   {
-    id: "name",
+    id: "personalDetails.name",
     label: "Name",
     alignRight: false,
     type: "stack",
     baseUrl: "/app/student/view",
   },
-  { id: "company", label: "Company", alignRight: false, type: "text" },
-  { id: "role", label: "Role", alignRight: false, type: "text" },
+  { id: "userId.email", label: "email", type: "text" },
+  {
+    id: "personalDetails.admissionNO",
+    label: "admission No",
+    type: "text",
+  },
 ];
 
 const TABLE_DATA = [
@@ -49,6 +55,20 @@ const TABLE_DATA = [
 ];
 
 export default function StudentsList() {
+  const [students, setStudents] = useState([]);
+  useEffect(() => {
+    const getStudents = async () => {
+      try {
+        // get students
+        const students = await studentService.getStudents();
+        console.log(students);
+        setStudents(students);
+      } catch (err) {
+        console.error(err?.response?.data?.message);
+      }
+    };
+    getStudents();
+  }, []);
   return (
     <Page title="StudentsList">
       <Container>
@@ -70,7 +90,9 @@ export default function StudentsList() {
             New Student
           </Button>
         </Stack>
-        <DataTable TABLE_DATA={TABLE_DATA} TABLE_HEAD={TABLE_HEAD} />
+        {students && (
+          <DataTable TABLE_DATA={students} TABLE_HEAD={TABLE_HEAD} />
+        )}
       </Container>
     </Page>
   );
