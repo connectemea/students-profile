@@ -4,12 +4,15 @@ import {
     Grid,
     Card,
     Container,
+    Link
   } from "@mui/material";
   import { styled } from "@mui/material/styles";
   import Page from "../../../utils/Page";
   
   //   custom component
   import Field from "./Field";
+  // icon import
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
    // custom card
   const ProfileCard = styled(Card)(({ theme }) => ({
     paddingRight: `${theme.spacing(4)} !important`,
@@ -32,11 +35,34 @@ import {
             container
             spacing={2}
           >
-            <Grid sx={{}} item sm={12} xs={12} md={12} lg={12}>
-              <Typography variant="h5" sx={{}}>
-                Father Details
-              </Typography>
-            </Grid>
+          {" "}
+          <Grid
+            item
+            sm={12}
+            xs={12}
+            md={12}
+            lg={12}
+            container
+            container
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            {" "}
+            <Typography variant="h5" sx={{}}>
+              10th Details
+            </Typography>
+            <Link to="/app/department/add" style={{ color: "none" }}>
+              <ModeEditOutlineOutlinedIcon
+                sx={{
+                  margin: "8px",
+                  opacity: "",
+                  height: "3vh",
+                  width: "2vw",
+                }}
+              />
+            </Link>
+          </Grid>
             <Grid item sm={12} xs={12} md={4} lg={4}>
               <Field
                 heading="Name"

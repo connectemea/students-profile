@@ -1,16 +1,19 @@
 // material components
-import { Typography, Grid, Card, Container } from "@mui/material";
+import { Typography, Grid, Card, Container,Link } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Page from "../../../utils/Page";
 
 //   custom component
 import Field from "./Field";
+// icon import
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
 // custom card
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
   paddingBottom: `${theme.spacing(4)} !important`,
 }));
+
 
 export default function EducationalView(props) {
   const {educationDetails} = props;
@@ -25,8 +28,33 @@ export default function EducationalView(props) {
           container
           spacing={2}
         >
-          <Grid item sm={12} xs={12} md={12} lg={12}>
-            <Typography variant="h5">10th Details</Typography>
+          {" "}
+          <Grid
+            item
+            sm={12}
+            xs={12}
+            md={12}
+            lg={12}
+            container
+            container
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            {" "}
+            <Typography variant="h5" sx={{}}>
+              10th Details
+            </Typography>
+            <Link to="/app/student" style={{ color: "none" }}>
+              <ModeEditOutlineOutlinedIcon
+                sx={{
+                  margin: "8px",
+                  opacity: "",
+                  height: "3vh",
+                  width: "2vw",
+                }}
+              />
+            </Link>
           </Grid>
           <Grid item sm={12} xs={12} md={6} lg={6}>
             <Field

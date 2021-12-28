@@ -19,7 +19,8 @@ const ProfileCard = styled(Card)(({ theme }) => ({
     paddingBottom: `${theme.spacing(4)} !important`
 }));
 
-export default function FamilyDetailsInput() {
+export default function FamilyDetailsInput(props) {
+    const {}
     //Father
     const [fatherName, setFatherName] = useState();
     const [fatherQualification, setFatherQualification] = useState();

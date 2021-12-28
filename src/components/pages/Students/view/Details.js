@@ -17,7 +17,12 @@ import EducationalView from "../../../utils/Student/View/EducationalView";
 import FamilyView from "../../../utils/Student/View/FamilyView";
 import DependenciesView from "../../../utils/Student/View/Dependencies";
 import profile from "../../../../images/test.jpg";
-import StudentService from "../../../../service/StudentService";
+import StudentService from "../../../../services/StudentService";
+import { useParams } from "react-router-dom";
+
+// icon import
+
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
@@ -32,6 +37,7 @@ const Panel = (props) => (
 
 export default function Details() {
   const [index, setIndex] = useState(0);
+  const {id} = useParams();
   const onTabClicked = (event, index) => {
     setIndex(index);
   };
@@ -40,18 +46,20 @@ export default function Details() {
   useEffect(() => {
     async function getStudentDetails() {
       try {
-        const response = await StudentService.getStudent();
-        setStudentDetails(response.data)
+        const response = await StudentService.getStudent(id);
+        setStudentDetails(response)
         console.log("success",response.data.personalDetails.name);
+        console.log(response)
       } catch (error) {
         console.log("error",error.response)
       }
     }
     getStudentDetails()
-  },[]);
+  },[id]);
 
   return (
     <Page title="details">
+    { studentDetails && (<>
       <Container>
         <Grid
           style={{
@@ -139,18 +147,19 @@ export default function Details() {
       </Container>
       <Grid sx={{ mt: 5 }}>
         <Panel value={index} index={0}>
-          <PersonalView personalDetails = {studentDetails && studentDetails.personalDetails} />
+          <PersonalView personalDetails = {studentDetails && studentDetails.personalDetails} id={studentDetails._id}/>
         </Panel>
         <Panel value={index} index={1}>
-          <EducationalView educationDetails = {studentDetails && studentDetails.educationDetails}/>
+          <EducationalView educationDetails = {studentDetails && studentDetails.educationDetails} id={studentDetails._id}/>
         </Panel>
         <Panel value={index} index={2}>
-          <FamilyView familyDetails = {studentDetails && studentDetails.familyDetails} />
+          <FamilyView familyDetails = {studentDetails && studentDetails.familyDetails} id={studentDetails._id}/>
         </Panel>
         <Panel value={index} index={3}>
-          <DependenciesView/>
+          <DependenciesView id={studentDetails._id}/>
         </Panel>
       </Grid>
+    </>)}
     </Page>
   );
 }

@@ -24,6 +24,8 @@ import Dependencies from "./components/pages/Students/Add/Dependencies";
 import DepartmentDetails from "./components/pages/Department/Dpt-details/DptDetails";
 import Add from "./components/pages/Department/Add/Add";
 import DptStudentList from "./components/pages/Department/List/DptStudentList";
+import UpdatePersonalDeatils from "./components/pages/Students/Edit/PersonalDetails";
+import UpdateEducationDeatils from "./components/pages/Students/Edit/EducationalDetails";
 
 function App() {
   return (
@@ -60,6 +62,10 @@ function App() {
                 <Route path="list" element={<StudentsList />} />
                 <Route path="add" element={<AddStudent />} />
                 <Route path="view/:id" element={<Details />} />
+                <Route path="update/:id"  >
+                  <Route path="personal" element={<UpdatePersonalDeatils/>}/>
+                  <Route path="educational" element={<UpdateEducationDeatils/>}/>
+                </Route>
               </Route>
               <Route path="department">
                 <Route
