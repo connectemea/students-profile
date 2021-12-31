@@ -84,6 +84,7 @@ function App() {
             {/* teacher details forms routes */}
             <Route path="/teacher">
               <Route path="details" element={<AddDetails />} />
+              <Route path="view" element={<TeachersView />} />
             </Route>
 
             {/* student details forms routes */}

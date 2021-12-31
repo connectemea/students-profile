@@ -3,7 +3,6 @@ import { useState } from "react";
 // material components
 import { Button, Typography, Grid, Card, Box, Container } from "@mui/material";
 
-
 // material icons
 import { styled } from "@mui/material/styles";
 
@@ -50,9 +49,9 @@ export default function AddDetails() {
   const [errorMsg, setErrorMsg] = useState();
   const clearError = () => setErrorMsg("");
 
-  const handleAddTeacherDetails = async () => {
+  console.log("welcome to the add details page");
 
-    console.log("handleAddTeacher function started")
+  const handleAddTeacherDetails = async () => {
     try {
       clearError();
       const userData = {
@@ -75,10 +74,8 @@ export default function AddDetails() {
       const formData = new FormData();
       formData.append("profile", profileImage);
 
-
       // adding user to db
       const response = await teacherService.createTeacher(userData);
-
 
       const imageRes = await userService.uploadImage(formData);
 
@@ -86,7 +83,7 @@ export default function AddDetails() {
       clearUserCredentials();
 
       // Navigating to next page
-      // navigate("/teacher/view");
+      navigate("/teacher/view/:id");
     } catch (err) {
       console.log(err);
       // console.log(err.response);
@@ -221,7 +218,6 @@ export default function AddDetails() {
                 label="Joining Year"
                 date={joinYear}
                 setDate={setJoiningYear}
-                
               />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -306,4 +302,4 @@ export default function AddDetails() {
       {/* </RootStyle> */}
     </Page>
   );
- }
+}
