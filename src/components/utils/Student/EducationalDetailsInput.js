@@ -42,7 +42,7 @@ export default function EducationalDetailsInput(props) {
     const [sslcSchoolName, setSslcSchoolName] = useState(currentData?currentData.tenthStd.schoolName:null);
     const [sslcMediumOfInstruction, setSslcMediumOfInstruction] = useState(currentData?currentData.tenthStd.syllabus:null);
     const [sslcEnglishMark, setSslcEnglishMark] = useState(currentData?currentData.tenthStd.english:null);
-    const [sslcMathsMark, setSslcMathsMark] = (useStatecurrentData?currentData.tenthStd.maths:null);
+    const [sslcMathsMark, setSslcMathsMark] = useState(currentData?currentData.tenthStd.maths:null);
     const [sslcScienceMark, setSslcScienceMark] = useState(currentData?currentData.tenthStd.scinece:null);
     const [sslcSocialScienceMark, setSslcSocialScienceMark] = useState(currentData?currentData.tenthStd.socialScience:null);
     //HSE

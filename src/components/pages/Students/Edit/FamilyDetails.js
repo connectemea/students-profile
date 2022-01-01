@@ -3,28 +3,31 @@ import { useEffect, useState } from "react";
 import { Container, Button, Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import StudentService from "../../../../services/StudentService";
-import FamilyDetails from "../Add/FamilyDetails";
 
 export default function FamilyDetails() {
   const [details, setDetails] = useState();
-  const { id } = useParams();
+  const {id} = useParams();
   useEffect(() => {
-    const getStudentDetails = async () => {
-      try {
+    const getStudentDetails = async() => {
+      try{
         const details = await StudentService.getStudent(id);
         setDetails(details);
-      } catch (err) {
-        console.err(err);
+      }catch(err){
+        console.error(err);
       }
-    };
-    if (id) getStudentDetails();
-  }, [id]);
+    }
+    if(id)getStudentDetails();
+  },[id])
   return (
     <Container>
       <Grid>
-        <Grid>FamilyDetails</Grid>
         <Grid>
-          {details && <FamilyDetailsInput currentData={details.FamilyDetails} />}
+        <Typography variant={"h4"}>
+        FamilyDetails
+        </Typography> 
+        </Grid>
+        <Grid>
+          {details && <FamilyDetailsInput currentData={details.familyDetails} />}
         </Grid>
         <Grid
           container

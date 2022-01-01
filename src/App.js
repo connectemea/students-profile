@@ -26,6 +26,7 @@ import Add from "./components/pages/Department/Add/Add";
 import DptStudentList from "./components/pages/Department/List/DptStudentList";
 import UpdatePersonalDeatils from "./components/pages/Students/Edit/PersonalDetails";
 import UpdateEducationDeatils from "./components/pages/Students/Edit/EducationalDetails";
+import UpdateFamilyDetails from "./components/pages/Students/Edit/FamilyDetails";
 
 function App() {
   return (
@@ -65,6 +66,8 @@ function App() {
                 <Route path="update/:id"  >
                   <Route path="personal" element={<UpdatePersonalDeatils/>}/>
                   <Route path="educational" element={<UpdateEducationDeatils/>}/>
+                  <Route path="family" element={<UpdateFamilyDetails/>}/>
+
                 </Route>
               </Route>
               <Route path="department">

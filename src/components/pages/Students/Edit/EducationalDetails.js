@@ -21,9 +21,14 @@ export default function EducationDeatils() {
   return (
     <Container>
       <Grid>
-        <Grid>Education Details</Grid>
         <Grid>
-         {details&& <EducationalDetailsInput currentData={details.EducationDeatils}/>}
+        <Typography variant={"h4"}>
+        Education Details
+        </Typography>
+        </Grid>
+
+        <Grid>
+         {details&& <EducationalDetailsInput currentData={details.educationDeatils}/>}
          </Grid>
         <Grid
           container

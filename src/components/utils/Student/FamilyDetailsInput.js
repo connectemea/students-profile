@@ -25,26 +25,26 @@ const ProfileCard = styled(Card)(({ theme }) => ({
 export default function FamilyDetailsInput(props) {
     const {currentData} = props ;
     //Father
-    const [fatherName, setFatherName] = useState(currentData?currentData.familyDetails.father.name:null);
-    const [fatherQualification, setFatherQualification] = useState(currentData?currentData.familyDetails.father.educationQualification:null);
-    const [fatherAnnualIncome, setFatherAnnualIncome] = useState(currentData?currentData.familyDetails.father.annualIncome:null);
-    const [fatherOccupation, setFatherOccupation] = useState(currentData?currentData.familyDetails.father.occupation:null);
+    const [fatherName, setFatherName] = useState(currentData?currentData.father.name:null);
+    const [fatherQualification, setFatherQualification] = useState(currentData?currentData.father.educationQualification:null);
+    const [fatherAnnualIncome, setFatherAnnualIncome] = useState(currentData?currentData.father.annualIncome:null);
+    const [fatherOccupation, setFatherOccupation] = useState(currentData?currentData.father.occupation:null);
     const [fatherNO, setFatherNO] = useState();
-    const [fatherAddress, setFatherAddress] = useState(currentData?currentData.familyDetails.father.officialAddress:null);
+    const [fatherAddress, setFatherAddress] = useState(currentData?currentData.father.officialAddress:null);
     //Mother
-    const [motherName, setMotherName] = useState(currentData?currentData.familyDetails.mother.name:null);
-    const [motherQualification, setMotherQualification] = useState(currentData?currentData.familyDetails.mother.educationQualification:null);
-    const [motherAnnualIncome, setMotherAnnualIncome] = useState(currentData?currentData.familyDetails.annualIncome:null);
-    const [motherOccupation, setMotherOccupation] = useState(currentData?currentData.familyDetails.occupation:null);
-    const [motherNO, setMotherNO] = useState(currentData?currentData.familyDetails.mother.name:null);
-    const [motherAddress, setMotherAddress] = useState(currentData?currentData.familyDetails.mother.officialAddress:null);
+    const [motherName, setMotherName] = useState(currentData?currentData.mother.name:null);
+    const [motherQualification, setMotherQualification] = useState(currentData?currentData.mother.educationQualification:null);
+    const [motherAnnualIncome, setMotherAnnualIncome] = useState(currentData?currentData.annualIncome:null);
+    const [motherOccupation, setMotherOccupation] = useState(currentData?currentData.occupation:null);
+    const [motherNO, setMotherNO] = useState(currentData?currentData.mother.name:null);
+    const [motherAddress, setMotherAddress] = useState(currentData?currentData.mother.officialAddress:null);
     //Guardian
-    const [guardianName, setGuardianName] = useState(currentData?currentData.familyDetails.gardian.name:null);
-    const [guardianQualification, setGuardianQualification] = useState(currentData?currentData.familyDetails.gardian.educationQualification:null);
-    const [guardianAnnualIncome, setGuardianAnnualIncome] = useState(currentData?currentData.familyDetails.gardian.annualIncome:null);
-    const [guardianOccupation, setGuardianOccupation] = useState(currentData?currentData.familyDetails.gardian.occupation:null);
-    const [guardianNO, setGuardianNO] = useState(currentData?currentData.familyDetails.mother.officialAddress:null);
-    const [guardianAddress, setGuardianAddress] = useState(currentData?currentData.familyDetails.gardian.officialAddress:null);
+    const [guardianName, setGuardianName] = useState(currentData?currentData.gardian.name:null);
+    const [guardianQualification, setGuardianQualification] = useState(currentData?currentData.gardian.educationQualification:null);
+    const [guardianAnnualIncome, setGuardianAnnualIncome] = useState(currentData?currentData.gardian.annualIncome:null);
+    const [guardianOccupation, setGuardianOccupation] = useState(currentData?currentData.gardian.occupation:null);
+    const [guardianNO, setGuardianNO] = useState(currentData?currentData.mother.officialAddress:null);
+    const [guardianAddress, setGuardianAddress] = useState(currentData?currentData.gardian.officialAddress:null);
 
     //Radio button management
     //Father

@@ -1,7 +1,11 @@
 // material components
-import { Typography, Grid, Card, Container,Link } from "@mui/material";
+import { Typography, Grid, Card, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Page from "../../../utils/Page";
+import { Link } from "react-router-dom";
+
+
+
 
 //   custom component
 import Field from "./Field";
@@ -16,7 +20,7 @@ const ProfileCard = styled(Card)(({ theme }) => ({
 
 
 export default function EducationalView(props) {
-  const {educationDetails} = props;
+  const {educationDetails,id} = props;
   return (
     <Page title="EducationalView">
       {/* Tenth Details */}
@@ -45,7 +49,7 @@ export default function EducationalView(props) {
             <Typography variant="h5" sx={{}}>
               10th Details
             </Typography>
-            <Link to="/app/student" style={{ color: "none" }}>
+            <Link to={`/app/student/update/${id}/educational`} style={{ color: "none" }}>
               <ModeEditOutlineOutlinedIcon
                 sx={{
                   margin: "8px",

@@ -4,10 +4,11 @@ import {
     Grid,
     Card,
     Container,
-    Link
   } from "@mui/material";
   import { styled } from "@mui/material/styles";
   import Page from "../../../utils/Page";
+  import { Link } from "react-router-dom";
+
   
   //   custom component
   import Field from "./Field";
@@ -21,7 +22,7 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
   
   export default function FamilyView(props) {
 
-    const {familyDetails} = props;
+    const {familyDetails,id} = props;
 
     return (
       <Page title="StudentsList">
@@ -52,7 +53,7 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
             <Typography variant="h5" sx={{}}>
               10th Details
             </Typography>
-            <Link to="/app/department/add" style={{ color: "none" }}>
+            <Link to={`/app/student/update/${id}/family`} style={{ color: "none" }}>
               <ModeEditOutlineOutlinedIcon
                 sx={{
                   margin: "8px",
