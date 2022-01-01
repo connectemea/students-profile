@@ -145,7 +145,7 @@ export default function AddTeacher() {
           <Stack
             direction="row"
             alignItems="center"
-            justifyContent="flex-end"
+            justifyContent="flex-end" 
             mt={2}
           >
             <Tooltip
