@@ -52,7 +52,6 @@ export default function AddDetails() {
 
   const handleAddTeacherDetails = async () => {
 
-    console.log("handleAddTeacher function started")
     try {
       clearError();
       const userData = {
@@ -69,7 +68,6 @@ export default function AddDetails() {
         cast,
         educationQualification
       };
-      // console.log(profileImage);
 
       // Converting data into form data format
       const formData = new FormData();
@@ -85,12 +83,8 @@ export default function AddDetails() {
       // clearing the form
       clearUserCredentials();
 
-      // Navigating to next page
-      // navigate("/teacher/view");
     } catch (err) {
       console.log(err);
-      // console.log(err.response);
-      // setErrorMsg(err.response.message);
     }
   };
 
