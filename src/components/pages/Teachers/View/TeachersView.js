@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 // material components
 import { Container, Grid, Card, Typography } from "@mui/material";
 
@@ -24,106 +25,50 @@ const ProfileCard = styled(Card)(({ theme }) => ({
   paddingBottom: `${theme.spacing(4)} !important`
 }));
 
-// value Object
-const teacherData = {
-  name: "Jhon Doe",
-  email: "jonn@doe@email.com",
-  shortForm: "JD",
-  phoneNumber: "223334444",
-  departments: "Computer Science",
-  joningYear: "2020",
-  gender: "male",
-  maritalStatus: "unmaried",
-  religion: "Jhon Doe",
-  caste: "Jonn Doe",
-  educationalQualification: "Pg"
-};
-
 export default function TeachersView() {
+  const { id } = useParams();
+  console.log(id);
   const [teacherData, setTeacherData] = useState();
   const [profileImgae, setProfileImage] = useState();
   const [image, setImage] = useState();
 
-  // console.log(teacherData);
-
-  // useEffect(() => {
-  //   console.log("View page is loading")
-  //   async function getTeacher() {
-  //     try {
-  //       const response = await TeacherService.getTeacher();
-  //       setTeacherData(response.data);
-  //       console.log(response.data);
-  //     } catch (err) {
-  //       console.log(err?.response?.data?.message);
-  //     }
-  //   }
-  //   getTeacher();
-  // }, []);
   useEffect(() => {
     console.log("use effect is loading");
-    async function getMe() {
+    if(id){
+      async function getOne() {
+        try {
+          console.log("getOne funciton is working");
+          const response = await TeacherService.getTeacherOne(id);
+          console.log(response);
+          setTeacherData(response);
+          setProfileImage(teacherData.userId.profileImage);
+          // console.log(profileImgae)
+        } catch (err) {
+          console.log(err?.response?.data?.message);
+        }
+      }
+      getOne();
+    } else{  async function getMe() {
       try {
-        console.log('getme funciton is working')
+        console.log("getme funciton is working");
         const response = await TeacherService.getTeacherMe();
-        setTeacherData(response.teacher);
-        console.log(teacherData);
-        // console.log(profileImage);
-        console.log(teacherData.userId.profileImage);
+        setTeacherData(response);
         setProfileImage(teacherData.userId.profileImage);
+        // console.log(profileImgae)
       } catch (err) {
         console.log(err?.response?.data?.message);
       }
     }
     getMe();
-    // console.log(profileImage);
-
-    async function getProfileImage() {
-      try {
-        console.log('getprofile funciton is working')
-        const response = await UserService.getProfileImage(teacherData.userId.profileImage);
-        setImage(response)
-        console.log(response)
-      } catch (err) {
-        console.log(err?.response?.data?.message);
-      }
-    }
-    getProfileImage()
+  }
+  
+  
   }, []);
 
   return (
     <Page title="details">
       {teacherData && (
         <Container maxWidth="xl" sx={{ pl: 4 }}>
-          {/* <Grid
-            style={{
-              backgroundImage:
-                "linear-gradient(to bottom,#038dfd 0%,#038dfd 20%,transparent 20%,transparent 100%)",
-            }}
-            component={ProfileCard}
-            sx={{
-              mt: 2,
-              p: 2,
-              alignContent: "center",
-            }}
-            container
-            spacing={2}
-            alignItems="center"
-          >
-            <Grid>
-              <Avatar
-                alt="Remy Sharp"
-                src={profile}
-                sx={{
-                  width: 80,
-                  height: 80,
-                }}
-              />
-            </Grid>
-            <Grid sx={{ marginLeft: 5 }}>
-              <Typography>{teacherData.name}</Typography>
-              <Typography>{teacherData.department}</Typography>
-            </Grid>  
-          </Grid> */}
           <Container>
             <Grid
               style={{

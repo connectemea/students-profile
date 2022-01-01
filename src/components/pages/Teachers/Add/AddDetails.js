@@ -52,6 +52,7 @@ export default function AddDetails() {
   console.log("welcome to the add details page");
 
   const handleAddTeacherDetails = async () => {
+    console.log("Handle add reacher is working")
     try {
       clearError();
       const userData = {
@@ -76,6 +77,8 @@ export default function AddDetails() {
 
       // adding user to db
       const response = await teacherService.createTeacher(userData);
+      console.log(response)
+      console.log("hi forom response")
 
       const imageRes = await userService.uploadImage(formData);
 
@@ -83,6 +86,7 @@ export default function AddDetails() {
       clearUserCredentials();
 
       // Navigating to next page
+      // __________________________________________________________ Needed fixing
       navigate("/teacher/view/:id");
     } catch (err) {
       console.log(err);

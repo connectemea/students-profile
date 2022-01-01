@@ -6,6 +6,11 @@ const getTeacher = (id) => {
   return BackendService.get(`teacher/${id}`);
 };
 
+// To get teacher one
+const getTeacherOne = (id) => {
+  return BackendService.get(`teacher/${id}`);
+  // return BackendService.get(`teacher/me`);
+};
 // To get teacher me
 const getTeacherMe = () => {
   // return BackendService.get(`teacher/${id}`);
@@ -27,6 +32,7 @@ const teacherService = {
   getAllTeacher,
   createTeacher,
   getTeacherMe,
+  getTeacherOne,
 };
 export default teacherService;
 
