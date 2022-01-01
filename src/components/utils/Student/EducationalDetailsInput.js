@@ -90,7 +90,7 @@ export default function EducationalDetailsInput(props) {
         if(!sslcSchoolName || !sslcMediumOfInstruction || !sslcEnglishMark || !sslcMathsMark || !sslcScienceMark || !sslcSocialScienceMark || !hseSchoolName || !hseSyllabus || !hseCourse || !hseEnglish || !hseSub1 || !hseSub2 || !hseSub3 || !hseSub4 || !hseEnglishMark || !hseSub1Mark || !hseSub2Mark || !hseSub3Mark || !hseSub4Mark){
             return errorSetter()
         }
-        return navigate("/student/details/dependencies")
+        return navigate("/student/details/family")
     }
 
     //To set error for empty field

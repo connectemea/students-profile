@@ -203,7 +203,7 @@ export default function FamilyDetailsInput(props) {
             </Grid>
             {/* Buttons */}
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                <Button sx={{ mt: 2, mr: 2 }} href="/student/details/dependencies" size="large" color="info" variant="contained">Previous</Button>
+                <Button sx={{ mt: 2, mr: 2 }} href="/student/details/educational" size="large" color="info" variant="contained">Previous</Button>
                 <Button sx={{ mt: 2 }} onClick={handleSubmitBtn} size="large" color="info" variant="contained">Submit</Button>
             </Box>
 
