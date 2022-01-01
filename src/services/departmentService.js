@@ -1,10 +1,14 @@
 import BackendService from './BackendService';
-import axios from 'axios';
 
 //to get all departments
 const getDepartment = async() => {
     return BackendService.get(`department/`);
 }
+
+//get department data by id
+const getDepartmentData = async(_id) => {
+    return BackendService.get(`department/${_id}`)
+};
 
 //to add department
 const addDepartment = async(data) => {
@@ -12,20 +16,21 @@ const addDepartment = async(data) => {
 };
 
 // delete department
-const deleteDepartment = async() => {
+const deleteDepartment = async(_id) => {
 
-    axios.delete(`department/${_id}`);
+    return BackendService.destroy(`department/${_id}`);
 }
 
 // update department
-const updateDepartment = async(id) => {
+const updateDepartment = async(_id , data) => {
 
-    axios.patch(`department/${id}`);
+    return BackendService.patch(`department/${_id}` , data);
 }
 const departmentService = {
     getDepartment,
     addDepartment,
     deleteDepartment,
-    updateDepartment
+    updateDepartment,
+    getDepartmentData,
 }
 export default departmentService;

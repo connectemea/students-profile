@@ -23,9 +23,8 @@ export default function DptDetails() {
       try {
         console.log("called getDepartment");
         // get department
-        const addDepartment = await departemntService.getDepartment();
-        setdepartmentData(addDepartment);
-        console.log(addDepartment);
+        const departmentList = await departemntService.getDepartment();
+        setdepartmentData(departmentList);
       } catch (err) {
         console.error(err.response);
       }

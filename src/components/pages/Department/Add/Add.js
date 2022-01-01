@@ -1,5 +1,6 @@
-import { useState , useEffect } from "react";
-import { useNavigate,useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import TextInput from '../../../utils/Inputs/TextInput';
 
 // material components
 import {
@@ -9,7 +10,6 @@ import {
   Typography,
   Grid,
   Card,
-  TextField,
   Tooltip
 } from "@mui/material";
 
@@ -25,39 +25,50 @@ import departmentService from "../../../../services/departmentService"
 
 //export function for add department
 export default function Add() {
-  const navigate = useNavigate()
-  const [name, setDptname] = useState();
-  const [shortName, setShortName] = useState();
-  const [hod, setHodname] = useState();
+
+  const navigate = useNavigate();
+  const [name, setName] = useState();
+  const [shortName, setshortName] = useState();
+  const [hod, setHod] = useState();
   const [phoneNo, setPhoneNo] = useState();
   const [email, setEmail] = useState();
-  const handleDptnameChange = (event) => setDptname(event.target.value);
-  const handleShortNameChange = (event) => setShortName(event.target.value);
-  const handleHodnameChange = (event) => setHodname(event.target.value);
-  const handleContactChange = (event) => setPhoneNo(event.target.value);
-  const handleEmailChange = (event) => setEmail(event.target.value);
-  
-  const { _id } = useParams();
+  // const handleDptnameChange = (event) => setName(event.target.value);
+  // const handleShortNameChange = (event) => setshortName(event.target.value);
+  // const handleHodnameChange = (event) => setHod(event.target.value);
+  // const handleContactChange = (event) => setPhoneNo(event.target.value);
+  // const handleEmailChange = (event) => setEmail(event.target.value);
 
-  const [departmentData, setdepartmentData] = useState();
+  //update department
+  const { id } = useParams();
+
+  //setState function
+  function setState(data) {
+
+    setName(data.name);
+    setshortName(data.shortName);
+    setHod(data.hod);
+    setPhoneNo(data.phoneNo);
+    setEmail(data.email);
+  }
+
   useEffect(() => {
     const getDepartment = async () => {
       try {
-        console.log("called getDepartment");
-        // get department
-        const editDepartment = await departmentService.getDepartment();
-        setdepartmentData(editDepartment);
-        console.log(editDepartment);
+        // get department data
+        const response = await departmentService.getDepartmentData(id);
+        setState(response);
+        console.log(response);
       } catch (err) {
         console.error(err.response);
       }
     };
-    if(_id)
-    getDepartment(_id);
-  }, []);
+    if (id) getDepartment()
+  }, [id]);
+
 
   //delete department
   const handleDeleteDepartment = async () => {
+    console.log("cheythkkn");
     try {
       const departmentData = {
         departmentDetails: {
@@ -68,13 +79,15 @@ export default function Add() {
           email,
         }
       };
-      const response = await departmentService.updateDepartment(departmentData);
+      const response = await departmentService.deleteDepartment(id);
       navigate("/app/department/list");
 
     } catch (error) {
       console.log(error.response);
+
     }
   };
+
   //add department
   const handleAddDepartment = async () => {
     try {
@@ -88,17 +101,21 @@ export default function Add() {
         }
       };
       // adding department to db
+      if(!id){
       const response = await departmentService.addDepartment(departmentData);
+      }else{
+        const response = await departmentService.updateDepartment(id , departmentData);
+      }
       // clearing the form
       navigate("/app/department/list");
-      console.log(response)
+      
     } catch (err) {
       console.log(err.response);
     }
   };
 
   return (
-    <Page title="Add Department">
+    <Page title="Department Data">
       <Container>
         <Stack
           direction="row"
@@ -107,65 +124,64 @@ export default function Add() {
           mb={2}
         >
           <Typography variant="h5" gutterBottom>
-            Add Department
+            Department Data
           </Typography>
         </Stack>
         <Card sx={{ padding: 3, marginBottom: 2 }}>
           <Grid container spacing={1} rowSpacing={1}>
             <Grid item xs={12} sm={6} md={6}>
-              <TextField
+              <TextInput
                 varient="contained"
                 name="name"
                 label="Department Name"
                 color="info"
                 fullWidth
-                value={name}
-                onChange={handleDptnameChange}
+                textValue={name}
+                setTextValue={setName}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
-              <TextField
+              <TextInput
                 varient="contained"
                 name="shortName"
                 label="Short Form"
                 color="info"
                 fullWidth
-                value={shortName}
-                onChange={handleShortNameChange}
+                textValue={shortName}
+                setTextValue={setshortName}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
-              <TextField
+              <TextInput
                 varient="contained"
                 name="hod"
                 label="HOD name"
                 color="info"
                 fullWidth
-                value={hod}
-                onChange={handleHodnameChange}
+                textValue={hod}
+                setTextValue={setHod}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
-              <TextField
+              <TextInput
                 varient="contained"
                 name="phoneNo"
-                type="number"
-                label="HOD phoneNo"
+                label="phone Number"
                 color="info"
                 fullWidth
-                value={phoneNo}
-                onChange={handleContactChange}
+                textValue={phoneNo}
+                setTextValue={setPhoneNo}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
-              <TextField
+              <TextInput
                 varient="contained"
                 name="email"
                 label="E-mail"
                 color="info"
                 fullWidth
-                value={email}
-                onChange={handleEmailChange}
+                textValue={email}
+                setTextValue={setEmail}
               />
             </Grid>
           </Grid>
@@ -197,7 +213,7 @@ export default function Add() {
                   //   to="#"
                   startIcon={<PublishIcon />}
                 >
-                  Add
+                  Submit
                 </Button>
               </Tooltip>
             </span>

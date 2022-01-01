@@ -69,7 +69,7 @@ function App() {
                 <Route path="list" element={<DepartmentDetails />} />
                 <Route path="details" element={<DptStudentList />} />
                 <Route path="add" element={<Add />} />
-                <Route path="edit/:id" element={<add update={true}/>} />
+                <Route path="edit/:id" element={<Add update={true}/>} />
               </Route>
             </Route>
 
