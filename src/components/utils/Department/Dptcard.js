@@ -12,7 +12,7 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 
 // ----------------------------------------------------------------------
 
-export default function Dptcard({ data,type }) {
+export default function Dptcard({ data, type }) {
   const deleteDepartment = () => {
     console.log("onClinck");
   };
@@ -54,13 +54,12 @@ export default function Dptcard({ data,type }) {
           alignItems="center"
         >
 
-          <Link to="/app/department/add" style={{ color: "none" }}>
-            <ModeEditOutlineOutlinedIcon sx={{ margin: "8px", opacity: "0.5" , height:"3vh" , width:"2vw"}} />
+          <Link to={`/app/department/edit/${data._id}`} style={{ color: "none" }}>
+            <ModeEditOutlineOutlinedIcon sx={{ margin: "8px", opacity: "0.5", height: "3vh", width: "2vw" }} />
           </Link>
         </Grid>
         <IconWrapperStyle>
-          {/* <Icon icon={appleFilled} width={24} height={24} /> */}
-          {/* <ShortFormStyle>{shortForm}</ShortFormStyle> */}
+          {<ShortFormStyle>{data && data.shortName}</ShortFormStyle>}
         </IconWrapperStyle>
         <Typography variant="h5">{data && data.name}</Typography>
         <Typography sx={{ mt: 4 }} variant="subtitle2">

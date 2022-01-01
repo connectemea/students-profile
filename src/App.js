@@ -61,15 +61,16 @@ function App() {
                 <Route path="add" element={<AddStudent />} />
                 <Route path="view/:id" element={<Details />} />
               </Route>
-<Route path="department">
-<Route
+              <Route path="department">
+                <Route
                   path="/app/department"
                   element={<Navigate to="/app/department/list" />}
                 />
-              <Route path="list" element={<DepartmentDetails/>}/>
-            <Route path="details" element={<DptStudentList/>}/>
-            <Route path="add" element={<Add/>}/>
-            </Route>
+                <Route path="list" element={<DepartmentDetails />} />
+                <Route path="details" element={<DptStudentList />} />
+                <Route path="add" element={<Add />} />
+                <Route path="edit/:id" element={<add update={true}/>} />
+              </Route>
             </Route>
 
             {/* user routes */}
@@ -84,7 +85,7 @@ function App() {
             <Route path="/teacher/details">
               <Route path="personal" element={<AddDetails />} />
             </Route>
-            
+
             {/* student details forms routes */}
             <Route path="/student/details">
               <Route path="personal" element={<PersonalDetails />} />

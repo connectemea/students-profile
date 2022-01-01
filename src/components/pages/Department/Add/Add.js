@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState , useEffect } from "react";
+import { useNavigate,useParams } from "react-router-dom";
 
 // material components
 import {
@@ -23,6 +23,7 @@ import Page from "../../../utils/Page";
 //api service
 import departmentService from "../../../../services/departmentService"
 
+//export function for add department
 export default function Add() {
   const navigate = useNavigate()
   const [name, setDptname] = useState();
@@ -35,7 +36,46 @@ export default function Add() {
   const handleHodnameChange = (event) => setHodname(event.target.value);
   const handleContactChange = (event) => setPhoneNo(event.target.value);
   const handleEmailChange = (event) => setEmail(event.target.value);
+  
+  const { _id } = useParams();
 
+  const [departmentData, setdepartmentData] = useState();
+  useEffect(() => {
+    const getDepartment = async () => {
+      try {
+        console.log("called getDepartment");
+        // get department
+        const editDepartment = await departmentService.getDepartment();
+        setdepartmentData(editDepartment);
+        console.log(editDepartment);
+      } catch (err) {
+        console.error(err.response);
+      }
+    };
+    if(_id)
+    getDepartment(_id);
+  }, []);
+
+  //delete department
+  const handleDeleteDepartment = async () => {
+    try {
+      const departmentData = {
+        departmentDetails: {
+          name,
+          shortName,
+          hod,
+          phoneNo,
+          email,
+        }
+      };
+      const response = await departmentService.updateDepartment(departmentData);
+      navigate("/app/department/list");
+
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  //add department
   const handleAddDepartment = async () => {
     try {
       const departmentData = {
@@ -56,6 +96,7 @@ export default function Add() {
       console.log(err.response);
     }
   };
+
   return (
     <Page title="Add Department">
       <Container>
@@ -140,7 +181,7 @@ export default function Add() {
                   color="info"
                   style={{ margin: "5px" }}
                   //   component={RouterLink}
-                  onClick={handleAddDepartment}
+                  onClick={handleDeleteDepartment}
                   disabled={!name || !shortName || !hod || !phoneNo || !email}
                   startIcon={<DeleteIcon />}>
                   Delete
