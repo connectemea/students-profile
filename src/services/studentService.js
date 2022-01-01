@@ -1,12 +1,26 @@
 import BackendService from "./BackendService";
 
-//get all students
-const getStudent = async (id) => {
-  return BackendService.get(`student/${id}`);
-};
+// To get an individual student by id
+const getStudent = (id) =>{
+    return BackendService.get(`student/${id}`);
+}
 
-//exporting the user service
+//To get all students
+const getStudents = () =>{
+    return BackendService.get(`student`);
+}
+
+//update students details
+const updateStudentsDetails = () =>{
+    return BackendService.patch('');
+}
+
+
 const StudentService = {
-  getStudent,
-};
+    getStudent,
+    getStudents,
+    updateStudentsDetails
+}
+
+
 export default StudentService;
