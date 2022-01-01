@@ -134,7 +134,7 @@ export default function Add() {
                 <Tooltip title={(!name || !shortName || !hod || !phoneNo || !email ? "fill the fields" : "sumbit fields")}>
                 <Button
                   variant="contained"
-                  color="info"
+                  color="info"appap
                   //   component={RouterLink}
                   onClick={handleAddDepartment}
                   disabled={!name || !shortName || !hod || !phoneNo || !email}

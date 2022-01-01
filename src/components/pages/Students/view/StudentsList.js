@@ -8,7 +8,7 @@ import AddIcon from "@mui/icons-material/Add";
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
 import DataTable from "../../../utils/DataTable";
-import studentService from "../../../../services/studentService";
+import studentService from "../../../../services/StudentService";
 
 // table header cell config
 const TABLE_HEAD = [
