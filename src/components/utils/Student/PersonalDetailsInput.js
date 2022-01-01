@@ -57,6 +57,8 @@ export default function PersonalDetailsInput(props) {
     const [residence, setResidence] = useState(currentData?currentData.residence:null);
     const [distanceFromCollege, setDistanceFromCollege] = useState(currentData?currentData.distanceFromCollege:null);
     const [isAddressSame, setIsAddressSame] = useState(false);
+
+
     const handleIsAddressChecked = () => {
         if (!isAddressSame) setPermanentAdress(presentAddress);
         setIsAddressSame(!isAddressSame)
@@ -69,11 +71,13 @@ export default function PersonalDetailsInput(props) {
     // To Check if the form is filled
     const navigate = useNavigate()
     const hadleNextBtn = () => {
-        if (!dateOfBirth || !yearOfJoin || !name || !email || !department || !mobileNO || !gender || !admissionNO || !bloodGroup || !maritalStatus || !religion || !caste || !categoryOfAdmission || !identificationMarkOne || !setIdentificationMarkTwo || !presentAddress || !permanentAddress || !residence || !distanceFromCollege) {
+        if (!profileImage || !dateOfBirth || !yearOfJoin || !name || !email || !department || !mobileNO || !gender || !admissionNO || !bloodGroup || !maritalStatus || !religion || !caste || !categoryOfAdmission || !identificationMarkOne || !setIdentificationMarkTwo || !presentAddress || !permanentAddress || !residence || !distanceFromCollege) {
             return errorSetter()
         }
-        console.log("namall jayichu");
-        return navigate("/student/details/educational")
+        return(
+            structureData()
+            // navigate("/student/details/educational")
+        )
     }
 
     //Set error for empty field
@@ -98,6 +102,13 @@ export default function PersonalDetailsInput(props) {
         if (!permanentAddress) setPermanentAdress("")
         if (!residence) setResidence("")
         if (!distanceFromCollege) setDistanceFromCollege("")
+    }
+
+    //Structure Data
+    const structureData = () => {
+        const personalDetails = {name, email, admissionNO, yearOfJoin, department, mobileNO, dateOfBirth, gender, bloodGroup, maritalStatus, religion, caste, categoryOfAdmission, identificationMarkOne, identificationMarkTwo, presentAddress, permanentAddress, residence, distanceFromCollege}
+        
+        return console.log(personalDetails)
     }
 
 
