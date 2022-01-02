@@ -120,28 +120,28 @@ export default function EducationalDetailsInput(props) {
     //Structure Data
     const structureData = () => {
         const educationDetails = {
-            tenthStd = {
+            tenthStd : {
                 schoolName: sslcSchoolName, syllabus: sslcMediumOfInstruction, english: sslcEnglishMark, maths: sslcMathsMark, science: sslcScienceMark, socialScience: sslcSocialScienceMark
-            }
-            twelthStd = {
+            },
+            twelthStd : {
                 schoolName: hseSchoolName, syllabus: hseSyllabus, course: hseCourse, sub: [hseEnglish, hseSub1, hseSub2, hseSub3, hseSub4], subMark: [hseEnglishMark, hseSub1Mark, hseSub2Mark, hseSub3Mark, hseSub4Mark]
-            }
-            degree = [
+            },
+            degree : [
                 {
                     college: collegeName, university: ugUniversity, course: ugCourse, core: ugCoreMark, complementary: ugComplementaryMark, commonOne: ugCommonEnglishMark, commonTwo: ugCommonLanguageMark, open: ugOpenMark
                 },
-            ]
-            otherQualifications = [
+            ],
+            otherQualifications : [
                 {
                     institutionName: othInstitutionName, courseType: othCourseType, Grade: othGrade, university: othUniversity
                 },
-            ]
-            additionalCourse = [
+            ],
+            additionalCourse : [
                 {
                     courseName: addiCourse, institutionName: addiInstituionName, university: addiUniversity, cgp: addiMarks
                 },
-            ]
-            extraCurricular = [
+            ],
+            extraCurricular : [
                 {
                     activity: activity, yearOfParticipation: yearOfParticipation, Price: prize, detailsOfExcellenceInPerformance: perfomance
                 },
