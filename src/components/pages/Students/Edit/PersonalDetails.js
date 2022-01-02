@@ -2,7 +2,7 @@ import PersonalDetailsInput from "../../../utils/Student/PersonalDetailsInput";
 import { useEffect,useState } from "react";
 import { Container, Button, Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import StudentService from "../../../../services/studentService";
+import studentsService from "../../../../services/studentsService";
 
 export default function PersonalDeatils() {
   const [details, setDetails] = useState();
@@ -10,7 +10,7 @@ export default function PersonalDeatils() {
   useEffect(()=>{
     const getStudentDetails = async() =>{
       try{
-        const details = await StudentService.getStudent(id);
+        const details = await studentsService.getStudent(id);
         setDetails(details);
       }catch(err){
         console.error(err);

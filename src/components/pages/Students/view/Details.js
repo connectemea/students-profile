@@ -17,7 +17,7 @@ import EducationalView from "../../../utils/Student/View/EducationalView";
 import FamilyView from "../../../utils/Student/View/FamilyView";
 import DependenciesView from "../../../utils/Student/View/Dependencies";
 import profile from "../../../../images/test.jpg";
-import StudentService from "../../../../services/studentService";
+import studentsService from "../../../../services/studentsService";
 import { useParams } from "react-router-dom";
 
 // icon import
@@ -41,13 +41,13 @@ export default function Details() {
   const onTabClicked = (event, index) => {
     setIndex(index);
   };
-  const [studentDetails,setStudentDetails] = useState();
+  const [studentDetails,setStudentsDetails] = useState();
 
   useEffect(() => {
     async function getStudentDetails() {
       try {
-        const response = await StudentService.getStudent(id);
-        setStudentDetails(response)
+        const response = await studentsService.getStudent(id);
+        setStudentsDetails(response)
         console.log("success",response.data.personalDetails.name);
         console.log(response)
       } catch (error) {

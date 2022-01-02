@@ -16,11 +16,11 @@ const updateStudentsDetails = () =>{
 }
 
 
-const StudentService = {
+const studentsService = {
     getStudent,
     getStudents,
     updateStudentsDetails
 }
 
 
-export default StudentService;
+export default studentsService;
