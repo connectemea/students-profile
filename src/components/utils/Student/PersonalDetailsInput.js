@@ -34,30 +34,31 @@ const maritalStatuses = ["Unmarried", "Married"]
 const categoriesOfAdmission = ["Merit", "Community Quota", "Management Quota", "Sports Quota", "Special Sports Quota", "PH Quota"]
 const residences = ["House", "Hostel", "Relative's Residence", "Guardian's Residence"]
 
-export default function PersonalDetailsInput() {
+export default function PersonalDetailsInput(props) {
+    const {currentData} = props;
     const [profileImage, setProfileImage] = useState();
-    const [dateOfBirth, setDateOfBirth] = useState(null);
-    const [yearOfJoin, setYearOfJoin] = useState(null);
-    const [name, setName] = useState();
-    const [email, setEmail] = useState();
-    const [department, setDepartment] = useState();
-    const [mobileNO, setMobileNO] = useState();
-    const [gender, setGender] = useState();
-    const [admissionNO, setAdmissionNO] = useState();
-    const [bloodGroup, setBloodGroup] = useState();
-    const [maritalStatus, setMaritalStatus] = useState();
-    const [religion, setReligion] = useState();
-    const [caste, setCaste] = useState();
-    const [categoryOfAdmission, setCategoryOfAdmission] = useState();
-    const [identificationMarkOne, setIdentificationMarkOne] = useState();
-    const [identificationMarkTwo, setIdentificationMarkTwo] = useState();
-    const [presentAddress, setPresentAddress] = useState();
-    const [permanentAddress, setPermanentAdress] = useState();
-    const [residence, setResidence] = useState();
-    const [distanceFromCollege, setDistanceFromCollege] = useState();
-
-    //Set presenr adress as permanent
+    const [dateOfBirth, setDateOfBirth] = useState(currentData?currentData.dateOfBirth:null);
+    const [yearOfJoin, setYearOfJoin] = useState(currentData?currentData.yearOfJoin:null);
+    const [name, setName] = useState(currentData?currentData.name:null);
+    const [email, setEmail] = useState(currentData?currentData.email:null);
+    const [department, setDepartment] = useState(currentData?currentData.department:null);
+    const [mobileNO, setMobileNO] = useState(currentData?currentData.mobileNo:null);
+    const [gender, setGender] = useState(currentData?currentData.gender:null);
+    const [admissionNO, setAdmissionNO] = useState(currentData?currentData.admissionNO:null);
+    const [bloodGroup, setBloodGroup] = useState(currentData?currentData.bloodGroup:null);
+    const [maritalStatus, setMaritalStatus] = useState(currentData?currentData.maritalStatus:null);
+    const [religion, setReligion] = useState(currentData?currentData.religion:null);
+    const [caste, setCaste] = useState(currentData?currentData.caste:null);
+    const [categoryOfAdmission, setCategoryOfAdmission] = useState(currentData?currentData.categoryOfAdmission:null);
+    const [identificationMarkOne, setIdentificationMarkOne] = useState(currentData?currentData.identificationMarkOne:null);
+    const [identificationMarkTwo, setIdentificationMarkTwo] = useState(currentData?currentData.identificationMarkTwo:null);
+    const [presentAddress, setPresentAddress] = useState(currentData?currentData.presentAddress:null);
+    const [permanentAddress, setPermanentAdress] = useState(currentData?currentData.permenentAddress:null);
+    const [residence, setResidence] = useState(currentData?currentData.residence:null);
+    const [distanceFromCollege, setDistanceFromCollege] = useState(currentData?currentData.distanceFromCollege:null);
     const [isAddressSame, setIsAddressSame] = useState(false);
+
+
     const handleIsAddressChecked = () => {
         if (!isAddressSame) setPermanentAdress(presentAddress);
         setIsAddressSame(!isAddressSame)
@@ -70,11 +71,13 @@ export default function PersonalDetailsInput() {
     // To Check if the form is filled
     const navigate = useNavigate()
     const hadleNextBtn = () => {
-        if (!dateOfBirth || !yearOfJoin || !name || !email || !department || !mobileNO || !gender || !admissionNO || !bloodGroup || !maritalStatus || !religion || !caste || !categoryOfAdmission || !identificationMarkOne || !setIdentificationMarkTwo || !presentAddress || !permanentAddress || !residence || !distanceFromCollege) {
+        if (!profileImage || !dateOfBirth || !yearOfJoin || !name || !email || !department || !mobileNO || !gender || !admissionNO || !bloodGroup || !maritalStatus || !religion || !caste || !categoryOfAdmission || !identificationMarkOne || !setIdentificationMarkTwo || !presentAddress || !permanentAddress || !residence || !distanceFromCollege) {
             return errorSetter()
         }
-        console.log("namall jayichu");
-        return navigate("/student/details/educational")
+        return(
+            structureData()
+            // navigate("/student/details/educational")
+        )
     }
 
     //Set error for empty field
@@ -99,6 +102,13 @@ export default function PersonalDetailsInput() {
         if (!permanentAddress) setPermanentAdress("")
         if (!residence) setResidence("")
         if (!distanceFromCollege) setDistanceFromCollege("")
+    }
+
+    //Structure Data
+    const structureData = () => {
+        const personalDetails = {name, email, admissionNO, yearOfJoin, department, mobileNO, dateOfBirth, gender, bloodGroup, maritalStatus, religion, caste, categoryOfAdmission, identificationMarkOne, identificationMarkTwo, presentAddress, permanentAddress, residence, distanceFromCollege}
+        
+        return console.log(personalDetails)
     }
 
 

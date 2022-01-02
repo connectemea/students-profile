@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect} from "react";
 
 // material components
 import {
@@ -36,28 +36,29 @@ const hseSubjects4 = ["Mathematics", "Politics", "Sociology"]
 //Degree
 const ugCourses = ["Bsc. Computer Science", "B.com", "BBA"]
 
-export default function EducationalDetailsInput() {
+export default function EducationalDetailsInput(props) {
+    const {currentData} = props;
     // sslc
-    const [sslcSchoolName, setSslcSchoolName] = useState();
-    const [sslcMediumOfInstruction, setSslcMediumOfInstruction] = useState();
-    const [sslcEnglishMark, setSslcEnglishMark] = useState();
-    const [sslcMathsMark, setSslcMathsMark] = useState();
-    const [sslcScienceMark, setSslcScienceMark] = useState();
-    const [sslcSocialScienceMark, setSslcSocialScienceMark] = useState();
+    const [sslcSchoolName, setSslcSchoolName] = useState(currentData?currentData.tenthStd.schoolName:null);
+    const [sslcMediumOfInstruction, setSslcMediumOfInstruction] = useState(currentData?currentData.tenthStd.syllabus:null);
+    const [sslcEnglishMark, setSslcEnglishMark] = useState(currentData?currentData.tenthStd.english:null);
+    const [sslcMathsMark, setSslcMathsMark] = useState(currentData?currentData.tenthStd.maths:null);
+    const [sslcScienceMark, setSslcScienceMark] = useState(currentData?currentData.tenthStd.scinece:null);
+    const [sslcSocialScienceMark, setSslcSocialScienceMark] = useState(currentData?currentData.tenthStd.socialScience:null);
     //HSE
-    const [hseSchoolName, setHseSchoolName] = useState();
-    const [hseSyllabus, setHseSyllabus] = useState();
-    const [hseCourse, setHseCourse] = useState();
-    const [hseEnglish, setHseEnglish] = useState();
-    const [hseSub1, setHseSub1] = useState();
-    const [hseSub2, setHseSub2] = useState();
-    const [hseSub3, setHseSub3] = useState();
-    const [hseSub4, setHseSub4] = useState();
-    const [hseEnglishMark, setHseEnglishMark] = useState();
-    const [hseSub1Mark, setHseSub1Mark] = useState();
-    const [hseSub2Mark, setHseSub2Mark] = useState();
-    const [hseSub3Mark, setHseSub3Mark] = useState();
-    const [hseSub4Mark, setHseSub4Mark] = useState();
+    const [hseSchoolName, setHseSchoolName] = useState(currentData?currentData.twelthStd.schoolName:null);
+    const [hseSyllabus, setHseSyllabus] = useState(currentData?currentData.twelthStd.syllabus:null);
+    const [hseCourse, setHseCourse] = useState(currentData?currentData.twelthStd.course:null);
+    const [hseEnglish, setHseEnglish] = useState(currentData?currentData.twelthStdsub[0]:null);
+    const [hseSub1, setHseSub1] = useState(currentData?currentData.twelthStd.sub[1]:null);
+    const [hseSub2, setHseSub2] = useState(currentData?currentData.twelthStd.sub[2]:null);
+    const [hseSub3, setHseSub3] = useState(currentData?currentData.twelthStd.sub[3]:null);
+    const [hseSub4, setHseSub4] = useState(currentData?currentData.twelthStd.sub[4]:null);
+    const [hseEnglishMark, setHseEnglishMark] = useState(currentData?currentData.twelthStd.sub[0]:null);
+    const [hseSub1Mark, setHseSub1Mark] = useState(currentData?currentData.twelthStd.subMark[1]:null);
+    const [hseSub2Mark, setHseSub2Mark] = useState(currentData?currentData.twelthStd.subMark[2]:null);
+    const [hseSub3Mark, setHseSub3Mark] = useState(currentData?currentData.twelthStd.subMark[3]:null);
+    const [hseSub4Mark, setHseSub4Mark] = useState(currentData?currentData.twelthStd.subMark[4]:null);
     //Degree
     const [collegeName, setCollegeName] = useState();
     const [ugUniversity, setUgUniversity] = useState();
@@ -89,7 +90,7 @@ export default function EducationalDetailsInput() {
         if(!sslcSchoolName || !sslcMediumOfInstruction || !sslcEnglishMark || !sslcMathsMark || !sslcScienceMark || !sslcSocialScienceMark || !hseSchoolName || !hseSyllabus || !hseCourse || !hseEnglish || !hseSub1 || !hseSub2 || !hseSub3 || !hseSub4 || !hseEnglishMark || !hseSub1Mark || !hseSub2Mark || !hseSub3Mark || !hseSub4Mark){
             return errorSetter()
         }
-        return navigate("/student/details/dependencies")
+        return navigate("/student/details/family")
     }
 
     //To set error for empty field
@@ -114,6 +115,38 @@ export default function EducationalDetailsInput() {
         if(!hseSub3Mark) setHseSub3Mark("")
         if(!hseSub4Mark) setHseSub4Mark("")
         
+    }
+
+    //Structure Data
+    const structureData = () => {
+        const educationDetails = {
+            tenthStd : {
+                schoolName: sslcSchoolName, syllabus: sslcMediumOfInstruction, english: sslcEnglishMark, maths: sslcMathsMark, science: sslcScienceMark, socialScience: sslcSocialScienceMark
+            },
+            twelthStd : {
+                schoolName: hseSchoolName, syllabus: hseSyllabus, course: hseCourse, sub: [hseEnglish, hseSub1, hseSub2, hseSub3, hseSub4], subMark: [hseEnglishMark, hseSub1Mark, hseSub2Mark, hseSub3Mark, hseSub4Mark]
+            },
+            degree : [
+                {
+                    college: collegeName, university: ugUniversity, course: ugCourse, core: ugCoreMark, complementary: ugComplementaryMark, commonOne: ugCommonEnglishMark, commonTwo: ugCommonLanguageMark, open: ugOpenMark
+                },
+            ],
+            otherQualifications : [
+                {
+                    institutionName: othInstitutionName, courseType: othCourseType, Grade: othGrade, university: othUniversity
+                },
+            ],
+            additionalCourse : [
+                {
+                    courseName: addiCourse, institutionName: addiInstituionName, university: addiUniversity, cgp: addiMarks
+                },
+            ],
+            extraCurricular : [
+                {
+                    activity: activity, yearOfParticipation: yearOfParticipation, Price: prize, detailsOfExcellenceInPerformance: perfomance
+                },
+            ]
+        }
     }
 
 

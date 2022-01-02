@@ -10,9 +10,17 @@ const getStudents = () =>{
     return BackendService.get(`student`);
 }
 
-const studentService = {
-    getStudent,
-    getStudents
+//update students details
+const updateStudentsDetails = () =>{
+    return BackendService.patch('');
 }
 
-export default studentService;
+
+const studentsService = {
+    getStudent,
+    getStudents,
+    updateStudentsDetails
+}
+
+
+export default studentsService;

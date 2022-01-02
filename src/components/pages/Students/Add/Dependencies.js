@@ -46,7 +46,7 @@ export default function Dependencies() {
                     </Stepper>
                 </Box>
                 {/* Add Custom Component Here */}
-                <DependenciesInput/>
+                {/* Dependencies Page Deleted */}
                 
             </RootStyle>
 
