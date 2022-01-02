@@ -135,7 +135,7 @@ export default function AddDetails() {
 
       // Navigating to next page
       // __________________________________________________________ Needed fixing
-      navigate("/teacher/view/:id");
+      navigate("http://localhost:3001/");
     } catch (err) {
       console.log(err);
       // console.log(err.response);
@@ -317,29 +317,6 @@ export default function AddDetails() {
           </Grid>
         </Grid>
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          {/* <Button
-            sx={{ mt: 2 }}
-            // href="/student/details/educational"
-            size="large"
-            color="info"
-            variant="contained"
-            disabled={
-              !profileImage ||
-              !name ||
-              !shortName ||
-              !email ||
-              !department ||
-              !joinYear ||
-              !gender ||
-              !maritalStatus ||
-              !phoneNo ||
-              !religion ||
-              !cast ||
-              !educationQualification
-            }
-          >
-            Next
-          </Button> */}
           <Button
             sx={{ mt: 2 }}
             onClick={handleNextBtn}
@@ -347,7 +324,7 @@ export default function AddDetails() {
             color="info"
             variant="contained"
           >
-            Next
+            Submit
           </Button>
         </Box>
       </Container>

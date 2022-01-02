@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 // material components
 import { Container, Grid, Card, Typography } from "@mui/material";
 
 // material icons
 import { styled } from "@mui/material/styles";
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
@@ -30,7 +31,8 @@ export default function TeachersView() {
   console.log(id);
   const [teacherData, setTeacherData] = useState();
   const [profileImage, setProfileImage] = useState();
-  const [image, setImage] = useState();
+  const [nxtPage, setNxtPage] = useState();
+  const [editButton, setEditButton] = useState(false);
 
   const url = useEffect(() => {
     if (id) {
@@ -55,9 +57,13 @@ export default function TeachersView() {
           console.log(response);
 
           setTeacherData(response);
+          setNxtPage(response.userId._id);
+          console.log(nxtPage);
+
           setProfileImage(
             `https://student-profile-api.herokuapp.com/upload/${response.userId.profileImage}`
           );
+          setEditButton(true);
         } catch (err) {
           console.log(err?.response?.data?.message);
         }
@@ -65,7 +71,9 @@ export default function TeachersView() {
       getMe();
     }
   }, []);
-
+  // setNxtPage(response);
+  console.log(editButton);
+  console.log(nxtPage);
   return (
     <Page title="details">
       {teacherData && (
@@ -136,7 +144,22 @@ export default function TeachersView() {
                   </Typography>
                 </Grid>
               </Grid>
-
+              {/* <Link to={`/teacher/student/update/${id}/personal`} style={{ color: "blue" }}> */}
+              <Link
+                to={`/teacher/details/update/${nxtPage}`}
+                style={{ color: "#333" }}
+              >
+                {editButton ? (
+                  <ModeEditOutlineOutlinedIcon
+                    sx={{
+                      margin: "8px",
+                      opacity: "",
+                      height: "3vh",
+                      width: "2vw"
+                    }}
+                  />
+                ) : null}
+              </Link>
               <Grid
                 item
                 xs={12}
@@ -146,14 +169,7 @@ export default function TeachersView() {
                 direction="row"
                 justifyContent="flex-end"
                 alignItems="center"
-              >
-                {/* <Tabs value={index} onChange={onTabClicked}>
-              <Tab label="Personal" />
-              <Tab label="Educational" />
-              <Tab label="Family" />
-              <Tab label="Dependencies" />
-            </Tabs> */}
-              </Grid>
+              ></Grid>
             </Grid>
 
             <Grid

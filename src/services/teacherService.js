@@ -29,7 +29,7 @@ const createTeacher = async (data) => {
 
 // update  teacher
 const updateTeacher = async (data, id) => {
-  return BackendService.patch(`teacher/${id}`, data);
+  return BackendService.patch(`teacher/${id}`, { teacherDetails: data });
 };
 
 const teacherService = {
