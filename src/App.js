@@ -21,12 +21,13 @@ import Details from "./components/pages/Students/view/Details";
 import ProfileProvider from "./context/profileContext";
 import StudentProvider from "./context/studentContext";
 import Dependencies from "./components/pages/Students/Add/Dependencies";
-import DepartmentDetails from "./components/pages/Department/Dpt-details/DptDetails";
-import Add from "./components/pages/Department/Add/Add";
+// import DepartmentDetails from "./components/pages/Department/Dpt-details/DptDetails";
 import DptStudentList from "./components/pages/Department/List/DptStudentList";
 import UpdatePersonalDeatils from "./components/pages/Students/Edit/PersonalDetails";
 import UpdateEducationDeatils from "./components/pages/Students/Edit/EducationalDetails";
 import UpdateFamilyDetails from "./components/pages/Students/Edit/FamilyDetails";
+import DepartmentDetails from './components/pages/Department/View/DptDetails';
+import Add from './components/pages/Department/Add/Add';
 
 function App() {
   return (
@@ -79,6 +80,7 @@ function App() {
                 <Route path="details" element={<DptStudentList />} />
                 <Route path="student/:id" element={<Details />} />
                 <Route path="add" element={<Add />} />
+                <Route path="edit/:id" element={<Add update={true}/>} />
               </Route>
             </Route>
 
