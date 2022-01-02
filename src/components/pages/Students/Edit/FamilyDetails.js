@@ -2,7 +2,7 @@ import FamilyDetailsInput from "../../../utils/Student/FamilyDetailsInput";
 import { useEffect, useState } from "react";
 import { Container, Button, Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import StudentService from "../../../../services/StudentService";
+import StudentService from "../../../../services/studentService";
 
 export default function FamilyDetails() {
   const [details, setDetails] = useState();

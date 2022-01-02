@@ -17,7 +17,7 @@ import EducationalView from "../../../utils/Student/View/EducationalView";
 import FamilyView from "../../../utils/Student/View/FamilyView";
 import DependenciesView from "../../../utils/Student/View/Dependencies";
 import profile from "../../../../images/test.jpg";
-import StudentService from "../../../../services/StudentService";
+import StudentService from "../../../../services/studentService";
 import { useParams } from "react-router-dom";
 
 // icon import

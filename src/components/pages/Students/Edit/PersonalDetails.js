@@ -2,7 +2,7 @@ import PersonalDetailsInput from "../../../utils/Student/PersonalDetailsInput";
 import { useEffect,useState } from "react";
 import { Container, Button, Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import StudentService from "../../../../services/StudentService";
+import StudentService from "../../../../services/studentService";
 
 export default function PersonalDeatils() {
   const [details, setDetails] = useState();

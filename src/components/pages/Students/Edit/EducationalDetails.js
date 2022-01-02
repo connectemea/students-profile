@@ -2,7 +2,7 @@ import EducationalDetailsInput from "../../../utils/Student/EducationalDetailsIn
 import { useEffect, useState } from "react";
 import { Container, Button, Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import StudentService from "../../../../services/StudentService";
+import StudentService from "../../../../services/studentService";
 
 export default function EducationDeatils() {
   const [details, setDetails] = useState();
