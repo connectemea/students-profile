@@ -1,23 +1,7 @@
 import EducationalDetailsInput from "../../../utils/Student/EducationalDetailsInput";
-import { useEffect, useState } from "react";
 import { Container, Button, Grid, Typography } from "@mui/material";
-import { useParams } from "react-router-dom";
-import studentsService from "../../../../services/studentsService";
 
 export default function EducationDeatils() {
-  const [details, setDetails] = useState();
-  const { id } = useParams();
-  useEffect(() => {
-    const getStudentDetails = async () => {
-      try {
-        const details = await studentsService.getStudent(id);
-        setDetails(details);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    if (id) getStudentDetails();
-  }, [id]);
   return (
     <Container>
       <Grid>
@@ -28,7 +12,7 @@ export default function EducationDeatils() {
         </Grid>
 
         <Grid>
-         {details&& <EducationalDetailsInput currentData={details.educationDeatils}/>}
+         <EducationalDetailsInput/>
          </Grid>
         <Grid
           container

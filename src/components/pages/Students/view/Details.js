@@ -46,10 +46,8 @@ export default function Details() {
   useEffect(() => {
     async function getStudentDetails() {
       try {
-        const response = await studentsService.getStudent(id);
+        const response = await studentsService.getStudentById(id);
         setStudentsDetails(response)
-        console.log("success",response.data.personalDetails.name);
-        console.log(response)
       } catch (error) {
         console.log("error",error.response)
       }
