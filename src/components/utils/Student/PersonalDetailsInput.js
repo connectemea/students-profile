@@ -75,21 +75,14 @@ export default function PersonalDetailsInput(props) {
         return console.log(personalDetails)
     }
 
-    // To handle next button click
-    const navigate = useNavigate()
-    const handleNextBtn = () => {
-        errorCheck()
-        //To structure data
-        if (errorCheck) structureData()
-    }
 
     //To Check if the form is filled
     const errorCheck = () => {
         if (!profileImage || !dateOfBirth || !yearOfJoin || !name || !email || !department || !mobileNO || !gender || !admissionNO || !bloodGroup || !maritalStatus || !religion || !caste || !categoryOfAdmission || !identificationMarkOne || !setIdentificationMarkTwo || !presentAddress || !permanentAddress || !residence || !distanceFromCollege) {
             errorSetter()
-            return false
+            return true
         }
-        return true
+        return false
     }
 
 
@@ -116,6 +109,14 @@ export default function PersonalDetailsInput(props) {
         if (!permanentAddress) setPermanentAdress("")
         if (!residence) setResidence("")
         if (!distanceFromCollege) setDistanceFromCollege("")
+    }
+
+    // To handle next button click
+    const navigate = useNavigate()
+    const handleNextBtn = () => {
+        errorCheck()
+        //To structure data
+        if (!errorCheck) structureData()
     }
 
 
