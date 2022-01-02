@@ -181,7 +181,7 @@ export default function PersonalDetailsInput() {
       ...student,
       personalDetails: structureData(),
     });
-    navigate("/student/educational");
+    navigate("/student/details/educational");
   };
   //To handle edit
   const handleUpdate = async () => {
