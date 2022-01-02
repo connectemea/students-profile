@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 // material components
 import {
@@ -19,6 +19,7 @@ import SelectInput from "../Inputs/SelectInput";
 import TextInput from '../Inputs/TextInput';
 import DatePickerInput from "../Inputs/DatePickerInput";
 import ImageUpload from "../Inputs/ImageUpload";
+import { studentContext } from "../../../context/studentContext";
 
 
 const ProfileCard = styled(Card)(({ theme }) => ({
@@ -36,6 +37,10 @@ const residences = ["House", "Hostel", "Relative's Residence", "Guardian's Resid
 
 export default function PersonalDetailsInput(props) {
     const {currentData} = props;
+    const {student, setStudent} = useContext(studentContext);
+    useEffect(()=>{
+        console.log(student);
+    },[]);
     const [profileImage, setProfileImage] = useState();
     const [dateOfBirth, setDateOfBirth] = useState(currentData?currentData.dateOfBirth:null);
     const [yearOfJoin, setYearOfJoin] = useState(currentData?currentData.yearOfJoin:null);
