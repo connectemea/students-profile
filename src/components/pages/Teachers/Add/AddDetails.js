@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 
 // material components
 import { Button, Typography, Grid, Card, Box, Container } from "@mui/material";
@@ -8,8 +11,6 @@ import { styled } from "@mui/material/styles";
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
-
-import { useNavigate } from "react-router-dom";
 
 //Custom component
 import TextInput from "../../../utils/Inputs/TextInput";
@@ -31,7 +32,11 @@ const genders = ["Female", "Male", "Other"];
 const status = ["Unmarried", "Married"];
 
 export default function AddDetails() {
+  const { id } = useParams();
+  console.log(id);
   const navigate = useNavigate();
+
+  // const [teacherData, setTeacherData] = useState();
 
   const [profileImage, setProfileImage] = useState();
   const [name, setName] = useState();
@@ -49,10 +54,47 @@ export default function AddDetails() {
   const [errorMsg, setErrorMsg] = useState();
   const clearError = () => setErrorMsg("");
 
+  useEffect(() => {
+    async function getMe() {
+      try {
+        console.log("getme funciton is working");
+        const response = await teacherService.getTeacherMe();
+        console.log(response);
+        const setTeacherData = (response) => {
+          console.log(response);
+          setProfileImage(
+            `https://student-profile-api.herokuapp.com/upload/${response.userId.profileImage}`
+          );
+          setName(response.name);
+          setShortName(response.shortName);
+          setEmail(response.email);
+          setDepartment(response.department);
+          setJoiningYear(response.joinYear);
+          setGender(response.gender);
+          setMaritalStatus(response.maritalStatus);
+          setPhoneNo(response.phoneNo);
+          setRelegion(response.religion);
+          setCast(response.cast);
+          setEducationQualification(response.educationQualification);
+        };
+
+        setTeacherData(response);
+      } catch (err) {
+        console.log(err?.response?.data?.message);
+      }
+    }
+    if (id) getMe();
+  }, [id]);
+
+  // console.log(gender);
+  // console.log(maritalStatus);
+  // console.log(joinYear);
+  console.log(profileImage);
+  // console.log(teacherData.cast);
+
   console.log("welcome to the add details page");
 
   const handleAddTeacherDetails = async () => {
-    console.log("Handle add reacher is working")
     try {
       clearError();
       const userData = {
@@ -76,11 +118,17 @@ export default function AddDetails() {
       formData.append("profile", profileImage);
 
       // adding user to db
-      const response = await teacherService.createTeacher(userData);
-      console.log(response)
-      console.log("hi forom response")
 
-      const imageRes = await userService.uploadImage(formData);
+      if (id) {
+        console.log("hi forom response update");
+        const response = await teacherService.updateTeacher(userData, id);
+        console.log(response);
+      } else {
+        console.log("hi forom response create");
+        const response = await teacherService.createTeacher(userData);
+        console.log(response);
+        const imageRes = await userService.uploadImage(formData);
+      }
 
       // clearing the form
       clearUserCredentials();

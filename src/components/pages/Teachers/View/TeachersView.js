@@ -13,7 +13,7 @@ import Page from "../../../utils/Page";
 import Avatar from "@mui/material/Avatar";
 import profile from "../../../../images/avatar.jpg";
 
-// Custuom compoent
+// Custom component
 import Field from "../utils/Field";
 
 // importing getTech form TeacherService
@@ -29,40 +29,41 @@ export default function TeachersView() {
   const { id } = useParams();
   console.log(id);
   const [teacherData, setTeacherData] = useState();
-  const [profileImgae, setProfileImage] = useState();
+  const [profileImage, setProfileImage] = useState();
   const [image, setImage] = useState();
 
-  useEffect(() => {
-    console.log("use effect is loading");
-    if(id){
+  const url = useEffect(() => {
+    if (id) {
       async function getOne() {
         try {
           console.log("getOne funciton is working");
           const response = await TeacherService.getTeacherOne(id);
-          console.log(response);
           setTeacherData(response);
-          setProfileImage(teacherData.userId.profileImage);
-          // console.log(profileImgae)
+          setProfileImage(
+            `https://student-profile-api.herokuapp.com/upload/${response.userId.profileImage}`
+          );
         } catch (err) {
           console.log(err?.response?.data?.message);
         }
       }
       getOne();
-    } else{  async function getMe() {
-      try {
-        console.log("getme funciton is working");
-        const response = await TeacherService.getTeacherMe();
-        setTeacherData(response);
-        setProfileImage(teacherData.userId.profileImage);
-        // console.log(profileImgae)
-      } catch (err) {
-        console.log(err?.response?.data?.message);
+    } else {
+      async function getMe() {
+        try {
+          console.log("getme funciton is working");
+          const response = await TeacherService.getTeacherMe();
+          console.log(response);
+
+          setTeacherData(response);
+          setProfileImage(
+            `https://student-profile-api.herokuapp.com/upload/${response.userId.profileImage}`
+          );
+        } catch (err) {
+          console.log(err?.response?.data?.message);
+        }
       }
+      getMe();
     }
-    getMe();
-  }
-  
-  
   }, []);
 
   return (
@@ -100,7 +101,8 @@ export default function TeachersView() {
                   item
                   component={Avatar}
                   alt="Remy Sharp"
-                  src={profile}
+                  // src={profile}
+                  src={profileImage}
                   sx={{
                     width: 80,
                     height: 80

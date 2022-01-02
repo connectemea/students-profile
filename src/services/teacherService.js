@@ -27,12 +27,17 @@ const createTeacher = async (data) => {
   return BackendService.post("teacher/", { teacherDetails: data });
 };
 
+// update  teacher
+const updateTeacher = async (data, id) => {
+  return BackendService.patch(`teacher/${id}`, data);
+};
+
 const teacherService = {
   getTeacher,
   getAllTeacher,
   createTeacher,
   getTeacherMe,
   getTeacherOne,
+  updateTeacher
 };
 export default teacherService;
-
