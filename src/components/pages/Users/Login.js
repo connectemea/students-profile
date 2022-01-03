@@ -2,10 +2,10 @@ import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Container, Typography, Stack, Card, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { Navigate, useNavigate } from "react-router";
 import PasswordField from "./utils/PasswordField";
 import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
+import { useNavigate } from "react-router-dom";
 
 //importing the user service
 import authService from "../../../services/authService";
@@ -23,6 +23,7 @@ const ContentStyle = styled("div")(({ theme }) => ({
 }));
 
 export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [authErrors, setAuthErrors] = useState();
@@ -40,6 +41,7 @@ export default function Login() {
       const response = await authService.loginUser(loginCredentials);
       //storing token in localStorage
       localStorage.setItem(LOCAL_KEYS.AUTH_TOKEN, response.data.userToken);
+      navigate("/app");
     } catch (err) {
       setAuthErrors(err?.response?.data?.message);
     }
