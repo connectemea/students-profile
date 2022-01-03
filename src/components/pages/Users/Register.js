@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Container, Typography, Stack, Link, Card } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
@@ -7,7 +7,7 @@ import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
 
 //importing the user service
-import userService from "../../../services/userService";
+import authService from "../../../services/authService";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -63,71 +63,71 @@ export default function Register() {
         password,
       };
       // registering a user
-      await userService.registerUser(registerCredentials);
+      await authService.registerUser(registerCredentials);
     } catch (err) {
       setAuthErrors(err?.response?.data?.message);
     }
   };
 
   return (
-      <ContentStyle>
-        <Card sx={{ p: 3 }}>
-          <Box sx={{ mb: 3 }}>
-            <Typography variant="h3" gutterBottom textAlign="center">
-              Register
-            </Typography>
-          </Box>
-          <Stack spacing={2}>
-            <TextInput
-              label="User name"
-              type="text"
-              value={username}
-              setValue={setUsername}
-              authErrors={authErrors}
-            />
-            <TextInput
-              label="Email"
-              type="email"
-              value={email}
-              setValue={setEmail}
-              authErrors={authErrors}
-            />
-            <PasswordField
-              label="Password"
-              value={password}
-              setValue={setPassword}
-              errorMessage={passwordError}
-              authErrors={authErrors}
-            />
-            <PasswordField
-              label="Confirm Password"
-              value={confirmPassword}
-              setValue={setConfirmPassword}
-              errorMessage={confirmPasswordError}
-              authErrors={authErrors}
-              showError
-            />
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="flex-start"
-              sx={{ my: 2 }}
-            >
-              <Link component={RouterLink} variant="subtitle2" to="/user/login">
-                Already have an account? Login
-              </Link>
-            </Stack>
-            <SubmitButton
-              name="Register"
-              disabled={
-                !username || !email || !password || !confirmPassword
-                  ? true
-                  : false
-              }
-              onClick={handleClick}
-            />
+    <ContentStyle>
+      <Card sx={{ p: 3 }}>
+        <Box sx={{ mb: 3 }}>
+          <Typography variant="h3" gutterBottom textAlign="center">
+            Register
+          </Typography>
+        </Box>
+        <Stack spacing={2}>
+          <TextInput
+            label="User name"
+            type="text"
+            value={username}
+            setValue={setUsername}
+            authErrors={authErrors}
+          />
+          <TextInput
+            label="Email"
+            type="email"
+            value={email}
+            setValue={setEmail}
+            authErrors={authErrors}
+          />
+          <PasswordField
+            label="Password"
+            value={password}
+            setValue={setPassword}
+            errorMessage={passwordError}
+            authErrors={authErrors}
+          />
+          <PasswordField
+            label="Confirm Password"
+            value={confirmPassword}
+            setValue={setConfirmPassword}
+            errorMessage={confirmPasswordError}
+            authErrors={authErrors}
+            showError
+          />
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="flex-start"
+            sx={{ my: 2 }}
+          >
+            <Link component={RouterLink} variant="subtitle2" to="/user/login">
+              Already have an account? Login
+            </Link>
           </Stack>
-        </Card>
-      </ContentStyle>
+          <SubmitButton
+            name="Register"
+            disabled={
+              !username || !email || !password || !confirmPassword
+                ? true
+                : false
+            }
+            onClick={handleClick}
+          />
+        </Stack>
+      </Card>
+    </ContentStyle>
   );
 }

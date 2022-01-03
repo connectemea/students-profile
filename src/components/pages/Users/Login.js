@@ -8,7 +8,7 @@ import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
 
 //importing the user service
-import userService from "../../../services/userService";
+import authService from "../../../services/authService";
 
 //importing LocalKey
 import LOCAL_KEYS from "../../../constants/LOCAL_KEY";
@@ -37,7 +37,7 @@ export default function Login() {
         password,
       };
       // logging in user
-      const response = await userService.loginUser(loginCredentials);
+      const response = await authService.loginUser(loginCredentials);
       //storing token in localStorage
       localStorage.setItem(LOCAL_KEYS.AUTH_TOKEN, response.data.userToken);
     } catch (err) {
