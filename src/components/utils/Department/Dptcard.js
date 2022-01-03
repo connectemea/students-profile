@@ -45,7 +45,7 @@ export default function Dptcard({ data, type }) {
     textTransform: "uppercase",
   }));
   return (
-    <Link to="/app/department/details" style={{ textDecoration: "none" }}>
+    <Link to={`/app/department/studentlist/${data._id}`} style={{ textDecoration: "none" }}>
       <RootStyle>
         <Grid
           container

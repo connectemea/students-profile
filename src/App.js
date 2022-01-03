@@ -77,7 +77,7 @@ function App() {
                   element={<Navigate to="/app/department/list" />}
                 />
                 <Route path="list" element={<DepartmentDetails />} />
-                <Route path="details" element={<DptStudentList />} />
+                <Route path="studentlist/:id" element={<DptStudentList />} />
                 <Route path="student/:id" element={<Details />} />
                 <Route path="add" element={<Add />} />
                 <Route path="edit/:id" element={<Add update={true}/>} />

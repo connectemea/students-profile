@@ -26,11 +26,18 @@ const updateDepartment = async(_id , data) => {
 
     return BackendService.patch(`department/${_id}` , data);
 }
+
+//get student by department
+const getStudentsByDepartment = (id , year) =>{
+    return BackendService.get(`student/?joinYear=${year}&department=${id}`);
+}
+
 const departmentService = {
     getDepartment,
     addDepartment,
     deleteDepartment,
     updateDepartment,
     getDepartmentData,
+    getStudentsByDepartment,
 }
 export default departmentService;
