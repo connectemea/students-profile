@@ -12,7 +12,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 export default function PasswordField(props) {
   const [showPassword, setShowPassword] = useState(false);
 
-  const { label, value, setValue, errorMessage } = props;
+  const { label, value, setValue, errorMessage, authErrors, showError } = props;
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -23,14 +23,14 @@ export default function PasswordField(props) {
   return (
     <FormControl fullWidth variant="outlined">
       <InputLabel
-        error={value === "" || errorMessage ? true : false}
+        error={value === "" || errorMessage || authErrors ? true : false}
         htmlFor="outlined-adornment-password"
       >
         {label}
       </InputLabel>
       <OutlinedInput
         value={value}
-        error={value === "" || errorMessage ? true : false}
+        error={value === "" || errorMessage || authErrors ? true : false}
         onChange={handleChange}
         id="outlined-adornment-password"
         fullWidth
@@ -49,6 +49,9 @@ export default function PasswordField(props) {
       </FormHelperText>
       <FormHelperText sx={{ color: "red" }}>
         {errorMessage !== "" ? errorMessage : ""}
+      </FormHelperText>
+      <FormHelperText sx={{ color: "red" }}>
+        {authErrors !== "" && showError ? authErrors : ""}
       </FormHelperText>
     </FormControl>
   );

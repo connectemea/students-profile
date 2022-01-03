@@ -22,28 +22,29 @@ const ProfileCard = styled(Card)(({ theme }) => ({
     paddingBottom: `${theme.spacing(4)} !important`
 }));
 
-export default function FamilyDetailsInput() {
+export default function FamilyDetailsInput(props) {
+    const {currentData} = props ;
     //Father
-    const [fatherName, setFatherName] = useState();
-    const [fatherQualification, setFatherQualification] = useState();
-    const [fatherAnnualIncome, setFatherAnnualIncome] = useState();
-    const [fatherOccupation, setFatherOccupation] = useState();
+    const [fatherName, setFatherName] = useState(currentData?currentData.father.name:null);
+    const [fatherQualification, setFatherQualification] = useState(currentData?currentData.father.educationQualification:null);
+    const [fatherAnnualIncome, setFatherAnnualIncome] = useState(currentData?currentData.father.annualIncome:null);
+    const [fatherOccupation, setFatherOccupation] = useState(currentData?currentData.father.occupation:null);
     const [fatherNO, setFatherNO] = useState();
-    const [fatherAddress, setFatherAddress] = useState();
+    const [fatherAddress, setFatherAddress] = useState(currentData?currentData.father.officialAddress:null);
     //Mother
-    const [motherName, setMotherName] = useState();
-    const [motherQualification, setMotherQualification] = useState();
-    const [motherAnnualIncome, setMotherAnnualIncome] = useState();
-    const [motherOccupation, setMotherOccupation] = useState();
-    const [motherNO, setMotherNO] = useState();
-    const [motherAddress, setMotherAddress] = useState();
+    const [motherName, setMotherName] = useState(currentData?currentData.mother.name:null);
+    const [motherQualification, setMotherQualification] = useState(currentData?currentData.mother.educationQualification:null);
+    const [motherAnnualIncome, setMotherAnnualIncome] = useState(currentData?currentData.annualIncome:null);
+    const [motherOccupation, setMotherOccupation] = useState(currentData?currentData.occupation:null);
+    const [motherNO, setMotherNO] = useState(currentData?currentData.mother.name:null);
+    const [motherAddress, setMotherAddress] = useState(currentData?currentData.mother.officialAddress:null);
     //Guardian
-    const [guardianName, setGuardianName] = useState();
-    const [guardianQualification, setGuardianQualification] = useState();
-    const [guardianAnnualIncome, setGuardianAnnualIncome] = useState();
-    const [guardianOccupation, setGuardianOccupation] = useState();
-    const [guardianNO, setGuardianNO] = useState();
-    const [guardianAddress, setGuardianAddress] = useState();
+    const [guardianName, setGuardianName] = useState(currentData?currentData.gardian.name:null);
+    const [guardianQualification, setGuardianQualification] = useState(currentData?currentData.gardian.educationQualification:null);
+    const [guardianAnnualIncome, setGuardianAnnualIncome] = useState(currentData?currentData.gardian.annualIncome:null);
+    const [guardianOccupation, setGuardianOccupation] = useState(currentData?currentData.gardian.occupation:null);
+    const [guardianNO, setGuardianNO] = useState(currentData?currentData.mother.officialAddress:null);
+    const [guardianAddress, setGuardianAddress] = useState(currentData?currentData.gardian.officialAddress:null);
 
     //Radio button management
     //Father
@@ -202,7 +203,7 @@ export default function FamilyDetailsInput() {
             </Grid>
             {/* Buttons */}
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                <Button sx={{ mt: 2, mr: 2 }} href="/student/details/dependencies" size="large" color="info" variant="contained">Previous</Button>
+                <Button sx={{ mt: 2, mr: 2 }} href="/student/details/educational" size="large" color="info" variant="contained">Previous</Button>
                 <Button sx={{ mt: 2 }} onClick={handleSubmitBtn} size="large" color="info" variant="contained">Submit</Button>
             </Box>
 

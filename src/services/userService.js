@@ -10,9 +10,17 @@ const createUser = async (data) => {
   return BackendService.post("user/", data);
 };
 
+// image upload 
+const uploadImage = async (data) => {
+  return BackendService.imageUpload("upload/", data);
+};
+
 //exporting the user service
 const UserService = {
   getUsers,
   createUser,
+  uploadImage,  
 };
+
 export default UserService;
+ 
