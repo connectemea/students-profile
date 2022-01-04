@@ -21,6 +21,7 @@ import ImageUpload from "../../../utils/Inputs/ImageUpload";
 // importing backend services
 import teacherService from "../../../../services//teacherService";
 import userService from "../../../../services/userService";
+import departemntService from "../../../../services/departmentService";
 
 const RootStyle = styled("div")(({ theme }) => ({
   padding: theme.spacing(4)
@@ -51,10 +52,30 @@ export default function AddDetails() {
   const [cast, setCast] = useState();
   const [educationQualification, setEducationQualification] = useState();
 
+  const [departmentData, setDepartmentData] = useState();
+
   const [errorMsg, setErrorMsg] = useState();
   const clearError = () => setErrorMsg("");
 
+  const departmentArray=[{name:"",id:""}]
+
   useEffect(() => {
+    console.log("Useffect");
+
+    const getDepartment = async () => {
+      try {
+        console.log("get Deparment");
+        const departmentList = await departemntService.getDepartment();
+        setDepartmentData(departmentList)
+        console.log(departmentData)
+      } catch (err) {
+        console.error(err.response);
+      }
+    };
+
+    console.log(departmentData)
+
+    // to Populate fields  for update
     async function getMe() {
       try {
         console.log("getme funciton is working");
@@ -84,6 +105,7 @@ export default function AddDetails() {
       }
     }
     if (id) getMe();
+    getDepartment();
   }, [id]);
 
   // console.log(gender);
@@ -93,6 +115,8 @@ export default function AddDetails() {
   // console.log(teacherData.cast);
 
   console.log("welcome to the add details page");
+  console.log(departmentData)
+
 
   const handleAddTeacherDetails = async () => {
     try {

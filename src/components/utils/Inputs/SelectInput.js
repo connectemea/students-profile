@@ -22,7 +22,7 @@ export default function SelectInput(props) {
       onChange={handleTextInputChange}
     >
       {menuItems.map((menuItem) => (
-        <MenuItem value={menuItem}>{menuItem}</MenuItem>
+        <MenuItem value={menuItem}>{menuItem.name?menuItem.name:menuItem}</MenuItem>
       ))}
     </TextField>
   );
