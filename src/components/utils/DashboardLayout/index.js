@@ -41,7 +41,6 @@ export default function DashboardLayout() {
   const { profile, setProfile } = useContext(profileContext);
   //state for controlling sidebar open and close
   const [open, setOpen] = useState(false);
-
   useEffect(() => {
     async function getUserProfile() {
       try {

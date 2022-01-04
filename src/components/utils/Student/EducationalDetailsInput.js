@@ -248,7 +248,7 @@ export default function EducationalDetailsInput(props) {
       ...student,
       educationalDetails: structureData(),
     });
-    navigate("/student/family");
+    navigate("/student/details/family");
   };
   //To handle edit
   const handleUpdate = async () => {

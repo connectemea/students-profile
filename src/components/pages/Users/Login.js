@@ -16,8 +16,6 @@ import LOCAL_KEYS from "../../../constants/LOCAL_KEY";
 //importing the user service
 import userService from "../../../services/userService";
 
-//importing LocalKey
-import LOCAL_KEYS from "../../../constants/LOCAL_KEY";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
