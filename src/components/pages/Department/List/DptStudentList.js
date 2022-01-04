@@ -10,7 +10,12 @@ import departmentService from "../../../../services/departmentService";
 
 //dropdown
 import SelectInput from "../../../utils/Inputs/SelectInput";
-const years = ["2017", "2018", "2019", "2020", "2021", "2022"]
+//get current year
+const currentYear = new Date().getFullYear();
+//loop years for dropdown
+let years = [];
+for (let i = currentYear; i >= (currentYear - 5); i--) { years.push(i); }
+// console.log(years);
 
 // table header cell config
 const TABLE_HEAD = [
@@ -31,32 +36,27 @@ const TABLE_HEAD = [
 
 export default function DptStudentsList() {
   const { id } = useParams();
-// //get department by id
-//   const [department, setDepartment] = useState();
-//   useEffect(() => {
-//     const getDepartment = async () => {
-//       try {
-//         // get department data
-//         const response = await departmentService.getDepartmentData(id);
-//         setDepartmentName(response);
-//         console.log(response);
-//       } catch (err) {
-//         console.error(err.response);
-//       }
-//     };
-//     if (id) getDepartment()
-//   }, [id]);
-  
-  //setState function
-//  function setDepartmentName(department) {
-//   setDepartment(department.name);
-//   }
-// console.log(department);
+  const [year, setYear] = useState(currentYear);
 
-  const [year, setYear] = useState(2021);
-  console.log(year);
+  const getStudents = async (year) => {
+    try {
+      // get students
+      const students = await departmentService.getStudentsByDepartment(id, year);
+      setStudents(students);
+    } catch (err) {
+      console.error(err?.response?.data?.message);
+    }
+  };
 
-  //get student list
+  //year onchange handler
+  const handleYearChange = (event) => {
+    const selectedYear = event.target.value;
+    //setting the selected year
+    setYear(selectedYear);
+    getStudents(selectedYear);
+
+  }
+
   const [students, setStudents] = useState([]);
   useEffect(() => {
     const getStudents = async () => {
@@ -86,7 +86,13 @@ export default function DptStudentsList() {
           </Typography>
           <Grid container justify="flex-end" item xs={12} sm={6} md={3} lg={3}>
             {/* select input from custom made component */}
-            <SelectInput label="select year" name="year" menuItems={years} dropdownValue={year} setDropdownValue={setYear} />
+            <SelectInput 
+             label="select year"
+             name="year" 
+             menuItems={years} 
+             dropdownValue={year} 
+             setDropdownValue={setYear} 
+             onChange={handleYearChange} />
           </Grid>
         </Stack>
         {students && (
