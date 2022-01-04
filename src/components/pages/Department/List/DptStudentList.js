@@ -37,26 +37,7 @@ const TABLE_HEAD = [
 export default function DptStudentsList() {
   const { id } = useParams();
   const [year, setYear] = useState(currentYear);
-
-  const getStudents = async (year) => {
-    try {
-      // get students
-      const students = await departmentService.getStudentsByDepartment(id, year);
-      setStudents(students);
-    } catch (err) {
-      console.error(err?.response?.data?.message);
-    }
-  };
-
-  //year onchange handler
-  const handleYearChange = (event) => {
-    const selectedYear = event.target.value;
-    //setting the selected year
-    setYear(selectedYear);
-    getStudents(selectedYear);
-
-  }
-
+  
   const [students, setStudents] = useState([]);
   useEffect(() => {
     const getStudents = async () => {
@@ -70,7 +51,7 @@ export default function DptStudentsList() {
       }
     };
     getStudents();
-  }, []);
+  }, [year]);
 
   return (
     <Page title="StudentsList">
@@ -91,8 +72,7 @@ export default function DptStudentsList() {
              name="year" 
              menuItems={years} 
              dropdownValue={year} 
-             setDropdownValue={setYear} 
-             onChange={handleYearChange} />
+             setDropdownValue={setYear} />
           </Grid>
         </Stack>
         {students && (

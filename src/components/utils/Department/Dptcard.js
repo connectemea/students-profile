@@ -20,7 +20,9 @@ export default function Dptcard({ data, type }) {
   const RootStyle = styled(Card)(({ theme }) => ({
     boxShadow: "none",
     textAlign: "center",
-    padding: theme.spacing(2, 1, 5, 2),
+    padding: theme.spacing(2),
+    maxHeight:"316px",
+    height:"316px",
     color: theme.palette[colorType].darker,
     backgroundColor: theme.palette[colorType].lighter,
   }));
