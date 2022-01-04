@@ -125,7 +125,7 @@ export default function PersonalDetailsInput() {
       !caste ||
       !categoryOfAdmission ||
       !identificationMarkOne ||
-      !setIdentificationMarkTwo ||
+      !identificationMarkTwo||
       !presentAddress ||
       !permanentAddress ||
       !residence ||
@@ -171,6 +171,20 @@ export default function PersonalDetailsInput() {
     setGender(details.gender);
     setDepartment(details.department);
     setYearOfJoin(details.yearOfJoin);
+    setGender(details.gender);
+    setAdmissionNO(details.admissionNO);
+    setBloodGroup(details.bloodGroup);
+    setMaritalStatus(details.maritalStatus);
+    setReligion(details.religion);
+    setCaste(details.cast);
+    setCategoryOfAdmission(details.categoriesOfAdmission);
+    setIdentificationMarkOne(details.identificationMarkOne);
+    setIdentificationMarkTwo(details.identificationMarkTwo);
+    setPresentAddress(details.presentAddress);
+    setPermanentAdress(details.permenentAddress);
+    setResidence(details.residence);
+    setDistanceFromCollege(details.distanceFromCollege)
+
   };
 
   // To handle next button click
@@ -203,6 +217,7 @@ export default function PersonalDetailsInput() {
       try {
         const student = await studentsService.getStudentById(id);
         setCurrentDetails(student.personalDetails);
+        console.log(student)
       } catch (error) {
         console.error(error?.response?.data?.message);
       }
