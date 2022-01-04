@@ -12,7 +12,7 @@ import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
 import { useNavigate } from "react-router-dom";
 
-import userService from "../../../services/userService";
+import authService from "../../../services/authService";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -40,7 +40,7 @@ export default function ForgotPassword() {
         email,
       };
       // logging in user
-      const response = await userService.forgotPassword(data);
+      const response = await authService.forgotPassword(data);
       console.log(response);
       navigate(`/user/recover/${response.data.userToken}`);
     } catch (err) {
@@ -50,37 +50,37 @@ export default function ForgotPassword() {
   };
 
   return (
-      <ContentStyle>
-        <Card sx={{ p: 5 }}>
-          <Box sx={{ mb: 3 }}>
-            <Typography textAlign="center" variant="h3" gutterBottom>
-              Forgot Password
-            </Typography>
-          </Box>
-          <Stack spacing={2}>
-            <TextInput
-              label="User name"
-              type="text"
-              value={username}
-              setValue={setUserName}
-              authErrors={authErrors}
-            />
-            <TextInput
-              label="Email"
-              type="email"
-              value={email}
-              setValue={setEmail}
-              authErrors={authErrors}
-            />
-            <Typography variant="body2">{authErrors && authErrors}</Typography>
+    <ContentStyle>
+      <Card sx={{ p: 5 }}>
+        <Box sx={{ mb: 3 }}>
+          <Typography textAlign="center" variant="h3" gutterBottom>
+            Forgot Password
+          </Typography>
+        </Box>
+        <Stack spacing={2}>
+          <TextInput
+            label="User name"
+            type="text"
+            value={username}
+            setValue={setUserName}
+            authErrors={authErrors}
+          />
+          <TextInput
+            label="Email"
+            type="email"
+            value={email}
+            setValue={setEmail}
+            authErrors={authErrors}
+          />
+          <Typography variant="body2">{authErrors && authErrors}</Typography>
 
-            <SubmitButton
-              disabled={!username || !email ? true : false}
-              name="Submit"
-              onClick={handleClick}
-            />
-          </Stack>
-        </Card>
-      </ContentStyle>
+          <SubmitButton
+            disabled={!username || !email ? true : false}
+            name="Submit"
+            onClick={handleClick}
+          />
+        </Stack>
+      </Card>
+    </ContentStyle>
   );
 }

@@ -15,11 +15,16 @@ const uploadImage = async (data) => {
   return BackendService.imageUpload("upload/", data);
 };
 
+const getProfile = async () => {
+  return BackendService.get("user/profile");
+};
+
 //exporting the user service
 const UserService = {
   getUsers,
   createUser,
-  uploadImage,  
+  uploadImage,
+  getProfile,
 };
 
 export default UserService;
