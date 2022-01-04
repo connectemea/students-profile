@@ -5,7 +5,7 @@ import { Box, Container, Typography, Stack, Card } from "@mui/material";
 import PasswordField from "./utils/PasswordField";
 import SubmitButton from "./utils/SubmitButton";
 
-import userService from "../../../services/userService";
+import authService from "../../../services/authService";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -56,7 +56,8 @@ export default function Register() {
         password,
       };
       // logging in user
-      const response = await userService.resetPassword(data, token);
+      const response = await authService.resetPassword(data, token);
+      console.log(response);
       navigate("/user/login");
     } catch (err) {
       console.log(err.response);
