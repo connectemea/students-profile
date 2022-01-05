@@ -60,13 +60,11 @@ export default function AddDetails() {
   const clearError = () => setErrorMsg("");
 
   // menu items || dropdown items
-  const departmentArray = [{ name: "", id: "" }];
-
   const [dropdownValue, setDropdownValue] = useState();
-
   const handleTextInputChange = (e) => {
     setDropdownValue(e.target.value);
-  };
+    setDepartment(e.target.value);
+  }
 
   useEffect(() => {
     console.log("Useffect");
@@ -226,6 +224,7 @@ export default function AddDetails() {
   };
 
   console.log(departmentData);
+  console.log(department)
 
   // departmentData.map((menuItem) => {
   //   console.log(menuItem);
@@ -305,7 +304,7 @@ export default function AddDetails() {
                 dropdownValue={department}
                 setDropdownValue={setDepartment}
               /> */}
-              {/* <TextField
+              <TextField
                 select
                 varient="contained"
                 value={dropdownValue}
@@ -317,10 +316,10 @@ export default function AddDetails() {
                 fullWidth
                 onChange={handleTextInputChange}
               >
-                {departmentData.map((menuItem) => (
-                  <MenuItem value={menuItem._id}>{menuItem.name}</MenuItem>
+                {departmentData && departmentData.map((menuItem) => (
+                  <MenuItem value={menuItem?._id}>{menuItem?.name}</MenuItem>
                 ))}
-              </TextField> */}
+              </TextField>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
               <DatePickerInput
