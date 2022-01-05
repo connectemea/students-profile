@@ -13,12 +13,14 @@ import { styled } from "@mui/material/styles";
 import { useNavigate, useParams } from "react-router-dom";
 //student service
 import studentsService from "../../../services/studentsService";
+import userService from "../../../services/userService";
 //Custom Components
 import SelectInput from "../Inputs/SelectInput";
 import TextInput from "../Inputs/TextInput";
 import DatePickerInput from "../Inputs/DatePickerInput";
 import ImageUpload from "../Inputs/ImageUpload";
 import { studentContext } from "../../../context/studentContext";
+import StudentsList from "../../pages/Students/view/StudentsList";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
@@ -57,7 +59,7 @@ export default function PersonalDetailsInput() {
   const [dateOfBirth, setDateOfBirth] = useState(null);
   const [yearOfJoin, setYearOfJoin] = useState(null);
   const [department, setDepartment] = useState(null);
-  const [mobileNO, setMobileNO] = useState(null);
+  const [mobileNo, setMobileNo] = useState(null);
   const [admissionNO, setAdmissionNO] = useState(null);
   const [bloodGroup, setBloodGroup] = useState(null);
   const [maritalStatus, setMaritalStatus] = useState(null);
@@ -83,12 +85,13 @@ export default function PersonalDetailsInput() {
   //Function to Structure Data
   const structureData = () => {
     const personalDetails = {
+      profileImage,
       name,
       email,
       admissionNO,
       yearOfJoin,
       department,
-      mobileNO,
+      mobileNo,
       dateOfBirth,
       gender,
       bloodGroup,
@@ -116,7 +119,7 @@ export default function PersonalDetailsInput() {
       !name ||
       !email ||
       !department ||
-      !mobileNO ||
+      !mobileNo ||
       !gender ||
       !admissionNO ||
       !bloodGroup ||
@@ -125,7 +128,7 @@ export default function PersonalDetailsInput() {
       !caste ||
       !categoryOfAdmission ||
       !identificationMarkOne ||
-      !identificationMarkTwo||
+      !identificationMarkTwo ||
       !presentAddress ||
       !permanentAddress ||
       !residence ||
@@ -145,7 +148,7 @@ export default function PersonalDetailsInput() {
     if (!name) setName("");
     if (!email) setEmail("");
     if (!department) setDepartment("");
-    if (!mobileNO) setMobileNO("");
+    if (!mobileNo) setMobileNo("");
     if (!gender) setGender("");
     if (!admissionNO) setAdmissionNO("");
     if (!bloodGroup) setBloodGroup("");
@@ -164,27 +167,28 @@ export default function PersonalDetailsInput() {
   //To set the given value to the state
   const setCurrentDetails = (details) => {
     if (!details) return;
-    setName(details.name);
-    setEmail(details.email);
-    setDepartment(details.department);
-    setMobileNO(details.mobileNo);
-    setGender(details.gender);
-    setDepartment(details.department);
-    setYearOfJoin(details.yearOfJoin);
-    setGender(details.gender);
-    setAdmissionNO(details.admissionNO);
-    setBloodGroup(details.bloodGroup);
-    setMaritalStatus(details.maritalStatus);
-    setReligion(details.religion);
-    setCaste(details.cast);
-    setCategoryOfAdmission(details.categoriesOfAdmission);
-    setIdentificationMarkOne(details.identificationMarkOne);
-    setIdentificationMarkTwo(details.identificationMarkTwo);
-    setPresentAddress(details.presentAddress);
-    setPermanentAdress(details.permenentAddress);
-    setResidence(details.residence);
-    setDistanceFromCollege(details.distanceFromCollege)
-
+    setProfileImage(details?.profileImage);
+    setName(details?.name);
+    setEmail(details?.email);
+    setDepartment(details?.department);
+    setMobileNo(details?.mobileNo);
+    setDateOfBirth(details?.dateOfBirth);
+    setGender(details?.gender);
+    setDepartment(details?.department);
+    setYearOfJoin(details?.yearOfJoin);
+    setGender(details?.gender);
+    setAdmissionNO(details?.admissionNO);
+    setBloodGroup(details?.bloodGroup);
+    setMaritalStatus(details?.maritalStatus);
+    setReligion(details?.religion);
+    setCaste(details?.caste);
+    setCategoryOfAdmission(details?.categoriesOfAdmission);
+    setIdentificationMarkOne(details?.identificationMarkOne);
+    setIdentificationMarkTwo(details?.identificationMarkTwo);
+    setPresentAddress(details?.presentAddress);
+    setPermanentAdress(details?.permanentAddress);
+    setResidence(details?.residence);
+    setDistanceFromCollege(details?.distanceFromCollege);
   };
 
   // To handle next button click
@@ -195,20 +199,29 @@ export default function PersonalDetailsInput() {
       ...student,
       personalDetails: structureData(),
     });
+    console.log("updated the context");
     navigate("/student/details/educational");
   };
+  //To check its an image or not
+  const isImage = (file) => file.match(/.(jpg|jpeg|png|gif)$/i);
+
   //To handle edit
   const handleUpdate = async () => {
     //To check if there are any error
     if (!errorCheck()) return;
     const data = {
-        personalDetails:structureData()
+      personalDetails: structureData(),
+    };
+    if (!isImage(profileImage)) {
+      const imageUrl = await userService.uploadImage(profileImage);
+      data.personalDetails.profileImage = imageUrl;
     }
-    await studentsService.updateStudent(id,data);
+    await studentsService.updateStudent(id, data);
   };
   //To set the previously filled data
   useEffect(() => {
-    setCurrentDetails(student.personalDetails);
+    console.log("context",student);
+    setCurrentDetails(student?.personalDetails);
   }, []);
 
   //To set the data on update
@@ -217,7 +230,6 @@ export default function PersonalDetailsInput() {
       try {
         const student = await studentsService.getStudentById(id);
         setCurrentDetails(student.personalDetails);
-        console.log(student)
       } catch (error) {
         console.error(error?.response?.data?.message);
       }
@@ -284,8 +296,8 @@ export default function PersonalDetailsInput() {
               name="Mobile Number"
               label="Mobile Number"
               type="number"
-              textValue={mobileNO}
-              setTextValue={setMobileNO}
+              textValue={mobileNo}
+              setTextValue={setMobileNo}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>

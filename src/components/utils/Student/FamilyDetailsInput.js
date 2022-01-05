@@ -12,12 +12,12 @@ import {
   Box,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-
 //Custom Components
 import TextInput from "../Inputs/TextInput";
 import { useNavigate, useParams } from "react-router-dom";
 //student Service
 import studentsService from "../../../services/studentsService";
+import userService from "../../../services/userService";
 
 import { studentContext } from "../../../context/studentContext";
 
@@ -26,8 +26,7 @@ const ProfileCard = styled(Card)(({ theme }) => ({
   paddingBottom: `${theme.spacing(4)} !important`,
 }));
 
-export default function FamilyDetailsInput(props) {
-  const { currentData } = props;
+export default function FamilyDetailsInput() {
   const { student, setStudent } = useContext(studentContext);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -169,41 +168,58 @@ export default function FamilyDetailsInput(props) {
   //To set the given value to the state
   const setCurrentDetails = (details) => {
     if (!details) return;
-    setFatherName(details.father.name);
-    setFatherQualification(details.father.qualification);
-    setFatherAnnualIncome();
-    setFatherOccupation(details.father.occupation);
-    setFatherNO();
-    setFatherAddress(details.father.officialAddress);
+    setFatherName(details?.father?.name);
+    setFatherQualification(details?.father?.qualification);
+    setFatherAnnualIncome(details?.father?.annualIncome);
+    setFatherOccupation(details?.father?.occupation);
+    setFatherNO(details?.father?.mobileNo);
+    setFatherAddress(details?.father?.officialAddress);
 
     //mother Details
-
-    setMotherName(details.mother.name);
-    setMotherQualification(details.mother.qualification);
-    setMotherAnnualIncome();
-    setMotherOccupation(details.mother.occupation);
-    setMotherNO();
-    setMotherAddress(details.mother.officialAddress);
+    setMotherName(details?.mother?.name);
+    setMotherQualification(details?.mother?.qualification);
+    setMotherAnnualIncome(details?.mother?.annualIncome);
+    setMotherOccupation(details?.mother?.occupation);
+    setMotherNO(details?.mother?.mobileNo);
+    setMotherAddress(details?.mother?.officialAddress);
 
     //Guardian details
-
-    setGuardianName(details.guardian.name);
-    setGuardianQualification();
-    setGuardianAnnualIncome();
-    setGuardianOccupation(details.guardian.occupation);
-    setGuardianNO();
-    setGuardianAddress(details.guardian.officialAddress);
+    setGuardianName(details?.guardian?.name);
+    setGuardianQualification(details?.guardian?.educationQualification);
+    setGuardianAnnualIncome(details?.guardian?.annualIncome);
+    setGuardianOccupation(details?.guardian?.occupation);
+    setGuardianNO(details?.guardian?.mobileNo);
+    setGuardianAddress(details?.guardian?.officialAddress);
   };
 
   //To handle next button click
-  const handleNext = () => {
+  const handleSubmit = async () => {
     //To check if there are any error
     if (!errorCheck()) return;
+    let data = {
+      ...student,
+      familyDetails: structureData(),
+    };
+    const imageData = data?.personalDetails?.profileImage;
+    //setting the submitted data in the student context
+    setStudent(data);
+    try {
+      const imageUrl = await userService.uploadImage(imageData);
+      data.profileImage = imageUrl.data;
+      await studentsService.addStudent(data);
+      navigate("/app/dashboard");
+      setStudent(null);
+    } catch (error) {
+      console.error(error?.response?.data?.message);
+    }
+  };
+  //To handle back button click
+  const handleBack = () => {
     setStudent({
       ...student,
       familyDetails: structureData(),
     });
-    navigate("/student/list");
+    navigate("/student/details/educational");
   };
   //To handle edit
   const handleUpdate = async () => {
@@ -224,9 +240,7 @@ export default function FamilyDetailsInput(props) {
     const getStudent = async () => {
       try {
         const student = await studentsService.getStudentById(id);
-        console.log(student)
         setCurrentDetails(student.familyDetails);
-        
       } catch (error) {
         console.error(error?.response?.data?.message);
       }
@@ -461,15 +475,26 @@ export default function FamilyDetailsInput(props) {
             update
           </Button>
         ) : (
-          <Button
-            sx={{ mt: 2 }}
-            onClick={handleNext}
-            size="large"
-            color="info"
-            variant="contained"
-          >
-            Next
-          </Button>
+          <>
+            <Button
+              sx={{ mt: 2, mr: 2 }}
+              size="large"
+              color="info"
+              variant="contained"
+              onClick={handleBack}
+            >
+              Back
+            </Button>
+            <Button
+              sx={{ mt: 2 }}
+              onClick={handleSubmit}
+              size="large"
+              color="info"
+              variant="contained"
+            >
+              Submit
+            </Button>
+          </>
         )}
       </Box>
     </>

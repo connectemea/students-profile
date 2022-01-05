@@ -20,6 +20,7 @@ export default function SelectInput(props) {
       color="info"
       fullWidth
       onChange={handleTextInputChange}
+      InputLabelProps={{ shrink: dropdownValue }}
     >
       {menuItems.map((menuItem) => (
         <MenuItem value={menuItem}>{menuItem}</MenuItem>

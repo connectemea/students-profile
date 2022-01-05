@@ -196,50 +196,56 @@ export default function EducationalDetailsInput(props) {
         },
       ],
     };
+    return educationDetails;
   };
 
   //To set the given value to the state
   const setCurrentDetails = (details) => {
     if (!details) return;
-    setSslcSchoolName(details.tenthStd.schoolName);
-    setSslcMediumOfInstruction(details.tenthStd.syllabus);
-    setSslcEnglishMark(details.tenthStd.english);
-    setSslcMathsMark(details.tenthStd.maths);
-    setSslcScienceMark(details.tenthStd.science);
-    setSslcSocialScienceMark(details.tenthStd.socialScience);
-    // Plus two
-    setHseSchoolName(details.twelthStd.schoolName);
-    setHseSyllabus(details.twelthStd.syllabus);
-    setHseCourse(details.twelthStd.course);
-    setHseEnglish(details.twelthStd.sub[0]);
-    setHseSub1(details.twelthStd.sub[1]);
-    setHseSub2(details.twelthStd.sub[2]);
-    setHseSub3(details.twelthStd.sub[3]);
-    setHseSub4(details.twelthStd.sub[4]);
-    setHseSub1Mark(details.twelthStd.subMark[0]);
-    setHseSub2Mark(details.twelthStd.subMark[1]);
-    setHseSub3Mark(details.twelthStd.subMark[2]);
-    setHseSub4Mark(details.twelthStd.subMark[3]);
-    setCollegeName(details.degree.collegeName);
-    setUgUniversity(details.degree.university);
-    setUgCourse(details.degree.course);
-    setUgCoreMark(details.degree.coreMark);
-    setUgComplementaryMark(details.degree.ugComplementaryMark);
-    setUgCommonEnglishMark(details.degree.ugCommonEnglishMark);
-    setUgCommonLanguageMark(details.degree.ugCommonLanguageMark);
-    setUgOpenMark(details.degree.ugOpenMark);
-    setOthInstitutionName(details.otherQualifications.othInstitutionName);
-    setOthCourseType(details.otherQualifications.othCourseType);
-    setOthGrade(details.otherQualifications.othGrade);
-    setOthUniversity(details.otherQualifications.othGrade);
-    setAddiInstituionName(details.otherQualifications.addiInstituionName);
+    //high school details
+    setSslcSchoolName(details?.tenthStd?.schoolName);
+    setSslcMediumOfInstruction(details?.tenthStd?.syllabus);
+    setSslcEnglishMark(details?.tenthStd?.english);
+    setSslcMathsMark(details?.tenthStd?.maths);
+    setSslcScienceMark(details?.tenthStd?.science);
+    setSslcSocialScienceMark(details?.tenthStd?.socialScience);
+    // higher secondary details
+    setHseSchoolName(details?.twelthStd?.schoolName);
+    setHseSyllabus(details?.twelthStd?.syllabus);
+    setHseCourse(details?.twelthStd?.course);
+    setHseEnglish(details?.twelthStd?.sub[0]);
+    setHseSub1(details?.twelthStd?.sub[1]);
+    setHseSub2(details?.twelthStd?.sub[2]);
+    setHseSub3(details?.twelthStd?.sub[3]);
+    setHseSub4(details?.twelthStd?.sub[4]);
+    setHseSub1Mark(details?.twelthStd?.subMark[0]);
+    setHseSub2Mark(details?.twelthStd?.subMark[1]);
+    setHseSub3Mark(details?.twelthStd?.subMark[2]);
+    setHseSub4Mark(details?.twelthStd?.subMark[3]);
+    //Degree details
+    setCollegeName(details?.degree?.collegeName);
+    setUgUniversity(details?.degree?.university);
+    setUgCourse(details?.degree?.course);
+    setUgCoreMark(details?.degree?.coreMark);
+    setUgComplementaryMark(details?.degree?.ugComplementaryMark);
+    setUgCommonEnglishMark(details?.degree?.ugCommonEnglishMark);
+    setUgCommonLanguageMark(details?.degree?.ugCommonLanguageMark);
+    setUgOpenMark(details?.degree?.ugOpenMark);
+    //other qualifications details
+    setOthInstitutionName(details?.otherQualifications?.othInstitutionName);
+    setOthCourseType(details?.otherQualifications?.othCourseType);
+    setOthGrade(details?.otherQualifications?.othGrade);
+    setOthUniversity(details?.otherQualifications?.othGrade);
+    setAddiInstituionName(details?.otherQualifications?.addiInstituionName);
     setAddiCourse();
     setAddiUniversity();
     setAddiMarks();
+    //extra curricular details
     setYearOfParticipation();
     setPrize();
     setPerfomance();
   };
+
   //To handle next button click
   const handleNext = () => {
     //To check if there are any error
@@ -250,6 +256,18 @@ export default function EducationalDetailsInput(props) {
     });
     navigate("/student/details/family");
   };
+
+  //To handle previous button click
+  const handleBack = () => {
+    //To check if there are any error
+    // if (!errorCheck()) return;
+    setStudent({
+      ...student,
+      educationalDetails: structureData(),
+    });
+    navigate("/student/details/personal");
+  };
+
   //To handle edit
   const handleUpdate = async () => {
     //To check if there are any error
@@ -261,7 +279,8 @@ export default function EducationalDetailsInput(props) {
   };
   //To set the previously filled data
   useEffect(() => {
-    setCurrentDetails(student.educationDetails);
+    console.log("data from the context from educational", student);
+    setCurrentDetails(student?.educationDetails);
   }, []);
 
   //To set the data on update
@@ -270,7 +289,6 @@ export default function EducationalDetailsInput(props) {
       try {
         const student = await studentsService.getStudentById(id);
         setCurrentDetails(student.educationDetails);
-        console.log(student)
       } catch (error) {
         console.error(error?.response?.data?.message);
       }
@@ -691,15 +709,26 @@ export default function EducationalDetailsInput(props) {
             update
           </Button>
         ) : (
-          <Button
-            sx={{ mt: 2 }}
-            onClick={handleNext}
-            size="large"
-            color="info"
-            variant="contained"
-          >
-            Next
-          </Button>
+          <>
+            <Button
+              sx={{ mt: 2, mr: 2 }}
+              onClick={handleBack}
+              size="large"
+              color="info"
+              variant="contained"
+            >
+              Back
+            </Button>
+            <Button
+              sx={{ mt: 2 }}
+              onClick={handleNext}
+              size="large"
+              color="info"
+              variant="contained"
+            >
+              Next
+            </Button>
+          </>
         )}
       </Box>
     </>

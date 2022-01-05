@@ -56,8 +56,6 @@ const destroy = async (path, headers = {}, params = {}) => {
 
 const imageUpload = async (path, data = {}, params = {}) => {
   axios({
-    //   //generating url
-    // const URL = `${BACKEND_URL.BASE_URL}${path}`;
     method: "post",
     url: `${BACKEND_URL.BASE_URL}${path}`,
     data: data,
