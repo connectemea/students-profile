@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 // material components
 import { Button, Typography, Grid, Card, Box, Container } from "@mui/material";
 
+import { MenuItem, TextField } from "@mui/material";
+
 // material icons
 import { styled } from "@mui/material/styles";
 
@@ -57,7 +59,14 @@ export default function AddDetails() {
   const [errorMsg, setErrorMsg] = useState();
   const clearError = () => setErrorMsg("");
 
-  const departmentArray=[{name:"",id:""}]
+  // menu items || dropdown items
+  const departmentArray = [{ name: "", id: "" }];
+
+  const [dropdownValue, setDropdownValue] = useState();
+
+  const handleTextInputChange = (e) => {
+    setDropdownValue(e.target.value);
+  };
 
   useEffect(() => {
     console.log("Useffect");
@@ -66,14 +75,14 @@ export default function AddDetails() {
       try {
         console.log("get Deparment");
         const departmentList = await departemntService.getDepartment();
-        setDepartmentData(departmentList)
-        console.log(departmentData)
+        setDepartmentData(departmentList);
+        console.log(departmentData);
       } catch (err) {
         console.error(err.response);
       }
     };
 
-    console.log(departmentData)
+    // console.log(departmentData);
 
     // to Populate fields  for update
     async function getMe() {
@@ -115,8 +124,6 @@ export default function AddDetails() {
   // console.log(teacherData.cast);
 
   console.log("welcome to the add details page");
-  console.log(departmentData)
-
 
   const handleAddTeacherDetails = async () => {
     try {
@@ -218,6 +225,17 @@ export default function AddDetails() {
     if (!educationQualification) setEducationQualification("");
   };
 
+  console.log(departmentData);
+
+  // departmentData.map((menuItem) => {
+  //   console.log(menuItem);
+  // });
+  // departmentData.map((menuItem) => {
+  //   console.log(menuItem._id);
+  // });
+
+  // console.log(departmentData[0]._id)
+
   return (
     <Page title="TeacherDetails">
       <Container maxWidth="xl" sx={{ mt: 2, p: 2, pl: 0 }}>
@@ -280,13 +298,29 @@ export default function AddDetails() {
               />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
-              <SelectInput
+              {/* <SelectInput
                 label="Department"
                 name="department"
                 menuItems={departments}
                 dropdownValue={department}
                 setDropdownValue={setDepartment}
-              />
+              /> */}
+              {/* <TextField
+                select
+                varient="contained"
+                value={dropdownValue}
+                name="deparment"
+                label="deparment"
+                error={dropdownValue === "" ? true : false}
+                helperText={dropdownValue === "" ? `${name} is required` : null}
+                color="info"
+                fullWidth
+                onChange={handleTextInputChange}
+              >
+                {departmentData.map((menuItem) => (
+                  <MenuItem value={menuItem._id}>{menuItem.name}</MenuItem>
+                ))}
+              </TextField> */}
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
               <DatePickerInput
