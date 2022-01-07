@@ -226,27 +226,29 @@ export default function EducationalDetailsInput(props) {
     setHseSub3Mark(details?.twelthStd?.subMark[3]);
     setHseSub4Mark(details?.twelthStd?.subMark[4]);
     //Degree details
-    setCollegeName(details?.degree?.collegeName);
-    setUgUniversity(details?.degree?.university);
-    setUgCourse(details?.degree?.course);
-    setUgCoreMark(details?.degree?.coreMark);
-    setUgComplementaryMark(details?.degree?.ugComplementaryMark);
-    setUgCommonEnglishMark(details?.degree?.ugCommonEnglishMark);
-    setUgCommonLanguageMark(details?.degree?.ugCommonLanguageMark);
-    setUgOpenMark(details?.degree?.ugOpenMark);
+    setCollegeName(details?.degree[0]?.college);
+    setUgUniversity(details?.degree[0]?.university);
+    setUgCourse(details?.degree[0]?.course);
+    setUgCoreMark(details?.degree[0]?.core);
+    setUgComplementaryMark(details?.degree[0]?.complementary);
+    setUgCommonEnglishMark(details?.degree[0]?.commonOne);
+    setUgCommonLanguageMark(details?.degree[0]?.commonTwo);
+    setUgOpenMark(details?.degree[0]?.open);
     //other qualifications details
-    setOthInstitutionName(details?.otherQualifications?.othInstitutionName);
-    setOthCourseType(details?.otherQualifications?.othCourseType);
-    setOthGrade(details?.otherQualifications?.othGrade);
-    setOthUniversity(details?.otherQualifications?.othGrade);
-    setAddiInstituionName(details?.otherQualifications?.addiInstituionName);
-    setAddiCourse();
-    setAddiUniversity();
-    setAddiMarks();
+    setOthInstitutionName(details?.otherQualifications[0]?.institutionName);
+    setOthCourseType(details?.otherQualifications[0]?.courseType);
+    setOthGrade(details?.otherQualifications[0]?.Grade);
+    setOthUniversity(details?.otherQualifications[0]?.university);
+    //Additional course
+    setAddiInstituionName(details?.additionalCourse[0]?.institutionName);
+    setAddiCourse(details?.additionalCourse[0]?.courseName);
+    setAddiUniversity(details?.additionalCourse[0]?.university);
+    setAddiMarks(details?.additionalCourse[0]?.cgp);
     //extra curricular details
-    setYearOfParticipation();
-    setPrize();
-    setPerfomance();
+    setActivity(details?.extraCurricular[0]?.activity);
+    setYearOfParticipation(details?.extraCurricular[0]?.yearOfParticipation);
+    setPrize(details?.extraCurricular[0]?.Price);
+    setPerfomance(details?.extraCurricular[0]?.detailsOfExcellenceInPerformance);
   };
 
   //To handle next button click
