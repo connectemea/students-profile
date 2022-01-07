@@ -93,17 +93,17 @@ export default function FamilyDetailsInput() {
       father: {
         name: fatherName,
         occupation: fatherOccupation,
-        annualIncome: fatherAnnualIncome,
         officialAddress: fatherAddress,
-        qualification: fatherQualification,
+        educationQualification: fatherQualification,
+        annualIncome: fatherAnnualIncome,
         number: fatherNO,
       },
       mother: {
         name: motherName,
         occupation: motherOccupation,
-        annualIncome: motherAnnualIncome,
         officialAddress: motherAddress,
-        qualification: motherQualification,
+        educationQualification: motherQualification,
+        annualIncome: motherAnnualIncome,
         number: motherNO,
       },
       guardian: {
@@ -172,7 +172,7 @@ export default function FamilyDetailsInput() {
   const setCurrentDetails = (details) => {
     if (!details) return;
     setFatherName(details?.father?.name);
-    setFatherQualification(details?.father?.qualification);
+    setFatherQualification(details?.father?.educationQualification);
     setFatherAnnualIncome(details?.father?.annualIncome);
     setFatherOccupation(details?.father?.occupation);
     setFatherNO(details?.father?.number);
@@ -180,7 +180,7 @@ export default function FamilyDetailsInput() {
 
     //mother Details
     setMotherName(details?.mother?.name);
-    setMotherQualification(details?.mother?.qualification);
+    setMotherQualification(details?.mother?.educationQualification);
     setMotherAnnualIncome(details?.mother?.annualIncome);
     setMotherOccupation(details?.mother?.occupation);
     setMotherNO(details?.mother?.number);
