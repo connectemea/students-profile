@@ -108,7 +108,8 @@ export default function FamilyDetailsInput() {
         name: guardianName,
         occupation: guardianOccupation,
         officialAddress: guardianAddress,
-        qualification: guardianQualification,
+        educationQualification: guardianQualification,
+        annualIncome: guardianAnnualIncome,
         number: guardianNO,
       },
     };
@@ -200,12 +201,15 @@ export default function FamilyDetailsInput() {
       ...student,
       familyDetails: structureData(),
     };
+    console.log(data);
     const imageData = data?.personalDetails?.profileImage;
     //setting the submitted data in the student context
     setStudent(data);
     try {
-      const imageUrl = await userService.uploadImage(imageData);
-      data.profileImage = imageUrl.data;
+      const formData = new FormData();
+      formData.append("profile", imageData);
+      const imageUrl = await userService.updateImage(formData);
+      data.profileImage = imageUrl.data.filepath;
       await studentsService.addStudent(data);
       navigate("/app/dashboard");
       setStudent(null);

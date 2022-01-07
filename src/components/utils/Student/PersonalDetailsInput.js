@@ -199,7 +199,6 @@ export default function PersonalDetailsInput() {
       ...student,
       personalDetails: structureData(),
     });
-    console.log("updated the context");
     navigate("/student/details/educational");
   };
   //To check its an image or not
@@ -213,14 +212,16 @@ export default function PersonalDetailsInput() {
       personalDetails: structureData(),
     };
     if (!isImage(profileImage)) {
-      const imageUrl = await userService.uploadImage(profileImage);
-      data.personalDetails.profileImage = imageUrl;
+      const formData = new FormData();
+      formData.append("profile", profileImage);
+      const imageUrl = await userService.updateImage(formData);
+      data.personalDetails.profileImage = imageUrl.filepath;
     }
     await studentsService.updateStudent(id, data);
   };
+
   //To set the previously filled data
   useEffect(() => {
-    console.log("context",student);
     setCurrentDetails(student?.personalDetails);
   }, []);
 

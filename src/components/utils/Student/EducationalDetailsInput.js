@@ -201,7 +201,9 @@ export default function EducationalDetailsInput(props) {
 
   //To set the given value to the state
   const setCurrentDetails = (details) => {
+    console.log("i am called bro");
     if (!details) return;
+    console.log("i am tackled that man");
     //high school details
     setSslcSchoolName(details?.tenthStd?.schoolName);
     setSslcMediumOfInstruction(details?.tenthStd?.syllabus);
@@ -218,7 +220,7 @@ export default function EducationalDetailsInput(props) {
     setHseSub2(details?.twelthStd?.sub[2]);
     setHseSub3(details?.twelthStd?.sub[3]);
     setHseSub4(details?.twelthStd?.sub[4]);
-    setHseEnglishMark(details?.twelthStd?.subMark[0])
+    setHseEnglishMark(details?.twelthStd?.subMark[0]);
     setHseSub1Mark(details?.twelthStd?.subMark[1]);
     setHseSub2Mark(details?.twelthStd?.subMark[2]);
     setHseSub3Mark(details?.twelthStd?.subMark[3]);
@@ -251,9 +253,10 @@ export default function EducationalDetailsInput(props) {
   const handleNext = () => {
     //To check if there are any error
     if (!errorCheck()) return;
+    console.log("saved to context")
     setStudent({
       ...student,
-      educationalDetails: structureData(),
+      educationDetails: structureData(),
     });
     navigate("/student/details/family");
   };
@@ -264,7 +267,7 @@ export default function EducationalDetailsInput(props) {
     // if (!errorCheck()) return;
     setStudent({
       ...student,
-      educationalDetails: structureData(),
+      educationDetails: structureData(),
     });
     navigate("/student/details/personal");
   };
