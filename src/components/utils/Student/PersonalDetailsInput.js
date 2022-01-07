@@ -182,7 +182,7 @@ export default function PersonalDetailsInput() {
     setMaritalStatus(details?.maritalStatus);
     setReligion(details?.religion);
     setCaste(details?.caste);
-    setCategoryOfAdmission(details?.categoriesOfAdmission);
+    setCategoryOfAdmission(details?.categoryOfAdmission);
     setIdentificationMarkOne(details?.identificationMarkOne);
     setIdentificationMarkTwo(details?.identificationMarkTwo);
     setPresentAddress(details?.presentAddress);
