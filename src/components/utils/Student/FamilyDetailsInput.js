@@ -93,6 +93,7 @@ export default function FamilyDetailsInput() {
       father: {
         name: fatherName,
         occupation: fatherOccupation,
+        annualIncome: fatherAnnualIncome,
         officialAddress: fatherAddress,
         qualification: fatherQualification,
         number: fatherNO,
@@ -100,6 +101,7 @@ export default function FamilyDetailsInput() {
       mother: {
         name: motherName,
         occupation: motherOccupation,
+        annualIncome: motherAnnualIncome,
         officialAddress: motherAddress,
         qualification: motherQualification,
         number: motherNO,
@@ -173,7 +175,7 @@ export default function FamilyDetailsInput() {
     setFatherQualification(details?.father?.qualification);
     setFatherAnnualIncome(details?.father?.annualIncome);
     setFatherOccupation(details?.father?.occupation);
-    setFatherNO(details?.father?.mobileNo);
+    setFatherNO(details?.father?.number);
     setFatherAddress(details?.father?.officialAddress);
 
     //mother Details
@@ -181,7 +183,7 @@ export default function FamilyDetailsInput() {
     setMotherQualification(details?.mother?.qualification);
     setMotherAnnualIncome(details?.mother?.annualIncome);
     setMotherOccupation(details?.mother?.occupation);
-    setMotherNO(details?.mother?.mobileNo);
+    setMotherNO(details?.mother?.number);
     setMotherAddress(details?.mother?.officialAddress);
 
     //Guardian details
@@ -189,7 +191,7 @@ export default function FamilyDetailsInput() {
     setGuardianQualification(details?.guardian?.educationQualification);
     setGuardianAnnualIncome(details?.guardian?.annualIncome);
     setGuardianOccupation(details?.guardian?.occupation);
-    setGuardianNO(details?.guardian?.mobileNo);
+    setGuardianNO(details?.guardian?.number);
     setGuardianAddress(details?.guardian?.officialAddress);
   };
 
