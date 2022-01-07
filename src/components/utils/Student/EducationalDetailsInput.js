@@ -218,10 +218,11 @@ export default function EducationalDetailsInput(props) {
     setHseSub2(details?.twelthStd?.sub[2]);
     setHseSub3(details?.twelthStd?.sub[3]);
     setHseSub4(details?.twelthStd?.sub[4]);
-    setHseSub1Mark(details?.twelthStd?.subMark[0]);
-    setHseSub2Mark(details?.twelthStd?.subMark[1]);
-    setHseSub3Mark(details?.twelthStd?.subMark[2]);
-    setHseSub4Mark(details?.twelthStd?.subMark[3]);
+    setHseEnglishMark(details?.twelthStd?.subMark[0])
+    setHseSub1Mark(details?.twelthStd?.subMark[1]);
+    setHseSub2Mark(details?.twelthStd?.subMark[2]);
+    setHseSub3Mark(details?.twelthStd?.subMark[3]);
+    setHseSub4Mark(details?.twelthStd?.subMark[4]);
     //Degree details
     setCollegeName(details?.degree?.collegeName);
     setUgUniversity(details?.degree?.university);
