@@ -28,6 +28,9 @@ import UpdateEducationDeatils from "./components/pages/Students/Edit/Educational
 import UpdateFamilyDetails from "./components/pages/Students/Edit/FamilyDetails";
 import DepartmentDetails from "./components/pages/Department/View/DptDetails";
 import Add from "./components/pages/Department/Add/Add";
+//private route
+import PrivateRoute from "./PrivateRoute";
+import PrivateWrapper from "./PrivateWrapper";
 
 function App() {
   return (
@@ -39,50 +42,74 @@ function App() {
         {/* User profile provider */}
         <ProfileProvider>
           <Routes>
-            {/* Home routes (Dashboard) */}
-            <Route path="/app" element={<DashboardLayout />}>
-              <Route path="/app" element={<Navigate to="/app/home" />} />
-              <Route path="home" element={<Home />} />
-
-              {/* Teachers routes (Dashboard)*/}
-              <Route path="teacher">
+            <Route element={<PrivateWrapper />}>
+              {/* Home routes (Dashboard) */}
+              <Route path="/app" element={<DashboardLayout/>}>
+                <Route path="/app" element={<Navigate to="/app/home" />} />
                 <Route
-                  path="/app/teacher"
-                  element={<Navigate to="/app/teacher/list" />}
+                  path="home"
+                  element={
+                    <PrivateRoute type="student" level="high">
+                      <Home/>
+                    </PrivateRoute>
+                  }
                 />
-                <Route path="view/:id" element={<TeachersView />} />
-                <Route path="list" element={<TeachersList />} />
-                <Route path="add" element={<AddTeacher />} />
-              </Route>
 
-              {/* students routes (Dashboard)*/}
-              <Route path="student">
-                <Route
-                  path="/app/student"
-                  element={<Navigate to="/app/student/list" />}
-                />
-                <Route path="list" element={<StudentsList />} />
-                <Route path="add" element={<AddStudent />} />
-                <Route path="view/:id" element={<Details />} />
-                <Route path="update/:id">
-                  <Route path="personal" element={<UpdatePersonalDeatils />} />
+                {/* Teachers routes (Dashboard)*/}
+                <Route path="teacher">
                   <Route
-                    path="educational"
-                    element={<UpdateEducationDeatils />}
+                    path="/app/teacher"
+                    element={<Navigate to="/app/teacher/list" />}
                   />
-                  <Route path="family" element={<UpdateFamilyDetails />} />
+                  <Route path="view/:id" element={<TeachersView />} />
+                  <Route path="list" element={<TeachersList />} />
+                  <Route path="add" element={<AddTeacher />} />
+                </Route>
+
+                {/* students routes (Dashboard)*/}
+                <Route path="student">
+                  <Route
+                    path="/app/student"
+                    element={<Navigate to="/app/student/list" />}
+                  />
+                  <Route path="list" element={<StudentsList />} />
+                  <Route path="add" element={<AddStudent />} />
+                  <Route path="view/:id" element={<Details />} />
+                  <Route path="update/:id">
+                    <Route
+                      path="personal"
+                      element={<UpdatePersonalDeatils />}
+                    />
+                    <Route
+                      path="educational"
+                      element={<UpdateEducationDeatils />}
+                    />
+                    <Route path="family" element={<UpdateFamilyDetails />} />
+                  </Route>
+                </Route>
+                <Route path="department">
+                  <Route
+                    path="/app/department"
+                    element={<Navigate to="/app/department/list" />}
+                  />
+                  <Route path="list" element={<DepartmentDetails />} />
+                  <Route path="details" element={<DptStudentList />} />
+                  <Route path="student/:id" element={<Details />} />
+                  <Route path="add" element={<Add />} />
+                  <Route path="edit/:id" element={<Add update={true} />} />
                 </Route>
               </Route>
-              <Route path="department">
-                <Route
-                  path="/app/department"
-                  element={<Navigate to="/app/department/list" />}
-                />
-                <Route path="list" element={<DepartmentDetails />} />
-                <Route path="details" element={<DptStudentList />} />
-                <Route path="student/:id" element={<Details />} />
-                <Route path="add" element={<Add />} />
-                <Route path="edit/:id" element={<Add update={true} />} />
+              {/* teacher details forms routes */}
+              <Route path="/teacher/details">
+                <Route path="personal" element={<AddDetails />} />
+              </Route>
+
+              {/* student details forms routes */}
+              <Route path="/student/details">
+                <Route path="personal" element={<PersonalDetails />} />
+                <Route path="educational" element={<EducationalDetails />} />
+                <Route path="family" element={<FamilyDetails />} />
+                <Route path="dependencies" element={<Dependencies />} />
               </Route>
             </Route>
 
@@ -94,18 +121,6 @@ function App() {
               <Route path="recover/:token" element={<RecoverPassword />} />
             </Route>
 
-            {/* teacher details forms routes */}
-            <Route path="/teacher/details">
-              <Route path="personal" element={<AddDetails />} />
-            </Route>
-
-            {/* student details forms routes */}
-            <Route path="/student/details">
-              <Route path="personal" element={<PersonalDetails />} />
-              <Route path="educational" element={<EducationalDetails />} />
-              <Route path="family" element={<FamilyDetails />} />
-              <Route path="dependencies" element={<Dependencies />} />
-            </Route>
             <Route path="/" element={<Navigate to="/user/login" />} />
           </Routes>
         </ProfileProvider>
