@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 
 // material components
 import { Button, Typography, Grid, Card, Box, Container } from "@mui/material";
 
+import { MenuItem, TextField } from "@mui/material";
 
 // material icons
 import { styled } from "@mui/material/styles";
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
-
-import { useNavigate } from "react-router-dom";
 
 //Custom component
 import TextInput from "../../../utils/Inputs/TextInput";
@@ -20,7 +22,8 @@ import ImageUpload from "../../../utils/Inputs/ImageUpload";
 
 // importing backend services
 import teacherService from "../../../../services//teacherService";
-import userService from "../../../../services//userService";
+import userService from "../../../../services/userService";
+import departemntService from "../../../../services/departmentService";
 
 const RootStyle = styled("div")(({ theme }) => ({
   padding: theme.spacing(4)
@@ -32,7 +35,11 @@ const genders = ["Female", "Male", "Other"];
 const status = ["Unmarried", "Married"];
 
 export default function AddDetails() {
+  const { id } = useParams();
+  console.log(id);
   const navigate = useNavigate();
+
+  // const [teacherData, setTeacherData] = useState();
 
   const [profileImage, setProfileImage] = useState();
   const [name, setName] = useState();
@@ -47,12 +54,76 @@ export default function AddDetails() {
   const [cast, setCast] = useState();
   const [educationQualification, setEducationQualification] = useState();
 
+  const [departmentData, setDepartmentData] = useState();
+
   const [errorMsg, setErrorMsg] = useState();
   const clearError = () => setErrorMsg("");
 
-  const handleAddTeacherDetails = async () => {
+  // menu items || dropdown items
+  const [dropdownValue, setDropdownValue] = useState();
+  const handleTextInputChange = (e) => {
+    setDropdownValue(e.target.value);
+    setDepartment(e.target.value);
+  }
 
-    console.log("handleAddTeacher function started")
+  useEffect(() => {
+    console.log("Useffect");
+
+    const getDepartment = async () => {
+      try {
+        console.log("get Deparment");
+        const departmentList = await departemntService.getDepartment();
+        setDepartmentData(departmentList);
+        console.log(departmentData);
+      } catch (err) {
+        console.error(err.response);
+      }
+    };
+
+    // console.log(departmentData);
+
+    // to Populate fields  for update
+    async function getMe() {
+      try {
+        console.log("getme funciton is working");
+        const response = await teacherService.getTeacherMe();
+        console.log(response);
+        const setTeacherData = (response) => {
+          console.log(response);
+          setProfileImage(
+            `https://student-profile-api.herokuapp.com/upload/${response.userId.profileImage}`
+          );
+          setName(response.name);
+          setShortName(response.shortName);
+          setEmail(response.email);
+          setDepartment(response.department);
+          setJoiningYear(response.joinYear);
+          setGender(response.gender);
+          setMaritalStatus(response.maritalStatus);
+          setPhoneNo(response.phoneNo);
+          setRelegion(response.religion);
+          setCast(response.cast);
+          setEducationQualification(response.educationQualification);
+        };
+
+        setTeacherData(response);
+      } catch (err) {
+        console.log(err?.response?.data?.message);
+      }
+    }
+    if (id) getMe();
+    getDepartment();
+  }, [id]);
+
+  // console.log(gender);
+  // console.log(maritalStatus);
+  // console.log(joinYear);
+  console.log(profileImage);
+  // console.log(teacherData.cast);
+
+  console.log("welcome to the add details page");
+
+  const handleAddTeacherDetails = async () => {
     try {
       clearError();
       const userData = {
@@ -69,36 +140,32 @@ export default function AddDetails() {
         cast,
         educationQualification
       };
-      // console.log(profileImage);
 
       // Converting data into form data format
       const formData = new FormData();
       formData.append("profile", profileImage);
 
-      // console.log(`form data = ${formData}`);
-      // console.log(formData);
-      const image = {
-        formData
-      };
       // adding user to db
-      // const response = await teacherService.createTeacher(userData);
-      // console.log(response);
 
-      await teacherService.createTeacher(userData);
-
-      const response = await userService.uploadImage(image);
-      console.log(`image response`)
-      console.log(response)
+      if (id) {
+        console.log("hi forom response update");
+        const response = await teacherService.updateTeacher(userData, id);
+        console.log(response);
+      } else {
+        console.log("hi forom response create");
+        const response = await teacherService.createTeacher(userData);
+        console.log(response);
+        const imageRes = await userService.uploadImage(formData);
+      }
 
       // clearing the form
       clearUserCredentials();
 
       // Navigating to next page
-      // navigate("/teacher/view");
+      // __________________________________________________________ Needed fixing
+      navigate("http://localhost:3001/");
     } catch (err) {
       console.log(err);
-      // console.log(err.response);
-      // setErrorMsg(err.response.message);
     }
   };
 
@@ -152,6 +219,18 @@ export default function AddDetails() {
     if (!cast) setCast("");
     if (!educationQualification) setEducationQualification("");
   };
+
+  console.log(departmentData);
+  console.log(department)
+
+  // departmentData.map((menuItem) => {
+  //   console.log(menuItem);
+  // });
+  // departmentData.map((menuItem) => {
+  //   console.log(menuItem._id);
+  // });
+
+  // console.log(departmentData[0]._id)
 
   return (
     <Page title="TeacherDetails">
@@ -215,13 +294,29 @@ export default function AddDetails() {
               />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
-              <SelectInput
+              {/* <SelectInput
                 label="Department"
                 name="department"
                 menuItems={departments}
                 dropdownValue={department}
                 setDropdownValue={setDepartment}
-              />
+              /> */}
+              <TextField
+                select
+                varient="contained"
+                value={dropdownValue}
+                name="deparment"
+                label="deparment"
+                error={dropdownValue === "" ? true : false}
+                helperText={dropdownValue === "" ? `${name} is required` : null}
+                color="info"
+                fullWidth
+                onChange={handleTextInputChange}
+              >
+                {departmentData && departmentData.map((menuItem) => (
+                  <MenuItem value={menuItem?._id}>{menuItem?.name}</MenuItem>
+                ))}
+              </TextField>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
               <DatePickerInput
@@ -229,7 +324,6 @@ export default function AddDetails() {
                 label="Joining Year"
                 date={joinYear}
                 setDate={setJoiningYear}
-                
               />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -277,29 +371,6 @@ export default function AddDetails() {
           </Grid>
         </Grid>
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          {/* <Button
-            sx={{ mt: 2 }}
-            // href="/student/details/educational"
-            size="large"
-            color="info"
-            variant="contained"
-            disabled={
-              !profileImage ||
-              !name ||
-              !shortName ||
-              !email ||
-              !department ||
-              !joinYear ||
-              !gender ||
-              !maritalStatus ||
-              !phoneNo ||
-              !religion ||
-              !cast ||
-              !educationQualification
-            }
-          >
-            Next
-          </Button> */}
           <Button
             sx={{ mt: 2 }}
             onClick={handleNextBtn}
@@ -307,11 +378,11 @@ export default function AddDetails() {
             color="info"
             variant="contained"
           >
-            Next
+            Submit
           </Button>
         </Box>
       </Container>
       {/* </RootStyle> */}
     </Page>
   );
- }
+}

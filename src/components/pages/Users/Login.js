@@ -33,8 +33,14 @@ export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [authErrors, setAuthErrors] = useState();
+  const navigate = useNavigate();
 
   const clearError = () => setAuthErrors("");
+
+  const clearForm = () => {
+    setEmail("");
+    setPassword("");
+  };
 
   const handleClick = async () => {
     try {

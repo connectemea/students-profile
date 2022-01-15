@@ -10,9 +10,34 @@ const createUser = async (data) => {
   return BackendService.post("user/", data);
 };
 
-// image upload 
+//loging a user
+const loginUser = async (data) => {
+  return BackendService.post("user/login", data);
+};
+
+//registering a user
+const registerUser = async (data) => {
+  return BackendService.patch("user/register", data);
+};
+
+//forgot password
+const forgotPassword = async (data) => {
+  return BackendService.post("user/forgot", data);
+};
+
+//reset password
+const resetPassword = async (data, token) => {
+  return BackendService.post("user/reset", data, { token });
+};
+
+// image upload
 const uploadImage = async (data) => {
-  return BackendService.imageUpload("upload/", data);
+  return BackendService.post("upload/", data);
+};
+
+// get profile image
+const getProfileImage = async (url) => {
+  return BackendService.get(`upload/${url}`);
 };
 
 const getProfile = async () => {
@@ -23,9 +48,11 @@ const getProfile = async () => {
 const UserService = {
   getUsers,
   createUser,
+  loginUser,
+  registerUser,
+  forgotPassword,
+  resetPassword,
   uploadImage,
-  getProfile,
+  getProfileImage
 };
-
 export default UserService;
- 

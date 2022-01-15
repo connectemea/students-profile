@@ -42,7 +42,7 @@ const patch = async (path, data = {}, headers = {}, params = {}) => {
 
   return response.data;
 };
-
+ 
 //delete request
 const destroy = async (path, headers = {}, params = {}) => {
   //generating url
@@ -54,24 +54,24 @@ const destroy = async (path, headers = {}, params = {}) => {
   return response.data;
 };
 
-const imageUpload = async (path, data = {}, params = {}) => {
-  axios({
-    //   //generating url
-    // const URL = `${BACKEND_URL.BASE_URL}${path}`;
-    method: "post",
-    url: `${BACKEND_URL.BASE_URL}${path}`,
-    data: data,
-    headers: { "Content-Type": "multipart/form-data" }
-  })
-    .then(function (response) {
-      //handle success
-      console.log(response);
-    })
-    .catch(function (response) {
-      //handle error
-      console.log(response);
-    });
-};
+// const imageUpload = async (path, data = {}, params = {}) => {
+//   axios({
+//     //   //generating url
+//     // const URL = `${BACKEND_URL.BASE_URL}${path}`;
+//     method: "post",
+//     url: `${BACKEND_URL.BASE_URL}${path}`,
+//     data: data,
+//     headers: { "Content-Type": "multipart/form-data" }
+//   })
+//     .then(function (response) {
+//       //handle success
+//       console.log(response);
+//     })
+//     .catch(function (response) {
+//       //handle error
+//       console.log(response);
+//     });
+// };
 
 //generate header parmas for request
 const _generateParams = (headers = {}, params = {}) => {
@@ -96,7 +96,7 @@ const BackendService = {
   post,
   patch,
   destroy,
-  imageUpload
+  // imageUpload
 };
 
 export default BackendService;

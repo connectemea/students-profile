@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 // material components
 import { Container, Grid, Card, Typography } from "@mui/material";
 
 // material icons
 import { styled } from "@mui/material/styles";
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
@@ -12,83 +14,70 @@ import Page from "../../../utils/Page";
 import Avatar from "@mui/material/Avatar";
 import profile from "../../../../images/avatar.jpg";
 
-// Custuom compoent
+// Custom component
 import Field from "../utils/Field";
 
 // importing getTech form TeacherService
 import TeacherService from "../../../../services/teacherService";
+import UserService from "../../../../services/teacherService";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
   paddingBottom: `${theme.spacing(4)} !important`
 }));
 
-// value Object
-const teacherData = {
-  name: "Jhon Doe",
-  email: "jonn@doe@email.com",
-  shortForm: "JD",
-  phoneNumber: "223334444",
-  departments: "Computer Science",
-  joningYear: "2020",
-  gender: "male",
-  maritalStatus: "unmaried",
-  religion: "Jhon Doe",
-  caste: "Jonn Doe",
-  educationalQualification: "Pg"
-};
-
 export default function TeachersView() {
+  const { id } = useParams();
+  console.log(id);
   const [teacherData, setTeacherData] = useState();
-  console.log(teacherData);
+  const [profileImage, setProfileImage] = useState();
+  const [nxtPage, setNxtPage] = useState();
+  const [editButton, setEditButton] = useState(false);
 
-  useEffect(() => {
-    async function getTeacher() {
-      try {
-        const response = await TeacherService.getTeacher();
-        setTeacherData(response.data);
-        console.log(response.data);
-      } catch (err) {
-        console.log(err?.response?.data?.message);
+  const url = useEffect(() => {
+    if (id) {
+      async function getOne() {
+        try {
+          console.log("getOne funciton is working");
+          const response = await TeacherService.getTeacherOne(id);
+          setTeacherData(response);
+          setProfileImage(
+            `https://student-profile-api.herokuapp.com/upload/${response.userId.profileImage}`
+          );
+        } catch (err) {
+          console.log(err?.response?.data?.message);
+        }
       }
-    }
-    getTeacher();
-  }, []);
+      getOne();
+    } else {
+      async function getMe() {
+        try {
+          console.log("getme funciton is working");
+          const response = await TeacherService.getTeacherMe();
+          console.log(response);
 
+          setTeacherData(response);
+          setNxtPage(response.userId._id);
+          console.log(nxtPage);
+
+          setProfileImage(
+            `https://student-profile-api.herokuapp.com/upload/${response.userId.profileImage}`
+          );
+          setEditButton(true);
+        } catch (err) {
+          console.log(err?.response?.data?.message);
+        }
+      }
+      getMe();
+    }
+  }, []);
+  // setNxtPage(response);
+  console.log(editButton);
+  console.log(nxtPage);
   return (
     <Page title="details">
       {teacherData && (
         <Container maxWidth="xl" sx={{ pl: 4 }}>
-          {/* <Grid
-            style={{
-              backgroundImage:
-                "linear-gradient(to bottom,#038dfd 0%,#038dfd 20%,transparent 20%,transparent 100%)",
-            }}
-            component={ProfileCard}
-            sx={{
-              mt: 2,
-              p: 2,
-              alignContent: "center",
-            }}
-            container
-            spacing={2}
-            alignItems="center"
-          >
-            <Grid>
-              <Avatar
-                alt="Remy Sharp"
-                src={profile}
-                sx={{
-                  width: 80,
-                  height: 80,
-                }}
-              />
-            </Grid>
-            <Grid sx={{ marginLeft: 5 }}>
-              <Typography>{teacherData.name}</Typography>
-              <Typography>{teacherData.department}</Typography>
-            </Grid>  
-          </Grid> */}
           <Container>
             <Grid
               style={{
@@ -120,7 +109,8 @@ export default function TeachersView() {
                   item
                   component={Avatar}
                   alt="Remy Sharp"
-                  src={profile}
+                  // src={profile}
+                  src={profileImage}
                   sx={{
                     width: 80,
                     height: 80
@@ -154,7 +144,22 @@ export default function TeachersView() {
                   </Typography>
                 </Grid>
               </Grid>
-
+              {/* <Link to={`/teacher/student/update/${id}/personal`} style={{ color: "blue" }}> */}
+              <Link
+                to={`/teacher/details/update/${nxtPage}`}
+                style={{ color: "#333" }}
+              >
+                {editButton ? (
+                  <ModeEditOutlineOutlinedIcon
+                    sx={{
+                      margin: "8px",
+                      opacity: "",
+                      height: "3vh",
+                      width: "2vw"
+                    }}
+                  />
+                ) : null}
+              </Link>
               <Grid
                 item
                 xs={12}
@@ -164,65 +169,70 @@ export default function TeachersView() {
                 direction="row"
                 justifyContent="flex-end"
                 alignItems="center"
-              >
-                {/* <Tabs value={index} onChange={onTabClicked}>
-              <Tab label="Personal" />
-              <Tab label="Educational" />
-              <Tab label="Family" />
-              <Tab label="Dependencies" />
-            </Tabs> */}
-              </Grid>
+              ></Grid>
             </Grid>
 
-          <Grid
-            component={ProfileCard}
-            sx={{ mt: 2, p: 2 }}
-            container
-            spacing={2.3}
-            alignItems="flex-end"
-          >
-            {/* <Container> */}
-            <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field heading="Name" subHeading={teacherData.name} />
+            <Grid
+              component={ProfileCard}
+              sx={{ mt: 2, p: 2 }}
+              container
+              spacing={2.3}
+              alignItems="flex-end"
+            >
+              {/* <Container> */}
+              <Grid item sm={12} xs={12} md={3} lg={3}>
+                <Field heading="Name" subHeading={teacherData.name} />
+              </Grid>
+              <Grid item sm={12} xs={12} md={3} lg={3}>
+                <Field heading="Email" subHeading={teacherData.email} />
+              </Grid>
+              <Grid item sm={12} xs={12} md={3} lg={3}>
+                <Field
+                  heading="Short Form"
+                  subHeading={teacherData.shortName}
+                />
+              </Grid>
+              <Grid item sm={12} xs={12} md={3} lg={3}>
+                <Field
+                  heading="Phone Number"
+                  subHeading={teacherData.phoneNo}
+                />
+              </Grid>
+              <Grid item sm={12} xs={12} md={3} lg={3}>
+                <Field
+                  heading="Department"
+                  subHeading={teacherData.department}
+                />
+              </Grid>
+              <Grid item sm={12} xs={12} md={3} lg={3}>
+                <Field
+                  heading="Joning Year"
+                  subHeading={teacherData.joinYear}
+                />
+              </Grid>
+              <Grid item sm={12} xs={12} md={3} lg={3}>
+                <Field heading="Gender" subHeading={teacherData.gender} />
+              </Grid>
+              <Grid item sm={12} xs={12} md={3} lg={3}>
+                <Field
+                  heading="Marital Status"
+                  subHeading={teacherData.maritalStatus}
+                />
+              </Grid>
+              <Grid item sm={12} xs={12} md={3} lg={3}>
+                <Field heading="Religion" subHeading={teacherData.religion} />
+              </Grid>
+              <Grid item sm={12} xs={12} md={3} lg={3}>
+                <Field heading="Caste" subHeading={teacherData.cast} />
+              </Grid>
+              <Grid item sm={12} xs={12} md={3} lg={3}>
+                <Field
+                  heading="Educational Qualification"
+                  subHeading={teacherData.educationQualification}
+                />
+              </Grid>
+              {/* </Container> */}
             </Grid>
-            <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field heading="Email" subHeading={teacherData.email} />
-            </Grid>
-            <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field heading="Short Form" subHeading={teacherData.shortName} />
-            </Grid>
-            <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field heading="Phone Number" subHeading={teacherData.phoneNo} />
-            </Grid>
-            <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field heading="Department" subHeading={teacherData.department} />
-            </Grid>
-            <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field heading="Joning Year" subHeading={teacherData.joinYear} />
-            </Grid>
-            <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field heading="Gender" subHeading={teacherData.gender} />
-            </Grid>
-            <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field
-                heading="Marital Status"
-                subHeading={teacherData.maritalStatus}
-              />
-            </Grid>
-            <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field heading="Religion" subHeading={teacherData.religion} />
-            </Grid>
-            <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field heading="Caste" subHeading={teacherData.cast} />
-            </Grid>
-            <Grid item sm={12} xs={12} md={3} lg={3}>
-              <Field
-                heading="Educational Qualification"
-                subHeading={teacherData.educationQualification}
-              />
-            </Grid>
-            {/* </Container> */}
-          </Grid>
           </Container>
         </Container>
       )}
