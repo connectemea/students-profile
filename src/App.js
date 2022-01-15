@@ -26,8 +26,8 @@ import DptStudentList from "./components/pages/Department/List/DptStudentList";
 import UpdatePersonalDeatils from "./components/pages/Students/Edit/PersonalDetails";
 import UpdateEducationDeatils from "./components/pages/Students/Edit/EducationalDetails";
 import UpdateFamilyDetails from "./components/pages/Students/Edit/FamilyDetails";
-import DepartmentDetails from './components/pages/Department/View/DptDetails';
-import Add from './components/pages/Department/Add/Add';
+import DepartmentDetails from "./components/pages/Department/View/DptDetails";
+import Add from "./components/pages/Department/Add/Add";
 
 function App() {
   return (
@@ -64,6 +64,14 @@ function App() {
                 <Route path="list" element={<StudentsList />} />
                 <Route path="add" element={<AddStudent />} />
                 <Route path="view/:id" element={<Details />} />
+                <Route path="update/:id">
+                  <Route path="personal" element={<UpdatePersonalDeatils />} />
+                  <Route
+                    path="educational"
+                    element={<UpdateEducationDeatils />}
+                  />
+                  <Route path="family" element={<UpdateFamilyDetails />} />
+                </Route>
               </Route>
               <Route path="department">
                 <Route
@@ -71,9 +79,10 @@ function App() {
                   element={<Navigate to="/app/department/list" />}
                 />
                 <Route path="list" element={<DepartmentDetails />} />
-                <Route path="details" element={<DptStudentList />} />
+                <Route path="studentlist/:id" element={<DptStudentList />} />
                 <Route path="student/:id" element={<Details />} />
                 <Route path="add" element={<Add />} />
+                <Route path="edit/:id" element={<Add update={true} />} />
               </Route>
             </Route>
 
@@ -82,7 +91,7 @@ function App() {
               <Route path="register" element={<Register />} />
               <Route path="login" element={<Login />} />
               <Route path="forgot" element={<ForgotPassword />} />
-              <Route path="recover" element={<RecoverPassword />} />
+              <Route path="recover/:token" element={<RecoverPassword />} />
             </Route>
 
             {/* teacher details forms routes */}

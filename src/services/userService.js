@@ -40,6 +40,10 @@ const getProfileImage = async (url) => {
   return BackendService.get(`upload/${url}`);
 };
 
+const getProfile = async () => {
+  return BackendService.get("user/profile");
+};
+
 //exporting the user service
 const UserService = {
   getUsers,
