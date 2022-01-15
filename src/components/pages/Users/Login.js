@@ -42,6 +42,19 @@ export default function Login() {
       console.error(err?.response?.data?.message);
     }
   }
+  const redirectionHandler = (type, status) => {
+    if (type === "admin") return navigate("/app");
+    if (type === "teacher" && status === "filled") {
+      return navigate("/app/teacher/view/me");
+    } else if (type === "teacher") {
+      return navigate("/teacher/details");
+    }
+    if (type === "student" && status === "filled") {
+      return navigate("/app/student/view/me");
+    } else if ((type = "student")) {
+      return navigate("/student/details");
+    }
+  };
   const handleClick = async () => {
     try {
       clearError();
@@ -52,9 +65,8 @@ export default function Login() {
       // logging in user
       const response = await authService.loginUser(loginCredentials);
       //storing token in localStorage
-      localStorage.setItem(LOCAL_KEYS.AUTH_TOKEN, response.data.userToken);
-      getUserProfile();
-      navigate("/app");
+      localStorage.setItem(LOCAL_KEYS.AUTH_TOKEN, response.data.token);
+      redirectionHandler(response.data.type, response.data.status);
     } catch (err) {
       setAuthErrors(err?.response?.data?.message);
     }

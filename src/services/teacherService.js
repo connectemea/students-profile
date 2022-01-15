@@ -3,7 +3,10 @@ import BackendService from "./BackendService";
 // To get teacher
 const getTeacher = () => {
   // return BackendService.get(`teacher/${id}`);
-  return BackendService.get(`teacher/6195d89a2ee84ac208962c4f`);
+  return BackendService.get(`teacher/me`);
+};
+const getTeacherById = (id) => {
+  return BackendService.get(`teacher/${id}`);
 };
 
 //To get all teacher sponsored by the user
@@ -18,6 +21,7 @@ const createTeacher = async (data) => {
 
 const teacherService = {
   getTeacher,
+  getTeacherById,
   getAllTeacher,
   createTeacher,
 };

@@ -4,7 +4,9 @@ import BackendService from "./BackendService";
 const getStudentById = (id) => {
   return BackendService.get(`student/${id}`);
 };
-
+const getStudent = () => {
+  return BackendService.get("student/me");
+};
 //To get all students
 const getStudents = () => {
   return BackendService.get(`student`);
@@ -22,6 +24,7 @@ const updateStudent = (id, data) => {
 
 const studentsService = {
   getStudentById,
+  getStudent,
   getStudents,
   addStudent,
   updateStudent,

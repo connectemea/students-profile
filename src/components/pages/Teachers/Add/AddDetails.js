@@ -3,7 +3,6 @@ import { useState } from "react";
 // material components
 import { Button, Typography, Grid, Card, Box, Container } from "@mui/material";
 
-
 // material icons
 import { styled } from "@mui/material/styles";
 
@@ -21,9 +20,10 @@ import ImageUpload from "../../../utils/Inputs/ImageUpload";
 // importing backend services
 import teacherService from "../../../../services//teacherService";
 import userService from "../../../../services//userService";
+import studentsService from "../../../../services/studentsService";
 
 const RootStyle = styled("div")(({ theme }) => ({
-  padding: theme.spacing(4)
+  padding: theme.spacing(4),
 }));
 
 // menu items || dropdown items
@@ -33,6 +33,7 @@ const status = ["Unmarried", "Married"];
 
 export default function AddDetails() {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const [profileImage, setProfileImage] = useState();
   const [name, setName] = useState();
@@ -51,12 +52,10 @@ export default function AddDetails() {
   const clearError = () => setErrorMsg("");
 
   const handleAddTeacherDetails = async () => {
-
-    console.log("handleAddTeacher function started")
     try {
+      if (isError()) return;
       clearError();
       const userData = {
-        // profileImage,
         name,
         shortName,
         email,
@@ -67,38 +66,21 @@ export default function AddDetails() {
         phoneNo,
         religion,
         cast,
-        educationQualification
+        educationQualification,
       };
-      // console.log(profileImage);
-
-      // Converting data into form data format
       const formData = new FormData();
       formData.append("profile", profileImage);
-
-      // console.log(`form data = ${formData}`);
-      // console.log(formData);
       const image = {
-        formData
+        formData,
       };
-      // adding user to db
-      // const response = await teacherService.createTeacher(userData);
-      // console.log(response);
+      const response = await userService.uploadImage(image);
 
       await teacherService.createTeacher(userData);
 
-      const response = await userService.uploadImage(image);
-      console.log(`image response`)
-      console.log(response)
-
-      // clearing the form
       clearUserCredentials();
-
-      // Navigating to next page
-      // navigate("/teacher/view");
+      navigate("/teacher/view/me");
     } catch (err) {
       console.log(err);
-      // console.log(err.response);
-      // setErrorMsg(err.response.message);
     }
   };
 
@@ -117,8 +99,20 @@ export default function AddDetails() {
     setEducationQualification("");
   };
 
-  // const navigate = useNavigate();
-  const handleNextBtn = () => {
+  const setCurrentDetails = (details) => {
+    if (!details) return;
+    setName(details.name);
+    setShortName(details.shortName);
+    setEmail(details.email);
+    setDepartment(details.department);
+    setJoiningYear(details.joiningYear);
+    setGender(details.gender);
+    setMaritalStatus(details.maritalStatus);
+    setPhoneNo(details.phoneNo);
+    setCast(details.cast);
+    setEducationQualification(details.educationQualification);
+  };
+  const isError = () => {
     if (
       !profileImage ||
       !name ||
@@ -133,9 +127,10 @@ export default function AddDetails() {
       !cast ||
       !educationQualification
     ) {
-      return errorSetter();
+      errorSetter();
+      return true;
     }
-    handleAddTeacherDetails();
+    return false;
   };
 
   const errorSetter = () => {
@@ -152,6 +147,17 @@ export default function AddDetails() {
     if (!cast) setCast("");
     if (!educationQualification) setEducationQualification("");
   };
+  useEffect(() => {
+    const getTeacherById = async () => {
+      try {
+        const response = await studentsService.getStudentById(id);
+        setCurrentDetails(response);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    if (id) getTeacherById();
+  }, [id]);
 
   return (
     <Page title="TeacherDetails">
@@ -229,7 +235,6 @@ export default function AddDetails() {
                 label="Joining Year"
                 date={joinYear}
                 setDate={setJoiningYear}
-                
               />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -314,4 +319,4 @@ export default function AddDetails() {
       {/* </RootStyle> */}
     </Page>
   );
- }
+}

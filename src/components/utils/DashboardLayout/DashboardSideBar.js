@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 // material ui predefined components
 import { styled } from "@mui/material/styles";
@@ -11,7 +11,8 @@ import NavSection from "./NavSection";
 import { MHidden } from "../../@material-extent";
 import NavConfig from "./NavConfig";
 import Logo from "../../../images/Logo.png";
-import ProfileImg from '../../../images/avatar.jpg'
+import ProfileImg from "../../../images/avatar.jpg";
+import { profileContext } from "../../../context/profileContext";
 // import account from '../../_mocks_/account';
 
 // drawer width for mobile devices
@@ -24,7 +25,6 @@ const RootStyle = styled("div")(({ theme }) => ({
     width: DRAWER_WIDTH,
   },
 }));
-
 
 // profile card styel
 const AccountStyle = styled("div")(({ theme }) => ({
@@ -43,6 +43,7 @@ DashboardSidebar.propTypes = {
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
+  const { profile } = useContext(profileContext);
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -63,29 +64,44 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       }}
     >
       <Box sx={{ px: 2.5, py: 3 }}>
-        <Box component={RouterLink} to="/" sx={{ display: "inline-flex" }}>
+        <Box component={RouterLink} to={"/"} sx={{ display: "inline-flex" }}>
           {/* <Logo /> */}
           <Box component={"img"} src={Logo} sx={{ width: 40, height: 40 }} />
         </Box>
       </Box>
 
       <Box sx={{ mb: 5, mx: 2.5 }}>
-        <Link underline="none" component={RouterLink} to="#">
-          <AccountStyle>
-            <Avatar src={ProfileImg} alt="photoURL" />
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-               Salman
-              </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                Admin
-              </Typography>
-            </Box>
-          </AccountStyle>
-        </Link>
+        {profile && (
+          <Link
+            underline="none"
+            component={RouterLink}
+            to={`/app/${
+              profile.userType === "student"
+                ? "student/view/me"
+                : profile.userType === "admin"
+                ? "home"
+                : "teacher/view/me"
+            }`}
+          >
+            <AccountStyle>
+              <Avatar src={ProfileImg} alt="photoURL" />
+              <Box sx={{ ml: 2 }}>
+                <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
+                  {profile && profile.username}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ color: "text.secondary", textTransform: "capitalize" }}
+                >
+                  {profile && profile.userType}
+                </Typography>
+              </Box>
+            </AccountStyle>
+          </Link>
+        )}
       </Box>
 
-      <NavSection navConfig={NavConfig} />
+      {profile && <NavSection navConfig={NavConfig} profile={profile} />}
 
       <Box sx={{ flexGrow: 1 }} />
 

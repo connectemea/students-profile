@@ -17,7 +17,11 @@ export default function PrivateWrapper() {
         console.error(err?.response?.data?.message);
       }
     }
-    if (token && !profile) getUserProfile();
-  }, []);
-  return token ? <Outlet /> : <Navigate to="/user/login" />;
+    if ((token || token === "undefined") && !profile) getUserProfile();
+  }, [token]);
+  return token && token !== "undefined" ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/user/login" />
+  );
 }

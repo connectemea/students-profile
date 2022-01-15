@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 // routes component
 import {
@@ -19,6 +19,8 @@ import {
   ListItemIcon,
   ListItemButton,
 } from "@mui/material";
+import { profileContext } from "../../../context/profileContext";
+import USER_TYPE from "../../../constants/USER_TYPE";
 
 // custom styled listItem
 const ListItemStyle = styled((props) => (
@@ -71,6 +73,7 @@ function NavItem({ item, active }) {
   const handleOpen = () => {
     setOpen((prev) => !prev);
   };
+
   //active nav item styles
   const activeRootStyle = {
     color: "info.main",
@@ -96,7 +99,7 @@ function NavItem({ item, active }) {
             ...(isActiveRoot && activeRootStyle),
           }}
         >
-          <ListItemIconStyle>{Icon && <Icon/>}</ListItemIconStyle>
+          <ListItemIconStyle>{Icon && <Icon />}</ListItemIconStyle>
           <ListItemText disableTypography primary={title} />
           {info && info}
           <Box
@@ -111,7 +114,6 @@ function NavItem({ item, active }) {
             {children.map((item) => {
               const { title, path } = item;
               const isActiveSub = active(path);
-
               return (
                 <ListItemStyle
                   key={title}
@@ -159,7 +161,7 @@ function NavItem({ item, active }) {
         ...(isActiveRoot && activeRootStyle),
       }}
     >
-      <ListItemIconStyle>{Icon && <Icon/>}</ListItemIconStyle>
+      <ListItemIconStyle>{Icon && <Icon />}</ListItemIconStyle>
       <ListItemText disableTypography primary={title} />
       {info && info}
     </ListItemStyle>
@@ -172,10 +174,16 @@ NavSection.propTypes = {
 };
 
 //nav section components
-export default function NavSection({ navConfig, ...other }) {
+export default function NavSection({ navConfig, profile, ...other }) {
   // pathname in useLocation component
   const { pathname } = useLocation();
 
+  //To user presidence
+  const checkUserHavePermission = (permitedUser, givenUser) =>
+    Object.keys(USER_TYPE).includes(givenUser) &&
+    USER_TYPE[givenUser] >= USER_TYPE[permitedUser]
+      ? true
+      : false;
   //To match current url and nav url
   const match = (path) =>
     path ? !!matchPath({ path, end: false }, pathname) : false;
@@ -184,9 +192,11 @@ export default function NavSection({ navConfig, ...other }) {
     <Box {...other}>
       <List disablePadding>
         {/* nav item component to map through navlink */}
-        {navConfig.map((item) => (
-          <NavItem key={item.title} item={item} active={match} />
-        ))}
+        {navConfig.map((item) =>
+          checkUserHavePermission(item.permittedUser, profile.userType) ? (
+            <NavItem key={item.title} item={item} active={match} />
+          ) : null
+        )}
       </List>
     </Box>
   );
