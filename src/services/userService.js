@@ -30,9 +30,14 @@ const resetPassword = async (data, token) => {
   return BackendService.post("user/reset", data, { token });
 };
 
-// image upload 
+// image upload
 const uploadImage = async (data) => {
   return BackendService.post("upload/", data);
+};
+
+// get profile image
+const getProfileImage = async (url) => {
+  return BackendService.get(`upload/${url}`);
 };
 
 //exporting the user service
@@ -43,6 +48,7 @@ const UserService = {
   registerUser,
   forgotPassword,
   resetPassword,
-  uploadImage
+  uploadImage,
+  getProfileImage
 };
 export default UserService;

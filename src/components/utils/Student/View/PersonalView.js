@@ -1,11 +1,11 @@
 // material components
-import {
-  Grid,
-  Card,
-  Container,
-} from "@mui/material";
+import { Grid, Card, Container ,Typography} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Page from "../../../utils/Page";
+import { Link } from "react-router-dom";
+// icon import
+
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
 //   custom component
 import Field from "./Field";
@@ -15,77 +15,152 @@ const ProfileCard = styled(Card)(({ theme }) => ({
   paddingBottom: `${theme.spacing(4)} !important`,
 }));
 
-export default function PersonalView() {
+export default function PersonalView(props) {
+  const { personalDetails,id } = props;
+
   return (
     <Page title="StudentsList">
       <Container>
         <Grid
           component={ProfileCard}
-          sx={{ mt: 2, p:2}}
+          sx={{ mt: 2, p: 2 }}
           container
           spacing={2}
         >
-          <Grid item sm={3} xs={12} md={3} lg={3}>
-            <Field heading="Name" subHeading="Salman Faris c c" />
+          {" "}
+          <Grid
+            item
+            sm={12}
+            xs={12}
+            md={12}
+            lg={12}
+            container
+            container
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            {" "}
+            <Typography variant="h5" sx={{}}>
+              Personal Details
+            </Typography>
+            <Link to={`/app/student/update/${id}/personal`} style={{ color: "none" }}>
+              <ModeEditOutlineOutlinedIcon
+                sx={{
+                  margin: "8px",
+                  opacity: "",
+                  height: "3vh",
+                  width: "2vw",
+                }}
+              />
+            </Link>
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
-            <Field heading="Email" subHeading="mail@gmail.com" />
+            <Field
+              heading="Name"
+              subHeading={personalDetails && personalDetails.name}
+            />
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
-            <Field heading="Department" subHeading="Computer Science" />
+            <Field
+              heading="Email"
+              subHeading={personalDetails && personalDetails.email}
+            />
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
-            <Field heading="Admission Number" subHeading="19bscd" />
+            <Field
+              heading="Department"
+              subHeading={personalDetails && personalDetails.department}
+            />
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
-            <Field heading="Date of Birth" subHeading="15/05/2001" />
+            <Field
+              heading="Admission Number"
+              subHeading={personalDetails && personalDetails.admissionNO}
+            />
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
-            <Field heading="Gender" subHeading="Male" />
+            <Field
+              heading="Date of Birth"
+              subHeading={personalDetails && personalDetails.dateOfBirth}
+            />
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
-            <Field heading="Mobile Number" subHeading="964587525" />
+            <Field
+              heading="Gender"
+              subHeading={personalDetails && personalDetails.gender}
+            />
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
-            <Field heading="Joining Year" subHeading="2019" />
+            <Field
+              heading="Mobile Number"
+              subHeading={personalDetails && personalDetails.mobileNo}
+            />
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
-            <Field heading="Blood Group" subHeading="A+ve" />
+            <Field
+              heading="Joining Year"
+              subHeading={personalDetails && personalDetails.yearOfJoin}
+            />
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
-            <Field heading="Marital Status" subHeading="Single" />
+            <Field
+              heading="Blood Group"
+              subHeading={personalDetails && personalDetails.bloodGroup}
+            />
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
-            <Field heading="Religion" subHeading="Muslim" />
+            <Field
+              heading="Marital Status"
+              subHeading={personalDetails && personalDetails.maritalStatus}
+            />
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
-            <Field heading="Caste" subHeading="Islam" />
+            <Field
+              heading="Religion"
+              subHeading={personalDetails && personalDetails.religion}
+            />
+          </Grid>
+          <Grid item sm={3} xs={12} md={3} lg={3}>
+            <Field
+              heading="Caste"
+              subHeading={personalDetails && personalDetails.cast}
+            />
           </Grid>
           <Grid item sm={12} xs={12} md={12} lg={12}>
-            <Field heading="Category Of Admission" subHeading="Management" />
+            <Field
+              heading="Category Of Admission"
+              subHeading={
+                personalDetails && personalDetails.categoryOfAdmission
+              }
+            />
           </Grid>
           <Grid item sm={6} xs={12} md={6} lg={6}>
             <Field
               heading="Identification Mark1"
-              subHeading="The black mole on the right chest"
+              subHeading={
+                personalDetails && personalDetails.identificationMarkOne
+              }
             />
           </Grid>
           <Grid item sm={6} xs={12} md={6} lg={6}>
             <Field
               heading="Identification Mark2"
-              subHeading="The black mole on the right chest"
+              subHeading={
+                personalDetails && personalDetails.identificationMarkTwo
+              }
             />
           </Grid>
           <Grid item sm={6} xs={12} md={6} lg={6}>
             <Field
               heading="Permanent Address"
-              subHeading="Jk house ,Kozhikode road "
+              subHeading={personalDetails && personalDetails.presentAddress}
             />
           </Grid>
           <Grid item sm={6} xs={12} md={6} lg={6}>
             <Field
               heading="Present Address"
-              subHeading="Jk house ,Kozhikode road "
+              subHeading={personalDetails && personalDetails.permenentAddress}
             />
           </Grid>
         </Grid>

@@ -42,7 +42,7 @@ const patch = async (path, data = {}, headers = {}, params = {}) => {
 
   return response.data;
 };
-
+ 
 //delete request
 const destroy = async (path, headers = {}, params = {}) => {
   //generating url
