@@ -198,61 +198,58 @@ export default function EducationalDetailsInput(props) {
 
   //To set the given value to the state
   const setCurrentDetails = (details) => {
-    console.log("i am called bro");
     if (!details) return;
-    console.log("i am tackled that man");
     //high school details
-    setSslcSchoolName(details?.tenthStd?.schoolName);
-    setSslcMediumOfInstruction(details?.tenthStd?.syllabus);
-    setSslcEnglishMark(details?.tenthStd?.english);
-    setSslcMathsMark(details?.tenthStd?.maths);
-    setSslcScienceMark(details?.tenthStd?.science);
-    setSslcSocialScienceMark(details?.tenthStd?.socialScience);
+    setSslcSchoolName(details.tenthStd.schoolName);
+    setSslcMediumOfInstruction(details.tenthStd.syllabus);
+    setSslcEnglishMark(details.tenthStd.english);
+    setSslcMathsMark(details.tenthStd.maths);
+    setSslcScienceMark(details.tenthStd.science);
+    setSslcSocialScienceMark(details.tenthStd.socialScience);
     // higher secondary details
-    setHseSchoolName(details?.twelthStd?.schoolName);
-    setHseSyllabus(details?.twelthStd?.syllabus);
-    setHseCourse(details?.twelthStd?.course);
-    setHseEnglish(details?.twelthStd?.sub[0]);
-    setHseSub1(details?.twelthStd?.sub[1]);
-    setHseSub2(details?.twelthStd?.sub[2]);
-    setHseSub3(details?.twelthStd?.sub[3]);
-    setHseSub4(details?.twelthStd?.sub[4]);
-    setHseEnglishMark(details?.twelthStd?.subMark[0]);
-    setHseSub1Mark(details?.twelthStd?.subMark[1]);
-    setHseSub2Mark(details?.twelthStd?.subMark[2]);
-    setHseSub3Mark(details?.twelthStd?.subMark[3]);
-    setHseSub4Mark(details?.twelthStd?.subMark[4]);
+    setHseSchoolName(details.twelthStd.schoolName);
+    setHseSyllabus(details.twelthStd.syllabus);
+    setHseCourse(details.twelthStd.course);
+    setHseEnglish(details.twelthStd.sub[0]);
+    setHseSub1(details.twelthStd.sub[1]);
+    setHseSub2(details.twelthStd.sub[2]);
+    setHseSub3(details.twelthStd.sub[3]);
+    setHseSub4(details.twelthStd.sub[4]);
+    setHseEnglishMark(details.twelthStd.subMark[0]);
+    setHseSub1Mark(details.twelthStd.subMark[1]);
+    setHseSub2Mark(details.twelthStd.subMark[2]);
+    setHseSub3Mark(details.twelthStd.subMark[3]);
+    setHseSub4Mark(details.twelthStd.subMark[4]);
     //Degree details
-    setCollegeName(details?.degree[0]?.college);
-    setUgUniversity(details?.degree[0]?.university);
-    setUgCourse(details?.degree[0]?.course);
-    setUgCoreMark(details?.degree[0]?.core);
-    setUgComplementaryMark(details?.degree[0]?.complementary);
-    setUgCommonEnglishMark(details?.degree[0]?.commonOne);
-    setUgCommonLanguageMark(details?.degree[0]?.commonTwo);
-    setUgOpenMark(details?.degree[0]?.open);
+    setCollegeName(details.degree[0]?.college);
+    setUgUniversity(details.degree[0]?.university);
+    setUgCourse(details.degree[0]?.course);
+    setUgCoreMark(details.degree[0]?.core);
+    setUgComplementaryMark(details.degree[0]?.complementary);
+    setUgCommonEnglishMark(details.degree[0]?.commonOne);
+    setUgCommonLanguageMark(details.degree[0]?.commonTwo);
+    setUgOpenMark(details.degree[0]?.open);
     //other qualifications details
-    setOthInstitutionName(details?.otherQualifications[0]?.institutionName);
-    setOthCourseType(details?.otherQualifications[0]?.courseType);
-    setOthGrade(details?.otherQualifications[0]?.Grade);
-    setOthUniversity(details?.otherQualifications[0]?.university);
+    setOthInstitutionName(details.otherQualifications[0]?.institutionName);
+    setOthCourseType(details.otherQualifications[0]?.courseType);
+    setOthGrade(details.otherQualifications[0]?.Grade);
+    setOthUniversity(details.otherQualifications[0]?.university);
     //Additional course
-    setAddiInstituionName(details?.additionalCourse[0]?.institutionName);
-    setAddiCourse(details?.additionalCourse[0]?.courseName);
-    setAddiUniversity(details?.additionalCourse[0]?.university);
-    setAddiMarks(details?.additionalCourse[0]?.cgp);
+    setAddiInstituionName(details.additionalCourse[0]?.institutionName);
+    setAddiCourse(details.additionalCourse[0]?.courseName);
+    setAddiUniversity(details.additionalCourse[0]?.university);
+    setAddiMarks(details.additionalCourse[0]?.cgp);
     //extra curricular details
-    setActivity(details?.extraCurricular[0]?.activity);
-    setYearOfParticipation(details?.extraCurricular[0]?.yearOfParticipation);
-    setPrize(details?.extraCurricular[0]?.Price);
-    setPerfomance(details?.extraCurricular[0]?.detailsOfExcellenceInPerformance);
+    setActivity(details.extraCurricular[0]?.activity);
+    setYearOfParticipation(details.extraCurricular[0]?.yearOfParticipation);
+    setPrize(details.extraCurricular[0]?.Price);
+    setPerfomance(details.extraCurricular[0]?.detailsOfExcellenceInPerformance);
   };
 
   //To handle next button click
   const handleNext = () => {
     //To check if there are any error
     if (!errorCheck()) return;
-    console.log("saved to context")
     setStudent({
       ...student,
       educationDetails: structureData(),
@@ -263,7 +260,6 @@ export default function EducationalDetailsInput(props) {
   //To handle previous button click
   const handleBack = () => {
     //To check if there are any error
-    // if (!errorCheck()) return;
     setStudent({
       ...student,
       educationDetails: structureData(),
@@ -279,12 +275,12 @@ export default function EducationalDetailsInput(props) {
       educationDetails: structureData(),
     };
     await studentsService.updateStudent(id, data);
+    navigate("/app/student/view/me");
   };
   //To set the previously filled data
   useEffect(() => {
-    console.log("data from the context from educational", student);
     setCurrentDetails(student?.educationDetails);
-  }, []);
+  }, [student]);
 
   //To set the data on update
   useEffect(() => {
@@ -699,7 +695,7 @@ export default function EducationalDetailsInput(props) {
           </Grid>
         </Grid>
       </Grid>
-      {/* Button */}
+      {/* Buttons */}
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         {id ? (
           <Button

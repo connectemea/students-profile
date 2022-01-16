@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Typography, Stack, Link, Card } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import PasswordField from "./utils/PasswordField";
 import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
+import Page from "../../utils/Page";
 
 //importing the user service
 import authService from "../../../services/authService";
@@ -69,7 +70,6 @@ export default function Register() {
         email,
         password,
       };
-      console.log("i am called man");
       // registering a user
       await authService.registerUser(registerCredentials);
       clearForm();
@@ -80,64 +80,66 @@ export default function Register() {
   };
 
   return (
-    <ContentStyle>
-      <Card sx={{ p: 3 }}>
-        <Box sx={{ mb: 3 }}>
-          <Typography variant="h3" gutterBottom textAlign="center">
-            Register
-          </Typography>
-        </Box>
-        <Stack spacing={2}>
-          <TextInput
-            label="User name"
-            type="text"
-            value={username}
-            setValue={setUsername}
-            authErrors={authErrors}
-          />
-          <TextInput
-            label="Email"
-            type="email"
-            value={email}
-            setValue={setEmail}
-            authErrors={authErrors}
-          />
-          <PasswordField
-            label="Password"
-            value={password}
-            setValue={setPassword}
-            errorMessage={passwordError}
-            authErrors={authErrors}
-          />
-          <PasswordField
-            label="Confirm Password"
-            value={confirmPassword}
-            setValue={setConfirmPassword}
-            errorMessage={confirmPasswordError}
-            authErrors={authErrors}
-            showError
-          />
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="flex-start"
-            sx={{ my: 2 }}
-          >
-            <Link component={RouterLink} variant="subtitle2" to="/user/login">
-              Already have an account? Login
-            </Link>
+    <Page title="Register">
+      <ContentStyle>
+        <Card sx={{ p: 3 }}>
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="h3" gutterBottom textAlign="center">
+              Register
+            </Typography>
+          </Box>
+          <Stack spacing={2}>
+            <TextInput
+              label="User name"
+              type="text"
+              value={username}
+              setValue={setUsername}
+              authErrors={authErrors}
+            />
+            <TextInput
+              label="Email"
+              type="email"
+              value={email}
+              setValue={setEmail}
+              authErrors={authErrors}
+            />
+            <PasswordField
+              label="Password"
+              value={password}
+              setValue={setPassword}
+              errorMessage={passwordError}
+              authErrors={authErrors}
+            />
+            <PasswordField
+              label="Confirm Password"
+              value={confirmPassword}
+              setValue={setConfirmPassword}
+              errorMessage={confirmPasswordError}
+              authErrors={authErrors}
+              showError
+            />
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="flex-start"
+              sx={{ my: 2 }}
+            >
+              <Link component={RouterLink} variant="subtitle2" to="/user/login">
+                Already have an account? Login
+              </Link>
+            </Stack>
+            <SubmitButton
+              name="Register"
+              disabled={
+                !username || !email || !password || !confirmPassword
+                  ? true
+                  : false
+              }
+              onClick={handleClick}
+            />
           </Stack>
-          <SubmitButton
-            name="Register"
-            disabled={
-              !username || !email || !password || !confirmPassword
-                ? true
-                : false
-            }
-            onClick={handleClick}
-          />
-        </Stack>
-      </Card>
-    </ContentStyle>
+        </Card>
+      </ContentStyle>
+    </Page>
   );
 }

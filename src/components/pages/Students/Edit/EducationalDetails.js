@@ -1,5 +1,5 @@
 import EducationalDetailsInput from "../../../utils/Student/EducationalDetailsInput";
-import { Container, Button, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 
 export default function EducationDeatils() {
   return (

@@ -40,7 +40,6 @@ export default function EducationalView(props) {
             md={12}
             lg={12}
             container
-            container
             direction="row"
             justifyContent="space-between"
             alignItems="center"

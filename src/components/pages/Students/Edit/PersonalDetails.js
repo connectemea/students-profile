@@ -1,5 +1,5 @@
 import PersonalDetailsInput from "../../../utils/Student/PersonalDetailsInput";
-import { Container, Button, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 
 export default function PersonalDeatils() {
   return (

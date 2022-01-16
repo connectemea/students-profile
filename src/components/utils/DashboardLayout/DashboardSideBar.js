@@ -5,16 +5,13 @@ import { Link as RouterLink, useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Box, Drawer, Link, Avatar, Typography } from "@mui/material";
 // custom components
-// import Logo from "../../Logo";
 import Scrollbar from "../Scrollbar";
 import NavSection from "./NavSection";
 import { MHidden } from "../../@material-extent";
 import NavConfig from "./NavConfig";
 import Logo from "../../../images/Logo.png";
-import ProfileImg from "../../../images/avatar.jpg";
 import { profileContext } from "../../../context/profileContext";
 import BACKEND_URL from "../../../constants/BACKEND_URL";
-// import account from '../../_mocks_/account';
 
 // drawer width for mobile devices
 const DRAWER_WIDTH = 280;
@@ -50,7 +47,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     if (isOpenSidebar) {
       onCloseSidebar();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, [pathname]);
 
   const renderContent = (
@@ -65,14 +62,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       }}
     >
       <Box sx={{ px: 2.5, py: 3 }}>
-        <Box component={RouterLink} to={"/"} sx={{ display: "inline-flex" }}>
-          {/* <Logo /> */}
-          <Box
-            component={"img"}
-            src={Logo}
-            sx={{ width: 40, height: 40 }}
-          />
-        </Box>
+        <Box component={"img"} src={Logo} sx={{ width: 40, height: 40 }} />
       </Box>
 
       <Box sx={{ mb: 5, mx: 2.5 }}>
@@ -89,7 +79,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             }`}
           >
             <AccountStyle>
-              <Avatar src={`${BACKEND_URL.BASE_URL}upload/${profile?.profileImage}`} alt="photoURL" />
+              <Avatar
+                src={`${BACKEND_URL.BASE_URL}upload/${profile?.profileImage}`}
+                alt="photoURL"
+              />
               <Box sx={{ ml: 2 }}>
                 <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
                   {profile && profile.username}
@@ -109,44 +102,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       {profile && <NavSection navConfig={NavConfig} profile={profile} />}
 
       <Box sx={{ flexGrow: 1 }} />
-
-      {/* <Box sx={{ px: 2.5, pb: 3, mt: 10 }}>
-        <Stack
-          alignItems="center"
-          spacing={3}
-          sx={{
-            p: 2.5,
-            pt: 5,
-            borderRadius: 2,
-            position: 'relative',
-            bgcolor: 'grey.200'
-          }}
-        >
-          <Box
-            component="img"
-            src="/static/illustrations/illustration_avatar.png"
-            sx={{ width: 100, position: 'absolute', top: -50 }}
-          />
-
-          <Box sx={{ textAlign: 'center' }}>
-            <Typography gutterBottom variant="h6">
-              Get more?
-            </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              From only $69
-            </Typography>
-          </Box>
-
-          <Button
-            fullWidth
-            href="https://material-ui.com/store/items/minimal-dashboard/"
-            target="_blank"
-            variant="contained"
-          >
-            Upgrade to Pro
-          </Button>
-        </Stack>
-      </Box> */}
     </Scrollbar>
   );
 

@@ -5,7 +5,7 @@ import { DatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
 export default function DatePickerInput(props) {
-  const { label, date, setDate, views, name } = props;
+  const { label, date, setDate, views, name, onChange } = props;
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -16,10 +16,15 @@ export default function DatePickerInput(props) {
         maxDate={new Date()}
         onChange={(newDateValue) => {
           setDate(newDateValue);
+          return onChange && onChange();
         }}
         renderInput={(params) => (
-          <TextField fullWidth color="info" helperText={date === "" ? `${name} is required` : null}
-            {...params} />
+          <TextField
+            fullWidth
+            color="info"
+            helperText={date === "" ? `${name} is required` : null}
+            {...params}
+          />
         )}
       />
     </LocalizationProvider>

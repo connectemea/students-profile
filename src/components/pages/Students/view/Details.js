@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 // material components
 import {
   Typography,
@@ -15,18 +14,12 @@ import Page from "../../../utils/Page";
 import PersonalView from "../../../utils/Student/View/PersonalView";
 import EducationalView from "../../../utils/Student/View/EducationalView";
 import FamilyView from "../../../utils/Student/View/FamilyView";
-import DependenciesView from "../../../utils/Student/View/Dependencies";
-import profile from "../../../../images/test.jpg";
+import BACKEND_URL from "../../../../constants/BACKEND_URL";
 import studentsService from "../../../../services/studentsService";
 import { useParams } from "react-router-dom";
 
-// icon import
-
-import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
-  // paddingBottom: `${theme.spacing(4)} !important`,
 }));
 
 const Panel = (props) => (
@@ -49,7 +42,7 @@ export default function Details() {
         const response = await studentsService.getStudentById(id);
         setStudentsDetails(response);
       } catch (error) {
-        console.log("error", error.response);
+        console.error(error.response);
       }
     }
     async function getLogedStudent() {
@@ -96,13 +89,10 @@ export default function Details() {
                 gitItems="center"
               >
                 <Grid
-                  // xs={12}
-                  // md={3}
-                  // sm={3}
                   item
                   component={Avatar}
                   alt="Remy Sharp"
-                  src={profile}
+                  src={`${BACKEND_URL.BASE_URL}upload/${studentDetails.personalDetails.profileImage}`}
                   sx={{
                     width: 80,
                     height: 80,
@@ -132,7 +122,8 @@ export default function Details() {
                       fontSize: 15,
                     }}
                   >
-                    UI/UX Designer
+                    {studentDetails &&
+                      studentDetails.personalDetails.department.name}
                   </Typography>
                 </Grid>
               </Grid>
@@ -151,7 +142,7 @@ export default function Details() {
                   <Tab label="Personal" />
                   <Tab label="Educational" />
                   <Tab label="Family" />
-                  <Tab label="Dependencies" />
+                  {/* <Tab label="Dependencies" /> */}
                 </Tabs>
               </Grid>
             </Grid>
@@ -179,9 +170,9 @@ export default function Details() {
                 id={studentDetails._id}
               />
             </Panel>
-            <Panel value={index} index={3}>
+            {/* <Panel value={index} index={3}>
               <DependenciesView id={studentDetails._id} />
-            </Panel>
+            </Panel> */}
           </Grid>
         </>
       )}

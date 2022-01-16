@@ -28,32 +28,6 @@ const TABLE_HEAD = [
   { id: "status", label: "status", type: "userStatusChip" },
 ];
 
-const TABLE_DATA = [
-  {
-    id: "134doojon",
-    username: "Aseel",
-    email: "aseelhacker@microsoft.com",
-    status: "registered",
-  },
-  {
-    id: "ounr34343",
-    username: "Noof",
-    email: "noof@google.com",
-    status: "created",
-  },
-  {
-    id: "343433ojnn",
-    username: "Nahyan",
-    email: "nahyan@facebook.com",
-    status: "filled",
-  },
-  {
-    id: "eonkn2434",
-    username: "Dilshad",
-    email: "dilshad@amazon.com",
-    status: "created",
-  },
-];
 
 export default function AddStudent() {
   const [username, setUsername] = useState();
@@ -67,7 +41,6 @@ export default function AddStudent() {
     const getUsers = async () => {
       try {
         const users = await userService.getUsers();
-        console.log(users);
         setUsers(users);
       } catch (err) {
         console.error(err?.response?.data?.message);
@@ -156,10 +129,8 @@ export default function AddStudent() {
                 <Button
                   variant="contained"
                   color="info"
-                  //   component={RouterLink}
                   onClick={handleAddStudent}
                   disabled={!username || !email}
-                  //   to="#"
                   startIcon={<PublishIcon />}
                 >
                   Add

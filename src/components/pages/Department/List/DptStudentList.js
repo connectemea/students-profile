@@ -1,4 +1,4 @@
-import { Link as RouterLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 // material components
 import { Stack, Container, Typography, Grid } from "@mui/material";
@@ -19,6 +19,7 @@ const TABLE_HEAD = [
     alignRight: false,
     type: "stack",
     baseUrl: "/app/student/view",
+    imageId: "personalDetails.profileImage",
   },
   { id: "userId.email", label: "email", type: "text" },
   {
@@ -30,9 +31,12 @@ const TABLE_HEAD = [
 
 export default function DptStudentsList() {
   const { id } = useParams();
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 5 }, (_, i) => currentYear + i);
-  const [year, setYear] = useState(currentYear);
+  const date = new Date();
+  const currentYear = date.getFullYear();
+  const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
+  const [year, setYear] = useState(
+    date.getMonth() > 0 ? currentYear : currentYear - 1
+  );
   const [students, setStudents] = useState([]);
   useEffect(() => {
     const getStudents = async () => {
@@ -64,7 +68,7 @@ export default function DptStudentsList() {
           <Grid container justify="flex-end" item xs={12} sm={6} md={3} lg={3}>
             {/* select input from custom made component */}
             <SelectInput
-              label="select year"
+              label="Joining year"
               name="year"
               menuItems={years}
               dropdownValue={year}

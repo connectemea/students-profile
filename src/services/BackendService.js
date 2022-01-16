@@ -77,7 +77,6 @@ const BackendService = {
   post,
   patch,
   destroy,
-  // imageUpload
 };
 
 export default BackendService;

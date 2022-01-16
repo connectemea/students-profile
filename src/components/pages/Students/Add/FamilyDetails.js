@@ -9,9 +9,6 @@ import { styled } from "@mui/material/styles";
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
-
-import { Link } from "react-router-dom";
-
 import { Box } from "@mui/system";
 import FamilyDetailsInput from "../../../utils/Student/FamilyDetailsInput";
 
@@ -38,9 +35,7 @@ export default function FamilyDetails() {
                     <Stepper activeStep={2}>
                     {steps.map((step) => (
                             <Step key={step.name}>
-                            <Link to={step.link} style={{textDecoration:'none'}}>
                                 <StepLabel>{step.name}</StepLabel>
-                            </Link>
                             </Step>
                         ))}
                     </Stepper>

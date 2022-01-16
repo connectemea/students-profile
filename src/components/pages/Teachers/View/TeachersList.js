@@ -13,37 +13,11 @@ import { useEffect } from "react";
 
 // table header cell config
 const TABLE_HEAD = [
-  { id: "name", label: "Name", type: "stack" ,baseUrl:"/app/teacher/view"},
+  { id: "name", label: "Name", type: "stack" ,baseUrl:"/app/teacher/view",imageId:"profileImage"},
   { id: "shortName", label: "short form", type: "text" },
   { id: "department", label: "department", type: "text" },
 ];
 
-// const TABLE_DATA = [
-//   {
-//     id: "134doojon",
-//     name: "Aseel",
-//     company: "microsoft",
-//     role: "Pentester",
-//   },
-//   {
-//     id: "ounr34343",
-//     name: "Noof",
-//     company: "google",
-//     role: "Front-end",
-//   },
-//   {
-//     id: "343433ojnn",
-//     name: "Nahyan",
-//     company: "facebook",
-//     role: "Back-end ",
-//   },
-//   {
-//     id: "eonkn2434",
-//     name: "Dilshad",
-//     company: "amazon",
-//     role: "Full-stack",
-//   },
-// ];
 
 export default function TeachersList() {
   const [teachers, setTeachers] = useState([]);

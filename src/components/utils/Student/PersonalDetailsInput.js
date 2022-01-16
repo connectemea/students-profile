@@ -23,6 +23,7 @@ import DatePickerInput from "../Inputs/DatePickerInput";
 import ImageUpload from "../Inputs/ImageUpload";
 import { studentContext } from "../../../context/studentContext";
 import departmentService from "../../../services/departmentService";
+import * as dateHelper from "../../helpers/dateTimeHelper";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
@@ -75,10 +76,10 @@ export default function PersonalDetailsInput() {
       name,
       email,
       admissionNO,
-      yearOfJoin,
+      yearOfJoin: dateHelper.getYear(yearOfJoin),
       department,
       mobileNo,
-      dateOfBirth,
+      dateOfBirth: dateHelper.getDate(dateOfBirth),
       gender,
       bloodGroup,
       maritalStatus,
@@ -153,28 +154,27 @@ export default function PersonalDetailsInput() {
   //To set the given value to the state
   const setCurrentDetails = (details) => {
     if (!details) return;
-    setProfileImage(details?.profileImage);
-    setName(details?.name);
-    setEmail(details?.email);
-    setDepartment(details?.department);
-    setMobileNo(details?.mobileNo);
-    setDateOfBirth(new Date(details?.dateOfBirth));
-    setGender(details?.gender);
-    setDepartment(details?.department);
-    setYearOfJoin(new Date(details?.yearOfJoin));
-    setGender(details?.gender);
-    setAdmissionNO(details?.admissionNO);
-    setBloodGroup(details?.bloodGroup);
-    setMaritalStatus(details?.maritalStatus);
-    setReligion(details?.religion);
-    setCaste(details?.caste);
-    setCategoryOfAdmission(details?.categoryOfAdmission);
-    setIdentificationMarkOne(details?.identificationMarkOne);
-    setIdentificationMarkTwo(details?.identificationMarkTwo);
-    setPresentAddress(details?.presentAddress);
-    setPermanentAdress(details?.permanentAddress);
-    setResidence(details?.residence);
-    setDistanceFromCollege(details?.distanceFromCollege);
+    setProfileImage(details.profileImage);
+    setName(details.name);
+    setEmail(details.email);
+    setDepartment(details.department._id);
+    setMobileNo(details.mobileNo);
+    setDateOfBirth(dateHelper.dateToObj(details.dateOfBirth));
+    setGender(details.gender);
+    setYearOfJoin(dateHelper.yearToObj(details.yearOfJoin));
+    setGender(details.gender);
+    setAdmissionNO(details.admissionNO);
+    setBloodGroup(details.bloodGroup);
+    setMaritalStatus(details.maritalStatus);
+    setReligion(details.religion);
+    setCaste(details.caste);
+    setCategoryOfAdmission(details.categoryOfAdmission);
+    setIdentificationMarkOne(details.identificationMarkOne);
+    setIdentificationMarkTwo(details.identificationMarkTwo);
+    setPresentAddress(details.presentAddress);
+    setPermanentAdress(details.permanentAddress);
+    setResidence(details.residence);
+    setDistanceFromCollege(details.distanceFromCollege);
   };
 
   // To handle next button click
@@ -205,12 +205,13 @@ export default function PersonalDetailsInput() {
       data.personalDetails.profileImage = imageUrl.filepath;
     }
     await studentsService.updateStudent(id, data);
+    navigate("/app/student/view/me");
   };
 
   //To set the previously filled data
   useEffect(() => {
     setCurrentDetails(student?.personalDetails);
-  }, []);
+  }, [student?.personalDetails]);
   //To get departments
   useEffect(() => {
     const getDepartment = async () => {

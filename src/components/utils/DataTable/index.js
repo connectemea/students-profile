@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import BACKEND_URL from "../../../constants/BACKEND_URL";
 
 // material UI components
 import {
@@ -22,7 +23,6 @@ import PropTypes from "prop-types";
 // custom components
 import DataTableHead from "./DataTableHead";
 import DataTableToolbar from "./DataTableToolbar";
-import Scrollbar from "../Scrollbar";
 import SearchNotFound from "./SearchNotFound";
 
 function descendingComparator(a, b, orderBy) {
@@ -140,7 +140,13 @@ export default function DataTable({ TABLE_HEAD, TABLE_DATA, SEARCH_ID }) {
             component={Link}
             to={`${col.baseUrl}/${value._id}`}
           >
-            <Avatar alt={value[col.id]} src={"#"} />
+            <Avatar
+              alt={value[col.id]}
+              src={`${BACKEND_URL.BASE_URL}upload/${getValueForCell(
+                value,
+                col.imageId
+              )}`}
+            />
             <Typography variant="subtitle2" noWrap>
               {getValueForCell(value, col.id)}
             </Typography>
@@ -172,48 +178,46 @@ export default function DataTable({ TABLE_HEAD, TABLE_DATA, SEARCH_ID }) {
         onFilterName={handleFilterByName}
       />
 
-      {/* <Scrollbar> */}
-        <TableContainer sx={{ minWidth: 800, padding: 2 }}>
-          <Table>
-            <DataTableHead
-              order={order}
-              orderBy={orderBy}
-              headLabel={TABLE_HEAD}
-              rowCount={TABLE_DATA.length}
-              numSelected={selected.length}
-              onRequestSort={handleRequestSort}
-              onSelectAllClick={handleSelectAllClick}
-            />
-            <TableBody>
-              {filteredUsers
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => (
-                  <TableRow hover key={row.id} tabIndex={-1} role="checkbox">
-                    {TABLE_HEAD.map((col) => (
-                      <TableCell align={row.align ? row.align : "left"}>
-                        {getRowCell(col, row)}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
+      <TableContainer sx={{ minWidth: 800, padding: 2 }}>
+        <Table>
+          <DataTableHead
+            order={order}
+            orderBy={orderBy}
+            headLabel={TABLE_HEAD}
+            rowCount={TABLE_DATA.length}
+            numSelected={selected.length}
+            onRequestSort={handleRequestSort}
+            onSelectAllClick={handleSelectAllClick}
+          />
+          <TableBody>
+            {filteredUsers
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => (
+                <TableRow hover key={row.id} tabIndex={-1} role="checkbox">
+                  {TABLE_HEAD.map((col) => (
+                    <TableCell align={row.align ? row.align : "left"}>
+                      {getRowCell(col, row)}
+                    </TableCell>
+                  ))}
                 </TableRow>
-              )}
-            </TableBody>
-            {isUserNotFound && (
-              <TableBody>
-                <TableRow>
-                  <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
-                    <SearchNotFound searchQuery={filterName} />
-                  </TableCell>
-                </TableRow>
-              </TableBody>
+              ))}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
             )}
-          </Table>
-        </TableContainer>
-      {/* </Scrollbar> */}
+          </TableBody>
+          {isUserNotFound && (
+            <TableBody>
+              <TableRow>
+                <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                  <SearchNotFound searchQuery={filterName} />
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          )}
+        </Table>
+      </TableContainer>
 
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}

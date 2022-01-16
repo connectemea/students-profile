@@ -7,13 +7,9 @@ import {
     StepLabel
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
-
 import { Box } from "@mui/system";
-import { Link } from "react-router-dom";
-
 
 const RootStyle = styled("div")(({ theme }) => ({
     padding: theme.spacing(4),
@@ -37,9 +33,7 @@ export default function PersonalDetails() {
                     <Stepper activeStep={0}>
                         {steps.map((step) => (
                             <Step key={step.name}>
-                            <Link to={step.link} style={{textDecoration:'none'}}>
                                 <StepLabel>{step.name}</StepLabel>
-                            </Link>
                             </Step>
                         ))}
                     </Stepper>

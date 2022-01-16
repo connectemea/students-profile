@@ -53,7 +53,7 @@ export default function FamilyDetailsInput() {
 
   //Radio button management
   //Father
-  const [isFatherChecked, setIsFatherChecked] = useState(false);
+  const [isFatherChecked] = useState(false);
   const handleIsFatherChecked = () => {
     if (!isFatherChecked) setFatherAsGuardian();
     setIsOtherChecked(false);
@@ -67,7 +67,7 @@ export default function FamilyDetailsInput() {
     setGuardianAddress(fatherAddress);
   };
   //Mother
-  const [isMotherChecked, setIsMotherChecked] = useState(false);
+  const [isMotherChecked] = useState(false);
   const handleIsMotherChecked = () => {
     if (!isMotherChecked) setMotherAsGuardian();
     setIsOtherChecked(false);
@@ -170,28 +170,28 @@ export default function FamilyDetailsInput() {
   //To set the given value to the state
   const setCurrentDetails = (details) => {
     if (!details) return;
-    setFatherName(details?.father?.name);
-    setFatherQualification(details?.father?.educationQualification);
-    setFatherAnnualIncome(details?.father?.annualIncome);
-    setFatherOccupation(details?.father?.occupation);
-    setFatherNO(details?.father?.number);
-    setFatherAddress(details?.father?.officialAddress);
+    setFatherName(details.father.name);
+    setFatherQualification(details.father.educationQualification);
+    setFatherAnnualIncome(details.father.annualIncome);
+    setFatherOccupation(details.father.occupation);
+    setFatherNO(details.father.number);
+    setFatherAddress(details.father.officialAddress);
 
     //mother Details
-    setMotherName(details?.mother?.name);
-    setMotherQualification(details?.mother?.educationQualification);
-    setMotherAnnualIncome(details?.mother?.annualIncome);
-    setMotherOccupation(details?.mother?.occupation);
-    setMotherNO(details?.mother?.number);
-    setMotherAddress(details?.mother?.officialAddress);
+    setMotherName(details.mother.name);
+    setMotherQualification(details.mother.educationQualification);
+    setMotherAnnualIncome(details.mother.annualIncome);
+    setMotherOccupation(details.mother.occupation);
+    setMotherNO(details.mother.number);
+    setMotherAddress(details.mother.officialAddress);
 
     //Guardian details
-    setGuardianName(details?.guardian?.name);
-    setGuardianQualification(details?.guardian?.educationQualification);
-    setGuardianAnnualIncome(details?.guardian?.annualIncome);
-    setGuardianOccupation(details?.guardian?.occupation);
-    setGuardianNO(details?.guardian?.number);
-    setGuardianAddress(details?.guardian?.officialAddress);
+    setGuardianName(details.guardian.name);
+    setGuardianQualification(details.guardian.educationQualification);
+    setGuardianAnnualIncome(details.guardian.annualIncome);
+    setGuardianOccupation(details.guardian.occupation);
+    setGuardianNO(details.guardian.number);
+    setGuardianAddress(details.guardian.officialAddress);
   };
 
   //To handle next button click
@@ -209,12 +209,12 @@ export default function FamilyDetailsInput() {
       const formData = new FormData();
       formData.append("profile", imageData);
       const imageUrl = await userService.updateImage(formData);
-      data.profileImage = imageUrl.data.filepath;
+      data.personalDetails.profileImage = imageUrl.filepath;
       await studentsService.addStudent(data);
-      navigate("/app/dashboard");
+      navigate("/app/student/view/me");
       setStudent(null);
     } catch (error) {
-      console.error(error?.response?.data?.message);
+      console.error(error);
     }
   };
   //To handle back button click
@@ -233,11 +233,12 @@ export default function FamilyDetailsInput() {
       familyDetails: structureData(),
     };
     await studentsService.updateStudent(id, data);
+    navigate("/app/student/view/me");
   };
   //To set the previously filled data
   useEffect(() => {
-    if(student)setCurrentDetails(student.familyDetails);
-  }, []);
+    if (student) setCurrentDetails(student.familyDetails);
+  }, [student]);
 
   //To set the data on update
   useEffect(() => {

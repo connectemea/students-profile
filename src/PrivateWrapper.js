@@ -18,7 +18,7 @@ export default function PrivateWrapper() {
       }
     }
     if ((token || token === "undefined") && !profile) getUserProfile();
-  }, [token]);
+  }, [token, profile, setProfile]);
   return token && token !== "undefined" ? (
     <Outlet />
   ) : (

@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 // routes component
 import {
@@ -19,7 +19,6 @@ import {
   ListItemIcon,
   ListItemButton,
 } from "@mui/material";
-import { profileContext } from "../../../context/profileContext";
 import USER_TYPE from "../../../constants/USER_TYPE";
 
 // custom styled listItem
@@ -103,7 +102,6 @@ function NavItem({ item, active }) {
           <ListItemText disableTypography primary={title} />
           {info && info}
           <Box
-            // component={Icon}
             icon={open ? KeyboardArrowDownIcon : ArrowForwardIosIcon}
             sx={{ width: 16, height: 16, ml: 1 }}
           />

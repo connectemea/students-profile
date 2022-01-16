@@ -6,6 +6,7 @@ import PasswordField from "./utils/PasswordField";
 import SubmitButton from "./utils/SubmitButton";
 
 import authService from "../../../services/authService";
+import Page from "../../utils/Page";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -51,50 +52,50 @@ export default function Register() {
     const passwordMatchError = validatePasswordMatch();
     if (passwordLengthError || passwordMatchError) return;
     try {
-      // clearError();
       const data = {
         password,
       };
       // logging in user
-      const response = await authService.resetPassword(data, token);
-      console.log(response);
+      await authService.resetPassword(data, token);
       navigate("/user/login");
     } catch (err) {
-      console.log(err.response);
+      console.error(err.response);
     }
   };
 
   return (
-    <Container>
-      <ContentStyle>
-        <Card sx={{ p: 4 }}>
-          <Box sx={{ mb: 3 }}>
-            <Typography textAlign="center" variant="h3" gutterBottom>
-              Recover Password
-            </Typography>
-          </Box>
-          <Stack spacing={2}>
-            <PasswordField
-              label="Password"
-              value={password}
-              setValue={setPassword}
-              errorMessage={passwordError}
-            />
-            <PasswordField
-              label="Confirm Password"
-              value={confirmPassword}
-              setValue={setConfirmPassword}
-              errorMessage={confirmPasswordError}
-            />
+    <Page title="Reset Password">
+      <Container>
+        <ContentStyle>
+          <Card sx={{ p: 4 }}>
+            <Box sx={{ mb: 3 }}>
+              <Typography textAlign="center" variant="h3" gutterBottom>
+                Recover Password
+              </Typography>
+            </Box>
+            <Stack spacing={2}>
+              <PasswordField
+                label="Password"
+                value={password}
+                setValue={setPassword}
+                errorMessage={passwordError}
+              />
+              <PasswordField
+                label="Confirm Password"
+                value={confirmPassword}
+                setValue={setConfirmPassword}
+                errorMessage={confirmPasswordError}
+              />
 
-            <SubmitButton
-              disabled={!password || !confirmPassword ? true : false}
-              name="Submit"
-              onClick={handleClick}
-            />
-          </Stack>
-        </Card>
-      </ContentStyle>
-    </Container>
+              <SubmitButton
+                disabled={!password || !confirmPassword ? true : false}
+                name="Submit"
+                onClick={handleClick}
+              />
+            </Stack>
+          </Card>
+        </ContentStyle>
+      </Container>
+    </Page>
   );
 }

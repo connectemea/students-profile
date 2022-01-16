@@ -10,7 +10,6 @@ import {
   MenuItem,
   TextField,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import Page from "../../../utils/Page";
 import TextInput from "../../../utils/Inputs/TextInput";
 import SelectInput from "../../../utils/Inputs/SelectInput";
@@ -21,6 +20,7 @@ import teacherService from "../../../../services/teacherService";
 import userService from "../../../../services/userService";
 import departemntService from "../../../../services/departmentService";
 import LOCAL_KEYS from "../../../../constants/LOCAL_KEY";
+import * as dateHelper from "../../../helpers/dateTimeHelper";
 
 export default function AddDetails() {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ export default function AddDetails() {
 
   const [departmentData, setDepartmentData] = useState();
 
-  const [errorMsg, setErrorMsg] = useState();
+  const [, setErrorMsg] = useState();
   const clearError = () => setErrorMsg("");
 
   const departmentChangeHandler = (e) => {
@@ -69,7 +69,7 @@ export default function AddDetails() {
         shortName,
         email,
         department,
-        joinYear,
+        joinYear: dateHelper.getYear(joinYear),
         gender,
         maritalStatus,
         phoneNo,
@@ -87,7 +87,7 @@ export default function AddDetails() {
       clearUserCredentials();
       navigate("/teacher/view/me");
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
   //To check its an image or not
@@ -103,7 +103,7 @@ export default function AddDetails() {
         shortName,
         email,
         department,
-        joinYear,
+        joinYear: dateHelper.getYear(joinYear),
         gender,
         maritalStatus,
         phoneNo,
@@ -121,7 +121,7 @@ export default function AddDetails() {
       clearUserCredentials();
       navigate("/app/teacher/view/me");
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -147,7 +147,7 @@ export default function AddDetails() {
     setShortName(details.shortName);
     setEmail(details.email);
     setDepartment(details.department._id);
-    setJoiningYear(new Date(details.joinYear));
+    setJoiningYear(dateHelper.yearToObj(details.joinYear));
     setGender(details.gender);
     setMaritalStatus(details.maritalStatus);
     setPhoneNo(details.phoneNo);

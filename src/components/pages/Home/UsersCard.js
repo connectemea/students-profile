@@ -1,14 +1,6 @@
-// import { Icon } from '@iconify/react';
-// import appleFilled from '@iconify/icons-ant-design/apple-filled';
 // material
 import { alpha, styled } from "@mui/material/styles";
 import { Card, Typography } from "@mui/material";
-// utils
-// import { fShortenNumber } from '../../../utils/formatNumber';
-
-// ----------------------------------------------------------------------
-
-// ----------------------------------------------------------------------
 
 const TOTAL = 1352831;
 
@@ -39,7 +31,6 @@ export default function UsersCard({type}) {
   return (
     <RootStyle>
       <IconWrapperStyle>
-        {/* <Icon icon={appleFilled} width={24} height={24} /> */}
         <Icon/>
       </IconWrapperStyle>
       <Typography variant="h3">{TOTAL}</Typography>
