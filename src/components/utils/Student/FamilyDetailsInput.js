@@ -170,28 +170,28 @@ export default function FamilyDetailsInput() {
   //To set the given value to the state
   const setCurrentDetails = (details) => {
     if (!details) return;
-    setFatherName(details?.father?.name);
-    setFatherQualification(details?.father?.educationQualification);
-    setFatherAnnualIncome(details?.father?.annualIncome);
-    setFatherOccupation(details?.father?.occupation);
-    setFatherNO(details?.father?.number);
-    setFatherAddress(details?.father?.officialAddress);
+    setFatherName(details.father.name);
+    setFatherQualification(details.father.educationQualification);
+    setFatherAnnualIncome(details.father.annualIncome);
+    setFatherOccupation(details.father.occupation);
+    setFatherNO(details.father.number);
+    setFatherAddress(details.father.officialAddress);
 
     //mother Details
-    setMotherName(details?.mother?.name);
-    setMotherQualification(details?.mother?.educationQualification);
-    setMotherAnnualIncome(details?.mother?.annualIncome);
-    setMotherOccupation(details?.mother?.occupation);
-    setMotherNO(details?.mother?.number);
-    setMotherAddress(details?.mother?.officialAddress);
+    setMotherName(details.mother.name);
+    setMotherQualification(details.mother.educationQualification);
+    setMotherAnnualIncome(details.mother.annualIncome);
+    setMotherOccupation(details.mother.occupation);
+    setMotherNO(details.mother.number);
+    setMotherAddress(details.mother.officialAddress);
 
     //Guardian details
-    setGuardianName(details?.guardian?.name);
-    setGuardianQualification(details?.guardian?.educationQualification);
-    setGuardianAnnualIncome(details?.guardian?.annualIncome);
-    setGuardianOccupation(details?.guardian?.occupation);
-    setGuardianNO(details?.guardian?.number);
-    setGuardianAddress(details?.guardian?.officialAddress);
+    setGuardianName(details.guardian.name);
+    setGuardianQualification(details.guardian.educationQualification);
+    setGuardianAnnualIncome(details.guardian.annualIncome);
+    setGuardianOccupation(details.guardian.occupation);
+    setGuardianNO(details.guardian.number);
+    setGuardianAddress(details.guardian.officialAddress);
   };
 
   //To handle next button click

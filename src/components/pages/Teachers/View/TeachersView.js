@@ -76,13 +76,9 @@ export default function TeachersView() {
                 gitItems="center"
               >
                 <Grid
-                  // xs={12}
-                  // md={3}
-                  // sm={3}
                   item
                   component={Avatar}
                   alt="Remy Sharp"
-                  // src={profile}
                   src={`${BACKEND_URL.BASE_URL}upload/${teacherData.profileImage}`}
                   sx={{
                     width: 80,
@@ -149,7 +145,6 @@ export default function TeachersView() {
               spacing={2.3}
               alignItems="flex-end"
             >
-              {/* <Container> */}
               <Grid item sm={12} xs={12} md={3} lg={3}>
                 <Field heading="Name" subHeading={teacherData.name} />
               </Grid>
@@ -201,7 +196,6 @@ export default function TeachersView() {
                   subHeading={teacherData.educationQualification}
                 />
               </Grid>
-              {/* </Container> */}
             </Grid>
           </Container>
         </Container>

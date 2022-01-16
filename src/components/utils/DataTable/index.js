@@ -171,7 +171,6 @@ export default function DataTable({ TABLE_HEAD, TABLE_DATA, SEARCH_ID }) {
         onFilterName={handleFilterByName}
       />
 
-      {/* <Scrollbar> */}
         <TableContainer sx={{ minWidth: 800, padding: 2 }}>
           <Table>
             <DataTableHead
@@ -212,7 +211,6 @@ export default function DataTable({ TABLE_HEAD, TABLE_DATA, SEARCH_ID }) {
             )}
           </Table>
         </TableContainer>
-      {/* </Scrollbar> */}
 
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}

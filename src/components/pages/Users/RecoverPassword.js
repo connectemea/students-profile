@@ -51,7 +51,6 @@ export default function Register() {
     const passwordMatchError = validatePasswordMatch();
     if (passwordLengthError || passwordMatchError) return;
     try {
-      // clearError();
       const data = {
         password,
       };

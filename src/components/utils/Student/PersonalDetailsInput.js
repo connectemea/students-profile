@@ -153,28 +153,28 @@ export default function PersonalDetailsInput() {
   //To set the given value to the state
   const setCurrentDetails = (details) => {
     if (!details) return;
-    setProfileImage(details?.profileImage);
-    setName(details?.name);
-    setEmail(details?.email);
-    setDepartment(details?.department);
-    setMobileNo(details?.mobileNo);
-    setDateOfBirth(new Date(details?.dateOfBirth));
-    setGender(details?.gender);
-    setDepartment(details?.department);
-    setYearOfJoin(new Date(details?.yearOfJoin));
-    setGender(details?.gender);
-    setAdmissionNO(details?.admissionNO);
-    setBloodGroup(details?.bloodGroup);
-    setMaritalStatus(details?.maritalStatus);
-    setReligion(details?.religion);
-    setCaste(details?.caste);
-    setCategoryOfAdmission(details?.categoryOfAdmission);
-    setIdentificationMarkOne(details?.identificationMarkOne);
-    setIdentificationMarkTwo(details?.identificationMarkTwo);
-    setPresentAddress(details?.presentAddress);
-    setPermanentAdress(details?.permanentAddress);
-    setResidence(details?.residence);
-    setDistanceFromCollege(details?.distanceFromCollege);
+    setProfileImage(details.profileImage);
+    setName(details.name);
+    setEmail(details.email);
+    setDepartment(details.department);
+    setMobileNo(details.mobileNo);
+    setDateOfBirth(new Date(details.dateOfBirth));
+    setGender(details.gender);
+    setDepartment(details.department);
+    setYearOfJoin(new Date(details.yearOfJoin));
+    setGender(details.gender);
+    setAdmissionNO(details.admissionNO);
+    setBloodGroup(details.bloodGroup);
+    setMaritalStatus(details.maritalStatus);
+    setReligion(details.religion);
+    setCaste(details.caste);
+    setCategoryOfAdmission(details.categoryOfAdmission);
+    setIdentificationMarkOne(details.identificationMarkOne);
+    setIdentificationMarkTwo(details.identificationMarkTwo);
+    setPresentAddress(details.presentAddress);
+    setPermanentAdress(details.permanentAddress);
+    setResidence(details.residence);
+    setDistanceFromCollege(details.distanceFromCollege);
   };
 
   // To handle next button click

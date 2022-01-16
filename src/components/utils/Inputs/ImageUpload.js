@@ -18,7 +18,7 @@ const AddImage = styled(IconButton)(({ theme, isError }) => ({
 }));
 
 export default function ImageUpload(props) {
-  // pops destructuring
+  // props destructuring
   const { image, setImage } = props;
   const imageUrl =
     image instanceof File
@@ -28,11 +28,6 @@ export default function ImageUpload(props) {
   const handleImageChange = (e) => {
     e.target.files[0] && setImage(e.target.files[0]);
 
-    // const formData = new FormData();
-    // formData.append("profile", image);
-
-    // console.log(`form data = ${formData}`);
-    // console.log(formData);
   };
 
   return (
