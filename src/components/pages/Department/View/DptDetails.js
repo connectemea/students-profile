@@ -55,7 +55,6 @@ export default function DptDetails() {
                 <Dptcard
                   data={department}
                   type={type}
-                // onClick={handleClick}
                 />
               ))}
 

@@ -156,10 +156,8 @@ export default function AddStudent() {
                 <Button
                   variant="contained"
                   color="info"
-                  //   component={RouterLink}
                   onClick={handleAddStudent}
                   disabled={!username || !email}
-                  //   to="#"
                   startIcon={<PublishIcon />}
                 >
                   Add
