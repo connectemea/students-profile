@@ -27,7 +27,7 @@ export default function Register() {
   const [passwordError, setPasswordError] = useState();
   const [confirmPasswordError, setConfirmPasswordError] = useState();
   const [authErrors, setAuthErrors] = useState();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const clearError = () => setAuthErrors("");
 
@@ -56,7 +56,7 @@ export default function Register() {
     setEmail("");
     setPassword("");
     setConfirmPassword("");
-  }
+  };
 
   const handleClick = async () => {
     const passwordLengthError = validatePasswordLength();
@@ -69,8 +69,9 @@ export default function Register() {
         email,
         password,
       };
+      console.log("i am called man");
       // registering a user
-      await userService.registerUser(registerCredentials);
+      await authService.registerUser(registerCredentials);
       clearForm();
       navigate("/user/login");
     } catch (err) {

@@ -32,11 +32,6 @@ export default function Add() {
   const [hod, setHod] = useState();
   const [phoneNo, setPhoneNo] = useState();
   const [email, setEmail] = useState();
-  // const handleDptnameChange = (event) => setName(event.target.value);
-  // const handleShortNameChange = (event) => setshortName(event.target.value);
-  // const handleHodnameChange = (event) => setHod(event.target.value);
-  // const handleContactChange = (event) => setPhoneNo(event.target.value);
-  // const handleEmailChange = (event) => setEmail(event.target.value);
 
   //update department
   const { id } = useParams();

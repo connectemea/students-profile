@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Container, Typography, Stack, Card, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
@@ -6,18 +6,13 @@ import PasswordField from "./utils/PasswordField";
 import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
 import { useNavigate } from "react-router-dom";
-
-//importing the user service
+//services
 import authService from "../../../services/authService";
-
-//importing LocalKey
-import LOCAL_KEYS from "../../../constants/LOCAL_KEY";
-
-//importing the user service
 import userService from "../../../services/userService";
-
-//importing LocalKey
+//constants
 import LOCAL_KEYS from "../../../constants/LOCAL_KEY";
+//context
+import { profileContext } from "../../../context/profileContext";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -33,15 +28,33 @@ export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [authErrors, setAuthErrors] = useState();
-  const navigate = useNavigate();
+  const { profile, setProfile } = useContext(profileContext);
 
   const clearError = () => setAuthErrors("");
 
-  const clearForm = () => {
-    setEmail("");
-    setPassword("");
+  async function getUserProfile() {
+    if (!profile) return;
+    try {
+      const profile = await userService.getProfile();
+      console.log(profile);
+      setProfile(profile);
+    } catch (err) {
+      console.error(err?.response?.data?.message);
+    }
+  }
+  const redirectionHandler = (type, status) => {
+    if (type === "admin") return navigate("/app");
+    if (type === "teacher" && status === "filled") {
+      return navigate("/app/teacher/view/me");
+    } else if (type === "teacher") {
+      return navigate("/teacher/details");
+    }
+    if (type === "student" && status === "filled") {
+      return navigate("/app/student/view/me");
+    } else if ((type = "student")) {
+      return navigate("/student/details");
+    }
   };
-
   const handleClick = async () => {
     try {
       clearError();
@@ -52,8 +65,8 @@ export default function Login() {
       // logging in user
       const response = await authService.loginUser(loginCredentials);
       //storing token in localStorage
-      localStorage.setItem(LOCAL_KEYS.AUTH_TOKEN, response.data.userToken);
-      navigate("/app");
+      localStorage.setItem(LOCAL_KEYS.AUTH_TOKEN, response.data.token);
+      redirectionHandler(response.data.type, response.data.status);
     } catch (err) {
       setAuthErrors(err?.response?.data?.message);
     }

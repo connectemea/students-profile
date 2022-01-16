@@ -1,22 +1,18 @@
 // material components
-import { Grid, Card, Container ,Typography} from "@mui/material";
+import { Grid, Card, Container, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Page from "../../../utils/Page";
 import { Link } from "react-router-dom";
-// icon import
-
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-
-//   custom component
 import Field from "./Field";
-
+import { getDate, getYear } from "../../../helpers/dateTimeHelper";
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
   paddingBottom: `${theme.spacing(4)} !important`,
 }));
 
 export default function PersonalView(props) {
-  const { personalDetails,id } = props;
+  const { personalDetails, id } = props;
 
   return (
     <Page title="StudentsList">
@@ -44,7 +40,10 @@ export default function PersonalView(props) {
             <Typography variant="h5" sx={{}}>
               Personal Details
             </Typography>
-            <Link to={`/app/student/update/${id}/personal`} style={{ color: "none" }}>
+            <Link
+              to={`/app/student/update/${id}/personal`}
+              style={{ color: "none" }}
+            >
               <ModeEditOutlineOutlinedIcon
                 sx={{
                   margin: "8px",
@@ -82,7 +81,9 @@ export default function PersonalView(props) {
           <Grid item sm={3} xs={12} md={3} lg={3}>
             <Field
               heading="Date of Birth"
-              subHeading={personalDetails && personalDetails.dateOfBirth}
+              subHeading={
+                personalDetails && getDate(personalDetails.dateOfBirth)
+              }
             />
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
@@ -100,7 +101,9 @@ export default function PersonalView(props) {
           <Grid item sm={3} xs={12} md={3} lg={3}>
             <Field
               heading="Joining Year"
-              subHeading={personalDetails && personalDetails.yearOfJoin}
+              subHeading={
+                personalDetails && getYear(personalDetails.yearOfJoin)
+              }
             />
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>

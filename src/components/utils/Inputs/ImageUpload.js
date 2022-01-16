@@ -8,18 +8,23 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import { Avatar, Stack, Typography } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
+import BACKEND_URL from "../../../constants/BACKEND_URL";
 
 const AddImage = styled(IconButton)(({ theme, isError }) => ({
   height: theme.spacing(20),
   width: theme.spacing(20),
-  outline: `1.5px dotted ${isError===""?"red":"grey"}`,
+  outline: `1.5px dotted ${isError === "" ? "red" : "grey"}`,
   outlineOffset: "10px",
 }));
 
 export default function ImageUpload(props) {
   // pops destructuring
   const { image, setImage } = props;
-
+  const imageUrl =
+    image instanceof File
+      ? URL.createObjectURL(image)
+      : `${BACKEND_URL.BASE_URL}upload/${image}`;
+  console.log(imageUrl);
   const handleImageChange = (e) => {
     e.target.files[0] && setImage(e.target.files[0]);
 
@@ -39,9 +44,7 @@ export default function ImageUpload(props) {
             {image ? (
               <Avatar
                 alt="Upload image"
-                src={
-                  typeof image == "object" ? URL.createObjectURL(image) : image
-                }
+                src={imageUrl}
                 sx={{ width: 182, height: 182 }}
               />
             ) : (

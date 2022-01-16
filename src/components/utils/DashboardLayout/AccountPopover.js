@@ -1,9 +1,5 @@
-import { useRef, useState } from "react";
-
-// material icons 
-// import HomeIcon from '@mui/icons-material/Home';
-// import PersonIcon from '@mui/icons-material/Person';
-// material component
+import { useRef, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { alpha } from "@mui/material/styles";
 import {
   Button,
@@ -14,26 +10,14 @@ import {
   IconButton,
 } from "@mui/material";
 import MenuPopover from "./MenuPopover";
-import avatar from '../../../images/avatar.jpg'
-
-// popover menu options
-// const MENU_OPTIONS = [
-//   {
-//     label: "Home",
-//     icon: HomeIcon,
-//     linkTo: "/home",
-//   },
-//   {
-//     label: "Profile",
-//     icon: PersonIcon,
-//     linkTo: "#",
-//   },
-// ];
-
+import { profileContext } from "../../../context/profileContext";
+import BACKEND_URL from "../../../constants/BACKEND_URL";
 
 export default function AccountPopover() {
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
+  const { profile } = useContext(profileContext);
+  const navigate = useNavigate();
 
   // handle account popover open
   const handleOpen = () => {
@@ -43,6 +27,10 @@ export default function AccountPopover() {
   //handle account popover close
   const handleClose = () => {
     setOpen(false);
+  };
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+    navigate("/user/login");
   };
 
   return (
@@ -67,7 +55,10 @@ export default function AccountPopover() {
           }),
         }}
       >
-        <Avatar src={avatar} alt="photoURL" />
+        <Avatar
+          src={`${BACKEND_URL.BASE_URL}upload/${profile?.profileImage}`}
+          alt="photoURL"
+        />
       </IconButton>
 
       <MenuPopover
@@ -78,10 +69,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            aseel
+            {profile && profile.username}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-            aseel@gmail.com
+            {profile && profile.email}
           </Typography>
         </Box>
 
@@ -110,7 +101,12 @@ export default function AccountPopover() {
         ))} */}
 
         <Box sx={{ p: 2, pt: 1.5 }}>
-          <Button fullWidth color="inherit" variant="outlined">
+          <Button
+            fullWidth
+            color="inherit"
+            variant="outlined"
+            onClick={logoutHandler}
+          >
             Logout
           </Button>
         </Box>

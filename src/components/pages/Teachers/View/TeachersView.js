@@ -1,79 +1,52 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-// material components
 import { Container, Grid, Card, Typography } from "@mui/material";
-
-// material icons
 import { styled } from "@mui/material/styles";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
-
-//  My Imports
+import BACKEND_URL from "../../../../constants/BACKEND_URL";
 import Avatar from "@mui/material/Avatar";
-import profile from "../../../../images/avatar.jpg";
-
-// Custom component
 import Field from "../utils/Field";
 
 // importing getTech form TeacherService
 import TeacherService from "../../../../services/teacherService";
-import UserService from "../../../../services/teacherService";
+import { getYear } from "../../../helpers/dateTimeHelper";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
-  paddingBottom: `${theme.spacing(4)} !important`
+  paddingBottom: `${theme.spacing(4)} !important`,
 }));
 
 export default function TeachersView() {
-  const { id } = useParams();
-  console.log(id);
   const [teacherData, setTeacherData] = useState();
-  const [profileImage, setProfileImage] = useState();
-  const [nxtPage, setNxtPage] = useState();
-  const [editButton, setEditButton] = useState(false);
+  const { id } = useParams();
 
-  const url = useEffect(() => {
-    if (id) {
-      async function getOne() {
-        try {
-          console.log("getOne funciton is working");
-          const response = await TeacherService.getTeacherOne(id);
-          setTeacherData(response);
-          setProfileImage(
-            `https://student-profile-api.herokuapp.com/upload/${response.userId.profileImage}`
-          );
-        } catch (err) {
-          console.log(err?.response?.data?.message);
-        }
+  useEffect(() => {
+    async function getLogedTeacher() {
+      try {
+        const response = await TeacherService.getTeacher();
+        setTeacherData(response);
+      } catch (err) {
+        console.error(err?.response?.data?.message);
       }
-      getOne();
-    } else {
-      async function getMe() {
-        try {
-          console.log("getme funciton is working");
-          const response = await TeacherService.getTeacherMe();
-          console.log(response);
-
-          setTeacherData(response);
-          setNxtPage(response.userId._id);
-          console.log(nxtPage);
-
-          setProfileImage(
-            `https://student-profile-api.herokuapp.com/upload/${response.userId.profileImage}`
-          );
-          setEditButton(true);
-        } catch (err) {
-          console.log(err?.response?.data?.message);
-        }
-      }
-      getMe();
     }
-  }, []);
-  // setNxtPage(response);
-  console.log(editButton);
-  console.log(nxtPage);
+    async function getTeacherById() {
+      try {
+        const response = await TeacherService.getTeacherById(id);
+        setTeacherData(response);
+      } catch (err) {
+        console.error(err?.response?.data?.message);
+      }
+    }
+    if (id && id === "me") {
+      getLogedTeacher();
+    } else if (id) {
+      getTeacherById();
+    }
+  }, [id]);
+
   return (
     <Page title="details">
       {teacherData && (
@@ -82,7 +55,7 @@ export default function TeachersView() {
             <Grid
               style={{
                 backgroundImage:
-                  "linear-gradient(to bottom,#038dfd 0%,#038dfd 25%,transparent 25%,transparent 100%)"
+                  "linear-gradient(to bottom,#038dfd 0%,#038dfd 25%,transparent 25%,transparent 100%)",
               }}
               component={ProfileCard}
               sx={{ mt: 2, p: 2 }}
@@ -110,10 +83,10 @@ export default function TeachersView() {
                   component={Avatar}
                   alt="Remy Sharp"
                   // src={profile}
-                  src={profileImage}
+                  src={`${BACKEND_URL.BASE_URL}upload/${teacherData.profileImage}`}
                   sx={{
                     width: 80,
-                    height: 80
+                    height: 80,
                   }}
                 />
                 <Grid
@@ -127,7 +100,7 @@ export default function TeachersView() {
                     sx={{
                       fontStyle: "normal",
                       fontWeight: 600,
-                      fontSize: 18
+                      fontSize: 18,
                     }}
                   >
                     {teacherData.name}
@@ -137,28 +110,25 @@ export default function TeachersView() {
                       color: "rgba(0,0,0,.75)",
                       fontStyle: "normal",
                       fontWeight: 300,
-                      fontSize: 15
+                      fontSize: 15,
                     }}
                   >
-                    {teacherData.department}
+                    {teacherData.department.name}
                   </Typography>
                 </Grid>
               </Grid>
-              {/* <Link to={`/teacher/student/update/${id}/personal`} style={{ color: "blue" }}> */}
               <Link
-                to={`/teacher/details/update/${nxtPage}`}
+                to={`/app/teacher/update/${teacherData._id}`}
                 style={{ color: "#333" }}
               >
-                {editButton ? (
-                  <ModeEditOutlineOutlinedIcon
-                    sx={{
-                      margin: "8px",
-                      opacity: "",
-                      height: "3vh",
-                      width: "2vw"
-                    }}
-                  />
-                ) : null}
+                <ModeEditOutlineOutlinedIcon
+                  sx={{
+                    margin: "8px",
+                    opacity: "",
+                    height: "3vh",
+                    width: "2vw",
+                  }}
+                />
               </Link>
               <Grid
                 item
@@ -201,13 +171,13 @@ export default function TeachersView() {
               <Grid item sm={12} xs={12} md={3} lg={3}>
                 <Field
                   heading="Department"
-                  subHeading={teacherData.department}
+                  subHeading={teacherData.department.name}
                 />
               </Grid>
               <Grid item sm={12} xs={12} md={3} lg={3}>
                 <Field
                   heading="Joning Year"
-                  subHeading={teacherData.joinYear}
+                  subHeading={getYear(teacherData.joinYear)}
                 />
               </Grid>
               <Grid item sm={12} xs={12} md={3} lg={3}>

@@ -1,20 +1,12 @@
 import BackendService from "./BackendService";
 
 // To get teacher
-const getTeacher = (id) => {
-  // return BackendService.get(`teacher/${id}`);
-  return BackendService.get(`teacher/${id}`);
-};
-
-// To get teacher one
-const getTeacherOne = (id) => {
-  return BackendService.get(`teacher/${id}`);
-  // return BackendService.get(`teacher/me`);
-};
-// To get teacher me
-const getTeacherMe = () => {
+const getTeacher = () => {
   // return BackendService.get(`teacher/${id}`);
   return BackendService.get(`teacher/me`);
+};
+const getTeacherById = (id) => {
+  return BackendService.get(`teacher/${id}`);
 };
 
 //To get all teacher sponsored by the user
@@ -28,16 +20,15 @@ const createTeacher = async (data) => {
 };
 
 // update  teacher
-const updateTeacher = async (data, id) => {
+const updateTeacher = async (id, data) => {
   return BackendService.patch(`teacher/${id}`, { teacherDetails: data });
 };
 
 const teacherService = {
   getTeacher,
+  getTeacherById,
   getAllTeacher,
   createTeacher,
-  getTeacherMe,
-  getTeacherOne,
-  updateTeacher
+  updateTeacher,
 };
 export default teacherService;

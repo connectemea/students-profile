@@ -10,12 +10,6 @@ import departmentService from "../../../../services/departmentService";
 
 //dropdown
 import SelectInput from "../../../utils/Inputs/SelectInput";
-//get current year
-const currentYear = new Date().getFullYear();
-//loop years for dropdown
-let years = [];
-for (let i = currentYear; i >= (currentYear - 5); i--) { years.push(i); }
-// console.log(years);
 
 // table header cell config
 const TABLE_HEAD = [
@@ -36,22 +30,24 @@ const TABLE_HEAD = [
 
 export default function DptStudentsList() {
   const { id } = useParams();
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 5 }, (_, i) => currentYear + i);
   const [year, setYear] = useState(currentYear);
-  
   const [students, setStudents] = useState([]);
   useEffect(() => {
     const getStudents = async () => {
       try {
-        // get students
-        const students = await departmentService.getStudentsByDepartment(id, year);
-        console.log(students);
+        const students = await departmentService.getStudentsByDepartment(
+          id,
+          year
+        );
         setStudents(students);
       } catch (err) {
         console.error(err?.response?.data?.message);
       }
     };
     getStudents();
-  }, [year]);
+  }, [id, year]);
 
   return (
     <Page title="StudentsList">
@@ -67,12 +63,13 @@ export default function DptStudentsList() {
           </Typography>
           <Grid container justify="flex-end" item xs={12} sm={6} md={3} lg={3}>
             {/* select input from custom made component */}
-            <SelectInput 
-             label="select year"
-             name="year" 
-             menuItems={years} 
-             dropdownValue={year} 
-             setDropdownValue={setYear} />
+            <SelectInput
+              label="select year"
+              name="year"
+              menuItems={years}
+              dropdownValue={year}
+              setDropdownValue={setYear}
+            />
           </Grid>
         </Stack>
         {students && (
