@@ -16,7 +16,7 @@ import BACKEND_URL from "../../../constants/BACKEND_URL";
 export default function AccountPopover() {
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
-  const { profile } = useContext(profileContext);
+  const { profile, setProfile } = useContext(profileContext);
   const navigate = useNavigate();
 
   // handle account popover open
@@ -30,7 +30,9 @@ export default function AccountPopover() {
   };
   const logoutHandler = () => {
     localStorage.removeItem("token");
+    setProfile(null);
     navigate("/user/login");
+    // window.location.reload();
   };
 
   return (

@@ -30,32 +30,6 @@ const TABLE_HEAD = [
   { id: "status", label: "status", type: "userStatusChip" },
 ];
 
-const TABLE_DATA = [
-  {
-    id: "134doojon",
-    username: "Aseel",
-    email: "aseelhacker@microsoft.com",
-    status: "created",
-  },
-  {
-    id: "ounr34343",
-    username: "Noof",
-    email: "noof@google.com",
-    status: "registered",
-  },
-  {
-    id: "343433ojnn",
-    username: "Nahyan",
-    email: "nahyan@facebook.com",
-    status: "filled",
-  },
-  {
-    id: "eonkn2434",
-    username: "Dilshad",
-    email: "dilshad@amazon.com",
-    status: "registered",
-  },
-];
 
 export default function AddTeacher() {
   const [username, setUsername] = useState();
@@ -94,9 +68,7 @@ export default function AddTeacher() {
     //get all user (teachers)
     const getUsers = async () => {
       try {
-        console.log("getting users");
         const users = await userService.getUsers("teacher");
-        console.log(users);
         setUsers(users);
       } catch (err) {
         console.error(err?.response?.data?.message);

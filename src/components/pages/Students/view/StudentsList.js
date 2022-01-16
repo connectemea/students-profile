@@ -18,39 +18,13 @@ const TABLE_HEAD = [
     alignRight: false,
     type: "stack",
     baseUrl: "/app/student/view",
+    imageId: "personalDetails.profileImage",
   },
   { id: "userId.email", label: "email", type: "text" },
   {
     id: "personalDetails.admissionNO",
     label: "admission No",
     type: "text",
-  },
-];
-
-const TABLE_DATA = [
-  {
-    id: "134doojon",
-    name: "Aseel",
-    company: "microsoft",
-    role: "Pentester",
-  },
-  {
-    id: "ounr34343",
-    name: "Noof",
-    company: "google",
-    role: "Front-end",
-  },
-  {
-    id: "343433ojnn",
-    name: "Nahyan",
-    company: "facebook",
-    role: "Back-end ",
-  },
-  {
-    id: "eonkn2434",
-    name: "Dilshad",
-    company: "amazon",
-    role: "Full-stack",
   },
 ];
 
@@ -61,7 +35,6 @@ export default function StudentsList() {
       try {
         // get students
         const students = await studentsService.getStudents();
-        console.log(students);
         setStudents(students);
       } catch (err) {
         console.error(err?.response?.data?.message);

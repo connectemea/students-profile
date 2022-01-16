@@ -5,7 +5,6 @@ import Page from "../../../utils/Page";
 import { Link } from "react-router-dom";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import Field from "./Field";
-import { getDate, getYear } from "../../../helpers/dateTimeHelper";
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
   paddingBottom: `${theme.spacing(4)} !important`,
@@ -68,7 +67,7 @@ export default function PersonalView(props) {
           <Grid item sm={3} xs={12} md={3} lg={3}>
             <Field
               heading="Department"
-              subHeading={personalDetails && personalDetails.department}
+              subHeading={personalDetails && personalDetails.department.name}
             />
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
@@ -80,9 +79,7 @@ export default function PersonalView(props) {
           <Grid item sm={3} xs={12} md={3} lg={3}>
             <Field
               heading="Date of Birth"
-              subHeading={
-                personalDetails && getDate(personalDetails.dateOfBirth)
-              }
+              subHeading={personalDetails && personalDetails.dateOfBirth}
             />
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
@@ -100,9 +97,7 @@ export default function PersonalView(props) {
           <Grid item sm={3} xs={12} md={3} lg={3}>
             <Field
               heading="Joining Year"
-              subHeading={
-                personalDetails && getYear(personalDetails.yearOfJoin)
-              }
+              subHeading={personalDetails && personalDetails.yearOfJoin}
             />
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
@@ -126,7 +121,7 @@ export default function PersonalView(props) {
           <Grid item sm={3} xs={12} md={3} lg={3}>
             <Field
               heading="Caste"
-              subHeading={personalDetails && personalDetails.cast}
+              subHeading={personalDetails && personalDetails.caste}
             />
           </Grid>
           <Grid item sm={12} xs={12} md={12} lg={12}>
@@ -162,7 +157,7 @@ export default function PersonalView(props) {
           <Grid item sm={6} xs={12} md={6} lg={6}>
             <Field
               heading="Present Address"
-              subHeading={personalDetails && personalDetails.permenentAddress}
+              subHeading={personalDetails && personalDetails.permanentAddress}
             />
           </Grid>
         </Grid>

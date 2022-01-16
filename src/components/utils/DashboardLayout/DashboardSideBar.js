@@ -47,6 +47,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     if (isOpenSidebar) {
       onCloseSidebar();
     }
+    // eslint-disable-next-line
   }, [pathname]);
 
   const renderContent = (
@@ -61,13 +62,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       }}
     >
       <Box sx={{ px: 2.5, py: 3 }}>
-        <Box component={RouterLink} to={"/"} sx={{ display: "inline-flex" }}>
-          <Box
-            component={"img"}
-            src={Logo}
-            sx={{ width: 40, height: 40 }}
-          />
-        </Box>
+        <Box component={"img"} src={Logo} sx={{ width: 40, height: 40 }} />
       </Box>
 
       <Box sx={{ mb: 5, mx: 2.5 }}>
@@ -84,7 +79,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             }`}
           >
             <AccountStyle>
-              <Avatar src={`${BACKEND_URL.BASE_URL}upload/${profile?.profileImage}`} alt="photoURL" />
+              <Avatar
+                src={`${BACKEND_URL.BASE_URL}upload/${profile?.profileImage}`}
+                alt="photoURL"
+              />
               <Box sx={{ ml: 2 }}>
                 <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
                   {profile && profile.username}
@@ -104,7 +102,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       {profile && <NavSection navConfig={NavConfig} profile={profile} />}
 
       <Box sx={{ flexGrow: 1 }} />
-      
     </Scrollbar>
   );
 

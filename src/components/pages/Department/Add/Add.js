@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import TextInput from '../../../utils/Inputs/TextInput';
+import TextInput from "../../../utils/Inputs/TextInput";
 
 // material components
 import {
@@ -10,22 +10,21 @@ import {
   Typography,
   Grid,
   Card,
-  Tooltip
+  Tooltip,
 } from "@mui/material";
 
 // material icons
 import PublishIcon from "@mui/icons-material/Publish";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
 
 //api service
-import departmentService from "../../../../services/departmentService"
+import departmentService from "../../../../services/departmentService";
 
 //export function for add department
 export default function Add() {
-
   const navigate = useNavigate();
   const [name, setName] = useState();
   const [shortName, setshortName] = useState();
@@ -38,7 +37,6 @@ export default function Add() {
 
   //setState function
   function setState(data) {
-
     setName(data.name);
     setshortName(data.shortName);
     setHod(data.hod);
@@ -52,33 +50,20 @@ export default function Add() {
         // get department data
         const response = await departmentService.getDepartmentData(id);
         setState(response);
-        console.log(response);
       } catch (err) {
         console.error(err.response);
       }
     };
-    if (id) getDepartment()
+    if (id) getDepartment();
   }, [id]);
-
 
   //delete department
   const handleDeleteDepartment = async () => {
     try {
-      const departmentData = {
-        departmentDetails: {
-          name,
-          shortName,
-          hod,
-          phoneNo,
-          email,
-        }
-      };
-      const response = await departmentService.deleteDepartment(id);
+      await departmentService.deleteDepartment(id);
       navigate("/app/department/list");
-
     } catch (error) {
-      console.log(error.response);
-
+      console.error(error.response);
     }
   };
 
@@ -92,19 +77,18 @@ export default function Add() {
           hod,
           phoneNo,
           email,
-        }
+        },
       };
       // adding department to db
       if (!id) {
-        const response = await departmentService.addDepartment(departmentData);
+        await departmentService.addDepartment(departmentData);
       } else {
-        const response = await departmentService.updateDepartment(id, departmentData);
+        await departmentService.updateDepartment(id, departmentData);
       }
       // clearing the form
       navigate("/app/department/list");
-
     } catch (err) {
-      console.log(err.response);
+      console.error(err.response);
     }
   };
 
@@ -186,25 +170,42 @@ export default function Add() {
             mt={2}
           >
             <span>
-              <Tooltip title={(!name || !shortName || !hod || !phoneNo || !email ? "Add Department" : "Delete Department")}>
-                <Button variant="outlined"
-                  color="info"
-                  style={{ margin: "5px" }}
-                  onClick={handleDeleteDepartment}
-                  disabled={!name || !shortName || !hod || !phoneNo || !email}
-                  startIcon={<DeleteIcon />}>
-                  Delete
-                </Button>
-              </Tooltip>
-              <Tooltip title={(!name || !shortName || !hod || !phoneNo || !email ? "fill the fields" : "sumbit fields")}>
+              {id && (
+                <Tooltip
+                  title={
+                    !name || !shortName || !hod || !phoneNo || !email
+                      ? "Add Department"
+                      : "Delete Department"
+                  }
+                >
+                  <Button
+                    variant="outlined"
+                    color="info"
+                    style={{ margin: "5px" }}
+                    onClick={handleDeleteDepartment}
+                    disabled={!name || !shortName || !hod || !phoneNo || !email}
+                    startIcon={<DeleteIcon />}
+                  >
+                    Delete
+                  </Button>
+                </Tooltip>
+              )}
+              <Tooltip
+                title={
+                  !name || !shortName || !hod || !phoneNo || !email
+                    ? "fill the fields"
+                    : "sumbit fields"
+                }
+              >
                 <Button
                   variant="contained"
-                  color="info" appap
+                  color="info"
+                  appap
                   onClick={handleAddDepartment}
                   disabled={!name || !shortName || !hod || !phoneNo || !email}
                   startIcon={<PublishIcon />}
                 >
-                  Submit
+                  {id ? "update" : "Submit"}
                 </Button>
               </Tooltip>
             </span>

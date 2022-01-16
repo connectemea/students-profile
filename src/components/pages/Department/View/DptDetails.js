@@ -21,7 +21,6 @@ export default function DptDetails() {
   useEffect(() => {
     const getDepartment = async () => {
       try {
-        console.log("called getDepartment");
         // get department
         const departmentList = await departemntService.getDepartment();
         setdepartmentData(departmentList);

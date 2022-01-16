@@ -124,7 +124,7 @@ function App() {
                   <Route
                     path="view/:id"
                     element={
-                      <PrivateRoute type={teacher} level={highAccessRight}>
+                      <PrivateRoute type={student} level={highAccessRight}>
                         <Details />
                       </PrivateRoute>
                     }

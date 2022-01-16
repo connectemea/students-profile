@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Container, Typography, Stack, Card, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
@@ -8,12 +8,10 @@ import SubmitButton from "./utils/SubmitButton";
 import { useNavigate } from "react-router-dom";
 //services
 import authService from "../../../services/authService";
-import userService from "../../../services/userService";
 //constants
 import LOCAL_KEYS from "../../../constants/LOCAL_KEY";
 //context
-import { profileContext } from "../../../context/profileContext";
-
+import Page from "../../utils/Page";
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
   margin: "auto",
@@ -28,20 +26,9 @@ export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [authErrors, setAuthErrors] = useState();
-  const { profile, setProfile } = useContext(profileContext);
 
   const clearError = () => setAuthErrors("");
 
-  async function getUserProfile() {
-    if (!profile) return;
-    try {
-      const profile = await userService.getProfile();
-      console.log(profile);
-      setProfile(profile);
-    } catch (err) {
-      console.error(err?.response?.data?.message);
-    }
-  }
   const redirectionHandler = (type, status) => {
     if (type === "admin") return navigate("/app");
     if (type === "teacher" && status === "filled") {
@@ -73,60 +60,62 @@ export default function Login() {
   };
 
   return (
-    <Container>
-      <ContentStyle>
-        <Card sx={{ p: 3 }}>
-          <Box sx={{ mb: 3 }}>
-            <Typography textAlign="center" variant="h3" gutterBottom>
-              Login
-            </Typography>
-          </Box>
-          <Stack spacing={2}>
-            <TextInput
-              label="Email"
-              type="email"
-              value={email}
-              setValue={setEmail}
-              authErrors={authErrors}
-            />
-            <PasswordField
-              label="Password"
-              value={password}
-              setValue={setPassword}
-              authErrors={authErrors}
-              showError
-            />
+    <Page title="Login">
+      <Container>
+        <ContentStyle>
+          <Card sx={{ p: 3 }}>
+            <Box sx={{ mb: 3 }}>
+              <Typography textAlign="center" variant="h3" gutterBottom>
+                Login
+              </Typography>
+            </Box>
+            <Stack spacing={2}>
+              <TextInput
+                label="Email"
+                type="email"
+                value={email}
+                setValue={setEmail}
+                authErrors={authErrors}
+              />
+              <PasswordField
+                label="Password"
+                value={password}
+                setValue={setPassword}
+                authErrors={authErrors}
+                showError
+              />
 
-            <Stack
-              direction="column"
-              alignItems="flex-start"
-              justifyContent="space-between"
-              sx={{ my: 2 }}
-            >
-              <Link
-                component={RouterLink}
-                variant="subtitle2"
-                to="/user/forgot"
+              <Stack
+                direction="column"
+                alignItems="flex-start"
+                justifyContent="space-between"
+                sx={{ my: 2 }}
               >
-                Forgot password
-              </Link>
+                <Link
+                  component={RouterLink}
+                  variant="subtitle2"
+                  to="/user/forgot"
+                >
+                  Forgot password
+                </Link>
 
-              <Link
-                component={RouterLink}
-                variant="subtitle2"
-                to="/user/register"
-              >
-                Don’t have an account? Register
-              </Link>
+                <Link
+                  component={RouterLink}
+                  variant="subtitle2"
+                  to="/user/register"
+                >
+                  Don’t have an account? Register
+                </Link>
+              </Stack>
+              <SubmitButton
+                disabled={!email || !password ? true : false}
+                name="Login"
+                onClick={handleClick}
+              />
             </Stack>
-            <SubmitButton
-              disabled={!email || !password ? true : false}
-              name="Login"
-              onClick={handleClick}
-            />
-          </Stack>
-        </Card>
-      </ContentStyle>
-    </Container>
+          </Card>
+        </ContentStyle>
+      </Container>
+    </Page>
   );
 }

@@ -12,7 +12,6 @@ import Field from "../utils/Field";
 
 // importing getTech form TeacherService
 import TeacherService from "../../../../services/teacherService";
-import { getYear } from "../../../helpers/dateTimeHelper";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
@@ -172,7 +171,7 @@ export default function TeachersView() {
               <Grid item sm={12} xs={12} md={3} lg={3}>
                 <Field
                   heading="Joning Year"
-                  subHeading={getYear(teacherData.joinYear)}
+                  subHeading={teacherData.joinYear}
                 />
               </Grid>
               <Grid item sm={12} xs={12} md={3} lg={3}>

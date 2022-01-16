@@ -198,9 +198,7 @@ export default function EducationalDetailsInput(props) {
 
   //To set the given value to the state
   const setCurrentDetails = (details) => {
-    console.log("i am called bro");
     if (!details) return;
-    console.log("i am tackled that man");
     //high school details
     setSslcSchoolName(details.tenthStd.schoolName);
     setSslcMediumOfInstruction(details.tenthStd.syllabus);
@@ -252,7 +250,6 @@ export default function EducationalDetailsInput(props) {
   const handleNext = () => {
     //To check if there are any error
     if (!errorCheck()) return;
-    console.log("saved to context")
     setStudent({
       ...student,
       educationDetails: structureData(),
@@ -278,10 +275,10 @@ export default function EducationalDetailsInput(props) {
       educationDetails: structureData(),
     };
     await studentsService.updateStudent(id, data);
+    navigate("/app/student/view/me");
   };
   //To set the previously filled data
   useEffect(() => {
-    console.log("data from the context from educational", student);
     setCurrentDetails(student?.educationDetails);
   }, [student]);
 

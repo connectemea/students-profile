@@ -13,7 +13,7 @@ import { useEffect } from "react";
 
 // table header cell config
 const TABLE_HEAD = [
-  { id: "name", label: "Name", type: "stack" ,baseUrl:"/app/teacher/view"},
+  { id: "name", label: "Name", type: "stack" ,baseUrl:"/app/teacher/view",imageId:"profileImage"},
   { id: "shortName", label: "short form", type: "text" },
   { id: "department", label: "department", type: "text" },
 ];

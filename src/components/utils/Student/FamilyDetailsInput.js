@@ -53,7 +53,7 @@ export default function FamilyDetailsInput() {
 
   //Radio button management
   //Father
-  const [isFatherChecked, setIsFatherChecked] = useState(false);
+  const [isFatherChecked] = useState(false);
   const handleIsFatherChecked = () => {
     if (!isFatherChecked) setFatherAsGuardian();
     setIsOtherChecked(false);
@@ -67,7 +67,7 @@ export default function FamilyDetailsInput() {
     setGuardianAddress(fatherAddress);
   };
   //Mother
-  const [isMotherChecked, setIsMotherChecked] = useState(false);
+  const [isMotherChecked] = useState(false);
   const handleIsMotherChecked = () => {
     if (!isMotherChecked) setMotherAsGuardian();
     setIsOtherChecked(false);
@@ -209,12 +209,12 @@ export default function FamilyDetailsInput() {
       const formData = new FormData();
       formData.append("profile", imageData);
       const imageUrl = await userService.updateImage(formData);
-      data.profileImage = imageUrl.data.filepath;
+      data.personalDetails.profileImage = imageUrl.filepath;
       await studentsService.addStudent(data);
-      navigate("/app/dashboard");
+      navigate("/app/student/view/me");
       setStudent(null);
     } catch (error) {
-      console.error(error?.response?.data?.message);
+      console.error(error);
     }
   };
   //To handle back button click
@@ -233,10 +233,11 @@ export default function FamilyDetailsInput() {
       familyDetails: structureData(),
     };
     await studentsService.updateStudent(id, data);
+    navigate("/app/student/view/me");
   };
   //To set the previously filled data
   useEffect(() => {
-    if(student)setCurrentDetails(student.familyDetails);
+    if (student) setCurrentDetails(student.familyDetails);
   }, [student]);
 
   //To set the data on update

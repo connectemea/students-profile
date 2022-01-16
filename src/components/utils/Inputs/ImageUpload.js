@@ -24,7 +24,6 @@ export default function ImageUpload(props) {
     image instanceof File
       ? URL.createObjectURL(image)
       : `${BACKEND_URL.BASE_URL}upload/${image}`;
-  console.log(imageUrl);
   const handleImageChange = (e) => {
     e.target.files[0] && setImage(e.target.files[0]);
 
