@@ -1,26 +1,16 @@
-// import { Icon } from '@iconify/react';
-// import appleFilled from '@iconify/icons-ant-design/apple-filled';
-// material
 import { alpha, styled } from "@mui/material/styles";
 import { Card, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-// utils
-// import { fShortenNumber } from '../../../utils/formatNumber';
-
-// ----------------------------------------------------------------------
-
-// ----------------------------------------------------------------------
 
 export default function Dptcard({ data, type }) {
-  const deleteDepartment = () => {
-    console.log("onClinck");
-  };
   const { colorType } = type;
   const RootStyle = styled(Card)(({ theme }) => ({
     boxShadow: "none",
     textAlign: "center",
-    padding: theme.spacing(2, 1, 5, 2),
+    padding: theme.spacing(2),
+    maxHeight: "316px",
+    height: "316px",
     color: theme.palette[colorType].darker,
     backgroundColor: theme.palette[colorType].lighter,
   }));
@@ -45,7 +35,10 @@ export default function Dptcard({ data, type }) {
     textTransform: "uppercase",
   }));
   return (
-    <Link to="/app/department/details" style={{ textDecoration: "none" }}>
+    <Link
+      to={`/app/department/details/${data._id}`}
+      style={{ textDecoration: "none" }}
+    >
       <RootStyle>
         <Grid
           container
@@ -53,9 +46,18 @@ export default function Dptcard({ data, type }) {
           justifyContent="flex-end"
           alignItems="center"
         >
-
-          <Link to={`/app/department/edit/${data._id}`} style={{ color: "none" }}>
-            <ModeEditOutlineOutlinedIcon sx={{ margin: "8px", opacity: "0.5", height: "3vh", width: "2vw" }} />
+          <Link
+            to={`/app/department/edit/${data._id}`}
+            style={{ color: "none" }}
+          >
+            <ModeEditOutlineOutlinedIcon
+              sx={{
+                margin: "8px",
+                opacity: "0.5",
+                height: "3vh",
+                width: "2vw",
+              }}
+            />
           </Link>
         </Grid>
         <IconWrapperStyle>

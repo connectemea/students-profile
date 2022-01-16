@@ -16,7 +16,7 @@ const uploadImage = async (data) => {
 };
 //update image
 const updateImage = async (data) => {
-  return BackendService.patch("upload", data);
+  return BackendService.patch("upload/", data);
 };
 
 const getProfile = async () => {
@@ -31,5 +31,4 @@ const UserService = {
   updateImage,
   getProfile,
 };
-
 export default UserService;

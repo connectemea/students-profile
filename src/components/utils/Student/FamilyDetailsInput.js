@@ -18,7 +18,6 @@ import { useNavigate, useParams } from "react-router-dom";
 //student Service
 import studentsService from "../../../services/studentsService";
 import userService from "../../../services/userService";
-
 import { studentContext } from "../../../context/studentContext";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
@@ -203,7 +202,6 @@ export default function FamilyDetailsInput() {
       ...student,
       familyDetails: structureData(),
     };
-    console.log(data);
     const imageData = data?.personalDetails?.profileImage;
     //setting the submitted data in the student context
     setStudent(data);
@@ -238,7 +236,7 @@ export default function FamilyDetailsInput() {
   };
   //To set the previously filled data
   useEffect(() => {
-    setCurrentDetails(student.familyDetails);
+    if(student)setCurrentDetails(student.familyDetails);
   }, []);
 
   //To set the data on update

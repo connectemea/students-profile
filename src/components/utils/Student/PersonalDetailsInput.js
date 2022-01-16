@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-// material components
 import {
   Typography,
   Grid,
@@ -7,10 +6,13 @@ import {
   Switch,
   FormControlLabel,
   Button,
+  MenuItem,
+  TextField,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { styled } from "@mui/material/styles";
 import { useNavigate, useParams } from "react-router-dom";
+import LOCAL_KEYS from "../../../constants/LOCAL_KEY";
 //student service
 import studentsService from "../../../services/studentsService";
 import userService from "../../../services/userService";
@@ -20,32 +22,12 @@ import TextInput from "../Inputs/TextInput";
 import DatePickerInput from "../Inputs/DatePickerInput";
 import ImageUpload from "../Inputs/ImageUpload";
 import { studentContext } from "../../../context/studentContext";
-import StudentsList from "../../pages/Students/view/StudentsList";
+import departmentService from "../../../services/departmentService";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
   paddingBottom: `${theme.spacing(4)} !important`,
 }));
-
-// menu items
-const departments = ["Bsc computer science", "Bsc Microbiology", "BA English"];
-const genders = ["Male", "Female", "Other"];
-const bloodGroups = ["O+", "O-", "A+", "A-", "AB+", "AB-", "B+", "B-"];
-const maritalStatuses = ["Unmarried", "Married"];
-const categoriesOfAdmission = [
-  "Merit",
-  "Community Quota",
-  "Management Quota",
-  "Sports Quota",
-  "Special Sports Quota",
-  "PH Quota",
-];
-const residences = [
-  "House",
-  "Hostel",
-  "Relative's Residence",
-  "Guardian's Residence",
-];
 
 export default function PersonalDetailsInput() {
   const { student, setStudent } = useContext(studentContext);
@@ -72,10 +54,14 @@ export default function PersonalDetailsInput() {
   const [residence, setResidence] = useState(null);
   const [distanceFromCollege, setDistanceFromCollege] = useState(null);
   const [isAddressSame, setIsAddressSame] = useState(false);
+  const [departmentData, setDepartmentData] = useState();
 
   const handleIsAddressChecked = () => {
     if (!isAddressSame) setPermanentAdress(presentAddress);
     setIsAddressSame(!isAddressSame);
+  };
+  const departmentChangeHandler = (e) => {
+    setDepartment(e.target.value);
   };
   useEffect(() => {
     const setPresentAsPermanent = () => setPermanentAdress(presentAddress);
@@ -172,10 +158,10 @@ export default function PersonalDetailsInput() {
     setEmail(details?.email);
     setDepartment(details?.department);
     setMobileNo(details?.mobileNo);
-    setDateOfBirth(details?.dateOfBirth);
+    setDateOfBirth(new Date(details?.dateOfBirth));
     setGender(details?.gender);
     setDepartment(details?.department);
-    setYearOfJoin(details?.yearOfJoin);
+    setYearOfJoin(new Date(details?.yearOfJoin));
     setGender(details?.gender);
     setAdmissionNO(details?.admissionNO);
     setBloodGroup(details?.bloodGroup);
@@ -201,8 +187,9 @@ export default function PersonalDetailsInput() {
     });
     navigate("/student/details/educational");
   };
+
   //To check its an image or not
-  const isImage = (file) => file.match(/.(jpg|jpeg|png|gif)$/i);
+  const isFile = (file) => file instanceof File;
 
   //To handle edit
   const handleUpdate = async () => {
@@ -211,7 +198,7 @@ export default function PersonalDetailsInput() {
     const data = {
       personalDetails: structureData(),
     };
-    if (!isImage(profileImage)) {
+    if (isFile(profileImage)) {
       const formData = new FormData();
       formData.append("profile", profileImage);
       const imageUrl = await userService.updateImage(formData);
@@ -223,6 +210,18 @@ export default function PersonalDetailsInput() {
   //To set the previously filled data
   useEffect(() => {
     setCurrentDetails(student?.personalDetails);
+  }, []);
+  //To get departments
+  useEffect(() => {
+    const getDepartment = async () => {
+      try {
+        const departmentList = await departmentService.getDepartment();
+        setDepartmentData(departmentList);
+      } catch (err) {
+        console.error(err.response);
+      }
+    };
+    getDepartment();
   }, []);
 
   //To set the data on update
@@ -255,7 +254,7 @@ export default function PersonalDetailsInput() {
           <ImageUpload image={profileImage} setImage={setProfileImage} />
           {profileImage === "" && (
             <Typography sx={{ mt: 2 }} variant="body2" color="error">
-              Profile image is required{" "}
+              Profile image is required
             </Typography>
           )}
           <Typography sx={{ mt: 2, color: "gray" }} variant={"body2"}>
@@ -284,13 +283,26 @@ export default function PersonalDetailsInput() {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             {/* select input from custom made component */}
-            <SelectInput
-              label="Department"
-              name="Department"
-              menuItems={departments}
-              dropdownValue={department}
-              setDropdownValue={setDepartment}
-            />
+            <TextField
+              select
+              varient="contained"
+              value={department}
+              name="deparment"
+              label="deparment"
+              error={department === "" ? true : false}
+              helperText={department === "" ? `${name} is required` : null}
+              color="info"
+              fullWidth
+              onChange={departmentChangeHandler}
+              InputLabelProps={{ shrink: department }}
+            >
+              {departmentData &&
+                departmentData.map((menuItem) => (
+                  <MenuItem key={menuItem._id} value={menuItem?._id}>
+                    {menuItem?.name}
+                  </MenuItem>
+                ))}
+            </TextField>
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <TextInput
@@ -313,7 +325,7 @@ export default function PersonalDetailsInput() {
             <SelectInput
               label="Gender"
               name="Gender"
-              menuItems={genders}
+              menuItems={LOCAL_KEYS.GENDER}
               dropdownValue={gender}
               setDropdownValue={setGender}
             />
@@ -340,7 +352,7 @@ export default function PersonalDetailsInput() {
           <SelectInput
             label="Blood Group"
             name="Blood Group"
-            menuItems={bloodGroups}
+            menuItems={LOCAL_KEYS.BLOOD_GROUP}
             dropdownValue={bloodGroup}
             setDropdownValue={setBloodGroup}
           />
@@ -349,7 +361,7 @@ export default function PersonalDetailsInput() {
           <SelectInput
             label="Marital Status"
             name="Marital Status"
-            menuItems={maritalStatuses}
+            menuItems={LOCAL_KEYS.MARITAL_STATUS}
             dropdownValue={maritalStatus}
             setDropdownValue={setMaritalStatus}
           />
@@ -374,7 +386,7 @@ export default function PersonalDetailsInput() {
           <SelectInput
             label="Category Of Admission"
             name="Category Of Admission"
-            menuItems={categoriesOfAdmission}
+            menuItems={LOCAL_KEYS.CATEGORY_OF_ADMISSION}
             dropdownValue={categoryOfAdmission}
             setDropdownValue={setCategoryOfAdmission}
           />
@@ -432,7 +444,7 @@ export default function PersonalDetailsInput() {
           <SelectInput
             label="Residence"
             name="Residence"
-            menuItems={residences}
+            menuItems={LOCAL_KEYS.RESIDENCE}
             dropdownValue={residence}
             setDropdownValue={setResidence}
           />

@@ -92,7 +92,7 @@ function App() {
                   <Route
                     path="update/:id"
                     element={
-                      <PrivateRoute type={admin} level={highAccessRight}>
+                      <PrivateRoute type={teacher} level={highAccessRight}>
                         <AddDetails />
                       </PrivateRoute>
                     }
@@ -170,7 +170,7 @@ function App() {
                     }
                   />
                   <Route
-                    path="details"
+                    path="details/:id"
                     element={
                       <PrivateRoute type={teacher} level={highAccessRight}>
                         <DptStudentList />
@@ -218,6 +218,10 @@ function App() {
               {/* student details forms routes */}
               <Route path="/student/details">
                 <Route
+                  path="/student/details"
+                  element={<Navigate to="/student/details/personal" />}
+                />
+                <Route
                   path="personal"
                   element={
                     <PrivateRoute type={student} level={lowAccessRight}>
@@ -259,8 +263,8 @@ function App() {
               <Route path="forgot" element={<ForgotPassword />} />
               <Route path="recover/:token" element={<RecoverPassword />} />
             </Route>
-
             <Route path="/" element={<Navigate to="/user/login" />} />
+            <Route path="*" element={<div>page not found</div>} />
           </Routes>
         </ProfileProvider>
       </StudentProvider>

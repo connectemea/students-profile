@@ -16,7 +16,7 @@ export default function useAuthUser(type = "person", level = "high") {
   if (profile && checkUserHavePermission(type, profile.userType)) {
     if (
       (level === "high" && profile.status === "filled") ||
-      (level === "low" && profile.status === "registered")
+      (level === "low" && profile.status === "registred")
     ) {
       return true;
     } else {

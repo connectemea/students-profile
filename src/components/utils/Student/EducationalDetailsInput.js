@@ -11,15 +11,12 @@ import TextInput from "../Inputs/TextInput";
 import SelectInput from "../Inputs/SelectInput";
 import DatePickerInput from "../Inputs/DatePickerInput";
 import { useNavigate, useParams } from "react-router-dom";
-
 import { studentContext } from "../../../context/studentContext";
-
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
   paddingBottom: `${theme.spacing(4)} !important`,
 }));
 
-//Dropdown Menu
 //SSLC
 const meduimsOfInstruction = ["Malayalam", "English", "Hindi"];
 //HSE

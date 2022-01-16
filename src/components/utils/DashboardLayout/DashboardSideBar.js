@@ -13,6 +13,7 @@ import NavConfig from "./NavConfig";
 import Logo from "../../../images/Logo.png";
 import ProfileImg from "../../../images/avatar.jpg";
 import { profileContext } from "../../../context/profileContext";
+import BACKEND_URL from "../../../constants/BACKEND_URL";
 // import account from '../../_mocks_/account';
 
 // drawer width for mobile devices
@@ -66,7 +67,11 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       <Box sx={{ px: 2.5, py: 3 }}>
         <Box component={RouterLink} to={"/"} sx={{ display: "inline-flex" }}>
           {/* <Logo /> */}
-          <Box component={"img"} src={Logo} sx={{ width: 40, height: 40 }} />
+          <Box
+            component={"img"}
+            src={Logo}
+            sx={{ width: 40, height: 40 }}
+          />
         </Box>
       </Box>
 
@@ -84,7 +89,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             }`}
           >
             <AccountStyle>
-              <Avatar src={ProfileImg} alt="photoURL" />
+              <Avatar src={`${BACKEND_URL.BASE_URL}upload/${profile?.profileImage}`} alt="photoURL" />
               <Box sx={{ ml: 2 }}>
                 <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
                   {profile && profile.username}

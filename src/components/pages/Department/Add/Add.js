@@ -32,11 +32,6 @@ export default function Add() {
   const [hod, setHod] = useState();
   const [phoneNo, setPhoneNo] = useState();
   const [email, setEmail] = useState();
-  // const handleDptnameChange = (event) => setName(event.target.value);
-  // const handleShortNameChange = (event) => setshortName(event.target.value);
-  // const handleHodnameChange = (event) => setHod(event.target.value);
-  // const handleContactChange = (event) => setPhoneNo(event.target.value);
-  // const handleEmailChange = (event) => setEmail(event.target.value);
 
   //update department
   const { id } = useParams();
@@ -101,14 +96,14 @@ export default function Add() {
         }
       };
       // adding department to db
-      if(!id){
-      const response = await departmentService.addDepartment(departmentData);
-      }else{
-        const response = await departmentService.updateDepartment(id , departmentData);
+      if (!id) {
+        const response = await departmentService.addDepartment(departmentData);
+      } else {
+        const response = await departmentService.updateDepartment(id, departmentData);
       }
       // clearing the form
       navigate("/app/department/list");
-      
+
     } catch (err) {
       console.log(err.response);
     }
@@ -206,7 +201,7 @@ export default function Add() {
               <Tooltip title={(!name || !shortName || !hod || !phoneNo || !email ? "fill the fields" : "sumbit fields")}>
                 <Button
                   variant="contained"
-                  color="info"appap
+                  color="info" appap
                   //   component={RouterLink}
                   onClick={handleAddDepartment}
                   disabled={!name || !shortName || !hod || !phoneNo || !email}

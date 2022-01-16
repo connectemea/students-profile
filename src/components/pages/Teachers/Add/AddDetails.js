@@ -1,35 +1,26 @@
-import { useState } from "react";
-
-// material components
-import { Button, Typography, Grid, Card, Box, Container } from "@mui/material";
-
-// material icons
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  Button,
+  Typography,
+  Grid,
+  Card,
+  Box,
+  Container,
+  MenuItem,
+  TextField,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
-
-// page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
-
-import { useNavigate } from "react-router-dom";
-
-//Custom component
 import TextInput from "../../../utils/Inputs/TextInput";
 import SelectInput from "../../../utils/Inputs/SelectInput";
 import DatePickerInput from "../../../utils/Inputs/DatePickerInput";
 import ImageUpload from "../../../utils/Inputs/ImageUpload";
-
-// importing backend services
-import teacherService from "../../../../services//teacherService";
-import userService from "../../../../services//userService";
-import studentsService from "../../../../services/studentsService";
-
-const RootStyle = styled("div")(({ theme }) => ({
-  padding: theme.spacing(4),
-}));
-
-// menu items || dropdown items
-const departments = ["BA English", "BSC Computer science", "BSC Microbiology"];
-const genders = ["Female", "Male", "Other"];
-const status = ["Unmarried", "Married"];
+// services
+import teacherService from "../../../../services/teacherService";
+import userService from "../../../../services/userService";
+import departemntService from "../../../../services/departmentService";
+import LOCAL_KEYS from "../../../../constants/LOCAL_KEY";
 
 export default function AddDetails() {
   const navigate = useNavigate();
@@ -39,23 +30,41 @@ export default function AddDetails() {
   const [name, setName] = useState();
   const [shortName, setShortName] = useState();
   const [email, setEmail] = useState();
-  const [department, setDepartment] = useState();
+  const [department, setDepartment] = useState(null);
   const [joinYear, setJoiningYear] = useState();
-  const [gender, setGender] = useState();
-  const [maritalStatus, setMaritalStatus] = useState();
+  const [gender, setGender] = useState(null);
+  const [maritalStatus, setMaritalStatus] = useState(null);
   const [phoneNo, setPhoneNo] = useState();
   const [religion, setRelegion] = useState();
   const [cast, setCast] = useState();
   const [educationQualification, setEducationQualification] = useState();
 
+  const [departmentData, setDepartmentData] = useState();
+
   const [errorMsg, setErrorMsg] = useState();
   const clearError = () => setErrorMsg("");
 
-  const handleAddTeacherDetails = async () => {
+  const departmentChangeHandler = (e) => {
+    setDepartment(e.target.value);
+  };
+
+  useEffect(() => {
+    const getDepartment = async () => {
+      try {
+        const departmentList = await departemntService.getDepartment();
+        setDepartmentData(departmentList);
+      } catch (err) {
+        console.error(err.response);
+      }
+    };
+    getDepartment();
+  }, []);
+
+  const addDetailsHandler = async () => {
     try {
       if (isError()) return;
       clearError();
-      const userData = {
+      let userData = {
         name,
         shortName,
         email,
@@ -68,17 +77,49 @@ export default function AddDetails() {
         cast,
         educationQualification,
       };
+      // Converting data into form data format
       const formData = new FormData();
       formData.append("profile", profileImage);
-      const image = {
-        formData,
-      };
-      const response = await userService.uploadImage(image);
+      const response = await userService.uploadImage(formData);
+      userData.profileImage = response.filePath;
 
       await teacherService.createTeacher(userData);
-
       clearUserCredentials();
       navigate("/teacher/view/me");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  //To check its an image or not
+  const isFile = (file) => file instanceof File;
+
+  const updateHandler = async () => {
+    try {
+      if (isError()) return;
+      clearError();
+      let userData = {
+        profileImage,
+        name,
+        shortName,
+        email,
+        department,
+        joinYear,
+        gender,
+        maritalStatus,
+        phoneNo,
+        religion,
+        cast,
+        educationQualification,
+      };
+      if (isFile(profileImage)) {
+        const formData = new FormData();
+        formData.append("profile", profileImage);
+        const imageUrl = await userService.updateImage(formData);
+        userData.profileImage = imageUrl.filepath;
+      }
+      await teacherService.updateTeacher(id, userData);
+      clearUserCredentials();
+      navigate("/app/teacher/view/me");
     } catch (err) {
       console.log(err);
     }
@@ -101,15 +142,17 @@ export default function AddDetails() {
 
   const setCurrentDetails = (details) => {
     if (!details) return;
+    setProfileImage(details.profileImage);
     setName(details.name);
     setShortName(details.shortName);
     setEmail(details.email);
-    setDepartment(details.department);
-    setJoiningYear(details.joiningYear);
+    setDepartment(details.department._id);
+    setJoiningYear(new Date(details.joinYear));
     setGender(details.gender);
     setMaritalStatus(details.maritalStatus);
     setPhoneNo(details.phoneNo);
     setCast(details.cast);
+    setRelegion(details.religion);
     setEducationQualification(details.educationQualification);
   };
   const isError = () => {
@@ -150,7 +193,7 @@ export default function AddDetails() {
   useEffect(() => {
     const getTeacherById = async () => {
       try {
-        const response = await studentsService.getStudentById(id);
+        const response = await teacherService.getTeacherById(id);
         setCurrentDetails(response);
       } catch (err) {
         console.error(err);
@@ -162,7 +205,6 @@ export default function AddDetails() {
   return (
     <Page title="TeacherDetails">
       <Container maxWidth="xl" sx={{ mt: 2, p: 2, pl: 0 }}>
-        {/* <RootStyle> */}
         <Typography variant={"h3"}>Personal Details</Typography>
         <Grid
           component={Card}
@@ -221,13 +263,26 @@ export default function AddDetails() {
               />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
-              <SelectInput
-                label="Department"
-                name="department"
-                menuItems={departments}
-                dropdownValue={department}
-                setDropdownValue={setDepartment}
-              />
+              <TextField
+                select
+                varient="contained"
+                value={department}
+                name="deparment"
+                label="deparment"
+                error={department === "" ? true : false}
+                helperText={department === "" ? `${name} is required` : null}
+                color="info"
+                fullWidth
+                onChange={departmentChangeHandler}
+                InputLabelProps={{ shrink: department }}
+              >
+                {departmentData &&
+                  departmentData.map((menuItem) => (
+                    <MenuItem key={menuItem._id} value={menuItem?._id}>
+                      {menuItem?.name}
+                    </MenuItem>
+                  ))}
+              </TextField>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
               <DatePickerInput
@@ -241,7 +296,7 @@ export default function AddDetails() {
               <SelectInput
                 label="Gender"
                 name="gender"
-                menuItems={genders}
+                menuItems={LOCAL_KEYS.GENDER}
                 dropdownValue={gender}
                 setDropdownValue={setGender}
               />
@@ -250,7 +305,7 @@ export default function AddDetails() {
               <SelectInput
                 label="Marital Status"
                 name="maritalStatus"
-                menuItems={status}
+                menuItems={LOCAL_KEYS.MARITAL_STATUS}
                 dropdownValue={maritalStatus}
                 setDropdownValue={setMaritalStatus}
               />
@@ -282,41 +337,17 @@ export default function AddDetails() {
           </Grid>
         </Grid>
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          {/* <Button
-            sx={{ mt: 2 }}
-            // href="/student/details/educational"
-            size="large"
-            color="info"
-            variant="contained"
-            disabled={
-              !profileImage ||
-              !name ||
-              !shortName ||
-              !email ||
-              !department ||
-              !joinYear ||
-              !gender ||
-              !maritalStatus ||
-              !phoneNo ||
-              !religion ||
-              !cast ||
-              !educationQualification
-            }
-          >
-            Next
-          </Button> */}
           <Button
             sx={{ mt: 2 }}
-            onClick={handleNextBtn}
+            onClick={id ? updateHandler : addDetailsHandler}
             size="large"
             color="info"
             variant="contained"
           >
-            Next
+            {id ? "update" : "Submit"}
           </Button>
         </Box>
       </Container>
-      {/* </RootStyle> */}
     </Page>
   );
 }

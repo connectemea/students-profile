@@ -1,43 +1,23 @@
 import { useState, useEffect } from "react";
-// material components
+import { useParams, Link } from "react-router-dom";
 import { Container, Grid, Card, Typography } from "@mui/material";
-
-// material icons
 import { styled } from "@mui/material/styles";
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
-
-//  My Imports
+import BACKEND_URL from "../../../../constants/BACKEND_URL";
 import Avatar from "@mui/material/Avatar";
-import profile from "../../../../images/avatar.jpg";
-
-// Custuom compoent
 import Field from "../utils/Field";
 
 // importing getTech form TeacherService
 import TeacherService from "../../../../services/teacherService";
-import { useParams } from "react-router-dom";
+import { getYear } from "../../../helpers/dateTimeHelper";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
   paddingBottom: `${theme.spacing(4)} !important`,
 }));
-
-// value Object
-const teacherData = {
-  name: "Jhon Doe",
-  email: "jonn@doe@email.com",
-  shortForm: "JD",
-  phoneNumber: "223334444",
-  departments: "Computer Science",
-  joningYear: "2020",
-  gender: "male",
-  maritalStatus: "unmaried",
-  religion: "Jhon Doe",
-  caste: "Jonn Doe",
-  educationalQualification: "Pg",
-};
 
 export default function TeachersView() {
   const [teacherData, setTeacherData] = useState();
@@ -71,36 +51,6 @@ export default function TeachersView() {
     <Page title="details">
       {teacherData && (
         <Container maxWidth="xl" sx={{ pl: 4 }}>
-          {/* <Grid
-            style={{
-              backgroundImage:
-                "linear-gradient(to bottom,#038dfd 0%,#038dfd 20%,transparent 20%,transparent 100%)",
-            }}
-            component={ProfileCard}
-            sx={{
-              mt: 2,
-              p: 2,
-              alignContent: "center",
-            }}
-            container
-            spacing={2}
-            alignItems="center"
-          >
-            <Grid>
-              <Avatar
-                alt="Remy Sharp"
-                src={profile}
-                sx={{
-                  width: 80,
-                  height: 80,
-                }}
-              />
-            </Grid>
-            <Grid sx={{ marginLeft: 5 }}>
-              <Typography>{teacherData.name}</Typography>
-              <Typography>{teacherData.department}</Typography>
-            </Grid>  
-          </Grid> */}
           <Container>
             <Grid
               style={{
@@ -132,7 +82,8 @@ export default function TeachersView() {
                   item
                   component={Avatar}
                   alt="Remy Sharp"
-                  src={profile}
+                  // src={profile}
+                  src={`${BACKEND_URL.BASE_URL}upload/${teacherData.profileImage}`}
                   sx={{
                     width: 80,
                     height: 80,
@@ -162,11 +113,23 @@ export default function TeachersView() {
                       fontSize: 15,
                     }}
                   >
-                    {teacherData.department}
+                    {teacherData.department.name}
                   </Typography>
                 </Grid>
               </Grid>
-
+              <Link
+                to={`/app/teacher/update/${teacherData._id}`}
+                style={{ color: "#333" }}
+              >
+                <ModeEditOutlineOutlinedIcon
+                  sx={{
+                    margin: "8px",
+                    opacity: "",
+                    height: "3vh",
+                    width: "2vw",
+                  }}
+                />
+              </Link>
               <Grid
                 item
                 xs={12}
@@ -176,14 +139,7 @@ export default function TeachersView() {
                 direction="row"
                 justifyContent="flex-end"
                 alignItems="center"
-              >
-                {/* <Tabs value={index} onChange={onTabClicked}>
-              <Tab label="Personal" />
-              <Tab label="Educational" />
-              <Tab label="Family" />
-              <Tab label="Dependencies" />
-            </Tabs> */}
-              </Grid>
+              ></Grid>
             </Grid>
 
             <Grid
@@ -215,13 +171,13 @@ export default function TeachersView() {
               <Grid item sm={12} xs={12} md={3} lg={3}>
                 <Field
                   heading="Department"
-                  subHeading={teacherData.department}
+                  subHeading={teacherData.department.name}
                 />
               </Grid>
               <Grid item sm={12} xs={12} md={3} lg={3}>
                 <Field
                   heading="Joning Year"
-                  subHeading={teacherData.joinYear}
+                  subHeading={getYear(teacherData.joinYear)}
                 />
               </Grid>
               <Grid item sm={12} xs={12} md={3} lg={3}>

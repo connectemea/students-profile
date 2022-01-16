@@ -10,8 +10,8 @@ import {
   IconButton,
 } from "@mui/material";
 import MenuPopover from "./MenuPopover";
-import avatar from "../../../images/avatar.jpg";
 import { profileContext } from "../../../context/profileContext";
+import BACKEND_URL from "../../../constants/BACKEND_URL";
 
 export default function AccountPopover() {
   const anchorRef = useRef(null);
@@ -55,7 +55,10 @@ export default function AccountPopover() {
           }),
         }}
       >
-        <Avatar src={avatar} alt="photoURL" />
+        <Avatar
+          src={`${BACKEND_URL.BASE_URL}upload/${profile?.profileImage}`}
+          alt="photoURL"
+        />
       </IconButton>
 
       <MenuPopover
