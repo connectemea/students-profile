@@ -63,7 +63,6 @@ export default function Add() {
 
   //delete department
   const handleDeleteDepartment = async () => {
-    console.log("cheythkkn");
     try {
       const departmentData = {
         departmentDetails: {
@@ -191,7 +190,6 @@ export default function Add() {
                 <Button variant="outlined"
                   color="info"
                   style={{ margin: "5px" }}
-                  //   component={RouterLink}
                   onClick={handleDeleteDepartment}
                   disabled={!name || !shortName || !hod || !phoneNo || !email}
                   startIcon={<DeleteIcon />}>
@@ -202,10 +200,8 @@ export default function Add() {
                 <Button
                   variant="contained"
                   color="info" appap
-                  //   component={RouterLink}
                   onClick={handleAddDepartment}
                   disabled={!name || !shortName || !hod || !phoneNo || !email}
-                  //   to="#"
                   startIcon={<PublishIcon />}
                 >
                   Submit
