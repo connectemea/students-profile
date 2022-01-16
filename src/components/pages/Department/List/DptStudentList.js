@@ -1,4 +1,4 @@
-import { Link as RouterLink, useParams } from "react-router-dom";
+import { Link as useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 // material components
 import { Stack, Container, Typography, Grid } from "@mui/material";

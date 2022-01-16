@@ -13,7 +13,6 @@ import Page from "../../../utils/Page";
 import { Link } from "react-router-dom";
 
 import { Box } from "@mui/system";
-import DependenciesInput from "../../../utils/Student/DependenciesInput";
 
 
 const RootStyle = styled("div")(({ theme }) => ({

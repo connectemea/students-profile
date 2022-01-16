@@ -22,7 +22,6 @@ import PropTypes from "prop-types";
 // custom components
 import DataTableHead from "./DataTableHead";
 import DataTableToolbar from "./DataTableToolbar";
-import Scrollbar from "../Scrollbar";
 import SearchNotFound from "./SearchNotFound";
 
 function descendingComparator(a, b, orderBy) {

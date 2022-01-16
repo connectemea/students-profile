@@ -284,7 +284,7 @@ export default function EducationalDetailsInput(props) {
   useEffect(() => {
     console.log("data from the context from educational", student);
     setCurrentDetails(student?.educationDetails);
-  }, []);
+  }, [student]);
 
   //To set the data on update
   useEffect(() => {

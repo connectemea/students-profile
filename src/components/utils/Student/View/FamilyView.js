@@ -44,7 +44,6 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
             md={12}
             lg={12}
             container
-            container
             direction="row"
             justifyContent="space-between"
             alignItems="center"

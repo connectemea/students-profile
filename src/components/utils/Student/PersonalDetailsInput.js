@@ -210,7 +210,7 @@ export default function PersonalDetailsInput() {
   //To set the previously filled data
   useEffect(() => {
     setCurrentDetails(student?.personalDetails);
-  }, []);
+  }, [student?.personalDetails]);
   //To get departments
   useEffect(() => {
     const getDepartment = async () => {

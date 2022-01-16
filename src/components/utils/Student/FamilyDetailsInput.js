@@ -237,7 +237,7 @@ export default function FamilyDetailsInput() {
   //To set the previously filled data
   useEffect(() => {
     if(student)setCurrentDetails(student.familyDetails);
-  }, []);
+  }, [student]);
 
   //To set the data on update
   useEffect(() => {

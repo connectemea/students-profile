@@ -20,13 +20,10 @@ import profile from "../../../../images/test.jpg";
 import studentsService from "../../../../services/studentsService";
 import { useParams } from "react-router-dom";
 
-// icon import
 
-import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
-  // paddingBottom: `${theme.spacing(4)} !important`,
 }));
 
 const Panel = (props) => (
@@ -96,9 +93,6 @@ export default function Details() {
                 gitItems="center"
               >
                 <Grid
-                  // xs={12}
-                  // md={3}
-                  // sm={3}
                   item
                   component={Avatar}
                   alt="Remy Sharp"
