@@ -5,6 +5,9 @@ import USER_TYPE from "../../constants/USER_TYPE";
 export default function useAuthUser(type = "person", level = "high") {
   const { profile } = useContext(profileContext);
   const navigate = useNavigate();
+
+  if (profile && profile.userType === "admin") return true;
+
   //To user presidence
   const checkUserHavePermission = (permitedUser, givenUser) =>
     Object.keys(USER_TYPE).includes(givenUser) &&
