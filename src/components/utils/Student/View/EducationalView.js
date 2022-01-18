@@ -140,7 +140,10 @@ export default function EducationalView(props) {
           <Grid item sm={12} xs={12} md={6} lg={6}>
             <Field heading="College Name" subHeading={educationDetails && educationDetails.degree[0].college} />
           </Grid>
-          <Grid item sm={12} xs={12} md={6} lg={6}>
+          <Grid item sm={12} xs={12} md={3} lg={3}>
+            <Field heading="University" subHeading={educationDetails && educationDetails.degree[0].university}/>
+          </Grid>
+          <Grid item sm={12} xs={12} md={3} lg={3}>
             <Field heading="Course" subHeading={educationDetails && educationDetails.degree[0].course}/>
           </Grid>
           <Grid item sm={12} xs={12} md={4} lg={4}>
@@ -183,7 +186,7 @@ export default function EducationalView(props) {
             <Field heading="University" subHeading={educationDetails && educationDetails.otherQualifications[0].university} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Grade/%Mark" subHeading={educationDetails && educationDetails.otherQualifications[0].Grade} />
+            <Field heading="Grade / Mark%" subHeading={educationDetails && educationDetails.otherQualifications[0].Grade} />
           </Grid>
         </Grid>
       </Container>
@@ -198,7 +201,7 @@ export default function EducationalView(props) {
           spacing={2}
         >
           <Grid sx={{}} item sm={12} xs={12} md={12} lg={12}>
-            <Typography variant="h5">Addition Course</Typography>
+            <Typography variant="h5">Additional Course</Typography>
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
             <Field heading="Course" subHeading={educationDetails && educationDetails.additionalCourse[0].courseName} />
@@ -210,7 +213,7 @@ export default function EducationalView(props) {
             <Field heading="University" subHeading={educationDetails && educationDetails.additionalCourse[0].university} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Grade/%Mark" subHeading={educationDetails && educationDetails.additionalCourse[0].cgp} />
+            <Field heading="Grade / Mark%" subHeading={educationDetails && educationDetails.additionalCourse[0].cgp} />
           </Grid>
         </Grid>
       </Container>
