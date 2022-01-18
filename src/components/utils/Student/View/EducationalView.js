@@ -101,8 +101,11 @@ export default function EducationalView(props) {
           <Grid item sm={12} xs={12} md={6} lg={6}>
             <Field heading="School Name" subHeading={educationDetails && educationDetails.twelthStd.schoolName} />
           </Grid>
-          <Grid item sm={12} xs={12} md={6} lg={6}>
-            <Field heading="Medium" subHeading={educationDetails && educationDetails.twelthStd.schoolName} />
+          <Grid item sm={12} xs={12} md={3} lg={3}>
+            <Field heading="Syllabus" subHeading={educationDetails && educationDetails.twelthStd.syllabus} />
+          </Grid>
+          <Grid item sm={12} xs={12} md={3} lg={3}>
+            <Field heading="Course" subHeading={educationDetails && educationDetails.twelthStd.course} />
           </Grid>
           <Grid item sm={12} xs={12} md={4} lg={4}>
             <Field heading={educationDetails && educationDetails.twelthStd.sub[0]} subHeading={educationDetails && educationDetails.twelthStd.subMark[0]} />
