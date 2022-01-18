@@ -104,17 +104,20 @@ export default function EducationalView(props) {
           <Grid item sm={12} xs={12} md={6} lg={6}>
             <Field heading="Medium" subHeading={educationDetails && educationDetails.twelthStd.schoolName} />
           </Grid>
-          <Grid item sm={12} xs={12} md={3} lg={3}>
+          <Grid item sm={12} xs={12} md={4} lg={4}>
             <Field heading={educationDetails && educationDetails.twelthStd.sub[0]} subHeading={educationDetails && educationDetails.twelthStd.subMark[0]} />
           </Grid>
-          <Grid item sm={12} xs={12} md={3} lg={3}>
+          <Grid item sm={12} xs={12} md={2} lg={2}>
             <Field heading={educationDetails && educationDetails.twelthStd.sub[1]}  subHeading={educationDetails && educationDetails.twelthStd.subMark[1]} />
           </Grid>
-          <Grid item sm={12} xs={12} md={3} lg={3}>
+          <Grid item sm={12} xs={12} md={2} lg={2}>
             <Field heading={educationDetails && educationDetails.twelthStd.sub[2]}  subHeading={educationDetails && educationDetails.twelthStd.subMark[2]} />
           </Grid>
-          <Grid item sm={12} xs={12} md={3} lg={3}>
+          <Grid item sm={12} xs={12} md={2} lg={2}>
             <Field heading={educationDetails && educationDetails.twelthStd.sub[3]}  subHeading={educationDetails && educationDetails.twelthStd.subMark[3]} />
+          </Grid>
+          <Grid item sm={12} xs={12} md={2} lg={2}>
+            <Field heading={educationDetails && educationDetails.twelthStd.sub[4]}  subHeading={educationDetails && educationDetails.twelthStd.subMark[4]} />
           </Grid>
         </Grid>
       </Container>
