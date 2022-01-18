@@ -140,17 +140,20 @@ export default function EducationalView(props) {
           <Grid item sm={12} xs={12} md={6} lg={6}>
             <Field heading="Course" subHeading={educationDetails && educationDetails.degree[0].course}/>
           </Grid>
-          <Grid item sm={12} xs={12} md={3} lg={3}>
+          <Grid item sm={12} xs={12} md={4} lg={4}>
             <Field heading="Core" subHeading={educationDetails && educationDetails.degree[0].core} />
           </Grid>
-          <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Complementary (Sub)" subHeading={educationDetails && educationDetails.degree[0].commonOne} />
+          <Grid item sm={12} xs={12} md={2} lg={2}>
+            <Field heading="Complementary (Sub)" subHeading={educationDetails && educationDetails.degree[0].complementary} />
           </Grid>
-          <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Common (English)" subHeading={educationDetails && educationDetails.degree[0].commonTwo} />
+          <Grid item sm={12} xs={12} md={2} lg={2}>
+            <Field heading="Common (English)" subHeading={educationDetails && educationDetails.degree[0].commonOne} />
           </Grid>
-          <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Common (Language)" subHeading={educationDetails && educationDetails.degree[0].open} />
+          <Grid item sm={12} xs={12} md={2} lg={2}>
+            <Field heading="Common (Language)" subHeading={educationDetails && educationDetails.degree[0].commonTwo} />
+          </Grid>
+          <Grid item sm={12} xs={12} md={2} lg={2}>
+            <Field heading="Open Course" subHeading={educationDetails && educationDetails.degree[0].open} />
           </Grid>
         </Grid>
       </Container>
