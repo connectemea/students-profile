@@ -66,6 +66,12 @@ export default function FamilyView(props) {
           </Grid>
           <Grid item sm={12} xs={12} md={4} lg={4}>
             <Field
+              heading="Phone Number"
+              subHeading={familyDetails && familyDetails.father.number}
+            />
+          </Grid>
+          <Grid item sm={12} xs={12} md={4} lg={4}>
+            <Field
               heading="Educational Qualification"
               subHeading={
                 familyDetails && familyDetails.father.educationQualification
@@ -84,7 +90,7 @@ export default function FamilyView(props) {
               subHeading={familyDetails && familyDetails.father.occupation}
             />
           </Grid>
-          <Grid item sm={12} xs={12} md={8} lg={8}>
+          <Grid item sm={12} xs={12} md={4} lg={4}>
             <Field
               heading="Official Address"
               subHeading={familyDetails && familyDetails.father.officialAddress}
@@ -112,6 +118,12 @@ export default function FamilyView(props) {
             />
           </Grid>
           <Grid item sm={12} xs={12} md={4} lg={4}>
+            <Field
+              heading="Phone Number"
+              subHeading={familyDetails && familyDetails.mother.number}
+            />
+          </Grid>
+          <Grid item sm={12} xs={12} md={4} lg={4}>
             <Field heading="Educational Qualification" subHeading="Degree" />
           </Grid>
           <Grid item sm={12} xs={12} md={4} lg={4}>
@@ -126,7 +138,7 @@ export default function FamilyView(props) {
               subHeading={familyDetails && familyDetails.mother.occupation}
             />
           </Grid>
-          <Grid item sm={12} xs={12} md={8} lg={8}>
+          <Grid item sm={12} xs={12} md={4} lg={4}>
             <Field
               heading="Official Address"
               subHeading={familyDetails && familyDetails.mother.officialAddress}
@@ -155,6 +167,12 @@ export default function FamilyView(props) {
           </Grid>
           <Grid item sm={12} xs={12} md={4} lg={4}>
             <Field
+              heading="Phone Number"
+              subHeading={familyDetails && familyDetails.guardian.number}
+            />
+          </Grid>
+          <Grid item sm={12} xs={12} md={4} lg={4}>
+            <Field
               heading="Educational Qualification"
               subHeading={
                 familyDetails && familyDetails.guardian.educationQualification
@@ -173,8 +191,8 @@ export default function FamilyView(props) {
               subHeading={familyDetails && familyDetails.guardian.occupation}
             />
           </Grid>
-          <Grid item sm={12} xs={12} md={8} lg={8}>
-            <Field
+          <Grid item sm={12} xs={12} md={4} lg={4}>
+          <Field
               heading="Official Address"
               subHeading={
                 familyDetails && familyDetails.guardian.officialAddress
