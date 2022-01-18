@@ -44,6 +44,7 @@ export default function Details() {
       } catch (error) {
         console.error(error.response);
       }
+      
     }
     async function getLogedStudent() {
       try {
