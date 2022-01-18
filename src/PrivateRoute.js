@@ -5,5 +5,6 @@ export default function PrivateRoute({
   children,
 }) {
   const isPermitted = useAuthUser(type, level);
+  console.log(isPermitted);
   return isPermitted && children;
 }

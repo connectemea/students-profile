@@ -30,7 +30,7 @@ export default function Login() {
   const clearError = () => setAuthErrors("");
 
   const redirectionHandler = (type, status) => {
-    if (type === "admin") return navigate("/app");
+    if (type === "admin") return navigate("/app/home");
     if (type === "teacher" && status === "filled") {
       return navigate("/app/teacher/view/me");
     } else if (type === "teacher") {
