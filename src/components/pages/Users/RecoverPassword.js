@@ -18,7 +18,7 @@ const ContentStyle = styled("div")(({ theme }) => ({
   alignContent: "center",
 }));
 
-export default function Register() {
+export default function RecoverPassword() {
   const navigate = useNavigate();
   const { token } = useParams();
 
