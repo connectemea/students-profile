@@ -132,22 +132,22 @@ export default function EducationalView(props) {
             <Typography variant="h5">Degree Details</Typography>
           </Grid>
           <Grid item sm={12} xs={12} md={6} lg={6}>
-            <Field heading="School Name" subHeading="GHSS Peruvallur" />
+            <Field heading="College Name" subHeading={educationDetails && educationDetails.degree[0].college} />
           </Grid>
           <Grid item sm={12} xs={12} md={6} lg={6}>
-            <Field heading="Medium" subHeading="English" />
+            <Field heading="Course" subHeading={educationDetails && educationDetails.degree[0].course}/>
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="English" subHeading="95%" />
+            <Field heading="Core" subHeading={educationDetails && educationDetails.degree[0].core} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Maths" subHeading="78%" />
+            <Field heading="Complementary (Sub)" subHeading={educationDetails && educationDetails.degree[0].commonOne} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Science" subHeading="85%" />
+            <Field heading="Common (English)" subHeading={educationDetails && educationDetails.degree[0].commonTwo} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Social Science" subHeading="90%" />
+            <Field heading="Common (Language)" subHeading={educationDetails && educationDetails.degree[0].open} />
           </Grid>
         </Grid>
       </Container>
@@ -165,16 +165,16 @@ export default function EducationalView(props) {
             <Typography variant="h5">Other Qualfication</Typography>
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Course" subHeading="Computer Science" />
+            <Field heading="Course" subHeading={educationDetails && educationDetails.otherQualifications[0].courseType} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Institution" subHeading="GEMS College" />
+            <Field heading="Institution" subHeading={educationDetails && educationDetails.otherQualifications[0].institutionName} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="University" subHeading="Calicut University" />
+            <Field heading="University" subHeading={educationDetails && educationDetails.otherQualifications[0].university} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Grade/%Mark" subHeading="95%" />
+            <Field heading="Grade/%Mark" subHeading={educationDetails && educationDetails.otherQualifications[0].Grade} />
           </Grid>
         </Grid>
       </Container>
@@ -192,49 +192,21 @@ export default function EducationalView(props) {
             <Typography variant="h5">Addition Course</Typography>
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Course" subHeading="Computer Science" />
+            <Field heading="Course" subHeading={educationDetails && educationDetails.additionalCourse[0].courseName} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Institution" subHeading="GEMS College" />
+            <Field heading="Institution" subHeading={educationDetails && educationDetails.additionalCourse[0].institutionName} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="University" subHeading="Calicut University" />
+            <Field heading="University" subHeading={educationDetails && educationDetails.additionalCourse[0].university} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Grade/%Mark" subHeading="95%" />
+            <Field heading="Grade/%Mark" subHeading={educationDetails && educationDetails.additionalCourse[0].cgp} />
           </Grid>
         </Grid>
       </Container>
 
-      {/* Extra Activities */}
-
-      <Container>
-        <Grid
-          component={ProfileCard}
-          sx={{ mt: 2, p: 2 }}
-          container
-          spacing={2}
-        >
-          <Grid sx={{}} item sm={12} xs={12} md={12} lg={12}>
-            <Typography variant="h5">
-              Participation in NCC,NSS,Sports,Fine Arts
-            </Typography>
-          </Grid>
-          <Grid item sm={12} xs={12} md={4} lg={4}>
-            <Field heading="Activity" subHeading="Volleyball" />
-          </Grid>
-          <Grid item sm={12} xs={12} md={4} lg={4}>
-            <Field heading="Price" subHeading="State First" />
-          </Grid>
-          <Grid item sm={12} xs={12} md={4} lg={4}>
-            <Field
-              heading="Details of Excellence in performance"
-              subHeading="Best Player"
-            />
-          </Grid>
-        </Grid>
-      </Container>
-
+  
       {/* Extra Caricaular Activities */}
 
       <Container>
@@ -250,18 +222,18 @@ export default function EducationalView(props) {
             </Typography>
           </Grid>
           <Grid item sm={12} xs={12} md={2} lg={2}>
-            <Field heading="Activties" subHeading="Hackathon" />
+            <Field heading="Activties" subHeading={educationDetails && educationDetails.extraCurricular[0].activity} />
           </Grid>
           <Grid item sm={12} xs={12} md={2} lg={2}>
-            <Field heading="Price" subHeading="Second" />
+            <Field heading="Price" subHeading={educationDetails && educationDetails.extraCurricular[0].Price} />
           </Grid>
           <Grid item sm={12} xs={12} md={3} lg={3}>
-            <Field heading="Year of Participation" subHeading="2021" />
+            <Field heading="Year of Participation" subHeading={educationDetails && educationDetails.extraCurricular[0].yearOfParticipation}/>
           </Grid>
           <Grid item sm={12} xs={12} md={5} lg={5}>
             <Field
               heading="Details of Execellence"
-              subHeading="The program that to task to create the App for the Kerala Police"
+              subHeading={educationDetails && educationDetails.extraCurricular[0].detailsOfExcellenceInPerformance}
             />
           </Grid>
         </Grid>

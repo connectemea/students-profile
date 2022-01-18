@@ -130,6 +130,7 @@ export default function EducationalDetailsInput(props) {
     if (!hseSub2Mark) setHseSub2Mark("");
     if (!hseSub3Mark) setHseSub3Mark("");
     if (!hseSub4Mark) setHseSub4Mark("");
+    
   };
 
   //Structure Data
@@ -281,6 +282,7 @@ export default function EducationalDetailsInput(props) {
   useEffect(() => {
     setCurrentDetails(student?.educationDetails);
   }, [student]);
+  
 
   //To set the data on update
   useEffect(() => {
