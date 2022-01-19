@@ -81,10 +81,13 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             <AccountStyle>
               <Avatar
                 src={`${BACKEND_URL.BASE_URL}upload/${profile?.profileImage}`}
-                alt="photoURL"
+                alt={profile && profile.username.toUpperCase()}
               />
               <Box sx={{ ml: 2 }}>
-                <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
+                <Typography
+                  variant="subtitle2"
+                  sx={{ color: "text.primary", textTransform: "capitalize" }}
+                >
                   {profile && profile.username}
                 </Typography>
                 <Typography

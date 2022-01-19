@@ -193,7 +193,7 @@ export default function EducationalDetailsInput(props) {
       extraCurricular: [
         {
           activity: activity,
-          yearOfParticipation: dateTimeHelper.dateToObj(yearOfParticipation),
+          yearOfParticipation: dateTimeHelper.getDate(yearOfParticipation),
           Price: prize,
           detailsOfExcellenceInPerformance: perfomance,
         },
@@ -248,7 +248,7 @@ export default function EducationalDetailsInput(props) {
     //extra curricular details
     setActivity(details.extraCurricular[0]?.activity);
     setYearOfParticipation(
-      dateTimeHelper.getDate(details.extraCurricular[0]?.yearOfParticipation)
+      dateTimeHelper.dateToObj(details.extraCurricular[0]?.yearOfParticipation)
     );
     setPrize(details.extraCurricular[0]?.Price);
     setPerfomance(details.extraCurricular[0]?.detailsOfExcellenceInPerformance);
@@ -282,11 +282,17 @@ export default function EducationalDetailsInput(props) {
     const data = {
       educationDetails: structureData(),
     };
-    loaderToggler(true);
-    await studentsService.updateStudent(id, data);
-    navigate("/app/student/view/me");
-    window.location.reload();
-    loaderToggler(false);
+    try{
+      loaderToggler(true);
+      await studentsService.updateStudent(id, data);
+      navigate("/app/student/view/me");
+      window.location.reload();
+      loaderToggler(false);
+    }catch(err){
+      console.error(err);
+      loaderToggler(false);
+    }
+
   };
   //To set the previously filled data
   useEffect(() => {
