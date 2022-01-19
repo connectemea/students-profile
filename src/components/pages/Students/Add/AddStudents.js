@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 // material components
 import {
   Stack,
@@ -18,6 +18,10 @@ import PublishIcon from "@mui/icons-material/Publish";
 import Page from "../../../utils/Page";
 import DataTable from "../../../utils/DataTable";
 
+//loading
+import { loadingContext } from "../../../../context/loadingContext";
+import Loader from "../../../utils/Loader";
+
 //importing the user service
 import userService from "../../../../services/userService";
 
@@ -29,6 +33,7 @@ const TABLE_HEAD = [
 ];
 
 export default function AddStudent() {
+  const { loaderToggler } = useContext(loadingContext);
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [errorMsg, setErrorMsg] = useState("");
@@ -39,27 +44,34 @@ export default function AddStudent() {
   useEffect(() => {
     const getUsers = async () => {
       try {
+        loaderToggler(true);
         const users = await userService.getUsers();
         setUsers(users);
+        loaderToggler(false);
       } catch (err) {
         console.error(err?.response?.data?.message);
+        loaderToggler(false);
       }
     };
     getUsers();
   }, []);
-  
+
   //get users
   const getUsers = async () => {
     try {
+      loaderToggler(true);
       const users = await userService.getUsers();
       setUsers(users);
+      loaderToggler(false);
     } catch (err) {
       console.error(err?.response?.data?.message);
+      loaderToggler(false);
     }
   };
   const handleAddStudent = async () => {
     try {
       clearError();
+      loaderToggler(true);
       const userData = {
         username,
         email,
@@ -70,8 +82,10 @@ export default function AddStudent() {
       getUsers();
       // clearing the form
       clearUserCredentials();
+      loaderToggler(false);
     } catch (err) {
       setErrorMsg(err?.response?.data?.message);
+      loaderToggler(false);
     }
   };
 
@@ -83,6 +97,7 @@ export default function AddStudent() {
   return (
     <Page title="AddStudent">
       <Container>
+        <Loader />
         <Stack
           direction="row"
           alignItems="center"

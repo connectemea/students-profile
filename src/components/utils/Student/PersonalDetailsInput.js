@@ -24,6 +24,9 @@ import ImageUpload from "../Inputs/ImageUpload";
 import { studentContext } from "../../../context/studentContext";
 import departmentService from "../../../services/departmentService";
 import * as dateHelper from "../../helpers/dateTimeHelper";
+//loading
+import { loadingContext } from "../../../context/loadingContext";
+import Loader from "../Loader";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
@@ -31,6 +34,7 @@ const ProfileCard = styled(Card)(({ theme }) => ({
 }));
 
 export default function PersonalDetailsInput() {
+  const { loaderToggler } = useContext(loadingContext);
   const { student, setStudent } = useContext(studentContext);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -204,9 +208,11 @@ export default function PersonalDetailsInput() {
       const imageUrl = await userService.updateImage(formData);
       data.personalDetails.profileImage = imageUrl.filepath;
     }
+    loaderToggler(true);
     await studentsService.updateStudent(id, data);
     navigate("/app/student/view/me");
     window.location.reload();
+    loaderToggler(false);
   };
 
   //To set the previously filled data
@@ -217,10 +223,13 @@ export default function PersonalDetailsInput() {
   useEffect(() => {
     const getDepartment = async () => {
       try {
+        loaderToggler(true);
         const departmentList = await departmentService.getDepartment();
         setDepartmentData(departmentList);
+        loaderToggler(false);
       } catch (err) {
         console.error(err.response);
+        loaderToggler(false);
       }
     };
     getDepartment();
@@ -230,10 +239,13 @@ export default function PersonalDetailsInput() {
   useEffect(() => {
     const getStudent = async () => {
       try {
+        loaderToggler(true);
         const student = await studentsService.getStudentById(id);
         setCurrentDetails(student.personalDetails);
+        loaderToggler(false);
       } catch (error) {
         console.error(error?.response?.data?.message);
+        loaderToggler(false);
       }
     };
     if (id) getStudent();
@@ -257,6 +269,7 @@ export default function PersonalDetailsInput() {
           md={4}
           lg={4}
         >
+          <Loader />
           <ImageUpload image={profileImage} setImage={setProfileImage} />
           {profileImage === "" && (
             <Typography sx={{ mt: 2 }} variant="body2" color="error">

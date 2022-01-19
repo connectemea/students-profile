@@ -13,6 +13,10 @@ import DatePickerInput from "../Inputs/DatePickerInput";
 import { useNavigate, useParams } from "react-router-dom";
 import { studentContext } from "../../../context/studentContext";
 import * as dateTimeHelper from "../../helpers/dateTimeHelper";
+//loading
+import { loadingContext } from "../../../context/loadingContext";
+import Loader from "../Loader";
+
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
   paddingBottom: `${theme.spacing(4)} !important`,
@@ -32,6 +36,7 @@ const hseSubjects4 = ["Mathematics", "Politics", "Sociology"];
 const ugCourses = ["Bsc. Computer Science", "B.com", "BBA"];
 
 export default function EducationalDetailsInput(props) {
+  const { loaderToggler } = useContext(loadingContext);
   const { student, setStudent } = useContext(studentContext);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -131,7 +136,6 @@ export default function EducationalDetailsInput(props) {
     if (!hseSub2Mark) setHseSub2Mark("");
     if (!hseSub3Mark) setHseSub3Mark("");
     if (!hseSub4Mark) setHseSub4Mark("");
-    
   };
 
   //Structure Data
@@ -278,24 +282,28 @@ export default function EducationalDetailsInput(props) {
     const data = {
       educationDetails: structureData(),
     };
+    loaderToggler(true);
     await studentsService.updateStudent(id, data);
     navigate("/app/student/view/me");
     window.location.reload();
+    loaderToggler(false);
   };
   //To set the previously filled data
   useEffect(() => {
     setCurrentDetails(student?.educationDetails);
   }, [student]);
-  
 
   //To set the data on update
   useEffect(() => {
     const getStudent = async () => {
       try {
+        loaderToggler(true);
         const student = await studentsService.getStudentById(id);
         setCurrentDetails(student.educationDetails);
+        loaderToggler(false);
       } catch (error) {
         console.error(error?.response?.data?.message);
+        loaderToggler(false);
       }
     };
     if (id) getStudent();
@@ -307,6 +315,7 @@ export default function EducationalDetailsInput(props) {
 
   return (
     <>
+      <Loader />
       {/* SSLC/10th */}
       <Grid component={ProfileCard} sx={{ mt: 2, p: 2 }} container spacing={2}>
         {/* Add Details Section */}

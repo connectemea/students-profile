@@ -19,13 +19,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import studentsService from "../../../services/studentsService";
 import userService from "../../../services/userService";
 import { studentContext } from "../../../context/studentContext";
-
+//loading
+import { loadingContext } from "../../../context/loadingContext";
+import Loader from "../Loader";
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
   paddingBottom: `${theme.spacing(4)} !important`,
 }));
 
 export default function FamilyDetailsInput() {
+  const { loaderToggler } = useContext(loadingContext);
   const { student, setStudent } = useContext(studentContext);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -206,6 +209,7 @@ export default function FamilyDetailsInput() {
     //setting the submitted data in the student context
     setStudent(data);
     try {
+      loaderToggler(true);
       //To check its an image or not
       const isFile = (file) => file instanceof File;
       if (isFile(imageData)) {
@@ -218,8 +222,10 @@ export default function FamilyDetailsInput() {
       navigate("/app/student/view/me");
       window.location.reload();
       setStudent(null);
+      loaderToggler(false);
     } catch (error) {
       console.error(error);
+      loaderToggler(false);
     }
   };
   //To handle back button click
@@ -237,9 +243,11 @@ export default function FamilyDetailsInput() {
     const data = {
       familyDetails: structureData(),
     };
+    loaderToggler(true);
     await studentsService.updateStudent(id, data);
     navigate("/app/student/view/me");
     window.location.reload();
+    loaderToggler(false);
   };
   //To set the previously filled data
   useEffect(() => {
@@ -250,10 +258,13 @@ export default function FamilyDetailsInput() {
   useEffect(() => {
     const getStudent = async () => {
       try {
+        loaderToggler(true);
         const student = await studentsService.getStudentById(id);
         setCurrentDetails(student.familyDetails);
+        loaderToggler(false);
       } catch (error) {
         console.error(error?.response?.data?.message);
+        loaderToggler(false);
       }
     };
     if (id) getStudent();
@@ -265,6 +276,7 @@ export default function FamilyDetailsInput() {
 
   return (
     <>
+      <Loader />
       {/* Father Details */}
       <Grid component={ProfileCard} sx={{ mt: 2, p: 2 }} container spacing={2}>
         {/* Add Details Section */}
