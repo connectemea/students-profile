@@ -282,17 +282,16 @@ export default function EducationalDetailsInput(props) {
     const data = {
       educationDetails: structureData(),
     };
-    try{
+    try {
       loaderToggler(true);
       await studentsService.updateStudent(id, data);
       navigate("/app/student/view/me");
       window.location.reload();
       loaderToggler(false);
-    }catch(err){
+    } catch (err) {
       console.error(err);
       loaderToggler(false);
     }
-
   };
   //To set the previously filled data
   useEffect(() => {
