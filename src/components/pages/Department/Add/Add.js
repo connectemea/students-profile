@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TextInput from "../../../utils/Inputs/TextInput";
 
@@ -17,6 +17,9 @@ import {
 import PublishIcon from "@mui/icons-material/Publish";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+//loading
+import { loadingContext } from "../../../../context/loadingContext";
+import Loader from "../../../utils/Loader";
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
 
@@ -25,6 +28,7 @@ import departmentService from "../../../../services/departmentService";
 
 //export function for add department
 export default function Add() {
+  const { loaderToggler } = useContext(loadingContext);
   const navigate = useNavigate();
   const [name, setName] = useState();
   const [shortName, setshortName] = useState();
@@ -47,11 +51,14 @@ export default function Add() {
   useEffect(() => {
     const getDepartment = async () => {
       try {
+        loaderToggler(true);
         // get department data
         const response = await departmentService.getDepartmentData(id);
         setState(response);
+        loaderToggler(false);
       } catch (err) {
         console.error(err.response);
+        loaderToggler(false);
       }
     };
     if (id) getDepartment();
@@ -60,16 +67,20 @@ export default function Add() {
   //delete department
   const handleDeleteDepartment = async () => {
     try {
+      loaderToggler(true);
       await departmentService.deleteDepartment(id);
       navigate("/app/department/list");
+      loaderToggler(false);
     } catch (error) {
       console.error(error.response);
+      loaderToggler(false);
     }
   };
 
   //add department
   const handleAddDepartment = async () => {
     try {
+      loaderToggler(true);
       const departmentData = {
         departmentDetails: {
           name,
@@ -87,14 +98,17 @@ export default function Add() {
       }
       // clearing the form
       navigate("/app/department/list");
+      loaderToggler(false);
     } catch (err) {
       console.error(err.response);
+      loaderToggler(false);
     }
   };
 
   return (
     <Page title="Department Data">
       <Container>
+        <Loader />
         <Stack
           direction="row"
           alignItems="center"
