@@ -58,7 +58,7 @@ export default function Login() {
       //storing token in localStorage
       localStorage.setItem(LOCAL_KEYS.AUTH_TOKEN, response.data.token);
       redirectionHandler(response.data.type, response.data.status);
-      loaderToggler();
+      loaderToggler(false);
     } catch (err) {
       setAuthErrors(err?.response?.data?.message);
       loaderToggler(false);
