@@ -1,5 +1,5 @@
 import { Link as RouterLink } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import teacherService from "../../../../services/teacherService";
 // material components
 import { Stack, Button, Container, Typography } from "@mui/material";
@@ -10,6 +10,10 @@ import AddIcon from "@mui/icons-material/Add";
 import Page from "../../../utils/Page";
 import DataTable from "../../../utils/DataTable";
 import { useEffect } from "react";
+
+// Loader
+import { loadingContext } from "../../../../context/loadingContext";
+import Loader from "../../../utils/Loader";
 
 // table header cell config
 const TABLE_HEAD = [
@@ -25,16 +29,20 @@ const TABLE_HEAD = [
 ];
 
 export default function TeachersList() {
+  const { loaderToggler } = useContext(loadingContext);
   const [teachers, setTeachers] = useState([]);
   useEffect(() => {
     const getTeachers = async () => {
       try {
+        loaderToggler(true);
         // get teachers
         const newTeacher = await teacherService.getAllTeacher();
         console.log(newTeacher);
         setTeachers(newTeacher);
+        loaderToggler(false);
       } catch (err) {
         console.error(err?.response?.data?.message);
+        loaderToggler(false);
       }
     };
     getTeachers();
@@ -43,6 +51,7 @@ export default function TeachersList() {
   return (
     <Page title="TeachersList">
       <Container>
+        <Loader />
         <Stack
           direction="row"
           alignItems="center"

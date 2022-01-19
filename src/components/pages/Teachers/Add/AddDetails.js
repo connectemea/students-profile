@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   Button,
@@ -22,7 +22,13 @@ import departemntService from "../../../../services/departmentService";
 import LOCAL_KEYS from "../../../../constants/LOCAL_KEY";
 import * as dateHelper from "../../../helpers/dateTimeHelper";
 
+// Loader
+import { loadingContext } from "../../../../context/loadingContext";
+import Loader from "../../../utils/Loader";
+
 export default function AddDetails() {
+  const { loaderToggler } = useContext(loadingContext);
+
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -51,10 +57,13 @@ export default function AddDetails() {
   useEffect(() => {
     const getDepartment = async () => {
       try {
+        loaderToggler(true);
         const departmentList = await departemntService.getDepartment();
         setDepartmentData(departmentList);
+        loaderToggler(false);
       } catch (err) {
         console.error(err.response);
+        loaderToggler(false);
       }
     };
     getDepartment();
@@ -62,6 +71,7 @@ export default function AddDetails() {
 
   const addDetailsHandler = async () => {
     try {
+      loaderToggler(true);
       if (isError()) return;
       clearError();
       let userData = {
@@ -87,8 +97,10 @@ export default function AddDetails() {
       clearUserCredentials();
       navigate("/app/teacher/view/me");
       window.location.reload();
+      loaderToggler(false);
     } catch (err) {
       console.error(err);
+      loaderToggler(false);
     }
   };
   //To check its an image or not
@@ -96,6 +108,7 @@ export default function AddDetails() {
 
   const updateHandler = async () => {
     try {
+      loaderToggler(true);
       if (isError()) return;
       clearError();
       let userData = {
@@ -122,8 +135,10 @@ export default function AddDetails() {
       clearUserCredentials();
       navigate("/app/teacher/view/me");
       window.location.reload();
+      loaderToggler(false);
     } catch (err) {
       console.error(err);
+      loaderToggler(false);
     }
   };
 
@@ -195,10 +210,12 @@ export default function AddDetails() {
   useEffect(() => {
     const getTeacherById = async () => {
       try {
+        loaderToggler(true);
         const response = await teacherService.getTeacherById(id);
         setCurrentDetails(response);
       } catch (err) {
         console.error(err);
+        loaderToggler(false);
       }
     };
     if (id) getTeacherById();
@@ -207,6 +224,7 @@ export default function AddDetails() {
   return (
     <Page title="TeacherDetails">
       <Container maxWidth="xl" sx={{ mt: 2, p: 2, pl: 0 }}>
+        <Loader />
         <Typography variant={"h3"}>Personal Details</Typography>
         <Grid
           component={Card}
