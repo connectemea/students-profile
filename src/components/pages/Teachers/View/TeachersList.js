@@ -13,11 +13,16 @@ import { useEffect } from "react";
 
 // table header cell config
 const TABLE_HEAD = [
-  { id: "name", label: "Name", type: "stack" ,baseUrl:"/app/teacher/view",imageId:"profileImage"},
+  {
+    id: "name",
+    label: "Name",
+    type: "stack",
+    baseUrl: "/app/teacher/view",
+    imageId: "profileImage",
+  },
   { id: "shortName", label: "short form", type: "text" },
-  { id: "department", label: "department", type: "text" },
+  { id: "department.name", label: "department", type: "text" },
 ];
-
 
 export default function TeachersList() {
   const [teachers, setTeachers] = useState([]);
@@ -26,6 +31,7 @@ export default function TeachersList() {
       try {
         // get teachers
         const newTeacher = await teacherService.getAllTeacher();
+        console.log(newTeacher);
         setTeachers(newTeacher);
       } catch (err) {
         console.error(err?.response?.data?.message);

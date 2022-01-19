@@ -80,12 +80,13 @@ export default function AddDetails() {
       // Converting data into form data format
       const formData = new FormData();
       formData.append("profile", profileImage);
-      const response = await userService.uploadImage(formData);
-      userData.profileImage = response.filePath;
+      const response = await userService.updateImage(formData);
+      userData.profileImage = response.filepath;
 
       await teacherService.createTeacher(userData);
       clearUserCredentials();
-      navigate("/teacher/view/me");
+      navigate("/app/teacher/view/me");
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
@@ -120,6 +121,7 @@ export default function AddDetails() {
       await teacherService.updateTeacher(id, userData);
       clearUserCredentials();
       navigate("/app/teacher/view/me");
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }

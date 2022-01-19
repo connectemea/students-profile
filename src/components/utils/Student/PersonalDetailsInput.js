@@ -206,6 +206,7 @@ export default function PersonalDetailsInput() {
     }
     await studentsService.updateStudent(id, data);
     navigate("/app/student/view/me");
+    window.location.reload();
   };
 
   //To set the previously filled data
@@ -237,6 +238,10 @@ export default function PersonalDetailsInput() {
     };
     if (id) getStudent();
   }, [id]);
+  //scroll to top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

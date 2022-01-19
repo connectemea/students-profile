@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Container, Typography, Stack, Card, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
@@ -12,6 +12,8 @@ import authService from "../../../services/authService";
 import LOCAL_KEYS from "../../../constants/LOCAL_KEY";
 //context
 import Page from "../../utils/Page";
+import { loadingContext } from "../../../context/loadingContext";
+import Loader from "../../utils/Loader";
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
   margin: "auto",
@@ -22,6 +24,7 @@ const ContentStyle = styled("div")(({ theme }) => ({
 }));
 
 export default function Login() {
+  const { loaderToggler } = useContext(loadingContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -34,7 +37,7 @@ export default function Login() {
     if (type === "teacher" && status === "filled") {
       return navigate("/app/teacher/view/me");
     } else if (type === "teacher") {
-      return navigate("/teacher/details");
+      return navigate("/teacher/details/personal");
     }
     if (type === "student" && status === "filled") {
       return navigate("/app/student/view/me");
@@ -45,6 +48,7 @@ export default function Login() {
   const handleClick = async () => {
     try {
       clearError();
+      loaderToggler(true);
       const loginCredentials = {
         email,
         password,
@@ -54,14 +58,17 @@ export default function Login() {
       //storing token in localStorage
       localStorage.setItem(LOCAL_KEYS.AUTH_TOKEN, response.data.token);
       redirectionHandler(response.data.type, response.data.status);
+      loaderToggler();
     } catch (err) {
       setAuthErrors(err?.response?.data?.message);
+      loaderToggler(false);
     }
   };
 
   return (
     <Page title="Login">
       <Container>
+        <Loader />
         <ContentStyle>
           <Card sx={{ p: 3 }}>
             <Box sx={{ mb: 3 }}>

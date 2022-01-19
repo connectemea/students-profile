@@ -6,6 +6,7 @@ import PasswordField from "./utils/PasswordField";
 import TextInput from "./utils/TextInput";
 import SubmitButton from "./utils/SubmitButton";
 import Page from "../../utils/Page";
+import Loader from "../../utils/Loader";
 
 //importing the user service
 import authService from "../../../services/authService";
@@ -82,6 +83,7 @@ export default function Register() {
   return (
     <Page title="Register">
       <ContentStyle>
+        <Loader />
         <Card sx={{ p: 3 }}>
           <Box sx={{ mb: 3 }}>
             <Typography variant="h3" gutterBottom textAlign="center">

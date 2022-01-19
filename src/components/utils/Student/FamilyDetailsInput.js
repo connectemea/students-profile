@@ -206,12 +206,17 @@ export default function FamilyDetailsInput() {
     //setting the submitted data in the student context
     setStudent(data);
     try {
-      const formData = new FormData();
-      formData.append("profile", imageData);
-      const imageUrl = await userService.updateImage(formData);
-      data.personalDetails.profileImage = imageUrl.filepath;
+      //To check its an image or not
+      const isFile = (file) => file instanceof File;
+      if (isFile(imageData)) {
+        const formData = new FormData();
+        formData.append("profile", imageData);
+        const imageUrl = await userService.updateImage(formData);
+        data.personalDetails.profileImage = imageUrl.filepath;
+      }
       await studentsService.addStudent(data);
       navigate("/app/student/view/me");
+      window.location.reload();
       setStudent(null);
     } catch (error) {
       console.error(error);
@@ -234,6 +239,7 @@ export default function FamilyDetailsInput() {
     };
     await studentsService.updateStudent(id, data);
     navigate("/app/student/view/me");
+    window.location.reload();
   };
   //To set the previously filled data
   useEffect(() => {
@@ -252,6 +258,10 @@ export default function FamilyDetailsInput() {
     };
     if (id) getStudent();
   }, [id]);
+  //scroll to top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

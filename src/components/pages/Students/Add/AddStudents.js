@@ -28,7 +28,6 @@ const TABLE_HEAD = [
   { id: "status", label: "status", type: "userStatusChip" },
 ];
 
-
 export default function AddStudent() {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
@@ -48,7 +47,16 @@ export default function AddStudent() {
     };
     getUsers();
   }, []);
-
+  
+  //get users
+  const getUsers = async () => {
+    try {
+      const users = await userService.getUsers();
+      setUsers(users);
+    } catch (err) {
+      console.error(err?.response?.data?.message);
+    }
+  };
   const handleAddStudent = async () => {
     try {
       clearError();
@@ -59,6 +67,7 @@ export default function AddStudent() {
       };
       // adding user to db
       await userService.createUser(userData);
+      getUsers();
       // clearing the form
       clearUserCredentials();
     } catch (err) {

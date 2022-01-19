@@ -12,6 +12,7 @@ import SelectInput from "../Inputs/SelectInput";
 import DatePickerInput from "../Inputs/DatePickerInput";
 import { useNavigate, useParams } from "react-router-dom";
 import { studentContext } from "../../../context/studentContext";
+import * as dateTimeHelper from "../../helpers/dateTimeHelper";
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
   paddingBottom: `${theme.spacing(4)} !important`,
@@ -187,7 +188,7 @@ export default function EducationalDetailsInput(props) {
       extraCurricular: [
         {
           activity: activity,
-          yearOfParticipation: yearOfParticipation,
+          yearOfParticipation: dateTimeHelper.dateToObj(yearOfParticipation),
           Price: prize,
           detailsOfExcellenceInPerformance: perfomance,
         },
@@ -241,7 +242,9 @@ export default function EducationalDetailsInput(props) {
     setAddiMarks(details.additionalCourse[0]?.cgp);
     //extra curricular details
     setActivity(details.extraCurricular[0]?.activity);
-    setYearOfParticipation(details.extraCurricular[0]?.yearOfParticipation);
+    setYearOfParticipation(
+      dateTimeHelper.getDate(details.extraCurricular[0]?.yearOfParticipation)
+    );
     setPrize(details.extraCurricular[0]?.Price);
     setPerfomance(details.extraCurricular[0]?.detailsOfExcellenceInPerformance);
   };
@@ -276,6 +279,7 @@ export default function EducationalDetailsInput(props) {
     };
     await studentsService.updateStudent(id, data);
     navigate("/app/student/view/me");
+    window.location.reload();
   };
   //To set the previously filled data
   useEffect(() => {
@@ -294,6 +298,10 @@ export default function EducationalDetailsInput(props) {
     };
     if (id) getStudent();
   }, [id]);
+  //scroll to top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

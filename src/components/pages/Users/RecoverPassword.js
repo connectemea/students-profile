@@ -7,6 +7,7 @@ import SubmitButton from "./utils/SubmitButton";
 
 import authService from "../../../services/authService";
 import Page from "../../utils/Page";
+import Loader from "../../utils/Loader";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -66,6 +67,7 @@ export default function Register() {
   return (
     <Page title="Reset Password">
       <Container>
+        <Loader />
         <ContentStyle>
           <Card sx={{ p: 4 }}>
             <Box sx={{ mb: 3 }}>

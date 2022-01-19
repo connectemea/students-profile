@@ -30,7 +30,6 @@ const TABLE_HEAD = [
   { id: "status", label: "status", type: "userStatusChip" },
 ];
 
-
 export default function AddTeacher() {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
@@ -43,9 +42,19 @@ export default function AddTeacher() {
     setEmail("");
     setUsername("");
   };
+  
   //To clear the error message
   const clearError = () => setErrorMsg("");
 
+  //get all user (teachers)
+  const getUsers = async () => {
+    try {
+      const users = await userService.getUsers("teacher");
+      setUsers(users);
+    } catch (err) {
+      console.error(err?.response?.data?.message);
+    }
+  };
   // add new teacher
   const handleAddTeacher = async () => {
     try {
@@ -57,6 +66,8 @@ export default function AddTeacher() {
       };
       // adding user to db
       await userService.createUser(userData);
+      //get user on add
+      getUsers();
       // clearing the form
       clearUserCredentials();
     } catch (err) {
@@ -122,7 +133,7 @@ export default function AddTeacher() {
           <Stack
             direction="row"
             alignItems="center"
-            justifyContent="flex-end" 
+            justifyContent="flex-end"
             mt={2}
           >
             <Tooltip
