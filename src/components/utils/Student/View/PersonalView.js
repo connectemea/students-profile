@@ -1,3 +1,4 @@
+import { useContext } from "react";
 // material components
 import { Grid, Card, Container, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -5,6 +6,7 @@ import Page from "../../../utils/Page";
 import { Link } from "react-router-dom";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import Field from "./Field";
+import { profileContext } from "../../../../context/profileContext";
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
   paddingBottom: `${theme.spacing(4)} !important`,
@@ -12,6 +14,7 @@ const ProfileCard = styled(Card)(({ theme }) => ({
 
 export default function PersonalView(props) {
   const { personalDetails, id } = props;
+  const { profile } = useContext(profileContext);
 
   return (
     <Page title="StudentsList">
@@ -38,19 +41,21 @@ export default function PersonalView(props) {
             <Typography variant="h5" sx={{}}>
               Personal Details
             </Typography>
-            <Link
-              to={`/app/student/update/${id}/personal`}
-              style={{ color: "none" }}
-            >
-              <ModeEditOutlineOutlinedIcon
-                sx={{
-                  margin: "8px",
-                  opacity: "",
-                  height: "3vh",
-                  width: "2vw",
-                }}
-              />
-            </Link>
+            {profile?.userType === "student" && (
+              <Link
+                to={`/app/student/update/${id}/personal`}
+                style={{ color: "none" }}
+              >
+                <ModeEditOutlineOutlinedIcon
+                  sx={{
+                    margin: "8px",
+                    opacity: "",
+                    height: "3vh",
+                    width: "2vw",
+                  }}
+                />
+              </Link>
+            )}
           </Grid>
           <Grid item sm={3} xs={12} md={3} lg={3}>
             <Field

@@ -13,6 +13,7 @@ import Field from "../utils/Field";
 
 // importing getTech form TeacherService
 import TeacherService from "../../../../services/teacherService";
+import { profileContext } from "../../../../context/profileContext";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
@@ -21,6 +22,7 @@ const ProfileCard = styled(Card)(({ theme }) => ({
 
 export default function TeachersView() {
   const { loaderToggler } = useContext(loadingContext);
+  const { profile } = useContext(profileContext);
   const [teacherData, setTeacherData] = useState();
   const { id } = useParams();
 
@@ -120,19 +122,22 @@ export default function TeachersView() {
                   </Typography>
                 </Grid>
               </Grid>
-              <Link
-                to={`/app/teacher/update/${teacherData._id}`}
-                style={{ color: "#333" }}
-              >
-                <ModeEditOutlineOutlinedIcon
-                  sx={{
-                    margin: "8px",
-                    opacity: "",
-                    height: "3vh",
-                    width: "2vw",
-                  }}
-                />
-              </Link>
+              {profile?.userType === "teacher" && (
+                <Link
+                  to={`/app/teacher/update/${teacherData._id}`}
+                  style={{ color: "#333" }}
+                >
+                  <ModeEditOutlineOutlinedIcon
+                    sx={{
+                      margin: "8px",
+                      opacity: "",
+                      height: "3vh",
+                      width: "2vw",
+                    }}
+                  />
+                </Link>
+              )}
+
               <Grid
                 item
                 xs={12}

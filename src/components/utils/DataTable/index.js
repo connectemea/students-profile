@@ -141,7 +141,7 @@ export default function DataTable({ TABLE_HEAD, TABLE_DATA, SEARCH_ID }) {
             to={`${col.baseUrl}/${value._id}`}
           >
             <Avatar
-              alt={getValueForCell(value, col.id).toUpperCase()}
+              alt={getValueForCell(value, col.id)?.toUpperCase()}
               src={`${BACKEND_URL.BASE_URL}upload/${getValueForCell(
                 value,
                 col.imageId

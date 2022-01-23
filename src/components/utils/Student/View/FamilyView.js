@@ -1,3 +1,4 @@
+import { useContext } from "react";
 // material components
 import { Typography, Grid, Card, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -8,6 +9,7 @@ import { Link } from "react-router-dom";
 import Field from "./Field";
 // icon import
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import { profileContext } from "../../../../context/profileContext";
 // custom card
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
@@ -16,6 +18,7 @@ const ProfileCard = styled(Card)(({ theme }) => ({
 
 export default function FamilyView(props) {
   const { familyDetails, id } = props;
+  const { profile } = useContext(profileContext);
 
   return (
     <Page title="StudentsList">
@@ -44,19 +47,21 @@ export default function FamilyView(props) {
             <Typography variant="h5" sx={{}}>
               Father Details
             </Typography>
-            <Link
-              to={`/app/student/update/${id}/family`}
-              style={{ color: "none" }}
-            >
-              <ModeEditOutlineOutlinedIcon
-                sx={{
-                  margin: "8px",
-                  opacity: "",
-                  height: "3vh",
-                  width: "2vw",
-                }}
-              />
-            </Link>
+            {profile?.userType && (
+              <Link
+                to={`/app/student/update/${id}/family`}
+                style={{ color: "none" }}
+              >
+                <ModeEditOutlineOutlinedIcon
+                  sx={{
+                    margin: "8px",
+                    opacity: "",
+                    height: "3vh",
+                    width: "2vw",
+                  }}
+                />
+              </Link>
+            )}
           </Grid>
           <Grid item sm={12} xs={12} md={4} lg={4}>
             <Field
@@ -192,7 +197,7 @@ export default function FamilyView(props) {
             />
           </Grid>
           <Grid item sm={12} xs={12} md={4} lg={4}>
-          <Field
+            <Field
               heading="Official Address"
               subHeading={
                 familyDetails && familyDetails.guardian.officialAddress

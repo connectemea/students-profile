@@ -5,7 +5,6 @@ import { Stack, Button, Container, Typography, Grid } from "@mui/material";
 import Page from "../../../utils/Page";
 import AddIcon from "@mui/icons-material/Add";
 import Dptcard from "../../../utils/Department/Dptcard";
-import DptTypeConfig from "../../../utils/Department/DptTypeConfig";
 //loading
 import { loadingContext } from "../../../../context/loadingContext";
 import Loader from "../../../utils/Loader";
@@ -56,11 +55,9 @@ export default function DptDetails() {
         </Stack>
         <Grid container spacing={3} rowSpacing={1} direction="row">
           {departmentData &&
-            departmentData.map((department) => (
+            departmentData.map((department, index) => (
               <Grid item xs={12} sm={6} md={3}>
-                {DptTypeConfig.map((type) => (
-                  <Dptcard data={department} type={type} />
-                ))}
+                <Dptcard data={department} index={index} />
               </Grid>
             ))}
         </Grid>

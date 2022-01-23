@@ -2,17 +2,26 @@ import { alpha, styled } from "@mui/material/styles";
 import { Card, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-
-export default function Dptcard({ data, type }) {
-  const { colorType } = type;
+const colors = [
+  "primary",
+  "secondary",
+  "error",
+  "info",
+  "success",
+  "warning",
+  "secondary",
+  "primary",
+  "info",
+];
+export default function Dptcard({ data, index }) {
   const RootStyle = styled(Card)(({ theme }) => ({
     boxShadow: "none",
     textAlign: "center",
     padding: theme.spacing(2),
     maxHeight: "316px",
     height: "316px",
-    color: theme.palette[colorType].darker,
-    backgroundColor: theme.palette[colorType].lighter,
+    color: theme.palette[colors[index % 8]].darker,
+    backgroundColor: theme.palette[colors[index % 8]].lighter,
   }));
   const IconWrapperStyle = styled("div")(({ theme }) => ({
     margin: "auto",
@@ -23,11 +32,11 @@ export default function Dptcard({ data, type }) {
     height: theme.spacing(8),
     justifyContent: "center",
     marginBottom: theme.spacing(3),
-    color: theme.palette[colorType].dark,
+    color: theme.palette[colors[index % 8]].dark,
     backgroundImage: `linear-gradient(135deg, ${alpha(
-      theme.palette[colorType].dark,
+      theme.palette[colors[index % 8]].dark,
       0
-    )} 0%, ${alpha(theme.palette[colorType].dark, 0.24)} 100%)`,
+    )} 0%, ${alpha(theme.palette[colors[index % 8]].dark, 0.24)} 100%)`,
   }));
   const ShortFormStyle = styled("div")(({ theme }) => ({
     fontWeight: "600",

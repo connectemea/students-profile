@@ -56,6 +56,7 @@ export default function Details() {
       try {
         loaderToggler(true);
         const response = await studentsService.getStudent();
+        console.log(response, response.personalDetails.name);
         setStudentsDetails(response);
         loaderToggler(false);
       } catch (error) {
@@ -134,7 +135,7 @@ export default function Details() {
                     }}
                   >
                     {studentDetails &&
-                      studentDetails.personalDetails.department.name}
+                      studentDetails?.personalDetails?.department?.name}
                   </Typography>
                 </Grid>
               </Grid>
