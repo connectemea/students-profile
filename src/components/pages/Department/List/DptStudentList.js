@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 // material components
 import { Stack, Container, Typography, Grid } from "@mui/material";
 
@@ -8,6 +8,9 @@ import Page from "../../../utils/Page";
 import DataTable from "../../../utils/DataTable";
 import departmentService from "../../../../services/departmentService";
 
+//loading
+import { loadingContext } from "../../../../context/loadingContext";
+import Loader from "../../../utils/Loader";
 //dropdown
 import SelectInput from "../../../utils/Inputs/SelectInput";
 
@@ -30,6 +33,7 @@ const TABLE_HEAD = [
 ];
 
 export default function DptStudentsList() {
+  const { loaderToggler } = useContext(loadingContext);
   const { id } = useParams();
   const date = new Date();
   const currentYear = date.getFullYear();
@@ -41,13 +45,16 @@ export default function DptStudentsList() {
   useEffect(() => {
     const getStudents = async () => {
       try {
+        loaderToggler(true);
         const students = await departmentService.getStudentsByDepartment(
           id,
           year
         );
         setStudents(students);
+        loaderToggler(false);
       } catch (err) {
         console.error(err?.response?.data?.message);
+        loaderToggler(false);
       }
     };
     getStudents();
@@ -56,6 +63,7 @@ export default function DptStudentsList() {
   return (
     <Page title="StudentsList">
       <Container>
+        <Loader />
         <Stack
           direction="row"
           alignItems="center"

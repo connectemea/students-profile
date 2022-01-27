@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 // material components
 import {
   Typography,
@@ -17,6 +17,9 @@ import FamilyView from "../../../utils/Student/View/FamilyView";
 import BACKEND_URL from "../../../../constants/BACKEND_URL";
 import studentsService from "../../../../services/studentsService";
 import { useParams } from "react-router-dom";
+//loading
+import { loadingContext } from "../../../../context/loadingContext";
+import Loader from "../../../utils/Loader";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
@@ -29,6 +32,7 @@ const Panel = (props) => (
 );
 
 export default function Details() {
+  const { loaderToggler } = useContext(loadingContext);
   const [index, setIndex] = useState(0);
   const { id } = useParams();
   const onTabClicked = (event, index) => {
@@ -39,18 +43,25 @@ export default function Details() {
   useEffect(() => {
     async function getStudentDetails() {
       try {
+        loaderToggler(true);
         const response = await studentsService.getStudentById(id);
         setStudentsDetails(response);
+        loaderToggler(false);
       } catch (error) {
         console.error(error.response);
+        loaderToggler(false);
       }
     }
     async function getLogedStudent() {
       try {
+        loaderToggler(true);
         const response = await studentsService.getStudent();
+        console.log(response, response.personalDetails.name);
         setStudentsDetails(response);
+        loaderToggler(false);
       } catch (error) {
         console.error(error.response);
+        loaderToggler(false);
       }
     }
     if (id && id !== "me") {
@@ -65,6 +76,7 @@ export default function Details() {
       {studentDetails && (
         <>
           <Container>
+            <Loader />
             <Grid
               style={{
                 backgroundImage:
@@ -123,7 +135,7 @@ export default function Details() {
                     }}
                   >
                     {studentDetails &&
-                      studentDetails.personalDetails.department.name}
+                      studentDetails?.personalDetails?.department?.name}
                   </Typography>
                 </Grid>
               </Grid>

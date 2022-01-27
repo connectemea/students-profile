@@ -17,7 +17,7 @@ const forgotPassword = async (data) => {
 
 //reset password
 const resetPassword = async (data, token) => {
-  return BackendService.post("user/reset", data, { token });
+  return BackendService.patch("user/reset", data, { token });
 };
 
 const authService = {

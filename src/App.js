@@ -18,8 +18,11 @@ import ForgotPassword from "./components/pages/Users/ForgotPassword";
 import RecoverPassword from "./components/pages/Users/RecoverPassword";
 import AddDetails from "./components/pages/Teachers/Add/AddDetails";
 import Details from "./components/pages/Students/view/Details";
+//context provider
 import ProfileProvider from "./context/profileContext";
 import StudentProvider from "./context/studentContext";
+import LoadingProvider from "./context/loadingContext";
+
 import Dependencies from "./components/pages/Students/Add/Dependencies";
 import DptStudentList from "./components/pages/Department/List/DptStudentList";
 import UpdatePersonalDeatils from "./components/pages/Students/Edit/PersonalDetails";
@@ -27,6 +30,7 @@ import UpdateEducationDeatils from "./components/pages/Students/Edit/Educational
 import UpdateFamilyDetails from "./components/pages/Students/Edit/FamilyDetails";
 import DepartmentDetails from "./components/pages/Department/View/DptDetails";
 import Add from "./components/pages/Department/Add/Add";
+import PageNotFound from "./components/pages/PageNotFound";
 //private route
 import PrivateRoute from "./PrivateRoute";
 import PrivateWrapper from "./PrivateWrapper";
@@ -40,234 +44,237 @@ function App() {
   return (
     <ThemeConfig>
       <GlobalStyles />
-
-      {/* Student data provider */}
-      <StudentProvider>
-        {/* User profile provider */}
-        <ProfileProvider>
-          <Routes>
-            <Route element={<PrivateWrapper />}>
-              {/* Home routes (Dashboard) */}
-              <Route path="/app" element={<DashboardLayout />}>
-                <Route path="/app" element={<Navigate to="/app/home" />} />
-                <Route
-                  path="home"
-                  element={
-                    <PrivateRoute type={admin} level={highAccessRight}>
-                      <Home />
-                    </PrivateRoute>
-                  }
-                />
-
-                {/* Teachers routes (Dashboard)*/}
-                <Route path="teacher">
+      <LoadingProvider>
+        {/* Student data provider */}
+        <StudentProvider>
+          {/* User profile provider */}
+          <ProfileProvider>
+            <Routes>
+              {/* <Route element={<AppWrapper />}> */}
+              <Route element={<PrivateWrapper />}>
+                {/* Home routes (Dashboard) */}
+                <Route path="/app" element={<DashboardLayout />}>
+                  <Route path="/app" element={<Navigate to="/app/home" />} />
                   <Route
-                    path="/app/teacher"
-                    element={<Navigate to="/app/teacher/list" />}
-                  />
-                  <Route
-                    path="view/:id"
-                    element={
-                      <PrivateRoute type={teacher} level={highAccessRight}>
-                        <TeachersView />
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="list"
+                    path="home"
                     element={
                       <PrivateRoute type={admin} level={highAccessRight}>
-                        <TeachersList />
+                        <Home />
                       </PrivateRoute>
                     }
                   />
+
+                  {/* Teachers routes (Dashboard)*/}
+                  <Route path="teacher">
+                    <Route
+                      path="/app/teacher"
+                      element={<Navigate to="/app/teacher/list" />}
+                    />
+                    <Route
+                      path="view/:id"
+                      element={
+                        <PrivateRoute type={teacher} level={highAccessRight}>
+                          <TeachersView />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="list"
+                      element={
+                        <PrivateRoute type={admin} level={highAccessRight}>
+                          <TeachersList />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="add"
+                      element={
+                        <PrivateRoute type={admin} level={highAccessRight}>
+                          <AddTeacher />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="update/:id"
+                      element={
+                        <PrivateRoute type={teacher} level={highAccessRight}>
+                          <AddDetails />
+                        </PrivateRoute>
+                      }
+                    />
+                  </Route>
+
+                  {/* students routes (Dashboard)*/}
+                  <Route path="student">
+                    <Route
+                      path="/app/student"
+                      element={<Navigate to="/app/student/list" />}
+                    />
+                    <Route
+                      path="list"
+                      element={
+                        <PrivateRoute type={teacher} level={highAccessRight}>
+                          <StudentsList />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="add"
+                      element={
+                        <PrivateRoute type={teacher} level={highAccessRight}>
+                          <AddStudent />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="view/:id"
+                      element={
+                        <PrivateRoute type={student} level={highAccessRight}>
+                          <Details />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route path="update/:id">
+                      <Route
+                        path="personal"
+                        element={
+                          <PrivateRoute type={student} level={highAccessRight}>
+                            <UpdatePersonalDeatils />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="educational"
+                        element={
+                          <PrivateRoute type={student} level={highAccessRight}>
+                            <UpdateEducationDeatils />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="family"
+                        element={
+                          <PrivateRoute type={student} level={highAccessRight}>
+                            <UpdateFamilyDetails />
+                          </PrivateRoute>
+                        }
+                      />
+                    </Route>
+                  </Route>
+                  <Route path="department">
+                    <Route
+                      path="/app/department"
+                      element={<Navigate to="/app/department/list" />}
+                    />
+                    <Route
+                      path="list"
+                      element={
+                        <PrivateRoute type={teacher} level={highAccessRight}>
+                          <DepartmentDetails />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="details/:id"
+                      element={
+                        <PrivateRoute type={teacher} level={highAccessRight}>
+                          <DptStudentList />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="student/:id"
+                      element={
+                        <PrivateRoute type={teacher} level={highAccessRight}>
+                          <Details />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="add"
+                      element={
+                        <PrivateRoute type={admin} level={highAccessRight}>
+                          <Add />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="edit/:id"
+                      element={
+                        <PrivateRoute type={admin} level={highAccessRight}>
+                          <Add update={true} />
+                        </PrivateRoute>
+                      }
+                    />
+                  </Route>
+                </Route>
+                {/* teacher details forms routes */}
+                <Route path="/teacher/details">
                   <Route
-                    path="add"
+                    path="personal"
                     element={
-                      <PrivateRoute type={admin} level={highAccessRight}>
-                        <AddTeacher />
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="update/:id"
-                    element={
-                      <PrivateRoute type={teacher} level={highAccessRight}>
+                      <PrivateRoute type={teacher} level={lowAccessRight}>
                         <AddDetails />
                       </PrivateRoute>
                     }
                   />
                 </Route>
 
-                {/* students routes (Dashboard)*/}
-                <Route path="student">
+                {/* student details forms routes */}
+                <Route path="/student/details">
                   <Route
-                    path="/app/student"
-                    element={<Navigate to="/app/student/list" />}
+                    path="/student/details"
+                    element={<Navigate to="/student/details/personal" />}
                   />
                   <Route
-                    path="list"
+                    path="personal"
                     element={
-                      <PrivateRoute type={teacher} level={highAccessRight}>
-                        <StudentsList />
+                      <PrivateRoute type={student} level={lowAccessRight}>
+                        <PersonalDetails />
                       </PrivateRoute>
                     }
                   />
                   <Route
-                    path="add"
+                    path="educational"
                     element={
-                      <PrivateRoute type={teacher} level={highAccessRight}>
-                        <AddStudent />
+                      <PrivateRoute type={student} level={lowAccessRight}>
+                        <EducationalDetails />
                       </PrivateRoute>
                     }
                   />
                   <Route
-                    path="view/:id"
+                    path="family"
                     element={
-                      <PrivateRoute type={student} level={highAccessRight}>
-                        <Details />
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route path="update/:id">
-                    <Route
-                      path="personal"
-                      element={
-                        <PrivateRoute type={student} level={highAccessRight}>
-                          <UpdatePersonalDeatils />
-                        </PrivateRoute>
-                      }
-                    />
-                    <Route
-                      path="educational"
-                      element={
-                        <PrivateRoute type={student} level={highAccessRight}>
-                          <UpdateEducationDeatils />
-                        </PrivateRoute>
-                      }
-                    />
-                    <Route
-                      path="family"
-                      element={
-                        <PrivateRoute type={student} level={highAccessRight}>
-                          <UpdateFamilyDetails />
-                        </PrivateRoute>
-                      }
-                    />
-                  </Route>
-                </Route>
-                <Route path="department">
-                  <Route
-                    path="/app/department"
-                    element={<Navigate to="/app/department/list" />}
-                  />
-                  <Route
-                    path="list"
-                    element={
-                      <PrivateRoute type={teacher} level={highAccessRight}>
-                        <DepartmentDetails />
+                      <PrivateRoute type={student} level={lowAccessRight}>
+                        <FamilyDetails />
                       </PrivateRoute>
                     }
                   />
                   <Route
-                    path="details/:id"
+                    path="dependencies"
                     element={
-                      <PrivateRoute type={teacher} level={highAccessRight}>
-                        <DptStudentList />
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="student/:id"
-                    element={
-                      <PrivateRoute type={teacher} level={highAccessRight}>
-                        <Details />
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="add"
-                    element={
-                      <PrivateRoute type={admin} level={highAccessRight}>
-                        <Add />
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="edit/:id"
-                    element={
-                      <PrivateRoute type={admin} level={highAccessRight}>
-                        <Add update={true} />
+                      <PrivateRoute type={student} level={lowAccessRight}>
+                        <Dependencies />
                       </PrivateRoute>
                     }
                   />
                 </Route>
               </Route>
-              {/* teacher details forms routes */}
-              <Route path="/teacher/details">
-                <Route
-                  path="personal"
-                  element={
-                    <PrivateRoute type={teacher} level={lowAccessRight}>
-                      <AddDetails />
-                    </PrivateRoute>
-                  }
-                />
-              </Route>
 
-              {/* student details forms routes */}
-              <Route path="/student/details">
-                <Route
-                  path="/student/details"
-                  element={<Navigate to="/student/details/personal" />}
-                />
-                <Route
-                  path="personal"
-                  element={
-                    <PrivateRoute type={student} level={lowAccessRight}>
-                      <PersonalDetails />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path="educational"
-                  element={
-                    <PrivateRoute type={student} level={lowAccessRight}>
-                      <EducationalDetails />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path="family"
-                  element={
-                    <PrivateRoute type={student} level={lowAccessRight}>
-                      <FamilyDetails />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path="dependencies"
-                  element={
-                    <PrivateRoute type={student} level={lowAccessRight}>
-                      <Dependencies />
-                    </PrivateRoute>
-                  }
-                />
+              {/* user routes */}
+              <Route path="/user" element={<AuthLayout />}>
+                <Route path="register" element={<Register />} />
+                <Route path="login" element={<Login />} />
+                <Route path="forgot" element={<ForgotPassword />} />
+                <Route path="recover/:token" element={<RecoverPassword />} />
               </Route>
-            </Route>
-
-            {/* user routes */}
-            <Route path="/user" element={<AuthLayout />}>
-              <Route path="register" element={<Register />} />
-              <Route path="login" element={<Login />} />
-              <Route path="forgot" element={<ForgotPassword />} />
-              <Route path="recover/:token" element={<RecoverPassword />} />
-            </Route>
-            <Route path="/" element={<Navigate to="/user/login" />} />
-            <Route path="*" element={<div>page not found</div>} />
-          </Routes>
-        </ProfileProvider>
-      </StudentProvider>
+              <Route path="/" element={<Navigate to="/user/login" />} />
+              <Route path="*" element={<PageNotFound />} />
+              {/* </Route> */}
+            </Routes>
+          </ProfileProvider>
+        </StudentProvider>
+      </LoadingProvider>
     </ThemeConfig>
   );
 }

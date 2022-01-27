@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Container, Grid, Card, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import { loadingContext } from "../../../../context/loadingContext";
 
 // page wrapper for dynamic meta tags
 import Page from "../../../utils/Page";
@@ -12,6 +13,7 @@ import Field from "../utils/Field";
 
 // importing getTech form TeacherService
 import TeacherService from "../../../../services/teacherService";
+import { profileContext } from "../../../../context/profileContext";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
@@ -19,24 +21,32 @@ const ProfileCard = styled(Card)(({ theme }) => ({
 }));
 
 export default function TeachersView() {
+  const { loaderToggler } = useContext(loadingContext);
+  const { profile } = useContext(profileContext);
   const [teacherData, setTeacherData] = useState();
   const { id } = useParams();
 
   useEffect(() => {
     async function getLogedTeacher() {
       try {
+        loaderToggler(true);
         const response = await TeacherService.getTeacher();
         setTeacherData(response);
+        loaderToggler(false);
       } catch (err) {
         console.error(err?.response?.data?.message);
+        loaderToggler(false);
       }
     }
     async function getTeacherById() {
       try {
+        loaderToggler(true);
         const response = await TeacherService.getTeacherById(id);
         setTeacherData(response);
+        loaderToggler(false);
       } catch (err) {
         console.error(err?.response?.data?.message);
+        loaderToggler(false);
       }
     }
     if (id && id === "me") {
@@ -112,19 +122,22 @@ export default function TeachersView() {
                   </Typography>
                 </Grid>
               </Grid>
-              <Link
-                to={`/app/teacher/update/${teacherData._id}`}
-                style={{ color: "#333" }}
-              >
-                <ModeEditOutlineOutlinedIcon
-                  sx={{
-                    margin: "8px",
-                    opacity: "",
-                    height: "3vh",
-                    width: "2vw",
-                  }}
-                />
-              </Link>
+              {profile?.userType === "teacher" && (
+                <Link
+                  to={`/app/teacher/update/${teacherData._id}`}
+                  style={{ color: "#333" }}
+                >
+                  <ModeEditOutlineOutlinedIcon
+                    sx={{
+                      margin: "8px",
+                      opacity: "",
+                      height: "3vh",
+                      width: "2vw",
+                    }}
+                  />
+                </Link>
+              )}
+
               <Grid
                 item
                 xs={12}

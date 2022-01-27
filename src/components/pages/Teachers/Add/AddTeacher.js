@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 // material components
 import {
@@ -23,6 +23,10 @@ import { TextField } from "@mui/material";
 // userService
 import userService from "../../../../services/userService";
 
+// Loader
+import { loadingContext } from "../../../../context/loadingContext";
+import Loader from "../../../utils/Loader";
+
 // table header cell config
 const TABLE_HEAD = [
   { id: "username", label: "username", type: "text" },
@@ -30,8 +34,8 @@ const TABLE_HEAD = [
   { id: "status", label: "status", type: "userStatusChip" },
 ];
 
-
 export default function AddTeacher() {
+  const { loaderToggler } = useContext(loadingContext);
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [errorMsg, setErrorMsg] = useState();
@@ -43,24 +47,42 @@ export default function AddTeacher() {
     setEmail("");
     setUsername("");
   };
+
   //To clear the error message
   const clearError = () => setErrorMsg("");
 
+  //get all user (teachers)
+  const getUsers = async () => {
+    try {
+      loaderToggler(true);
+      const users = await userService.getUsers("teacher");
+      setUsers(users);
+      loaderToggler(false);
+    } catch (err) {
+      console.error(err?.response?.data?.message);
+      loaderToggler(false);
+    }
+  };
   // add new teacher
   const handleAddTeacher = async () => {
     try {
+      loaderToggler(true);
       clearError();
       const userData = {
         username,
         email,
         userType: "teacher",
       };
+      loaderToggler(false);
       // adding user to db
       await userService.createUser(userData);
+      //get user on add
+      getUsers();
       // clearing the form
       clearUserCredentials();
     } catch (err) {
       setErrorMsg(err?.response?.data?.message);
+      loaderToggler(false);
     }
   };
 
@@ -79,6 +101,7 @@ export default function AddTeacher() {
   return (
     <Page title="AddTeacher">
       <Container>
+        <Loader />
         <Stack
           direction="row"
           alignItems="center"
@@ -122,7 +145,7 @@ export default function AddTeacher() {
           <Stack
             direction="row"
             alignItems="center"
-            justifyContent="flex-end" 
+            justifyContent="flex-end"
             mt={2}
           >
             <Tooltip

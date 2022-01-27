@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 import authService from "../../../services/authService";
 import Page from "../../utils/Page";
+import Loader from "../../utils/Loader";
 
 const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -45,6 +46,7 @@ export default function ForgotPassword() {
   return (
     <Page title="Forgot Password">
       <ContentStyle>
+        <Loader />
         <Card sx={{ p: 5 }}>
           <Box sx={{ mb: 3 }}>
             <Typography textAlign="center" variant="h3" gutterBottom>

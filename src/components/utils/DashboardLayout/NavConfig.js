@@ -22,6 +22,7 @@ const NavConfig = [
     path: "/app/student",
     icon: PersonIcon,
     permittedUser: "teacher",
+    strict: true,
   },
   {
     title: "department",

@@ -4,6 +4,7 @@ import { styled } from "@mui/material/styles";
 import DashboardNavbar from "./DashboardNavbar";
 import DashboardSidebar from "./DashboardSideBar";
 import { Outlet } from "react-router";
+import Loader from "../Loader";
 // padding count in pc and lap
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
@@ -34,6 +35,7 @@ export default function DashboardLayout() {
 
   return (
     <RootStyle>
+      <Loader />
       <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
       <DashboardSidebar
         isOpenSidebar={open}

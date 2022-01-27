@@ -12,6 +12,11 @@ import SelectInput from "../Inputs/SelectInput";
 import DatePickerInput from "../Inputs/DatePickerInput";
 import { useNavigate, useParams } from "react-router-dom";
 import { studentContext } from "../../../context/studentContext";
+import * as dateTimeHelper from "../../helpers/dateTimeHelper";
+//loading
+import { loadingContext } from "../../../context/loadingContext";
+import Loader from "../Loader";
+
 const ProfileCard = styled(Card)(({ theme }) => ({
   paddingRight: `${theme.spacing(4)} !important`,
   paddingBottom: `${theme.spacing(4)} !important`,
@@ -31,6 +36,7 @@ const hseSubjects4 = ["Mathematics", "Politics", "Sociology"];
 const ugCourses = ["Bsc. Computer Science", "B.com", "BBA"];
 
 export default function EducationalDetailsInput(props) {
+  const { loaderToggler } = useContext(loadingContext);
   const { student, setStudent } = useContext(studentContext);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -187,7 +193,7 @@ export default function EducationalDetailsInput(props) {
       extraCurricular: [
         {
           activity: activity,
-          yearOfParticipation: yearOfParticipation,
+          yearOfParticipation: dateTimeHelper.getDate(yearOfParticipation),
           Price: prize,
           detailsOfExcellenceInPerformance: perfomance,
         },
@@ -241,7 +247,9 @@ export default function EducationalDetailsInput(props) {
     setAddiMarks(details.additionalCourse[0]?.cgp);
     //extra curricular details
     setActivity(details.extraCurricular[0]?.activity);
-    setYearOfParticipation(details.extraCurricular[0]?.yearOfParticipation);
+    setYearOfParticipation(
+      dateTimeHelper.dateToObj(details.extraCurricular[0]?.yearOfParticipation)
+    );
     setPrize(details.extraCurricular[0]?.Price);
     setPerfomance(details.extraCurricular[0]?.detailsOfExcellenceInPerformance);
   };
@@ -274,8 +282,16 @@ export default function EducationalDetailsInput(props) {
     const data = {
       educationDetails: structureData(),
     };
-    await studentsService.updateStudent(id, data);
-    navigate("/app/student/view/me");
+    try {
+      loaderToggler(true);
+      await studentsService.updateStudent(id, data);
+      navigate("/app/student/view/me");
+      window.location.reload();
+      loaderToggler(false);
+    } catch (err) {
+      console.error(err);
+      loaderToggler(false);
+    }
   };
   //To set the previously filled data
   useEffect(() => {
@@ -286,17 +302,25 @@ export default function EducationalDetailsInput(props) {
   useEffect(() => {
     const getStudent = async () => {
       try {
+        loaderToggler(true);
         const student = await studentsService.getStudentById(id);
         setCurrentDetails(student.educationDetails);
+        loaderToggler(false);
       } catch (error) {
         console.error(error?.response?.data?.message);
+        loaderToggler(false);
       }
     };
     if (id) getStudent();
   }, [id]);
+  //scroll to top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
+      <Loader />
       {/* SSLC/10th */}
       <Grid component={ProfileCard} sx={{ mt: 2, p: 2 }} container spacing={2}>
         {/* Add Details Section */}

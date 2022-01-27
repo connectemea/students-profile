@@ -191,7 +191,9 @@ export default function NavSection({ navConfig, profile, ...other }) {
       <List disablePadding>
         {/* nav item component to map through navlink */}
         {navConfig.map((item) =>
-          checkUserHavePermission(item.permittedUser, profile.userType) ? (
+          (item.strict && item.permittedUser === profile.userType) ||
+          (!item.strict &&
+            checkUserHavePermission(item.permittedUser, profile.userType)) ? (
             <NavItem key={item.title} item={item} active={match} />
           ) : null
         )}

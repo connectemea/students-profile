@@ -59,7 +59,7 @@ export default function AccountPopover() {
       >
         <Avatar
           src={`${BACKEND_URL.BASE_URL}upload/${profile?.profileImage}`}
-          alt="photoURL"
+          alt={profile && profile.username.toUpperCase()}
         />
       </IconButton>
 
@@ -70,7 +70,11 @@ export default function AccountPopover() {
         sx={{ width: 220 }}
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
-          <Typography variant="subtitle1" noWrap>
+          <Typography
+            variant="subtitle1"
+            noWrap
+            sx={{ textTransform: "capitalize" }}
+          >
             {profile && profile.username}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
